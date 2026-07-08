@@ -468,15 +468,19 @@ class EventCard extends StatelessWidget {
                         width: 40.0,
                         height: 32.0,
                         decoration: BoxDecoration(
-                          color: const Color(
-                            0xFFEDE5F5,
-                          ), // surface-container-high
+                          color: event.isReminderSet
+                              ? const Color(0xFFFDE8E8)
+                              : const Color(0xFFEDE5F5), // surface-container-high
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: const Icon(
-                          Icons.near_me_outlined,
-                          size: 14.0,
-                          color: Color(0xFF4A4456),
+                        child: Icon(
+                          event.isReminderSet
+                              ? Icons.notifications_active
+                              : Icons.notifications_none_rounded,
+                          size: 16.0,
+                          color: event.isReminderSet
+                              ? const Color(0xFFBA1A1A)
+                              : const Color(0xFF4A4456),
                         ),
                       ),
                     ),

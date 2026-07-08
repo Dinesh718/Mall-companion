@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/discover_entities.dart';
+import '../../../restaurants/presentation/pages/restaurant_listing_page.dart';
+import '../../../restaurants/presentation/pages/restaurant_details_page.dart';
 
 class TrendingDining extends StatelessWidget {
   final List<DiscoverRestaurantEntity> restaurants;
@@ -28,7 +30,12 @@ class TrendingDining extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  // See all action
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const RestaurantListingPage(),
+                    ),
+                  );
                 },
                 child: const Text(
                   'See All',
@@ -45,20 +52,31 @@ class TrendingDining extends StatelessWidget {
           const SizedBox(height: 8.0),
           // Vertical list of dining items
           ...restaurants.map((restaurant) {
-            return Container(
-              margin: const EdgeInsets.only(bottom: 12.0),
-              padding: const EdgeInsets.all(12.0), // p-3
-              decoration: BoxDecoration(
-                color: const Color(0xFFF9F1FF), // surface-container-low
-                borderRadius: BorderRadius.circular(16.0), // rounded-2xl
-                border: Border.all(
-                  color: const Color(
-                    0xFFCCC3D9,
-                  ).withOpacity(0.2), // outline-variant/10
-                  width: 1.0,
+            return GestureDetector(
+              onTap: () {
+                // Map the discover restaurant entity directly to detail
+                final id = restaurant.id.isNotEmpty ? restaurant.id : 'lessence_moderne';
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => RestaurantDetailsPage(restaurantId: id),
+                  ),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 12.0),
+                padding: const EdgeInsets.all(12.0), // p-3
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF9F1FF), // surface-container-low
+                  borderRadius: BorderRadius.circular(16.0), // rounded-2xl
+                  border: Border.all(
+                    color: const Color(
+                      0xFFCCC3D9,
+                    ).withOpacity(0.2), // outline-variant/10
+                    width: 1.0,
+                  ),
                 ),
-              ),
-              child: Row(
+                child: Row(
                 children: [
                   // Leading image
                   Container(
@@ -159,8 +177,9 @@ class TrendingDining extends StatelessWidget {
                   ),
                 ],
               ),
-            );
-          }).toList(),
+            ),
+          );
+        }).toList(),
         ],
       ),
     );

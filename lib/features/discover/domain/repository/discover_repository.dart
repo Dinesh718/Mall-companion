@@ -5,4 +5,5 @@ abstract class DiscoverRepository {
   Future<List<MallEventEntity>> getEvents();
   Future<void> toggleBookmarkEvent(String id);
   Future<void> registerForEvent(String id);
+  Future<void> toggleReminderEvent(String id);
 }

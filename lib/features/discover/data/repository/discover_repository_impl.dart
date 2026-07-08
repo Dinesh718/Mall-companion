@@ -26,4 +26,9 @@ class DiscoverRepositoryImpl implements DiscoverRepository {
   Future<void> registerForEvent(String id) async {
     await localDataSource.registerForEvent(id);
   }
+
+  @override
+  Future<void> toggleReminderEvent(String id) async {
+    await localDataSource.toggleReminderEvent(id);
+  }
 }

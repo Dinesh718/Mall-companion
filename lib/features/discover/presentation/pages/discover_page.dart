@@ -22,6 +22,13 @@ import '../widgets/popular_theatres.dart';
 import '../widgets/promo_banner.dart';
 import '../widgets/trending_dining.dart';
 import 'events/event_listing_page.dart';
+import '../../../theatres/presentation/pages/theatre_listing_page.dart';
+import '../../../stores/presentation/pages/store_listing_page.dart';
+import '../../../products/presentation/pages/product_listing_page.dart';
+import '../../../restaurants/presentation/pages/restaurant_listing_page.dart';
+import '../../../more/presentation/pages/more_page.dart';
+import '../../../brands/presentation/pages/brand_listing_page.dart';
+import '../../../categories/presentation/pages/category_listing_page.dart';
 
 class DiscoverPage extends StatelessWidget {
   const DiscoverPage({super.key});
@@ -199,6 +206,55 @@ class _DiscoverPageBody extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (_) => const EventListingPage(),
+                          ),
+                        );
+                      } else if (catId == 'theatres') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const TheatreListingPage(),
+                          ),
+                        );
+                      } else if (catId == 'stores') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const StoreListingPage(),
+                          ),
+                        );
+                      } else if (catId == 'products') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const ProductListingPage(),
+                          ),
+                        );
+                      } else if (catId == 'dining') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const RestaurantListingPage(),
+                          ),
+                        );
+                      } else if (catId == 'brands') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const BrandListingPage(),
+                          ),
+                        );
+                      } else if (catId == 'categories') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const CategoryListingPage(),
+                          ),
+                        );
+                      } else if (catId == 'more') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const MorePage(),
                           ),
                         );
                       } else {

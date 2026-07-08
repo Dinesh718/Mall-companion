@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/home_entities.dart';
+import '../../../emergency/presentation/pages/emergency_hub_page.dart';
 
 class EmergencyShortcutCard extends StatelessWidget {
   final EmergencyShortcutEntity emergency;
@@ -74,7 +75,10 @@ class EmergencyShortcutCard extends StatelessWidget {
             // Action button
             ElevatedButton(
               onPressed: () {
-                // Emergency hub action
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const EmergencyHubPage()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFDC2626), // red-600

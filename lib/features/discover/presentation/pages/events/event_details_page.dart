@@ -5,6 +5,7 @@ import 'package:visitor_mall/features/discover/data/repository/discover_reposito
 import 'package:visitor_mall/features/discover/domain/usecases/get_events.dart';
 import 'package:visitor_mall/features/discover/domain/usecases/register_for_event.dart';
 import 'package:visitor_mall/features/discover/domain/usecases/toggle_bookmark_event.dart';
+import 'package:visitor_mall/features/discover/domain/usecases/toggle_reminder_event.dart';
 
 // BLoC
 import 'bloc/event_bloc.dart';
@@ -39,6 +40,7 @@ class EventDetailsPage extends StatelessWidget {
         getEvents: GetEvents(discoverRepo),
         toggleBookmarkEvent: ToggleBookmarkEvent(discoverRepo),
         registerForEvent: RegisterForEvent(discoverRepo),
+        toggleReminderEvent: ToggleReminderEvent(discoverRepo),
       )..add(LoadEventDetails(eventId: eventId)),
       child: const _EventDetailsBody(),
     );
@@ -483,12 +485,30 @@ class _EventDetailsBodyState extends State<_EventDetailsBody> {
                   right: 20.0,
                   child: EventActionButtons(
                     isInterested: event.isBookmarked,
+                    isReminderSet: event.isReminderSet,
                     onNavigate: () {
                       // Navigate directions inside the mall
                     },
                     onInterested: () {
                       context.read<EventBloc>().add(
                         BookmarkEvent(eventId: event.id),
+                      );
+                    },
+                    onToggleReminder: () {
+                      context.read<EventBloc>().add(
+                        ToggleReminder(eventId: event.id),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            event.isReminderSet
+                                ? 'Reminder removed for ${event.name}'
+                                : 'Reminder set! We\'ll notify you 30 minutes before ${event.name}.',
+                          ),
+                          behavior: SnackBarBehavior.floating,
+                          backgroundColor: const Color(0xFF6100D6),
+                          duration: const Duration(seconds: 2),
+                        ),
                       );
                     },
                     onShare: () {},

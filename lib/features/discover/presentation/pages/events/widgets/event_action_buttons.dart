@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 
 class EventActionButtons extends StatelessWidget {
   final bool isInterested;
+  final bool isReminderSet;
   final VoidCallback onNavigate;
   final VoidCallback onInterested;
+  final VoidCallback onToggleReminder;
   final VoidCallback onShare;
 
   const EventActionButtons({
     super.key,
     required this.isInterested,
+    required this.isReminderSet,
     required this.onNavigate,
     required this.onInterested,
+    required this.onToggleReminder,
     required this.onShare,
   });
 
@@ -61,9 +65,9 @@ class EventActionButtons extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Icon(Icons.near_me, color: Colors.white, size: 18.0),
-                          SizedBox(width: 8.0),
-                          Text(
+                           Icon(Icons.near_me, color: Colors.white, size: 18.0),
+                           SizedBox(width: 8.0),
+                           Text(
                             'Navigate to Event',
                             style: TextStyle(
                               fontFamily: 'Inter',
@@ -92,6 +96,26 @@ class EventActionButtons extends StatelessWidget {
                   child: const Icon(
                     Icons.share_outlined,
                     color: Color(0xFF6100D6),
+                    size: 20.0,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8.0),
+              // Reminder Button
+              GestureDetector(
+                onTap: onToggleReminder,
+                child: Container(
+                  width: 48.0,
+                  height: 48.0,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFEDE5F5), // surface-container-high
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    isReminderSet
+                        ? Icons.notifications_active
+                        : Icons.notifications_outlined,
+                    color: isReminderSet ? const Color(0xFFBA1A1A) : const Color(0xFF6100D6),
                     size: 20.0,
                   ),
                 ),

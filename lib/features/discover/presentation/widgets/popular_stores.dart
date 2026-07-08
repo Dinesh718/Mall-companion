@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/discover_entities.dart';
+import '../../../stores/presentation/pages/store_details_page.dart';
 
 class PopularStores extends StatelessWidget {
   final List<DiscoverStoreEntity> stores;
@@ -53,120 +54,119 @@ class PopularStores extends StatelessWidget {
             itemCount: stores.length,
             itemBuilder: (context, index) {
               final store = stores[index];
-              return Container(
-                width: 256.0,
-                margin: const EdgeInsets.only(right: 16.0),
-                decoration: BoxDecoration(
-                  color: Colors.white, // surface-container-lowest
-                  borderRadius: BorderRadius.circular(16.0), // rounded-2xl
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.04),
-                      blurRadius: 15.0,
-                      offset: const Offset(0, 0),
+              return GestureDetector(
+                onTap: () {
+                  String storeId = store.id;
+                  if (storeId == 'h_and_m') storeId = 'hm';
+                  if (storeId == 'apple') storeId = 'apple_store';
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => StoreDetailsPage(storeId: storeId),
                     ),
-                  ],
-                ),
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Image with Rating Badge Overlay
-                    Stack(
-                      children: [
-                        Image.network(
-                          store.imageUrl,
-                          height: 140.0,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(
-                            height: 140.0,
-                            color: const Color(0xFFEDE5F5),
-                            child: const Icon(
-                              Icons.storefront_outlined,
-                              size: 40.0,
-                              color: Color(0xFF6100D6),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 12.0,
-                          left: 12.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.9),
-                              borderRadius: BorderRadius.circular(
-                                8.0,
-                              ), // rounded-lg (8px)
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.04),
-                                  blurRadius: 4.0,
-                                  offset: const Offset(0, 1),
-                                ),
-                              ],
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                              vertical: 4.0,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Icon(
-                                  Icons.star,
-                                  size: 14.0,
-                                  color: Colors.amber,
-                                ),
-                                const SizedBox(width: 4.0),
-                                Text(
-                                  store.rating.toStringAsFixed(1),
-                                  style: const TextStyle(
-                                    fontFamily: 'Inter',
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.w600, // label-sm
-                                    color: Color(0xFF1D1A25), // on-surface
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Details Container
-                    Padding(
-                      padding: const EdgeInsets.all(16.0), // card-padding
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  );
+                },
+                child: Container(
+                  width: 256.0,
+                  margin: const EdgeInsets.only(right: 16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white, // surface-container-lowest
+                    borderRadius: BorderRadius.circular(16.0), // rounded-2xl
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.04),
+                        blurRadius: 15.0,
+                        offset: const Offset(0, 0),
+                      ),
+                    ],
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Image with Rating Badge Overlay
+                      Stack(
                         children: [
-                          Text(
-                            store.name,
-                            style: const TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w600, // label-lg
-                              color: Color(0xFF1D1A25),
+                          SizedBox(
+                            height: 140.0,
+                            width: double.infinity,
+                            child: Image.network(
+                              store.imageUrl,
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
                           ),
-                          const SizedBox(height: 2.0),
-                          Text(
-                            '${store.category} • ${store.floorText}',
-                            style: const TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w400, // body-md
-                              color: Color(0xFF4A4456), // on-surface-variant
+                          // Rating Badge
+                          Positioned(
+                            top: 12.0,
+                            right: 12.0,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(9999.0), // pill
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 6.0,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.star, color: Colors.amber, size: 14.0),
+                                  const SizedBox(width: 4.0),
+                                  Text(
+                                    store.rating.toStringAsFixed(1),
+                                    style: const TextStyle(
+                                      fontFamily: 'Inter',
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF1D1A25), // on-surface
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                      // Info
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              store.name,
+                              style: const TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold, // title-large
+                                color: Color(0xFF1D1A25), // on-surface
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 2.0),
+                            Text(
+                              '${store.category} • ${store.floorText}',
+                              style: const TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w400, // body-md
+                                color: Color(0xFF4A4456), // on-surface-variant
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

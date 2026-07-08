@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/home_entities.dart';
+import '../../../maintenance/presentation/pages/report_issue_page.dart';
 
 class QuickActionsGrid extends StatelessWidget {
   final List<QuickActionEntity> actions;
@@ -24,6 +25,8 @@ class QuickActionsGrid extends StatelessWidget {
         return Icons.qr_code_2_outlined;
       case 'medical_services':
         return Icons.medical_services_outlined;
+      case 'construction':
+        return Icons.construction_outlined;
       default:
         return Icons.help_outline;
     }
@@ -82,7 +85,14 @@ class QuickActionsGrid extends StatelessWidget {
 
               return GestureDetector(
                 onTap: () {
-                  // Navigate or trigger specific action
+                  if (action.id == 'report_issue') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const ReportIssuePage(),
+                      ),
+                    );
+                  }
                 },
                 child: Column(
                   children: [

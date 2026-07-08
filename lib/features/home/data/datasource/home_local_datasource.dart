@@ -56,10 +56,10 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
           colorHex: '0xFF9333EA',
         ),
         QuickActionModel(
-          id: 'offers',
-          title: 'Offers',
-          iconName: 'sell',
-          colorHex: '0xFFBA1A1A',
+          id: 'report_issue',
+          title: 'Report Issue',
+          iconName: 'construction',
+          colorHex: '0xFF6100D6',
         ),
         QuickActionModel(
           id: 'points',

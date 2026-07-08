@@ -22,6 +22,12 @@ class BookmarkEvent extends EventEvent {
   const BookmarkEvent({required this.eventId});
 }
 
+class ToggleReminder extends EventEvent {
+  final String eventId;
+
+  const ToggleReminder({required this.eventId});
+}
+
 class RegisterEvent extends EventEvent {
   final String eventId;
 

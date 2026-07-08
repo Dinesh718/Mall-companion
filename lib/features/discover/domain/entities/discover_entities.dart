@@ -129,6 +129,7 @@ class MallEventEntity {
   final int interestedCount;
   final bool isBookmarked;
   final bool isRegistered;
+  final bool isReminderSet;
   final String imageUrl;
   final List<String> galleryUrls;
   final String statusText; // Live Now, Ongoing, Upcoming, etc.
@@ -151,6 +152,7 @@ class MallEventEntity {
     required this.interestedCount,
     this.isBookmarked = false,
     this.isRegistered = false,
+    this.isReminderSet = false,
     required this.imageUrl,
     required this.galleryUrls,
     required this.statusText,
@@ -160,6 +162,7 @@ class MallEventEntity {
   MallEventEntity copyWith({
     bool? isBookmarked,
     bool? isRegistered,
+    bool? isReminderSet,
     int? interestedCount,
     int? remainingSeats,
   }) {
@@ -180,6 +183,7 @@ class MallEventEntity {
       interestedCount: interestedCount ?? this.interestedCount,
       isBookmarked: isBookmarked ?? this.isBookmarked,
       isRegistered: isRegistered ?? this.isRegistered,
+      isReminderSet: isReminderSet ?? this.isReminderSet,
       imageUrl: imageUrl,
       galleryUrls: galleryUrls,
       statusText: statusText,

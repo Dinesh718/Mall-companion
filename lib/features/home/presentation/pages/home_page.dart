@@ -24,6 +24,8 @@ import '../widgets/parking_status_card.dart';
 import '../widgets/quick_actions_grid.dart';
 import '../widgets/restaurants_section.dart';
 import '../../../discover/presentation/pages/discover_page.dart';
+import '../../../discover/presentation/pages/events/event_listing_page.dart';
+import '../../../profile/presentation/pages/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -69,19 +71,9 @@ class _HomePageState extends State<HomePage> {
               // Tab 2: Discover
               const DiscoverPage(),
               // Tab 3: Event
-              const _PlaceholderTab(
-                title: 'Live Events',
-                icon: Icons.local_activity_outlined,
-                message:
-                    'Check out live shows, workshops, and seasonal carnivals.',
-              ),
+              const EventListingPage(),
               // Tab 4: Profile
-              const _PlaceholderTab(
-                title: 'Visitor Profile',
-                icon: Icons.person_outline,
-                message:
-                    'Manage your loyalty points, parking history, and account settings.',
-              ),
+              const ProfilePage(),
             ],
           ),
         ),

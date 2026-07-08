@@ -6,6 +6,7 @@ abstract class DiscoverLocalDataSource {
   Future<List<MallEventEntity>> getEvents();
   Future<void> toggleBookmarkEvent(String id);
   Future<void> registerForEvent(String id);
+  Future<void> toggleReminderEvent(String id);
 }
 
 class DiscoverLocalDataSourceImpl implements DiscoverLocalDataSource {
@@ -397,6 +398,15 @@ class DiscoverLocalDataSourceImpl implements DiscoverLocalDataSource {
             ? current.remainingSeats - 1
             : 0,
       );
+    }
+  }
+
+  @override
+  Future<void> toggleReminderEvent(String id) async {
+    final idx = _events.indexWhere((e) => e.id == id);
+    if (idx != -1) {
+      final current = _events[idx];
+      _events[idx] = current.copyWith(isReminderSet: !current.isReminderSet);
     }
   }
 }

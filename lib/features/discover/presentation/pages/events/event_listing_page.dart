@@ -5,6 +5,7 @@ import 'package:visitor_mall/features/discover/data/repository/discover_reposito
 import 'package:visitor_mall/features/discover/domain/usecases/get_events.dart';
 import 'package:visitor_mall/features/discover/domain/usecases/register_for_event.dart';
 import 'package:visitor_mall/features/discover/domain/usecases/toggle_bookmark_event.dart';
+import 'package:visitor_mall/features/discover/domain/usecases/toggle_reminder_event.dart';
 
 // BLoC
 import 'bloc/event_bloc.dart';
@@ -34,6 +35,7 @@ class EventListingPage extends StatelessWidget {
         getEvents: GetEvents(discoverRepo),
         toggleBookmarkEvent: ToggleBookmarkEvent(discoverRepo),
         registerForEvent: RegisterForEvent(discoverRepo),
+        toggleReminderEvent: ToggleReminderEvent(discoverRepo),
       )..add(const LoadEvents()),
       child: const _EventListingBody(),
     );
@@ -212,7 +214,23 @@ class _EventListingBody extends StatelessWidget {
                                     _navigateToDetails(context, item.id),
                                 onDetailsTap: () =>
                                     _navigateToDetails(context, item.id),
-                                onNearMeTap: () {},
+                                onNearMeTap: () {
+                                  context.read<EventBloc>().add(
+                                    ToggleReminder(eventId: item.id),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        item.isReminderSet
+                                            ? 'Reminder removed for ${item.name}'
+                                            : 'Reminder set! We\'ll notify you 30 minutes before ${item.name}.',
+                                      ),
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor: const Color(0xFF6100D6),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+                                },
                               );
                             }).toList(),
                           ),
@@ -237,27 +255,29 @@ class _EventListingBody extends StatelessWidget {
     );
   }
 
-  // Header Builder
   Widget _buildHeader(BuildContext context) {
+    final canPop = Navigator.canPop(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
       child: Row(
         children: [
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(
-              Icons.arrow_back_rounded,
-              color: Color(0xFF1D1A25),
+          if (canPop) ...[
+            IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(
+                Icons.arrow_back_rounded,
+                color: Color(0xFF1D1A25),
+              ),
+              style: IconButton.styleFrom(
+                backgroundColor: const Color(
+                  0xFFEDE5F5,
+                ), // surface-container-high
+                minimumSize: const Size(40.0, 40.0),
+                shape: const CircleBorder(),
+              ),
             ),
-            style: IconButton.styleFrom(
-              backgroundColor: const Color(
-                0xFFEDE5F5,
-              ), // surface-container-high
-              minimumSize: const Size(40.0, 40.0),
-              shape: const CircleBorder(),
-            ),
-          ),
-          const SizedBox(width: 12.0),
+            const SizedBox(width: 12.0),
+          ],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
