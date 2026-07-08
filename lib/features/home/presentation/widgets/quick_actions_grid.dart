@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/home_entities.dart';
 import '../../../maintenance/presentation/pages/report_issue_page.dart';
+import '../../../parking/presentation/pages/parking_page.dart';
 
 class QuickActionsGrid extends StatelessWidget {
   final List<QuickActionEntity> actions;
@@ -91,6 +92,11 @@ class QuickActionsGrid extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (_) => const ReportIssuePage(),
                       ),
+                    );
+                  } else if (action.id == 'parking') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ParkingPage()),
                     );
                   }
                 },

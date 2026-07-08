@@ -4,10 +4,7 @@ import '../../domain/entities/store_entities.dart';
 class StoreReviewCard extends StatelessWidget {
   final StoreReviewEntity review;
 
-  const StoreReviewCard({
-    super.key,
-    required this.review,
-  });
+  const StoreReviewCard({super.key, required this.review});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +37,9 @@ class StoreReviewCard extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      review.userName.isNotEmpty ? review.userName[0].toUpperCase() : 'U',
+                      review.userName.isNotEmpty
+                          ? review.userName[0].toUpperCase()
+                          : 'U',
                       style: const TextStyle(
                         fontFamily: 'Plus Jakarta Sans',
                         fontSize: 14.0,

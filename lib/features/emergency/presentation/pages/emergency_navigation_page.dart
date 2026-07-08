@@ -21,21 +21,24 @@ import '../widgets/emergency_ui_states.dart';
 class EmergencyNavigationPage extends StatelessWidget {
   final String destination;
 
-  const EmergencyNavigationPage({
-    super.key,
-    required this.destination,
-  });
+  const EmergencyNavigationPage({super.key, required this.destination});
 
   @override
   Widget build(BuildContext context) {
     final localDataSource = EmergencyLocalDataSourceImpl();
-    final repository = EmergencyRepositoryImpl(localDataSource: localDataSource);
+    final repository = EmergencyRepositoryImpl(
+      localDataSource: localDataSource,
+    );
 
     return BlocProvider(
       create: (_) => EmergencyBloc(
-        loadEmergencyFacilitiesUseCase: LoadEmergencyFacilitiesUseCase(repository),
+        loadEmergencyFacilitiesUseCase: LoadEmergencyFacilitiesUseCase(
+          repository,
+        ),
         loadEmergencyContactsUseCase: LoadEmergencyContactsUseCase(repository),
-        startEmergencyNavigationUseCase: StartEmergencyNavigationUseCase(repository),
+        startEmergencyNavigationUseCase: StartEmergencyNavigationUseCase(
+          repository,
+        ),
         sendSOSUseCase: SendSOSUseCase(repository),
         notifySecurityUseCase: NotifySecurityUseCase(repository),
         loadInstructionsUseCase: LoadInstructionsUseCase(repository),
@@ -71,7 +74,10 @@ class _EmergencyNavigationView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Color(0xFF6100D6)),
+            icon: const Icon(
+              Icons.notifications_outlined,
+              color: Color(0xFF6100D6),
+            ),
             onPressed: () {},
           ),
         ],
@@ -96,7 +102,9 @@ class _EmergencyNavigationView extends StatelessWidget {
               if (state is EmergencyLoading || state is EmergencyInitial) {
                 return const Center(
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF6100D6)),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Color(0xFF6100D6),
+                    ),
                   ),
                 );
               }
@@ -111,7 +119,10 @@ class _EmergencyNavigationView extends StatelessWidget {
                 final route = state.route;
 
                 return SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 20.0,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -189,7 +200,10 @@ class _EmergencyNavigationView extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24.0),
         gradient: const LinearGradient(
-          colors: [Color(0xFF7B2FF7), Color(0xFF3B82F6)], // primary to secondary
+          colors: [
+            Color(0xFF7B2FF7),
+            Color(0xFF3B82F6),
+          ], // primary to secondary
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -207,7 +221,11 @@ class _EmergencyNavigationView extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
-                child: const Icon(Icons.directions_run, color: Colors.white, size: 18.0),
+                child: const Icon(
+                  Icons.directions_run,
+                  color: Colors.white,
+                  size: 18.0,
+                ),
               ),
               const SizedBox(width: 12.0),
               Expanded(
@@ -216,7 +234,11 @@ class _EmergencyNavigationView extends StatelessWidget {
                   children: [
                     const Text(
                       'Destination',
-                      style: TextStyle(fontFamily: 'Inter', fontSize: 11.0, color: Colors.white70),
+                      style: TextStyle(
+                        fontFamily: 'Inter',
+                        fontSize: 11.0,
+                        color: Colors.white70,
+                      ),
                     ),
                     Text(
                       route.destinationName,
@@ -243,12 +265,20 @@ class _EmergencyNavigationView extends StatelessWidget {
                 children: [
                   const Text(
                     'Estimated Time',
-                    style: TextStyle(fontFamily: 'Inter', fontSize: 11.0, color: Colors.white70),
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 11.0,
+                      color: Colors.white70,
+                    ),
                   ),
                   const SizedBox(height: 4.0),
                   Row(
                     children: [
-                      const Icon(Icons.schedule, color: Colors.white, size: 14.0),
+                      const Icon(
+                        Icons.schedule,
+                        color: Colors.white,
+                        size: 14.0,
+                      ),
                       const SizedBox(width: 4.0),
                       Text(
                         '${route.estimatedMinutes} Minutes',
@@ -268,12 +298,20 @@ class _EmergencyNavigationView extends StatelessWidget {
                 children: [
                   const Text(
                     'Distance',
-                    style: TextStyle(fontFamily: 'Inter', fontSize: 11.0, color: Colors.white70),
+                    style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 11.0,
+                      color: Colors.white70,
+                    ),
                   ),
                   const SizedBox(height: 4.0),
                   Row(
                     children: [
-                      const Icon(Icons.straighten, color: Colors.white, size: 14.0),
+                      const Icon(
+                        Icons.straighten,
+                        color: Colors.white,
+                        size: 14.0,
+                      ),
                       const SizedBox(width: 4.0),
                       Text(
                         '${route.distanceMeter.toInt()} meters',
@@ -302,13 +340,20 @@ class _EmergencyNavigationView extends StatelessWidget {
                   const SizedBox(width: 4.0),
                   Text(
                     route.currentFloor,
-                    style: const TextStyle(fontFamily: 'Inter', fontSize: 13.0, color: Colors.white),
+                    style: const TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: 13.0,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
               if (route.isSafeRouteActive)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 4.0,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(9999.0),
@@ -365,27 +410,30 @@ class _EmergencyNavigationView extends StatelessWidget {
           Positioned.fill(
             child: Opacity(
               opacity: 0.1,
-              child: CustomPaint(
-                painter: _BlueprintGridPainter(),
-              ),
+              child: CustomPaint(painter: _BlueprintGridPainter()),
             ),
           ),
           // Route path drawing
-          Positioned.fill(
-            child: CustomPaint(
-              painter: _RoutePathPainter(),
-            ),
-          ),
+          Positioned.fill(child: CustomPaint(painter: _RoutePathPainter())),
           // Landmarks overlay text
           const Positioned(
             top: 80.0,
             left: 160.0,
             child: Column(
               children: [
-                Icon(Icons.medical_services, color: Color(0xFF0058BE), size: 18.0),
+                Icon(
+                  Icons.medical_services,
+                  color: Color(0xFF0058BE),
+                  size: 18.0,
+                ),
                 Text(
                   'First Aid',
-                  style: TextStyle(fontFamily: 'Inter', fontSize: 10.0, fontWeight: FontWeight.bold, color: Color(0xFF0058BE)),
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 10.0,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0058BE),
+                  ),
                 ),
               ],
             ),
@@ -526,7 +574,10 @@ class _EmergencyNavigationView extends StatelessWidget {
                 child: Icon(icon, color: const Color(0xFF6100D6), size: 18.0),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 2.0,
+                ),
                 decoration: BoxDecoration(
                   color: statusBg,
                   borderRadius: BorderRadius.circular(9999.0),
@@ -558,14 +609,26 @@ class _EmergencyNavigationView extends StatelessWidget {
               const SizedBox(width: 4.0),
               Text(
                 '$minutes min',
-                style: const TextStyle(fontFamily: 'Inter', fontSize: 11.0, color: Color(0xFF4A4456)),
+                style: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 11.0,
+                  color: Color(0xFF4A4456),
+                ),
               ),
               const SizedBox(width: 16.0),
-              const Icon(Icons.straighten, color: Color(0xFF4A4456), size: 12.0),
+              const Icon(
+                Icons.straighten,
+                color: Color(0xFF4A4456),
+                size: 12.0,
+              ),
               const SizedBox(width: 4.0),
               Text(
                 '${distance}m',
-                style: const TextStyle(fontFamily: 'Inter', fontSize: 11.0, color: Color(0xFF4A4456)),
+                style: const TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 11.0,
+                  color: Color(0xFF4A4456),
+                ),
               ),
             ],
           ),
@@ -636,11 +699,21 @@ class _RoutePathPainter extends CustomPainter {
     // 3. Draw start point circle
     final pointPaint = Paint()..color = const Color(0xFF0058BE);
     canvas.drawCircle(const Offset(100, 250), 6.0, pointPaint);
-    canvas.drawCircle(const Offset(100, 250), 12.0, pointPaint..color = const Color(0xFF0058BE).withOpacity(0.2));
+    canvas.drawCircle(
+      const Offset(100, 250),
+      12.0,
+      pointPaint..color = const Color(0xFF0058BE).withOpacity(0.2),
+    );
 
     // 4. Draw exit box node
     final destBoxPaint = Paint()..color = const Color(0xFF6100D6);
-    canvas.drawRRect(RRect.fromRectAndRadius(const Rect.fromLTWH(235, 85, 30, 30), const Radius.circular(4.0)), destBoxPaint);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        const Rect.fromLTWH(235, 85, 30, 30),
+        const Radius.circular(4.0),
+      ),
+      destBoxPaint,
+    );
 
     // 5. Draw exit door icon inside box
     final textPainter = TextPainter(

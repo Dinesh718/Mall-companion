@@ -58,22 +58,27 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     try {
       final products = await getProductsData.getProducts();
       final product = products.firstWhere((p) => p.id == event.productId);
-      
+
       // Filter recommended products in the same category
-      final recommended = products.where((p) => p.id != event.productId && p.category == product.category).toList();
-      emit(ProductDetailsLoaded(
-        product: product,
-        recommendedProducts: recommended.isNotEmpty ? recommended : products.where((p) => p.id != event.productId).toList(),
-      ));
+      final recommended = products
+          .where(
+            (p) => p.id != event.productId && p.category == product.category,
+          )
+          .toList();
+      emit(
+        ProductDetailsLoaded(
+          product: product,
+          recommendedProducts: recommended.isNotEmpty
+              ? recommended
+              : products.where((p) => p.id != event.productId).toList(),
+        ),
+      );
     } catch (e) {
       emit(ProductError(errorMessage: e.toString()));
     }
   }
 
-  void _onSearchProducts(
-    SearchProducts event,
-    Emitter<ProductState> emit,
-  ) {
+  void _onSearchProducts(SearchProducts event, Emitter<ProductState> emit) {
     if (state is ProductLoaded) {
       final current = state as ProductLoaded;
       emit(current.copyWith(searchQuery: event.query));
@@ -113,8 +118,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(current.copyWith(products: products));
       } else if (state is ProductDetailsLoaded) {
         final current = state as ProductDetailsLoaded;
-        final updatedProduct = products.firstWhere((p) => p.id == current.product.id);
-        emit(current.copyWith(product: updatedProduct, recommendedProducts: current.recommendedProducts));
+        final updatedProduct = products.firstWhere(
+          (p) => p.id == current.product.id,
+        );
+        emit(
+          current.copyWith(
+            product: updatedProduct,
+            recommendedProducts: current.recommendedProducts,
+          ),
+        );
       }
     } catch (e) {
       emit(ProductError(errorMessage: e.toString()));

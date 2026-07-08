@@ -32,10 +32,7 @@ class FeaturedBrandCard extends StatelessWidget {
           children: [
             // Background Image
             Positioned.fill(
-              child: Image.network(
-                brand.bannerUrl,
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(brand.bannerUrl, fit: BoxFit.cover),
             ),
             // Gradient Overlay
             Positioned.fill(
@@ -63,7 +60,10 @@ class FeaturedBrandCard extends StatelessWidget {
                 children: [
                   // Logo Container
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 4.0,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(8.0),
@@ -96,7 +96,10 @@ class FeaturedBrandCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 12.0),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 10.0,
+                    ),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         colors: [Color(0xFF7B2FF7), Color(0xFF3B82F6)],

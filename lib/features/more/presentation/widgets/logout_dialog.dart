@@ -3,17 +3,12 @@ import 'package:flutter/material.dart';
 class LogoutDialog extends StatelessWidget {
   final VoidCallback onConfirm;
 
-  const LogoutDialog({
-    super.key,
-    required this.onConfirm,
-  });
+  const LogoutDialog({super.key, required this.onConfirm});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(28.0),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28.0)),
       backgroundColor: Colors.white,
       title: const Text(
         'Logout',
@@ -31,7 +26,10 @@ class LogoutDialog extends StatelessWidget {
           color: Color(0xFF4A4456),
         ),
       ),
-      actionsPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      actionsPadding: const EdgeInsets.symmetric(
+        horizontal: 16.0,
+        vertical: 12.0,
+      ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),

@@ -60,14 +60,18 @@ class ProductCard extends StatelessWidget {
                         child: Image.network(
                           product.imageUrl,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                          errorBuilder: (_, __, ___) =>
+                              Container(color: Colors.grey[200]),
                         ),
                       ),
                       Positioned(
                         top: 10.0,
                         left: 10.0,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                            vertical: 4.0,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.white.withAlpha(230),
                             borderRadius: BorderRadius.circular(9999.0),
@@ -75,7 +79,11 @@ class ProductCard extends StatelessWidget {
                           child: const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.directions_walk, size: 12.0, color: Color(0xFF4A4456)),
+                              Icon(
+                                Icons.directions_walk,
+                                size: 12.0,
+                                color: Color(0xFF4A4456),
+                              ),
                               SizedBox(width: 2.0),
                               Text(
                                 '3 mins walk',
@@ -128,7 +136,9 @@ class ProductCard extends StatelessWidget {
                                   style: const TextStyle(
                                     fontFamily: 'Plus Jakarta Sans',
                                     fontSize: 11.0,
-                                    color: Color(0xFF4A4456), // on-surface-variant
+                                    color: Color(
+                                      0xFF4A4456,
+                                    ), // on-surface-variant
                                   ),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
@@ -138,9 +148,14 @@ class ProductCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 8.0),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0,
+                              vertical: 4.0,
+                            ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFEDE5F5), // surface-container-high
+                              color: const Color(
+                                0xFFEDE5F5,
+                              ), // surface-container-high
                               borderRadius: BorderRadius.circular(6.0),
                             ),
                             child: Text(
@@ -218,7 +233,11 @@ class ProductCard extends StatelessWidget {
 
           // Actions Row (Details & Navigate & Favorite)
           Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+              bottom: 16.0,
+            ),
             child: Row(
               children: [
                 Expanded(
@@ -228,7 +247,10 @@ class ProductCard extends StatelessWidget {
                       height: 48.0,
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [Color(0xFF7B2FF7), Color(0xFF2170E4)], // primary-gradient
+                          colors: [
+                            Color(0xFF7B2FF7),
+                            Color(0xFF2170E4),
+                          ], // primary-gradient
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -269,7 +291,9 @@ class ProductCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.0),
-                      border: Border.all(color: const Color(0xFFCCC3D9)), // outline-variant
+                      border: Border.all(
+                        color: const Color(0xFFCCC3D9),
+                      ), // outline-variant
                     ),
                     alignment: Alignment.center,
                     child: const Text(
@@ -291,12 +315,18 @@ class ProductCard extends StatelessWidget {
                     width: 48.0,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.0),
-                      border: Border.all(color: const Color(0xFFCCC3D9)), // outline-variant
+                      border: Border.all(
+                        color: const Color(0xFFCCC3D9),
+                      ), // outline-variant
                     ),
                     alignment: Alignment.center,
                     child: Icon(
-                      product.isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: product.isFavorite ? const Color(0xFFBA1A1A) : const Color(0xFF4A4456),
+                      product.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: product.isFavorite
+                          ? const Color(0xFFBA1A1A)
+                          : const Color(0xFF4A4456),
                       size: 20.0,
                     ),
                   ),

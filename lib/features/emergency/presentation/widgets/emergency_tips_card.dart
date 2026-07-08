@@ -57,7 +57,11 @@ class EmergencyTipsCard extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(tip.icon, color: const Color(0xFF6100D6), size: 20.0), // primary
+                  Icon(
+                    tip.icon,
+                    color: const Color(0xFF6100D6),
+                    size: 20.0,
+                  ), // primary
                   const SizedBox(width: 8.0),
                   Expanded(
                     child: Text(
@@ -83,16 +87,24 @@ class EmergencyTipsCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: const Color(0xFFFFDCCB).withOpacity(0.3), // tertiary-container/10
+              color: const Color(
+                0xFFFFDCCB,
+              ).withOpacity(0.3), // tertiary-container/10
               borderRadius: BorderRadius.circular(24.0),
-              border: Border.all(color: const Color(0xFFFFDCCB).withOpacity(0.5)),
+              border: Border.all(
+                color: const Color(0xFFFFDCCB).withOpacity(0.5),
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.lightbulb_outline, color: Color(0xFF813800), size: 18.0), // tertiary
+                    Icon(
+                      Icons.lightbulb_outline,
+                      color: Color(0xFF813800),
+                      size: 18.0,
+                    ), // tertiary
                     SizedBox(width: 8.0),
                     Text(
                       'Quick Tip',

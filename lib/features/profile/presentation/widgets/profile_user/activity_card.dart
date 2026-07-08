@@ -62,11 +62,7 @@ class ActivityCard extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(
-            height: 1.0,
-            thickness: 1.0,
-            color: Color(0xFFEDE5F5),
-          ),
+          const Divider(height: 1.0, thickness: 1.0, color: Color(0xFFEDE5F5)),
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -114,14 +110,22 @@ class _TransactionItem extends StatelessWidget {
             height: 40.0,
             decoration: BoxDecoration(
               color: isPositive
-                  ? const Color(0xFF0058BE).withOpacity(0.08) // positive blue/green tint
-                  : const Color(0xFFBA1A1A).withOpacity(0.08), // negative red tint
+                  ? const Color(0xFF0058BE).withOpacity(
+                      0.08,
+                    ) // positive blue/green tint
+                  : const Color(
+                      0xFFBA1A1A,
+                    ).withOpacity(0.08), // negative red tint
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
             child: Icon(
-              isPositive ? Icons.add_circle_outline : Icons.remove_circle_outline,
-              color: isPositive ? const Color(0xFF0058BE) : const Color(0xFFBA1A1A),
+              isPositive
+                  ? Icons.add_circle_outline
+                  : Icons.remove_circle_outline,
+              color: isPositive
+                  ? const Color(0xFF0058BE)
+                  : const Color(0xFFBA1A1A),
               size: 20.0,
             ),
           ),
@@ -166,7 +170,9 @@ class _TransactionItem extends StatelessWidget {
               fontFamily: 'Plus Jakarta Sans',
               fontSize: 14.0,
               fontWeight: FontWeight.bold,
-              color: isPositive ? const Color(0xFF0058BE) : const Color(0xFFBA1A1A),
+              color: isPositive
+                  ? const Color(0xFF0058BE)
+                  : const Color(0xFFBA1A1A),
             ),
           ),
         ],

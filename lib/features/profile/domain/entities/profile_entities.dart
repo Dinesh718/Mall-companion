@@ -16,10 +16,7 @@ class RewardEntity {
   final int points;
   final String description;
 
-  const RewardEntity({
-    required this.points,
-    required this.description,
-  });
+  const RewardEntity({required this.points, required this.description});
 }
 
 class ReservationSummaryEntity {
@@ -38,20 +35,14 @@ class FavoriteSummaryEntity {
   final int count;
   final String label;
 
-  const FavoriteSummaryEntity({
-    required this.count,
-    required this.label,
-  });
+  const FavoriteSummaryEntity({required this.count, required this.label});
 }
 
 class ParkingSummaryEntity {
   final String level;
   final String spot;
 
-  const ParkingSummaryEntity({
-    required this.level,
-    required this.spot,
-  });
+  const ParkingSummaryEntity({required this.level, required this.spot});
 }
 
 class PreferenceEntity {
@@ -85,7 +76,8 @@ class PreferenceEntity {
       accessibility: accessibility ?? this.accessibility,
       recentSearches: recentSearches ?? this.recentSearches,
       favoriteRoutes: favoriteRoutes ?? this.favoriteRoutes,
-      pushNotificationsEnabled: pushNotificationsEnabled ?? this.pushNotificationsEnabled,
+      pushNotificationsEnabled:
+          pushNotificationsEnabled ?? this.pushNotificationsEnabled,
     );
   }
 }
@@ -141,15 +133,9 @@ class UserProfileEntity {
 class GuestProfileEntity {
   final PreferenceEntity preferences;
 
-  const GuestProfileEntity({
-    required this.preferences,
-  });
+  const GuestProfileEntity({required this.preferences});
 
-  GuestProfileEntity copyWith({
-    PreferenceEntity? preferences,
-  }) {
-    return GuestProfileEntity(
-      preferences: preferences ?? this.preferences,
-    );
+  GuestProfileEntity copyWith({PreferenceEntity? preferences}) {
+    return GuestProfileEntity(preferences: preferences ?? this.preferences);
   }
 }

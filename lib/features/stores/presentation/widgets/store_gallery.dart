@@ -4,11 +4,7 @@ class StoreGallery extends StatelessWidget {
   final List<String> imageUrls;
   final double height;
 
-  const StoreGallery({
-    super.key,
-    required this.imageUrls,
-    this.height = 192.0,
-  });
+  const StoreGallery({super.key, required this.imageUrls, this.height = 192.0});
 
   @override
   Widget build(BuildContext context) {

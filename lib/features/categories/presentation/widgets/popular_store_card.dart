@@ -86,7 +86,9 @@ class PopularStoreCard extends StatelessWidget {
                       width: 8.0,
                       height: 8.0,
                       decoration: BoxDecoration(
-                        color: store.isOpen ? const Color(0xFF059669) : const Color(0xFFDC2626), // emerald-600 or red-600
+                        color: store.isOpen
+                            ? const Color(0xFF059669)
+                            : const Color(0xFFDC2626), // emerald-600 or red-600
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -97,7 +99,9 @@ class PopularStoreCard extends StatelessWidget {
                         fontFamily: 'Plus Jakarta Sans',
                         fontSize: 12.0,
                         fontWeight: FontWeight.w600,
-                        color: store.isOpen ? const Color(0xFF059669) : const Color(0xFFDC2626),
+                        color: store.isOpen
+                            ? const Color(0xFF059669)
+                            : const Color(0xFFDC2626),
                       ),
                     ),
                   ],
@@ -109,7 +113,10 @@ class PopularStoreCard extends StatelessWidget {
           GestureDetector(
             onTap: onNavigateTap,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 10.0,
+              ),
               decoration: BoxDecoration(
                 color: const Color(0xFFEADDFF), // bg-primary-fixed
                 borderRadius: BorderRadius.circular(12.0), // rounded-xl
@@ -164,11 +171,7 @@ class PopularStoreCard extends StatelessWidget {
         textAlign: TextAlign.center,
       );
     } else if (logoUrl == 'NIKE') {
-      return const Icon(
-        Icons.check_circle,
-        color: Colors.white,
-        size: 32.0,
-      );
+      return const Icon(Icons.check_circle, color: Colors.white, size: 32.0);
     } else {
       return Text(
         logoUrl,

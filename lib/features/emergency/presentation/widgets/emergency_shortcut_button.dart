@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 class EmergencyShortcutButton extends StatefulWidget {
   final VoidCallback onTap;
 
-  const EmergencyShortcutButton({
-    super.key,
-    required this.onTap,
-  });
+  const EmergencyShortcutButton({super.key, required this.onTap});
 
   @override
-  State<EmergencyShortcutButton> createState() => _EmergencyShortcutButtonState();
+  State<EmergencyShortcutButton> createState() =>
+      _EmergencyShortcutButtonState();
 }
 
-class _EmergencyShortcutButtonState extends State<EmergencyShortcutButton> with SingleTickerProviderStateMixin {
+class _EmergencyShortcutButtonState extends State<EmergencyShortcutButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -43,7 +42,9 @@ class _EmergencyShortcutButtonState extends State<EmergencyShortcutButton> with 
               width: 56.0 + (28.0 * _controller.value),
               height: 56.0 + (28.0 * _controller.value),
               decoration: BoxDecoration(
-                color: const Color(0xFFBA1A1A).withOpacity(0.4 * (1.0 - _controller.value)),
+                color: const Color(
+                  0xFFBA1A1A,
+                ).withOpacity(0.4 * (1.0 - _controller.value)),
                 shape: BoxShape.circle,
               ),
             );

@@ -22,7 +22,10 @@ class StoreCategoryChip extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFF7B2FF7), Color(0xFF3B82F6)], // primary-gradient
+              colors: [
+                Color(0xFF7B2FF7),
+                Color(0xFF3B82F6),
+              ], // primary-gradient
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

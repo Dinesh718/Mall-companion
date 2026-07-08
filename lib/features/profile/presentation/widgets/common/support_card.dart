@@ -52,9 +52,7 @@ class SupportCard extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => const MyReportsPage(),
-                ),
+                MaterialPageRoute(builder: (_) => const MyReportsPage()),
               );
             },
           ),

@@ -68,7 +68,9 @@ class MenuTile extends StatelessWidget {
           Divider(
             height: 1.0,
             thickness: 1.0,
-            color: const Color(0xFFCCC3D9).withOpacity(0.2), // border-outline-variant/10
+            color: const Color(
+              0xFFCCC3D9,
+            ).withOpacity(0.2), // border-outline-variant/10
             indent: 20.0,
             endIndent: 20.0,
           ),

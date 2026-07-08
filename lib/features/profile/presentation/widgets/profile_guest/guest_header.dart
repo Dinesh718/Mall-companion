@@ -15,7 +15,9 @@ class GuestHeader extends StatelessWidget {
         color: const Color(0xFFF9F1FF), // bg-surface-container-low
         borderRadius: BorderRadius.circular(32.0), // rounded-card
         border: Border.all(
-          color: const Color(0xFF7B2FF7).withOpacity(0.1), // primary-container/10
+          color: const Color(
+            0xFF7B2FF7,
+          ).withOpacity(0.1), // primary-container/10
           width: 1.0,
         ),
         boxShadow: [
@@ -34,10 +36,7 @@ class GuestHeader extends StatelessWidget {
             height: 96.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white,
-                width: 4.0,
-              ),
+              border: Border.all(color: Colors.white, width: 4.0),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.15),
@@ -56,9 +55,14 @@ class GuestHeader extends StatelessWidget {
           const SizedBox(height: 16.0),
           // Guest Mode Active Indicator
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12.0,
+              vertical: 4.0,
+            ),
             decoration: BoxDecoration(
-              color: const Color(0xFF7B2FF7).withOpacity(0.1), // primary-container/10
+              color: const Color(
+                0xFF7B2FF7,
+              ).withOpacity(0.1), // primary-container/10
               borderRadius: BorderRadius.circular(9999.0), // rounded-full
             ),
             child: Row(
@@ -144,7 +148,9 @@ class GuestHeader extends StatelessWidget {
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Registration flow is not implemented in this demo.'),
+                      content: Text(
+                        'Registration flow is not implemented in this demo.',
+                      ),
                       duration: Duration(seconds: 2),
                     ),
                   );

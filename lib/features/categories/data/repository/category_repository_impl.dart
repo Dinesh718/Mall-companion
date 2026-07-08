@@ -18,7 +18,10 @@ class CategoryRepositoryImpl implements CategoryRepository {
   }
 
   @override
-  Future<void> toggleFavoriteProduct(String categoryId, String productId) async {
+  Future<void> toggleFavoriteProduct(
+    String categoryId,
+    String productId,
+  ) async {
     await localDataSource.toggleFavoriteProduct(categoryId, productId);
   }
 

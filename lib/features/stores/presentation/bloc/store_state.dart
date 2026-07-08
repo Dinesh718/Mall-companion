@@ -15,7 +15,8 @@ class StoreLoading extends StoreState {
 class StoreLoaded extends StoreState {
   final List<StoreEntity> stores;
   final String searchQuery;
-  final String selectedCategory; // e.g. "All Stores", "Fashion", "Electronics", etc.
+  final String
+  selectedCategory; // e.g. "All Stores", "Fashion", "Electronics", etc.
   final String selectedFloor; // e.g. "All Floors", "Ground", "L1", "L2"
 
   const StoreLoaded({

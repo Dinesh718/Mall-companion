@@ -35,7 +35,9 @@ class ActionButton extends StatelessWidget {
               child: Center(
                 child: Icon(
                   icon,
-                  color: isFav ? const Color(0xFFBA1A1A) : const Color(0xFF1D1A25),
+                  color: isFav
+                      ? const Color(0xFFBA1A1A)
+                      : const Color(0xFF1D1A25),
                   size: 24.0,
                 ),
               ),

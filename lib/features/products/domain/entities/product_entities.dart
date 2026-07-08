@@ -60,10 +60,7 @@ class SpecificationEntity {
   final String key;
   final String value;
 
-  const SpecificationEntity({
-    required this.key,
-    required this.value,
-  });
+  const SpecificationEntity({required this.key, required this.value});
 }
 
 class ProductEntity {
@@ -109,9 +106,7 @@ class ProductEntity {
     required this.availableSizes,
   });
 
-  ProductEntity copyWith({
-    bool? isFavorite,
-  }) {
+  ProductEntity copyWith({bool? isFavorite}) {
     return ProductEntity(
       id: id,
       name: name,

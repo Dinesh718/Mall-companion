@@ -24,7 +24,9 @@ class EmergencyRepositoryImpl implements EmergencyRepository {
   }
 
   @override
-  Future<EmergencyNavigationRouteEntity> startNavigation(String destination) async {
+  Future<EmergencyNavigationRouteEntity> startNavigation(
+    String destination,
+  ) async {
     return await localDataSource.startNavigation(destination);
   }
 

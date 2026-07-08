@@ -4,10 +4,7 @@ import '../../domain/entities/brand_entities.dart';
 class BrandStoryCard extends StatelessWidget {
   final BrandEntity brand;
 
-  const BrandStoryCard({
-    super.key,
-    required this.brand,
-  });
+  const BrandStoryCard({super.key, required this.brand});
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +60,7 @@ class BrandStoryCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: const Color(0xFFF9F1FF),
             borderRadius: BorderRadius.circular(16.0),
-            border: Border.all(
-              color: const Color(0xFFE8DFEF).withOpacity(0.5),
-            ),
+            border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.5)),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

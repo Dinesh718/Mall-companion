@@ -24,7 +24,9 @@ class GuestSyncCard extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(32.0), // rounded-card
             border: Border.all(
-              color: const Color(0xFFCCC3D9).withOpacity(0.2), // outline-variant/20
+              color: const Color(
+                0xFFCCC3D9,
+              ).withOpacity(0.2), // outline-variant/20
               width: 1.0,
             ),
             boxShadow: [
@@ -86,7 +88,10 @@ class GuestSyncCard extends StatelessWidget {
                 runSpacing: 8.0,
                 children: localChips.map((chip) {
                   return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 6.0,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF3EBFA), // bg-surface-container
                       borderRadius: BorderRadius.circular(9999.0),
@@ -170,11 +175,20 @@ class GuestSyncCard extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 16.0),
-                          _buildOfflineBenefitRow(Icons.check_circle, 'Mall Directory & Maps'),
+                          _buildOfflineBenefitRow(
+                            Icons.check_circle,
+                            'Mall Directory & Maps',
+                          ),
                           const SizedBox(height: 8.0),
-                          _buildOfflineBenefitRow(Icons.check_circle, 'Emergency Contacts'),
+                          _buildOfflineBenefitRow(
+                            Icons.check_circle,
+                            'Emergency Contacts',
+                          ),
                           const SizedBox(height: 8.0),
-                          _buildOfflineBenefitRow(Icons.check_circle, 'Saved Preferences'),
+                          _buildOfflineBenefitRow(
+                            Icons.check_circle,
+                            'Saved Preferences',
+                          ),
                         ],
                       ),
                     ),
@@ -205,11 +219,7 @@ class GuestSyncCard extends StatelessWidget {
   Widget _buildOfflineBenefitRow(IconData icon, String text) {
     return Row(
       children: [
-        Icon(
-          icon,
-          color: Colors.white,
-          size: 18.0,
-        ),
+        Icon(icon, color: Colors.white, size: 18.0),
         const SizedBox(width: 10.0),
         Text(
           text,

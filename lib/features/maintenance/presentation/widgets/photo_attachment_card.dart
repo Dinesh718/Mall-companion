@@ -65,7 +65,10 @@ class PhotoAttachmentCard extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
                 color: Colors.black38,
                 child: const Row(
                   children: [
@@ -153,7 +156,11 @@ class PhotoAttachmentCard extends StatelessWidget {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.camera_alt_outlined, color: Color(0xFF0B1C30), size: 16.0),
+                        Icon(
+                          Icons.camera_alt_outlined,
+                          color: Color(0xFF0B1C30),
+                          size: 16.0,
+                        ),
                         SizedBox(width: 8.0),
                         Text(
                           'Camera',
@@ -182,7 +189,11 @@ class PhotoAttachmentCard extends StatelessWidget {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.image_outlined, color: Color(0xFF0B1C30), size: 16.0),
+                        Icon(
+                          Icons.image_outlined,
+                          color: Color(0xFF0B1C30),
+                          size: 16.0,
+                        ),
                         SizedBox(width: 8.0),
                         Text(
                           'Gallery',

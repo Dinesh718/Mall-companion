@@ -61,11 +61,7 @@ class EmergencyFacilityCard extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 alignment: Alignment.center,
-                child: Icon(
-                  icon,
-                  color: iconColor,
-                  size: 20.0,
-                ),
+                child: Icon(icon, color: iconColor, size: 20.0),
               ),
               const SizedBox(width: 12.0),
               Expanded(
@@ -105,7 +101,11 @@ class EmergencyFacilityCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.straighten, color: Color(0xFF4A4456), size: 14.0),
+                  const Icon(
+                    Icons.straighten,
+                    color: Color(0xFF4A4456),
+                    size: 14.0,
+                  ),
                   const SizedBox(width: 4.0),
                   Text(
                     '${facility.distanceMeter.toInt()}m',
@@ -119,7 +119,11 @@ class EmergencyFacilityCard extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Icon(Icons.schedule, color: Color(0xFF4A4456), size: 14.0),
+                  const Icon(
+                    Icons.schedule,
+                    color: Color(0xFF4A4456),
+                    size: 14.0,
+                  ),
                   const SizedBox(width: 4.0),
                   Text(
                     '${facility.walkingTimeMinutes} min',
@@ -147,7 +151,11 @@ class EmergencyFacilityCard extends StatelessWidget {
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.directions, color: Color(0xFF6100D6), size: 16.0), // primary
+                  Icon(
+                    Icons.directions,
+                    color: Color(0xFF6100D6),
+                    size: 16.0,
+                  ), // primary
                   SizedBox(width: 6.0),
                   Text(
                     'Navigate',

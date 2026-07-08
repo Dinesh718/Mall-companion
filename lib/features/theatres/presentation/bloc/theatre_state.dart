@@ -23,7 +23,8 @@ class TheatreLoaded extends TheatreState {
     required this.movies,
     required this.theatres,
     this.searchQuery = '',
-    this.selectedCategory = 'Now Showing', // default active chip in Stitch design
+    this.selectedCategory =
+        'Now Showing', // default active chip in Stitch design
     this.selectedLanguage = 'All',
   });
 

@@ -15,7 +15,7 @@ class MoreShortcutCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isEmergency = action.type == 'emergency';
 
-    final Color bgColor = isEmergency 
+    final Color bgColor = isEmergency
         ? const Color(0xFFFFDAD6).withOpacity(0.3)
         : Colors.white;
     final Border border = isEmergency
@@ -111,11 +111,7 @@ class MoreShortcutCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8.0),
-            Icon(
-              Icons.chevron_right_rounded,
-              color: chevronColor,
-              size: 20.0,
-            ),
+            Icon(Icons.chevron_right_rounded, color: chevronColor, size: 20.0),
           ],
         ),
       ),

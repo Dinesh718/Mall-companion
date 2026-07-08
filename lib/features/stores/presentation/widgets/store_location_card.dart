@@ -38,7 +38,8 @@ class StoreLocationCard extends StatelessWidget {
                   child: Image.network(
                     store.location.mapImageUrl,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                    errorBuilder: (_, __, ___) =>
+                        Container(color: Colors.grey[200]),
                   ),
                 ),
                 Positioned.fill(
@@ -73,7 +74,9 @@ class StoreLocationCard extends StatelessWidget {
                         width: 40.0,
                         height: 40.0,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF0058BE).withOpacity(0.1), // secondary/10
+                          color: const Color(
+                            0xFF0058BE,
+                          ).withOpacity(0.1), // secondary/10
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
@@ -116,7 +119,10 @@ class StoreLocationCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(9999.0),
                         side: const BorderSide(color: Color(0xFFCCC3D9)),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 8.0,
+                      ),
                     ),
                     child: const Text(
                       'Start Navigation',

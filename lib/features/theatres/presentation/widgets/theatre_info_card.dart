@@ -19,7 +19,14 @@ class TheatreInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Separate facilities: display IMAX/4K like pills in top-right
-    final topPills = theatre.facilities.where((f) => f.toUpperCase() == 'IMAX' || f.toUpperCase() == '4K' || f.toUpperCase() == '3D').toList();
+    final topPills = theatre.facilities
+        .where(
+          (f) =>
+              f.toUpperCase() == 'IMAX' ||
+              f.toUpperCase() == '4K' ||
+              f.toUpperCase() == '3D',
+        )
+        .toList();
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -78,7 +85,10 @@ class TheatreInfoCard extends StatelessWidget {
                   children: topPills.map((pill) {
                     return Container(
                       margin: const EdgeInsets.only(left: 4.0),
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0,
+                        vertical: 2.0,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFF3EBFA), // surface-container
                         borderRadius: BorderRadius.circular(4.0),

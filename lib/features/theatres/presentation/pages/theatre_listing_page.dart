@@ -135,21 +135,29 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
 
           // 2. Filter movies based on search, category and language
           final filteredMovies = state.movies.where((movie) {
-            final matchesSearch = movie.title.toLowerCase().contains(query) ||
+            final matchesSearch =
+                movie.title.toLowerCase().contains(query) ||
                 movie.genre.toLowerCase().contains(query);
 
-            final matchesCategory = categoryFilter == 'All' ||
+            final matchesCategory =
+                categoryFilter == 'All' ||
                 movie.category.toLowerCase() == categoryFilter.toLowerCase();
 
             bool matchesLanguage = true;
             if (languageFilter != 'All') {
               if (languageFilter == 'IMAX') {
                 matchesLanguage = movie.showTimes.any((st) {
-                  final theatre = state.theatres.firstWhere((t) => t.id == st.theatreId);
-                  return theatre.facilities.any((f) => f.toUpperCase() == 'IMAX');
+                  final theatre = state.theatres.firstWhere(
+                    (t) => t.id == st.theatreId,
+                  );
+                  return theatre.facilities.any(
+                    (f) => f.toUpperCase() == 'IMAX',
+                  );
                 });
               } else {
-                matchesLanguage = movie.language.toLowerCase() == languageFilter.toLowerCase();
+                matchesLanguage =
+                    movie.language.toLowerCase() ==
+                    languageFilter.toLowerCase();
               }
             }
 
@@ -194,7 +202,9 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
                           child: TextField(
                             controller: _searchController,
                             onChanged: (val) {
-                              context.read<TheatreBloc>().add(SearchMovie(query: val));
+                              context.read<TheatreBloc>().add(
+                                SearchMovie(query: val),
+                              );
                             },
                             decoration: InputDecoration(
                               filled: true,
@@ -213,27 +223,44 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                    icon: const Icon(Icons.mic, color: Color(0xFF7B7488)),
+                                    icon: const Icon(
+                                      Icons.mic,
+                                      color: Color(0xFF7B7488),
+                                    ),
                                     onPressed: () {},
                                   ),
                                   IconButton(
-                                    icon: const Icon(Icons.qr_code_scanner, color: Color(0xFF7B7488)),
+                                    icon: const Icon(
+                                      Icons.qr_code_scanner,
+                                      color: Color(0xFF7B7488),
+                                    ),
                                     onPressed: () {},
                                   ),
                                 ],
                               ),
-                              contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 16.0,
+                              ),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(9999.0), // pill
-                                borderSide: const BorderSide(color: Color(0xFFCCC3D9)), // outline-variant
+                                borderRadius: BorderRadius.circular(
+                                  9999.0,
+                                ), // pill
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFCCC3D9),
+                                ), // outline-variant
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9999.0),
-                                borderSide: const BorderSide(color: Color(0xFFCCC3D9)),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFCCC3D9),
+                                ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9999.0),
-                                borderSide: const BorderSide(color: Color(0xFF6100D6), width: 2.0),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF6100D6),
+                                  width: 2.0,
+                                ),
                               ),
                             ),
                           ),
@@ -253,8 +280,10 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
                               isSelected: categoryFilter == 'Now Showing',
                               onTap: () {
                                 context.read<TheatreBloc>().add(
-                                      const FilterMoviesCategory(category: 'Now Showing'),
-                                    );
+                                  const FilterMoviesCategory(
+                                    category: 'Now Showing',
+                                  ),
+                                );
                               },
                             ),
                             _buildFilterChip(
@@ -262,40 +291,58 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
                               isSelected: categoryFilter == 'Coming Soon',
                               onTap: () {
                                 context.read<TheatreBloc>().add(
-                                      const FilterMoviesCategory(category: 'Coming Soon'),
-                                    );
+                                  const FilterMoviesCategory(
+                                    category: 'Coming Soon',
+                                  ),
+                                );
                               },
                             ),
                             _buildFilterChip(
                               text: 'English',
                               isSelected: languageFilter == 'English',
                               onTap: () {
-                                final nextLang = languageFilter == 'English' ? 'All' : 'English';
-                                context.read<TheatreBloc>().add(FilterLanguage(language: nextLang));
+                                final nextLang = languageFilter == 'English'
+                                    ? 'All'
+                                    : 'English';
+                                context.read<TheatreBloc>().add(
+                                  FilterLanguage(language: nextLang),
+                                );
                               },
                             ),
                             _buildFilterChip(
                               text: 'Tamil',
                               isSelected: languageFilter == 'Tamil',
                               onTap: () {
-                                final nextLang = languageFilter == 'Tamil' ? 'All' : 'Tamil';
-                                context.read<TheatreBloc>().add(FilterLanguage(language: nextLang));
+                                final nextLang = languageFilter == 'Tamil'
+                                    ? 'All'
+                                    : 'Tamil';
+                                context.read<TheatreBloc>().add(
+                                  FilterLanguage(language: nextLang),
+                                );
                               },
                             ),
                             _buildFilterChip(
                               text: 'Hindi',
                               isSelected: languageFilter == 'Hindi',
                               onTap: () {
-                                final nextLang = languageFilter == 'Hindi' ? 'All' : 'Hindi';
-                                context.read<TheatreBloc>().add(FilterLanguage(language: nextLang));
+                                final nextLang = languageFilter == 'Hindi'
+                                    ? 'All'
+                                    : 'Hindi';
+                                context.read<TheatreBloc>().add(
+                                  FilterLanguage(language: nextLang),
+                                );
                               },
                             ),
                             _buildFilterChip(
                               text: 'IMAX',
                               isSelected: languageFilter == 'IMAX',
                               onTap: () {
-                                final nextLang = languageFilter == 'IMAX' ? 'All' : 'IMAX';
-                                context.read<TheatreBloc>().add(FilterLanguage(language: nextLang));
+                                final nextLang = languageFilter == 'IMAX'
+                                    ? 'All'
+                                    : 'IMAX';
+                                context.read<TheatreBloc>().add(
+                                  FilterLanguage(language: nextLang),
+                                );
                               },
                             ),
                           ],
@@ -310,7 +357,8 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => TheatreDetailsPage(movieId: featuredMovie.id),
+                              builder: (_) =>
+                                  TheatreDetailsPage(movieId: featuredMovie.id),
                             ),
                           );
                         },
@@ -340,7 +388,8 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => TheatreDetailsPage(movieId: m.id),
+                                    builder: (_) =>
+                                        TheatreDetailsPage(movieId: m.id),
                                   ),
                                 );
                               },
@@ -364,9 +413,10 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                  MaterialPageRoute(
-                                    builder: (_) => TheatreDetailsPage(movieId: m.id),
-                                  ),
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      TheatreDetailsPage(movieId: m.id),
+                                ),
                               );
                             },
                             onNavigate: () {},
@@ -394,7 +444,9 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
                     right: 20.0,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFEF7FF).withOpacity(0.8), // glass-header background
+                    color: const Color(
+                      0xFFFEF7FF,
+                    ).withOpacity(0.8), // glass-header background
                     boxShadow: _isHeaderCollapsed
                         ? [
                             BoxShadow(
@@ -436,7 +488,9 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
                                 style: TextStyle(
                                   fontFamily: 'Plus Jakarta Sans',
                                   fontSize: 11.0, // label-sm
-                                  color: Color(0xFF4A4456), // on-surface-variant
+                                  color: Color(
+                                    0xFF4A4456,
+                                  ), // on-surface-variant
                                 ),
                               ),
                           ],
@@ -473,7 +527,10 @@ class _TheatreListingPageBodyState extends State<TheatreListingPageBody> {
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
           decoration: BoxDecoration(
             gradient: const LinearGradient(
-              colors: [Color(0xFF7423F0), Color(0xFF6100D6)], // primary-gradient
+              colors: [
+                Color(0xFF7423F0),
+                Color(0xFF6100D6),
+              ], // primary-gradient
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),

@@ -105,9 +105,7 @@ class MovieEntity {
     required this.associatedTheatreName,
   });
 
-  MovieEntity copyWith({
-    bool? isBookmarked,
-  }) {
+  MovieEntity copyWith({bool? isBookmarked}) {
     return MovieEntity(
       id: id,
       title: title,

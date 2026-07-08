@@ -43,7 +43,9 @@ class SettingTile extends StatelessWidget {
             activeColor: Colors.white,
             activeTrackColor: const Color(0xFF6100D6), // primary
             inactiveThumbColor: const Color(0xFF7B7488), // outline
-            inactiveTrackColor: const Color(0xFFEDE5F5), // surface-container-high
+            inactiveTrackColor: const Color(
+              0xFFEDE5F5,
+            ), // surface-container-high
           ),
         ],
       ),

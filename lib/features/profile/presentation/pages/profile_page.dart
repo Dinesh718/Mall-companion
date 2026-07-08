@@ -81,10 +81,15 @@ class _ProfileView extends StatelessWidget {
             : null,
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Color(0xFF4A4456)),
+            icon: const Icon(
+              Icons.notifications_outlined,
+              color: Color(0xFF4A4456),
+            ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Notifications screen is not implemented.')),
+                const SnackBar(
+                  content: Text('Notifications screen is not implemented.'),
+                ),
               );
             },
           ),
@@ -92,7 +97,9 @@ class _ProfileView extends StatelessWidget {
             icon: const Icon(Icons.settings_outlined, color: Color(0xFF4A4456)),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Settings dashboard is not implemented.')),
+                const SnackBar(
+                  content: Text('Settings dashboard is not implemented.'),
+                ),
               );
             },
           ),
@@ -116,7 +123,11 @@ class _ProfileView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.error_outline, size: 64.0, color: Color(0xFFBA1A1A)),
+                    const Icon(
+                      Icons.error_outline,
+                      size: 64.0,
+                      color: Color(0xFFBA1A1A),
+                    ),
                     const SizedBox(height: 16.0),
                     const Text(
                       'Failed to load Profile',
@@ -191,7 +202,9 @@ class _ProfileView extends StatelessWidget {
                       versionText: 'Version 1.0.42 • Visitor App',
                       showLogoAndCallIcon: true,
                     ),
-                    const SizedBox(height: 120.0), // spacer offset bottom navigation height
+                    const SizedBox(
+                      height: 120.0,
+                    ), // spacer offset bottom navigation height
                   ],
                 ),
               ),
@@ -231,15 +244,17 @@ class _ProfileView extends StatelessWidget {
                     const SectionTitle(title: 'Preferences'),
                     PreferenceCard(
                       language: user.preferences.language,
-                      pushNotificationsEnabled: user.preferences.pushNotificationsEnabled,
+                      pushNotificationsEnabled:
+                          user.preferences.pushNotificationsEnabled,
                       accessibility: user.preferences.accessibility,
                       onLanguageTap: () => _showLanguageSelector(context),
                       onNotificationChanged: (val) {
                         context.read<ProfileBloc>().add(
-                              ToggleNotification(pushNotificationsEnabled: val),
-                            );
+                          ToggleNotification(pushNotificationsEnabled: val),
+                        );
                       },
-                      onAccessibilityTap: () => _showAccessibilitySelector(context),
+                      onAccessibilityTap: () =>
+                          _showAccessibilitySelector(context),
                     ),
                     const SizedBox(height: 32.0),
                     // 7. Support Card
@@ -290,28 +305,36 @@ class _ProfileView extends StatelessWidget {
           children: [
             SimpleDialogOption(
               onPressed: () {
-                context.read<ProfileBloc>().add(const ChangeLanguage(language: 'English'));
+                context.read<ProfileBloc>().add(
+                  const ChangeLanguage(language: 'English'),
+                );
                 Navigator.pop(diagContext);
               },
               child: const Text('English', style: TextStyle(fontSize: 16.0)),
             ),
             SimpleDialogOption(
               onPressed: () {
-                context.read<ProfileBloc>().add(const ChangeLanguage(language: 'Español'));
+                context.read<ProfileBloc>().add(
+                  const ChangeLanguage(language: 'Español'),
+                );
                 Navigator.pop(diagContext);
               },
               child: const Text('Español', style: TextStyle(fontSize: 16.0)),
             ),
             SimpleDialogOption(
               onPressed: () {
-                context.read<ProfileBloc>().add(const ChangeLanguage(language: 'Français'));
+                context.read<ProfileBloc>().add(
+                  const ChangeLanguage(language: 'Français'),
+                );
                 Navigator.pop(diagContext);
               },
               child: const Text('Français', style: TextStyle(fontSize: 16.0)),
             ),
             SimpleDialogOption(
               onPressed: () {
-                context.read<ProfileBloc>().add(const ChangeLanguage(language: 'العربية'));
+                context.read<ProfileBloc>().add(
+                  const ChangeLanguage(language: 'العربية'),
+                );
                 Navigator.pop(diagContext);
               },
               child: const Text('العربية', style: TextStyle(fontSize: 16.0)),
@@ -341,26 +364,34 @@ class _ProfileView extends StatelessWidget {
             SimpleDialogOption(
               onPressed: () {
                 context.read<ProfileBloc>().add(
-                      const ChangeAccessibility(accessibility: 'High Contrast'),
-                    );
+                  const ChangeAccessibility(accessibility: 'High Contrast'),
+                );
                 Navigator.pop(diagContext);
               },
-              child: const Text('High Contrast', style: TextStyle(fontSize: 16.0)),
+              child: const Text(
+                'High Contrast',
+                style: TextStyle(fontSize: 16.0),
+              ),
             ),
             SimpleDialogOption(
               onPressed: () {
                 context.read<ProfileBloc>().add(
-                      const ChangeAccessibility(accessibility: 'Screen Reader Friendly'),
-                    );
+                  const ChangeAccessibility(
+                    accessibility: 'Screen Reader Friendly',
+                  ),
+                );
                 Navigator.pop(diagContext);
               },
-              child: const Text('Screen Reader Friendly', style: TextStyle(fontSize: 16.0)),
+              child: const Text(
+                'Screen Reader Friendly',
+                style: TextStyle(fontSize: 16.0),
+              ),
             ),
             SimpleDialogOption(
               onPressed: () {
                 context.read<ProfileBloc>().add(
-                      const ChangeAccessibility(accessibility: 'Standard'),
-                    );
+                  const ChangeAccessibility(accessibility: 'Standard'),
+                );
                 Navigator.pop(diagContext);
               },
               child: const Text('Standard', style: TextStyle(fontSize: 16.0)),

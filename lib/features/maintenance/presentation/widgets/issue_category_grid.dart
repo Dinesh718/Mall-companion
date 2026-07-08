@@ -23,21 +23,81 @@ class IssueCategoryGrid extends StatelessWidget {
   });
 
   static const List<IssueCategory> categories = [
-    IssueCategory(name: 'Cleaning', icon: Icons.cleaning_services_outlined, desc: 'Spills, debris, or trash'),
-    IssueCategory(name: 'Broken Equipment', icon: Icons.construction_outlined, desc: 'Damaged fixtures'),
-    IssueCategory(name: 'Escalator', icon: Icons.stairs_outlined, desc: 'Not moving or noisy'),
-    IssueCategory(name: 'Elevator', icon: Icons.elevator_outlined, desc: 'Technical issues'),
-    IssueCategory(name: 'Lighting', icon: Icons.lightbulb_outline, desc: 'Flickering or out'),
-    IssueCategory(name: 'Restroom', icon: Icons.wc_outlined, desc: 'Plumbing or hygiene'),
-    IssueCategory(name: 'Water Leakage', icon: Icons.water_drop_outlined, desc: 'Ceiling or floor leaks'),
-    IssueCategory(name: 'Electrical', icon: Icons.bolt_outlined, desc: 'Exposed wires or power'),
-    IssueCategory(name: 'Air Conditioning', icon: Icons.ac_unit_outlined, desc: 'HVAC issues'),
-    IssueCategory(name: 'Safety Hazard', icon: Icons.warning_amber_outlined, desc: 'Dangerous areas'),
-    IssueCategory(name: 'Food Court', icon: Icons.restaurant_outlined, desc: 'Spills or damage'),
-    IssueCategory(name: 'Parking', icon: Icons.local_parking_outlined, desc: 'Parking issues'),
-    IssueCategory(name: 'Signage', icon: Icons.info_outline, desc: 'Broken signage'),
-    IssueCategory(name: 'Floor Damage', icon: Icons.layers_outlined, desc: 'Damaged flooring'),
-    IssueCategory(name: 'Other', icon: Icons.help_outline, desc: 'Other issues'),
+    IssueCategory(
+      name: 'Cleaning',
+      icon: Icons.cleaning_services_outlined,
+      desc: 'Spills, debris, or trash',
+    ),
+    IssueCategory(
+      name: 'Broken Equipment',
+      icon: Icons.construction_outlined,
+      desc: 'Damaged fixtures',
+    ),
+    IssueCategory(
+      name: 'Escalator',
+      icon: Icons.stairs_outlined,
+      desc: 'Not moving or noisy',
+    ),
+    IssueCategory(
+      name: 'Elevator',
+      icon: Icons.elevator_outlined,
+      desc: 'Technical issues',
+    ),
+    IssueCategory(
+      name: 'Lighting',
+      icon: Icons.lightbulb_outline,
+      desc: 'Flickering or out',
+    ),
+    IssueCategory(
+      name: 'Restroom',
+      icon: Icons.wc_outlined,
+      desc: 'Plumbing or hygiene',
+    ),
+    IssueCategory(
+      name: 'Water Leakage',
+      icon: Icons.water_drop_outlined,
+      desc: 'Ceiling or floor leaks',
+    ),
+    IssueCategory(
+      name: 'Electrical',
+      icon: Icons.bolt_outlined,
+      desc: 'Exposed wires or power',
+    ),
+    IssueCategory(
+      name: 'Air Conditioning',
+      icon: Icons.ac_unit_outlined,
+      desc: 'HVAC issues',
+    ),
+    IssueCategory(
+      name: 'Safety Hazard',
+      icon: Icons.warning_amber_outlined,
+      desc: 'Dangerous areas',
+    ),
+    IssueCategory(
+      name: 'Food Court',
+      icon: Icons.restaurant_outlined,
+      desc: 'Spills or damage',
+    ),
+    IssueCategory(
+      name: 'Parking',
+      icon: Icons.local_parking_outlined,
+      desc: 'Parking issues',
+    ),
+    IssueCategory(
+      name: 'Signage',
+      icon: Icons.info_outline,
+      desc: 'Broken signage',
+    ),
+    IssueCategory(
+      name: 'Floor Damage',
+      icon: Icons.layers_outlined,
+      desc: 'Damaged flooring',
+    ),
+    IssueCategory(
+      name: 'Other',
+      icon: Icons.help_outline,
+      desc: 'Other issues',
+    ),
   ];
 
   @override
@@ -64,12 +124,21 @@ class IssueCategoryGrid extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 curve: Curves.easeInOut,
-                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 14.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 14.0,
+                ),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFFEADDFF) : Colors.white, // primary-fixed / white
+                  color: isSelected
+                      ? const Color(0xFFEADDFF)
+                      : Colors.white, // primary-fixed / white
                   borderRadius: BorderRadius.circular(24.0), // rounded-3xl
                   border: Border.all(
-                    color: isSelected ? const Color(0xFF6100D6) : const Color(0xFFCCC3D9).withOpacity(0.2), // primary / outline-variant
+                    color: isSelected
+                        ? const Color(0xFF6100D6)
+                        : const Color(
+                            0xFFCCC3D9,
+                          ).withOpacity(0.2), // primary / outline-variant
                     width: isSelected ? 2.0 : 1.0,
                   ),
                   boxShadow: [
@@ -90,7 +159,9 @@ class IssueCategoryGrid extends StatelessWidget {
                       width: 40.0,
                       height: 40.0,
                       decoration: BoxDecoration(
-                        color: isSelected ? Colors.white : const Color(0xFFF8F9FF),
+                        color: isSelected
+                            ? Colors.white
+                            : const Color(0xFFF8F9FF),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       alignment: Alignment.center,

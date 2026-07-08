@@ -45,10 +45,7 @@ class GalleryWidget extends StatelessWidget {
               errorBuilder: (_, __, ___) => Container(
                 color: const Color(0xFFEDE5F5),
                 alignment: Alignment.center,
-                child: const Icon(
-                  Icons.image,
-                  color: Color(0xFF6100D6),
-                ),
+                child: const Icon(Icons.image, color: Color(0xFF6100D6)),
               ),
             ),
           );

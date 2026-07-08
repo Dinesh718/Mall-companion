@@ -58,10 +58,7 @@ class MaintenanceBloc extends Bloc<MaintenanceEvent, MaintenanceState> {
     }
   }
 
-  void _onSelectCategory(
-    SelectCategory event,
-    Emitter<MaintenanceState> emit,
-  ) {
+  void _onSelectCategory(SelectCategory event, Emitter<MaintenanceState> emit) {
     if (state is MaintenanceLoaded) {
       final s = state as MaintenanceLoaded;
       emit(s.copyWith(category: event.category));
@@ -88,30 +85,21 @@ class MaintenanceBloc extends Bloc<MaintenanceEvent, MaintenanceState> {
     }
   }
 
-  void _onUpdatePriority(
-    UpdatePriority event,
-    Emitter<MaintenanceState> emit,
-  ) {
+  void _onUpdatePriority(UpdatePriority event, Emitter<MaintenanceState> emit) {
     if (state is MaintenanceLoaded) {
       final s = state as MaintenanceLoaded;
       emit(s.copyWith(priority: event.priority));
     }
   }
 
-  void _onAttachPhoto(
-    AttachPhoto event,
-    Emitter<MaintenanceState> emit,
-  ) {
+  void _onAttachPhoto(AttachPhoto event, Emitter<MaintenanceState> emit) {
     if (state is MaintenanceLoaded) {
       final s = state as MaintenanceLoaded;
       emit(s.copyWith(photoPath: event.photoPath));
     }
   }
 
-  void _onRemovePhoto(
-    RemovePhoto event,
-    Emitter<MaintenanceState> emit,
-  ) {
+  void _onRemovePhoto(RemovePhoto event, Emitter<MaintenanceState> emit) {
     if (state is MaintenanceLoaded) {
       final s = state as MaintenanceLoaded;
       emit(s.copyWith(photoPath: null));
@@ -126,12 +114,14 @@ class MaintenanceBloc extends Bloc<MaintenanceEvent, MaintenanceState> {
       final s = state as MaintenanceLoaded;
       emit(s.copyWith(locationStatus: 'Locating...'));
       await Future.delayed(const Duration(milliseconds: 600));
-      emit(s.copyWith(
-        locationStatus: 'Auto Detected',
-        location: 'LuxeMall • 2nd Floor • North Wing',
-        floor: '2nd Floor',
-        nearestLandmark: 'Prada Flagship Store',
-      ));
+      emit(
+        s.copyWith(
+          locationStatus: 'Auto Detected',
+          location: 'LuxeMall • 2nd Floor • North Wing',
+          floor: '2nd Floor',
+          nearestLandmark: 'Prada Flagship Store',
+        ),
+      );
     }
   }
 
@@ -141,8 +131,14 @@ class MaintenanceBloc extends Bloc<MaintenanceEvent, MaintenanceState> {
   ) async {
     if (state is MaintenanceLoaded) {
       final form = state as MaintenanceLoaded;
-      if (form.category.isEmpty || form.title.isEmpty || form.description.isEmpty) {
-        emit(const MaintenanceError(errorMessage: 'Please fill in all required fields.'));
+      if (form.category.isEmpty ||
+          form.title.isEmpty ||
+          form.description.isEmpty) {
+        emit(
+          const MaintenanceError(
+            errorMessage: 'Please fill in all required fields.',
+          ),
+        );
         emit(form); // restore form state
         return;
       }

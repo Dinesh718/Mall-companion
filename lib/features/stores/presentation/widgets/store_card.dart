@@ -57,7 +57,8 @@ class StoreCard extends StatelessWidget {
                 child: Image.network(
                   store.bannerUrl,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                  errorBuilder: (_, __, ___) =>
+                      Container(color: Colors.grey[200]),
                 ),
               ),
               // Open status badge top left
@@ -65,7 +66,10 @@ class StoreCard extends StatelessWidget {
                 top: 16.0,
                 left: 16.0,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 4.0,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(9999.0), // pill
@@ -76,7 +80,9 @@ class StoreCard extends StatelessWidget {
                         width: 8.0,
                         height: 8.0,
                         decoration: BoxDecoration(
-                          color: store.isOpen ? const Color(0xFF22C55E) : const Color(0xFFEF4444),
+                          color: store.isOpen
+                              ? const Color(0xFF22C55E)
+                              : const Color(0xFFEF4444),
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -159,7 +165,9 @@ class StoreCard extends StatelessWidget {
                       height: 48.0,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0),
-                        border: Border.all(color: const Color(0xFFCCC3D9)), // outline-variant
+                        border: Border.all(
+                          color: const Color(0xFFCCC3D9),
+                        ), // outline-variant
                       ),
                       alignment: Alignment.center,
                       child: const Text(
@@ -182,7 +190,10 @@ class StoreCard extends StatelessWidget {
                       height: 48.0,
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [Color(0xFF7B2FF7), Color(0xFF3B82F6)], // primary-gradient
+                          colors: [
+                            Color(0xFF7B2FF7),
+                            Color(0xFF3B82F6),
+                          ], // primary-gradient
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -271,14 +282,19 @@ class StoreCard extends StatelessWidget {
                         child: Image.network(
                           store.bannerUrl,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                          errorBuilder: (_, __, ___) =>
+                              Container(color: Colors.grey[200]),
                         ),
                       ),
                       // Brand logo overlaid on top left of banner
                       Positioned(
                         top: 10.0,
                         left: 10.0,
-                        child: StoreLogo(logoUrl: store.logoUrl, size: 40.0, padding: 3.0),
+                        child: StoreLogo(
+                          logoUrl: store.logoUrl,
+                          size: 40.0,
+                          padding: 3.0,
+                        ),
                       ),
                     ],
                   ),
@@ -311,7 +327,10 @@ class StoreCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 8.0),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                            vertical: 4.0,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFFF3EBFA), // surface-container
                             borderRadius: BorderRadius.circular(9999.0), // pill
@@ -319,7 +338,11 @@ class StoreCard extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Icon(Icons.star, color: Colors.amber, size: 12.0),
+                              const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 12.0,
+                              ),
                               const SizedBox(width: 4.0),
                               Text(
                                 store.rating.toStringAsFixed(1),
@@ -353,7 +376,11 @@ class StoreCard extends StatelessWidget {
                     // Specifications
                     Row(
                       children: [
-                        const Icon(Icons.layers, size: 16.0, color: Color(0xFF4A4456)),
+                        const Icon(
+                          Icons.layers,
+                          size: 16.0,
+                          color: Color(0xFF4A4456),
+                        ),
                         const SizedBox(width: 6.0),
                         Text(
                           store.floorText,
@@ -368,7 +395,11 @@ class StoreCard extends StatelessWidget {
                     const SizedBox(height: 6.0),
                     Row(
                       children: [
-                        const Icon(Icons.schedule, size: 16.0, color: Color(0xFF22C55E)),
+                        const Icon(
+                          Icons.schedule,
+                          size: 16.0,
+                          color: Color(0xFF22C55E),
+                        ),
                         const SizedBox(width: 6.0),
                         Text(
                           'Open (${store.openingHours})',
@@ -384,7 +415,11 @@ class StoreCard extends StatelessWidget {
                     const SizedBox(height: 6.0),
                     Row(
                       children: [
-                        const Icon(Icons.directions_walk, size: 16.0, color: Color(0xFF4A4456)),
+                        const Icon(
+                          Icons.directions_walk,
+                          size: 16.0,
+                          color: Color(0xFF4A4456),
+                        ),
                         const SizedBox(width: 6.0),
                         Text(
                           store.distanceWalkText,
@@ -439,7 +474,10 @@ class StoreCard extends StatelessWidget {
                   height: 48.0,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      colors: [Color(0xFF7B2FF7), Color(0xFF3B82F6)], // primary-gradient
+                      colors: [
+                        Color(0xFF7B2FF7),
+                        Color(0xFF3B82F6),
+                      ], // primary-gradient
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
@@ -452,7 +490,11 @@ class StoreCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: const Icon(Icons.near_me, color: Colors.white, size: 18.0),
+                  child: const Icon(
+                    Icons.near_me,
+                    color: Colors.white,
+                    size: 18.0,
+                  ),
                 ),
               ),
             ],

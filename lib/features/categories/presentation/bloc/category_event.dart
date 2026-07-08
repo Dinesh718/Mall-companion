@@ -33,5 +33,8 @@ class FavoriteCategory extends CategoryEvent {
 class FavoriteCategoryProduct extends CategoryEvent {
   final String categoryId;
   final String productId;
-  const FavoriteCategoryProduct({required this.categoryId, required this.productId});
+  const FavoriteCategoryProduct({
+    required this.categoryId,
+    required this.productId,
+  });
 }

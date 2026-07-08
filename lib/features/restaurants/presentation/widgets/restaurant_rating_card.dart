@@ -10,13 +10,19 @@ class RestaurantRatingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // Generate guest counts and seating times dynamically based on wait time simulation
     final isDirectSeating = restaurant.waitTimeText.toLowerCase() == 'open';
-    final waitMinutes = isDirectSeating ? 0 : int.tryParse(restaurant.waitTimeText.replaceAll(RegExp(r'[^0-9]'), '')) ?? 10;
+    final waitMinutes = isDirectSeating
+        ? 0
+        : int.tryParse(
+                restaurant.waitTimeText.replaceAll(RegExp(r'[^0-9]'), ''),
+              ) ??
+              10;
     final guestCount = waitMinutes > 0 ? (waitMinutes * 1.2).round() : 0;
 
     // Calculate seating time
     final now = DateTime.now();
     final seatingTime = now.add(Duration(minutes: waitMinutes));
-    final timeString = "${seatingTime.hour.toString().padLeft(2, '0')}:${seatingTime.minute.toString().padLeft(2, '0')} PM";
+    final timeString =
+        "${seatingTime.hour.toString().padLeft(2, '0')}:${seatingTime.minute.toString().padLeft(2, '0')} PM";
 
     return Container(
       decoration: BoxDecoration(
@@ -102,7 +108,9 @@ class RestaurantRatingCard extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: isDirectSeating ? '0' : waitMinutes.toString(),
+                              text: isDirectSeating
+                                  ? '0'
+                                  : waitMinutes.toString(),
                               style: const TextStyle(
                                 fontFamily: 'Plus Jakarta Sans',
                                 fontSize: 24.0,
@@ -192,7 +200,11 @@ class RestaurantRatingCard extends StatelessWidget {
               children: [
                 Row(
                   children: const [
-                    Icon(Icons.event_seat, size: 20.0, color: Color(0xFF4A4456)),
+                    Icon(
+                      Icons.event_seat,
+                      size: 20.0,
+                      color: Color(0xFF4A4456),
+                    ),
                     SizedBox(width: 8.0),
                     Text(
                       'Est. Seating Time',

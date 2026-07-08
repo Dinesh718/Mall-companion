@@ -36,10 +36,7 @@ class StoreAvailabilityModel extends StoreAvailabilityEntity {
 }
 
 class SpecificationModel extends SpecificationEntity {
-  const SpecificationModel({
-    required super.key,
-    required super.value,
-  });
+  const SpecificationModel({required super.key, required super.value});
 }
 
 class ProductModel extends ProductEntity {

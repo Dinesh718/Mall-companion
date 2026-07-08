@@ -17,10 +17,7 @@ import '../widgets/theatre_info_card.dart';
 class TheatreDetailsPage extends StatelessWidget {
   final String movieId;
 
-  const TheatreDetailsPage({
-    super.key,
-    required this.movieId,
-  });
+  const TheatreDetailsPage({super.key, required this.movieId});
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +97,11 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.error_outline, size: 48.0, color: Color(0xFFBA1A1A)),
+                const Icon(
+                  Icons.error_outline,
+                  size: 48.0,
+                  color: Color(0xFFBA1A1A),
+                ),
                 const SizedBox(height: 16.0),
                 Text(state.errorMessage),
               ],
@@ -161,10 +162,7 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                           child: Container(
                             decoration: const BoxDecoration(
                               gradient: LinearGradient(
-                                colors: [
-                                  Colors.transparent,
-                                  Color(0xFFFEF7FF),
-                                ],
+                                colors: [Colors.transparent, Color(0xFFFEF7FF)],
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                               ),
@@ -235,7 +233,9 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                       child: Container(
                         height: 192.0,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(24.0), // rounded-[24px]
+                          borderRadius: BorderRadius.circular(
+                            24.0,
+                          ), // rounded-[24px]
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.05),
@@ -251,7 +251,8 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                               child: Image.network(
                                 activeTheatre.mapImageUrl,
                                 fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                                errorBuilder: (_, __, ___) =>
+                                    Container(color: Colors.grey[200]),
                               ),
                             ),
                             Positioned.fill(
@@ -265,13 +266,19 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                               right: 12.0,
                               bottom: 12.0,
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0,
+                                  vertical: 12.0,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFFEF7FF).withOpacity(0.8), // glass overlay
+                                  color: const Color(
+                                    0xFFFEF7FF,
+                                  ).withOpacity(0.8), // glass overlay
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
@@ -279,7 +286,9 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                                           width: 32.0,
                                           height: 32.0,
                                           decoration: BoxDecoration(
-                                            color: const Color(0xFF6100D6).withOpacity(0.1),
+                                            color: const Color(
+                                              0xFF6100D6,
+                                            ).withOpacity(0.1),
                                             shape: BoxShape.circle,
                                           ),
                                           child: const Icon(
@@ -290,7 +299,8 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                                         ),
                                         const SizedBox(width: 12.0),
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               activeTheatre.distanceWalkText,
@@ -346,7 +356,8 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => TheatreDetailsPage(movieId: rMovie.id),
+                                    builder: (_) =>
+                                        TheatreDetailsPage(movieId: rMovie.id),
                                   ),
                                 );
                               },
@@ -405,16 +416,22 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                             icon: Icons.share,
                             isTransparent: !_isHeaderBlurred,
                             onTap: () {
-                              context.read<TheatreBloc>().add(SearchMovie(query: movie.title)); // simulation
+                              context.read<TheatreBloc>().add(
+                                SearchMovie(query: movie.title),
+                              ); // simulation
                             },
                           ),
                           const SizedBox(width: 8.0),
                           ActionButton(
-                            icon: movie.isBookmarked ? Icons.favorite : Icons.favorite_border,
+                            icon: movie.isBookmarked
+                                ? Icons.favorite
+                                : Icons.favorite_border,
                             isFav: movie.isBookmarked,
                             isTransparent: !_isHeaderBlurred,
                             onTap: () {
-                              context.read<TheatreBloc>().add(FavoriteMovie(movieId: movie.id));
+                              context.read<TheatreBloc>().add(
+                                FavoriteMovie(movieId: movie.id),
+                              );
                             },
                           ),
                         ],
@@ -437,7 +454,9 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                     bottom: MediaQuery.of(context).padding.bottom + 16.0,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFEF7FF).withOpacity(0.8), // glass overlay
+                    color: const Color(
+                      0xFFFEF7FF,
+                    ).withOpacity(0.8), // glass overlay
                     border: Border(
                       top: BorderSide(
                         color: const Color(0xFFCCC3D9).withOpacity(0.1),
@@ -461,8 +480,12 @@ class _TheatreDetailsPageBodyState extends State<TheatreDetailsPageBody> {
                           width: 56.0,
                           height: 56.0,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFEDE5F5), // surface-container-high
-                            borderRadius: BorderRadius.circular(16.0), // rounded-2xl
+                            color: const Color(
+                              0xFFEDE5F5,
+                            ), // surface-container-high
+                            borderRadius: BorderRadius.circular(
+                              16.0,
+                            ), // rounded-2xl
                             border: Border.all(
                               color: const Color(0xFFCCC3D9).withOpacity(0.2),
                               width: 1.0,

@@ -18,7 +18,9 @@ class LoginPromptCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(32.0),
         border: Border.all(
-          color: const Color(0xFFD3E4FE).withOpacity(0.5), // border border-surface-variant/30
+          color: const Color(
+            0xFFD3E4FE,
+          ).withOpacity(0.5), // border border-surface-variant/30
           width: 1.0,
         ),
         boxShadow: [
@@ -87,7 +89,10 @@ class LoginPromptCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(9999.0), // rounded-full
                 gradient: const LinearGradient(
-                  colors: [Color(0xFF7B2FF7), Color(0xFF3B82F6)], // primary-gradient
+                  colors: [
+                    Color(0xFF7B2FF7),
+                    Color(0xFF3B82F6),
+                  ], // primary-gradient
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),

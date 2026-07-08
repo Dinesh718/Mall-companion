@@ -4,10 +4,7 @@ import '../../domain/entities/store_entities.dart';
 class StoreBanner extends StatelessWidget {
   final StoreEntity store;
 
-  const StoreBanner({
-    super.key,
-    required this.store,
-  });
+  const StoreBanner({super.key, required this.store});
 
   @override
   Widget build(BuildContext context) {

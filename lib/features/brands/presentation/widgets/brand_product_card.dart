@@ -5,11 +5,7 @@ class BrandProductCard extends StatelessWidget {
   final BrandProductEntity product;
   final VoidCallback? onTap;
 
-  const BrandProductCard({
-    super.key,
-    required this.product,
-    this.onTap,
-  });
+  const BrandProductCard({super.key, required this.product, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +23,7 @@ class BrandProductCard extends StatelessWidget {
               offset: const Offset(0, 4),
             ),
           ],
-          border: Border.all(
-            color: const Color(0xFFE8DFEF).withOpacity(0.3),
-          ),
+          border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.3)),
         ),
         child: Row(
           children: [
@@ -42,10 +36,7 @@ class BrandProductCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0),
               ),
               clipBehavior: Clip.antiAlias,
-              child: Image.network(
-                product.imageUrl,
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(product.imageUrl, fit: BoxFit.cover),
             ),
             const SizedBox(width: 16.0),
             // Product info
@@ -85,7 +76,10 @@ class BrandProductCard extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0,
+                          vertical: 4.0,
+                        ),
                         decoration: BoxDecoration(
                           color: const Color(0xFFF3EBFA),
                           borderRadius: BorderRadius.circular(8.0),

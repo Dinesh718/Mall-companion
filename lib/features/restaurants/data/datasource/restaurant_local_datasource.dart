@@ -16,8 +16,10 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
       floorText: 'Level 3, North Wing',
       rating: 4.9,
       priceRange: r'$$$$',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAc1M-gwuWQbCS94uV5Stk7Xl28vzFD8bUlU2-rCjoEPA-S_CXJsPIeBK04Z4UYJkbxm9F01eAzaVFeFY5zy3jCUU6dL1vHs_3KVpZLF4u14txRGp4JfDsJeaEbnZ1Eq9mY9itegQcX34fcyWItnzmneQsE5CuRFnf1yqe9P5qSlz9AzzC1dVVHXCKnuZEbZHbEDaxJF-i1-7NUncBZovUkEi-OLJLs3IFgG07-YXB2k_eSpdT7Oso4kUrNfKNMR_iqU_bjSU_NMQ',
-      description: 'Experience the pinnacle of fine dining at L\'Essence Moderne. Our kitchen blends traditional French techniques with innovative local ingredients to create a symphony of flavors that delight the senses.',
+      imageUrl:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuAc1M-gwuWQbCS94uV5Stk7Xl28vzFD8bUlU2-rCjoEPA-S_CXJsPIeBK04Z4UYJkbxm9F01eAzaVFeFY5zy3jCUU6dL1vHs_3KVpZLF4u14txRGp4JfDsJeaEbnZ1Eq9mY9itegQcX34fcyWItnzmneQsE5CuRFnf1yqe9P5qSlz9AzzC1dVVHXCKnuZEbZHbEDaxJF-i1-7NUncBZovUkEi-OLJLs3IFgG07-YXB2k_eSpdT7Oso4kUrNfKNMR_iqU_bjSU_NMQ',
+      description:
+          'Experience the pinnacle of fine dining at L\'Essence Moderne. Our kitchen blends traditional French techniques with innovative local ingredients to create a symphony of flavors that delight the senses.',
       phone: '+1 (555) 890-2100',
       website: 'www.lessencemoderne.com',
       isOpen: true,
@@ -32,14 +34,17 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
       reviews: [
         RestaurantReviewModel(
           userName: 'Charlotte Bennett',
-          userAvatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80',
+          userAvatarUrl:
+              'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80',
           rating: 5.0,
-          reviewText: 'Sensational wagyu steak and perfect ambient lighting. Service is top tier.',
+          reviewText:
+              'Sensational wagyu steak and perfect ambient lighting. Service is top tier.',
           dateText: 'Yesterday',
         ),
         RestaurantReviewModel(
           userName: 'Julian Vance',
-          userAvatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
+          userAvatarUrl:
+              'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80',
           rating: 4.8,
           reviewText: 'Amazing scallops and desserts. Very high-end feel.',
           dateText: '3 days ago',
@@ -50,19 +55,22 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
           category: 'Appetizer',
           name: 'Atlantic Scallops',
           price: 28.0,
-          imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuASC4sKTo78VdXZrlpBhZwPvcDQaYkldnBTqoSdFOsUfR-URagXdkKIHPytPNGKZiDShF1hbw8HqT95yun2grMwfp-NRczkqUtF2wWcUliHn45VvWTm54etk7BxHhAqoMOgnsPM58iFSlWcsL6oFsn-719f-lwo8tq39AGOgswSuA67FamcxPjeregZLHzA75SDp69bHt9G76tHl-1IxXSE_7f9Gg4twP86odMbn9k1akl5k_H4j5a4DXHLd3kfwm292ZhEKDzP7A',
+          imageUrl:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuASC4sKTo78VdXZrlpBhZwPvcDQaYkldnBTqoSdFOsUfR-URagXdkKIHPytPNGKZiDShF1hbw8HqT95yun2grMwfp-NRczkqUtF2wWcUliHn45VvWTm54etk7BxHhAqoMOgnsPM58iFSlWcsL6oFsn-719f-lwo8tq39AGOgswSuA67FamcxPjeregZLHzA75SDp69bHt9G76tHl-1IxXSE_7f9Gg4twP86odMbn9k1akl5k_H4j5a4DXHLd3kfwm292ZhEKDzP7A',
         ),
         MenuItemModel(
           category: 'Main Course',
           name: 'Wagyu A5 Fillet',
           price: 115.0,
-          imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB14AI7s8298S9XyTz-UvY7Sq6pB7ouWkSf5iwSfJv659O59wCKjKupUIfxLk-Sa7c3TJ_xg_1Dxi1u_SEwPZzP5Rn36kIHln_Ec9TXedpbLrEOf7FHxYgmf3QJXbbRXWtB5UewXuEg-fSwj3F3xXJAhwH3EpFdyeZelUcMDWVFz3JQ_tJYElGPT27KlLKzJjBoDKEGN0tB-Da4HjqOHcqJaazChYzrmBVItmwQ_FEmcXLNGY6K2fwQru_f92Yp_NQLsf7MPfCxIQ',
+          imageUrl:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuB14AI7s8298S9XyTz-UvY7Sq6pB7ouWkSf5iwSfJv659O59wCKjKupUIfxLk-Sa7c3TJ_xg_1Dxi1u_SEwPZzP5Rn36kIHln_Ec9TXedpbLrEOf7FHxYgmf3QJXbbRXWtB5UewXuEg-fSwj3F3xXJAhwH3EpFdyeZelUcMDWVFz3JQ_tJYElGPT27KlLKzJjBoDKEGN0tB-Da4HjqOHcqJaazChYzrmBVItmwQ_FEmcXLNGY6K2fwQru_f92Yp_NQLsf7MPfCxIQ',
         ),
         MenuItemModel(
           category: 'Dessert',
           name: 'Sphère de Chocolat',
           price: 22.0,
-          imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCBromvHmK9QEfn2IYD6lBCPQ7bxCNg619dRooe_w1-Y5ee0p7UR95mRzkxSF0DD5s6Pi4CQCgct9-t50yyUxqZqpFYJd4wzDvrUJyTy0vjGTgOno9VJK_CKBMEU9hZ75GqPMHvj4pPdgIRx7VY2gCjGSFwGnmeum3L2IyxSUKoaCt_cTcSqQWNHSV9ezJ2We8xWQMQpDkWmoWWa6AeiK3XKtZDclNtvBdUYPAbCS6VtKPs_7FbPRyfg9HV-q9AxVro3XINFgN5mw',
+          imageUrl:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuCBromvHmK9QEfn2IYD6lBCPQ7bxCNg619dRooe_w1-Y5ee0p7UR95mRzkxSF0DD5s6Pi4CQCgct9-t50yyUxqZqpFYJd4wzDvrUJyTy0vjGTgOno9VJK_CKBMEU9hZ75GqPMHvj4pPdgIRx7VY2gCjGSFwGnmeum3L2IyxSUKoaCt_cTcSqQWNHSV9ezJ2We8xWQMQpDkWmoWWa6AeiK3XKtZDclNtvBdUYPAbCS6VtKPs_7FbPRyfg9HV-q9AxVro3XINFgN5mw',
         ),
       ],
       slots: [
@@ -91,8 +99,10 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
       floorText: 'Floor 3, South wing',
       rating: 4.8,
       priceRange: r'$$$',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC6iBpsWnzVodd2MU2HkSB-67GuHCr54FBqf429eK2yo6Of2DTahusppgYWbi9j7vrpls-ltE9xnHc-y7uki70EixCbr-aGwvFAcorTuQVSQrCR-be4rRXnO6NzCrzJRDX0fBOg9Gu4h7K70ALzMJtmMcMmbPzYCqruFFfAOVJ9HpBQAqTLlkU7dF2BoPHAPDJ3MDQItFuULZ7rcEZ7ooqSOfGRskPqkMkAJo_Xt82P1EphOrVnfChZRoTsBaCWI7YA5IG_pg7-bQ',
-      description: 'Lumière Brasserie brings classical Parisian dining into a modern space. Savor freshly shucked oysters, perfectly crusted steak frites, and premium vintage selections.',
+      imageUrl:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuC6iBpsWnzVodd2MU2HkSB-67GuHCr54FBqf429eK2yo6Of2DTahusppgYWbi9j7vrpls-ltE9xnHc-y7uki70EixCbr-aGwvFAcorTuQVSQrCR-be4rRXnO6NzCrzJRDX0fBOg9Gu4h7K70ALzMJtmMcMmbPzYCqruFFfAOVJ9HpBQAqTLlkU7dF2BoPHAPDJ3MDQItFuULZ7rcEZ7ooqSOfGRskPqkMkAJo_Xt82P1EphOrVnfChZRoTsBaCWI7YA5IG_pg7-bQ',
+      description:
+          'Lumière Brasserie brings classical Parisian dining into a modern space. Savor freshly shucked oysters, perfectly crusted steak frites, and premium vintage selections.',
       phone: '+1 (555) 789-3210',
       website: 'www.lumierebrasserie.com',
       isOpen: true,
@@ -106,7 +116,8 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
       reviews: [
         RestaurantReviewModel(
           userName: 'George Harrison',
-          userAvatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80',
+          userAvatarUrl:
+              'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80',
           rating: 4.7,
           reviewText: 'Great atmosphere, excellent steak frites.',
           dateText: '4 days ago',
@@ -117,7 +128,8 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
           category: 'Main Course',
           name: 'Steak Frites',
           price: 42.0,
-          imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB14AI7s8298S9XyTz-UvY7Sq6pB7ouWkSf5iwSfJv659O59wCKjKupUIfxLk-Sa7c3TJ_xg_1Dxi1u_SEwPZzP5Rn36kIHln_Ec9TXedpbLrEOf7FHxYgmf3QJXbbRXWtB5UewXuEg-fSwj3F3xXJAhwH3EpFdyeZelUcMDWVFz3JQ_tJYElGPT27KlLKzJjBoDKEGN0tB-Da4HjqOHcqJaazChYzrmBVItmwQ_FEmcXLNGY6K2fwQru_f92Yp_NQLsf7MPfCxIQ',
+          imageUrl:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuB14AI7s8298S9XyTz-UvY7Sq6pB7ouWkSf5iwSfJv659O59wCKjKupUIfxLk-Sa7c3TJ_xg_1Dxi1u_SEwPZzP5Rn36kIHln_Ec9TXedpbLrEOf7FHxYgmf3QJXbbRXWtB5UewXuEg-fSwj3F3xXJAhwH3EpFdyeZelUcMDWVFz3JQ_tJYElGPT27KlLKzJjBoDKEGN0tB-Da4HjqOHcqJaazChYzrmBVItmwQ_FEmcXLNGY6K2fwQru_f92Yp_NQLsf7MPfCxIQ',
         ),
       ],
       slots: [
@@ -133,8 +145,10 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
       floorText: '1st Floor, Central Court',
       rating: 4.6,
       priceRange: r'$$$',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBYihnfu5WSEmAqU2UpcMVM_fKxWqw2f05ZcXatuzcIAgYVBfopIWqQz_QrDmhersspAuituDWQ4QD8eVvTDBPtFzIpfkxuSmfHWJohM2duSxMcDnzg83yz4xyhNggoBox3BRwpvmgG_Ti0bGPa5wwzpGq1FfZtxAx0fCzgE8mdABhI4osU7I_Rgz26ZOJxVORsgmwqaSpdugE6f4YdTdwkdGOCFruRPnQX7rT4gLSoNKonFTYa9oCBkS-70J84ofLNScZaTV7z1g',
-      description: 'Experience authentic Edomae sushi handcrafted by master chefs. We fly fresh fish daily from Toyosu market to deliver the ultimate omakase journey.',
+      imageUrl:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuBYihnfu5WSEmAqU2UpcMVM_fKxWqw2f05ZcXatuzcIAgYVBfopIWqQz_QrDmhersspAuituDWQ4QD8eVvTDBPtFzIpfkxuSmfHWJohM2duSxMcDnzg83yz4xyhNggoBox3BRwpvmgG_Ti0bGPa5wwzpGq1FfZtxAx0fCzgE8mdABhI4osU7I_Rgz26ZOJxVORsgmwqaSpdugE6f4YdTdwkdGOCFruRPnQX7rT4gLSoNKonFTYa9oCBkS-70J84ofLNScZaTV7z1g',
+      description:
+          'Experience authentic Edomae sushi handcrafted by master chefs. We fly fresh fish daily from Toyosu market to deliver the ultimate omakase journey.',
       phone: '+1 (555) 456-7890',
       website: 'www.sushizenmall.com',
       isOpen: true,
@@ -155,8 +169,10 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
       floorText: 'Ground Floor, North Court',
       rating: 4.5,
       priceRange: r'$$',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9cWdEMsdg9xyCIEyMEVIz3xyK4u--N2nu20frREl3MeVHvZUTjq64aq1UxA-6TX56yGCgUy7Jj_40XIsQlhG7I68HzhPOwXKVuW5n_R4nzlRC6G_7S7zOiYBWik7Wghxj8D3G9ofSIID2Zh5Y3qKdZ8O230GLdLt8H3Ex7_JBCFoPfd8SgsU74vGNvYbiGhl53WeXCLyVrlYg29Lv1jZLNPIu9EwZ4_5TtWOrGd48lT4SODqiNhpUKzT5hGDIIlrcoppmc2h4cg',
-      description: 'Gourmet smashed beef patties, house-made brioche buns, and hand-cut truffle fries. Simple ingredients elevated to absolute perfection.',
+      imageUrl:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuD9cWdEMsdg9xyCIEyMEVIz3xyK4u--N2nu20frREl3MeVHvZUTjq64aq1UxA-6TX56yGCgUy7Jj_40XIsQlhG7I68HzhPOwXKVuW5n_R4nzlRC6G_7S7zOiYBWik7Wghxj8D3G9ofSIID2Zh5Y3qKdZ8O230GLdLt8H3Ex7_JBCFoPfd8SgsU74vGNvYbiGhl53WeXCLyVrlYg29Lv1jZLNPIu9EwZ4_5TtWOrGd48lT4SODqiNhpUKzT5hGDIIlrcoppmc2h4cg',
+      description:
+          'Gourmet smashed beef patties, house-made brioche buns, and hand-cut truffle fries. Simple ingredients elevated to absolute perfection.',
       phone: '+1 (555) 345-6789',
       website: 'www.burgercraft.com',
       isOpen: true,
@@ -177,8 +193,10 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
       floorText: 'Ground Floor, South Wing',
       rating: 4.4,
       priceRange: r'$',
-      imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB4hxkz6PR4EADIVev0ohhgL2rxyir5R-KlgXwg8ZKQIHKZ9zlqBxyxfV2rzRvjoOQrM_BHX5hphCvKZ1He2590SzOnt0woqBWO4nbRHXbZOpq9zjbrJc61SUcVzeOR69EYc9JE3SSn2iNY0YZE-w19EMwQiYl9MFYrfE0dNrjIdzhD67FS1efL52KyzZcdoX1DjqsOLXWrule0ztQXs_IgOPyt4OMZnh16MKILGOXa0XDVyAd6sAyh39m1a15SbGAlAjLzqQENpw',
-      description: 'Your neighborhood cozy retreat inside Lumina. Freshly roasted single-origin coffees, organic teas, and custom French pastries baked in-house daily.',
+      imageUrl:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuB4hxkz6PR4EADIVev0ohhgL2rxyir5R-KlgXwg8ZKQIHKZ9zlqBxyxfV2rzRvjoOQrM_BHX5hphCvKZ1He2590SzOnt0woqBWO4nbRHXbZOpq9zjbrJc61SUcVzeOR69EYc9JE3SSn2iNY0YZE-w19EMwQiYl9MFYrfE0dNrjIdzhD67FS1efL52KyzZcdoX1DjqsOLXWrule0ztQXs_IgOPyt4OMZnh16MKILGOXa0XDVyAd6sAyh39m1a15SbGAlAjLzqQENpw',
+      description:
+          'Your neighborhood cozy retreat inside Lumina. Freshly roasted single-origin coffees, organic teas, and custom French pastries baked in-house daily.',
       phone: '+1 (555) 234-5678',
       website: 'www.cafebistrolumina.com',
       isOpen: true,
@@ -208,7 +226,9 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
       final current = _restaurants[idx];
       _restaurants[idx] = current.copyWith(
         isFavorite: !current.isFavorite,
-        interestedCount: current.isFavorite ? current.interestedCount - 1 : current.interestedCount + 1,
+        interestedCount: current.isFavorite
+            ? current.interestedCount - 1
+            : current.interestedCount + 1,
       );
     }
   }
@@ -221,7 +241,9 @@ class RestaurantLocalDataSourceImpl implements RestaurantLocalDataSource {
       final slotIndex = current.slots.indexWhere((s) => s.timeSlot == timeSlot);
       if (slotIndex != -1) {
         final updatedSlots = List<TableSlotEntity>.from(current.slots);
-        updatedSlots[slotIndex] = updatedSlots[slotIndex].copyWith(status: 'Reserved');
+        updatedSlots[slotIndex] = updatedSlots[slotIndex].copyWith(
+          status: 'Reserved',
+        );
         _restaurants[idx] = current.copyWith(slots: updatedSlots);
       }
     }

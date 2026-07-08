@@ -32,7 +32,9 @@ class SubcategoryChip extends StatelessWidget {
                   end: Alignment.bottomRight,
                 )
               : null,
-          color: isSelected ? null : const Color(0xFFEDE5F5), // bg-surface-container-high
+          color: isSelected
+              ? null
+              : const Color(0xFFEDE5F5), // bg-surface-container-high
           boxShadow: isSelected
               ? [
                   BoxShadow(
@@ -60,7 +62,9 @@ class SubcategoryChip extends StatelessWidget {
                 fontFamily: 'Plus Jakarta Sans',
                 fontSize: 14.0,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                color: isSelected ? Colors.white : const Color(0xFF1D1A25), // on-surface
+                color: isSelected
+                    ? Colors.white
+                    : const Color(0xFF1D1A25), // on-surface
               ),
             ),
           ],

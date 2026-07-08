@@ -4,10 +4,7 @@ import '../../domain/entities/store_entities.dart';
 class StoreOfferCard extends StatelessWidget {
   final StoreOfferEntity offer;
 
-  const StoreOfferCard({
-    super.key,
-    required this.offer,
-  });
+  const StoreOfferCard({super.key, required this.offer});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +42,10 @@ class StoreOfferCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 4.0,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(9999.0), // pill

@@ -26,13 +26,19 @@ class EmergencyAssistancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localDataSource = EmergencyLocalDataSourceImpl();
-    final repository = EmergencyRepositoryImpl(localDataSource: localDataSource);
+    final repository = EmergencyRepositoryImpl(
+      localDataSource: localDataSource,
+    );
 
     return BlocProvider(
       create: (_) => EmergencyBloc(
-        loadEmergencyFacilitiesUseCase: LoadEmergencyFacilitiesUseCase(repository),
+        loadEmergencyFacilitiesUseCase: LoadEmergencyFacilitiesUseCase(
+          repository,
+        ),
         loadEmergencyContactsUseCase: LoadEmergencyContactsUseCase(repository),
-        startEmergencyNavigationUseCase: StartEmergencyNavigationUseCase(repository),
+        startEmergencyNavigationUseCase: StartEmergencyNavigationUseCase(
+          repository,
+        ),
         sendSOSUseCase: SendSOSUseCase(repository),
         notifySecurityUseCase: NotifySecurityUseCase(repository),
         loadInstructionsUseCase: LoadInstructionsUseCase(repository),
@@ -91,7 +97,10 @@ class _EmergencyAssistanceView extends StatelessWidget {
 
           if (state is EmergencyLoaded) {
             return SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 20.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -138,7 +147,8 @@ class _EmergencyAssistanceView extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       physics: const BouncingScrollPhysics(),
                       itemCount: state.facilities.length,
-                      separatorBuilder: (context, index) => const SizedBox(width: 16.0),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 16.0),
                       itemBuilder: (context, index) {
                         final facility = state.facilities[index];
                         return EmergencyFacilityCard(
@@ -147,7 +157,9 @@ class _EmergencyAssistanceView extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => EmergencyNavigationPage(destination: facility.title),
+                                builder: (_) => EmergencyNavigationPage(
+                                  destination: facility.title,
+                                ),
                               ),
                             );
                           },
@@ -172,7 +184,8 @@ class _EmergencyAssistanceView extends StatelessWidget {
                         icon: Icons.security_outlined,
                       ),
                     ],
-                    quickTipText: 'Stay calm and remain in a visible area while waiting for assistance. Security is always patrolling.',
+                    quickTipText:
+                        'Stay calm and remain in a visible area while waiting for assistance. Security is always patrolling.',
                   ),
                   const SizedBox(height: 64.0),
                 ],
@@ -274,7 +287,9 @@ class _EmergencyAssistanceView extends StatelessWidget {
           buttonText: 'Report Missing',
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Starting Lost Child reporting flow...')),
+              const SnackBar(
+                content: Text('Starting Lost Child reporting flow...'),
+              ),
             );
           },
         ),
@@ -289,7 +304,9 @@ class _EmergencyAssistanceView extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const EmergencyNavigationPage(destination: 'First Aid Room'),
+                builder: (_) => const EmergencyNavigationPage(
+                  destination: 'First Aid Room',
+                ),
               ),
             );
           },
@@ -303,7 +320,9 @@ class _EmergencyAssistanceView extends StatelessWidget {
           buttonText: 'Connect Now',
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Connecting to Help Desk live support...')),
+              const SnackBar(
+                content: Text('Connecting to Help Desk live support...'),
+              ),
             );
           },
         ),
@@ -316,7 +335,11 @@ class _EmergencyAssistanceView extends StatelessWidget {
           buttonText: 'Get Support',
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Requesting Wheelchair / Stroller dispatch assistance...')),
+              const SnackBar(
+                content: Text(
+                  'Requesting Wheelchair / Stroller dispatch assistance...',
+                ),
+              ),
             );
           },
         ),
@@ -452,23 +475,27 @@ class _EmergencyAssistanceView extends StatelessWidget {
             steps: [
               EmergencyTimelineStep(
                 title: 'Select Service',
-                description: 'Choose the type of help you need from the list above.',
+                description:
+                    'Choose the type of help you need from the list above.',
                 icon: Icons.touch_app,
                 isActive: true,
               ),
               EmergencyTimelineStep(
                 title: 'Location Shared',
-                description: 'We\'ll automatically ping your precise location to the team.',
+                description:
+                    'We\'ll automatically ping your precise location to the team.',
                 icon: Icons.share_location,
               ),
               EmergencyTimelineStep(
                 title: 'Staff Assigned',
-                description: 'Receive a live notification when a team member is on their way.',
+                description:
+                    'Receive a live notification when a team member is on their way.',
                 icon: Icons.notifications,
               ),
               EmergencyTimelineStep(
                 title: 'Receive Assistance',
-                description: 'Immediate on-site support until your issue is resolved.',
+                description:
+                    'Immediate on-site support until your issue is resolved.',
                 icon: Icons.done_all,
               ),
             ],

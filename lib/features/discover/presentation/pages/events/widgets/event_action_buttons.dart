@@ -65,9 +65,9 @@ class EventActionButtons extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                           Icon(Icons.near_me, color: Colors.white, size: 18.0),
-                           SizedBox(width: 8.0),
-                           Text(
+                          Icon(Icons.near_me, color: Colors.white, size: 18.0),
+                          SizedBox(width: 8.0),
+                          Text(
                             'Navigate to Event',
                             style: TextStyle(
                               fontFamily: 'Inter',
@@ -115,7 +115,9 @@ class EventActionButtons extends StatelessWidget {
                     isReminderSet
                         ? Icons.notifications_active
                         : Icons.notifications_outlined,
-                    color: isReminderSet ? const Color(0xFFBA1A1A) : const Color(0xFF6100D6),
+                    color: isReminderSet
+                        ? const Color(0xFFBA1A1A)
+                        : const Color(0xFF6100D6),
                     size: 20.0,
                   ),
                 ),

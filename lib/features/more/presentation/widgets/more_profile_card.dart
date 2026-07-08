@@ -5,11 +5,7 @@ class MoreProfileCard extends StatelessWidget {
   final UserProfileEntity profile;
   final VoidCallback? onEditTap;
 
-  const MoreProfileCard({
-    super.key,
-    required this.profile,
-    this.onEditTap,
-  });
+  const MoreProfileCard({super.key, required this.profile, this.onEditTap});
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +73,10 @@ class MoreProfileCard extends StatelessWidget {
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(100.0),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                        vertical: 4.0,
+                      ),
                       child: Text(
                         profile.membershipStatus,
                         style: const TextStyle(
@@ -114,10 +113,7 @@ class MoreProfileCard extends StatelessWidget {
           ),
           const SizedBox(height: 20.0),
           // Divider
-          Container(
-            height: 1.0,
-            color: Colors.white.withOpacity(0.15),
-          ),
+          Container(height: 1.0, color: Colors.white.withOpacity(0.15)),
           const SizedBox(height: 16.0),
           // Loyalty points metrics
           Row(
@@ -165,7 +161,10 @@ class MoreProfileCard extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(100.0),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
                   child: const Text(
                     'View Rewards',
                     style: TextStyle(

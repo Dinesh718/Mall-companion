@@ -15,10 +15,7 @@ import '../widgets/brand_story_card.dart';
 class BrandDetailsPage extends StatelessWidget {
   final String brandId;
 
-  const BrandDetailsPage({
-    super.key,
-    required this.brandId,
-  });
+  const BrandDetailsPage({super.key, required this.brandId});
 
   @override
   Widget build(BuildContext context) {
@@ -123,15 +120,23 @@ class _BrandDetailsPageBody extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 12.0,
+                                          vertical: 4.0,
+                                        ),
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(100.0),
+                                          borderRadius: BorderRadius.circular(
+                                            100.0,
+                                          ),
                                           border: Border.all(
-                                            color: Colors.white.withOpacity(0.3),
+                                            color: Colors.white.withOpacity(
+                                              0.3,
+                                            ),
                                           ),
                                         ),
                                         child: const Text(
@@ -162,11 +167,11 @@ class _BrandDetailsPageBody extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     context.read<BrandBloc>().add(
-                                          ToggleFavorite(
-                                            brandId: brand.id,
-                                            isDetailsPage: true,
-                                          ),
-                                        );
+                                      ToggleFavorite(
+                                        brandId: brand.id,
+                                        isDetailsPage: true,
+                                      ),
+                                    );
                                   },
                                   child: Container(
                                     width: 56.0,
@@ -222,7 +227,9 @@ class _BrandDetailsPageBody extends StatelessWidget {
                                 onNavigateTap: () {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text('Guiding you to ${store.name} on ${store.levelText}...'),
+                                      content: Text(
+                                        'Guiding you to ${store.name} on ${store.levelText}...',
+                                      ),
                                     ),
                                   );
                                 },
@@ -237,7 +244,9 @@ class _BrandDetailsPageBody extends StatelessWidget {
                       if (state.collections.isNotEmpty) ...[
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: BrandSectionTitle(title: 'Featured Collections'),
+                          child: BrandSectionTitle(
+                            title: 'Featured Collections',
+                          ),
                         ),
                         const SizedBox(height: 16.0),
                         GridView.builder(
@@ -245,12 +254,13 @@ class _BrandDetailsPageBody extends StatelessWidget {
                           physics: const NeverScrollableScrollPhysics(),
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           itemCount: state.collections.length,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 16.0,
-                            crossAxisSpacing: 16.0,
-                            childAspectRatio: 3 / 4,
-                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 16.0,
+                                crossAxisSpacing: 16.0,
+                                childAspectRatio: 3 / 4,
+                              ),
                           itemBuilder: (context, index) {
                             final col = state.collections[index];
                             return BrandCollectionCard(collection: col);
@@ -288,7 +298,9 @@ class _BrandDetailsPageBody extends StatelessWidget {
                                     child: Image.network(
                                       'https://lh3.googleusercontent.com/aida-public/AB6AXuBeeYz_-YcPGSXPGIRCa52wMT0yxEyyNoAc5XEPzg0k2izG3pA32wE7ONBaLLyJ2eXnO5vBFNh3ZFhSrNUWv0xKbEd1NTzpV76Em3uyAysgd7sxkuTV5k-chESKWxKeSurOhtBnrxs5dP4IhD_818KgdBxySpVC0o6RELnnIsOtjx5IhgO2NJV8yA4uOVgWySFAjsrQDgn9aSznXWwdovSAzQBTZYN3MrIiWPY-Tvfon6bSB9AE8fd9zBWDxpjFaLkTw2WZXs0v4A',
                                       fit: BoxFit.cover,
-                                      opacity: const AlwaysStoppedAnimation(0.65),
+                                      opacity: const AlwaysStoppedAnimation(
+                                        0.65,
+                                      ),
                                     ),
                                   ),
                                   // Location pin
@@ -311,17 +323,28 @@ class _BrandDetailsPageBody extends StatelessWidget {
                                     top: 16.0,
                                     left: 16.0,
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0,
+                                        vertical: 8.0,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: Colors.white.withOpacity(0.9),
-                                        borderRadius: BorderRadius.circular(16.0),
+                                        borderRadius: BorderRadius.circular(
+                                          16.0,
+                                        ),
                                         border: Border.all(
-                                          color: const Color(0xFFE8DFEF).withOpacity(0.5),
+                                          color: const Color(
+                                            0xFFE8DFEF,
+                                          ).withOpacity(0.5),
                                         ),
                                       ),
                                       child: const Row(
                                         children: [
-                                          Icon(Icons.location_on, color: Color(0xFF6100D6), size: 14.0),
+                                          Icon(
+                                            Icons.location_on,
+                                            color: Color(0xFF6100D6),
+                                            size: 14.0,
+                                          ),
                                           SizedBox(width: 4.0),
                                           Text(
                                             'Distance: 120m',
@@ -341,7 +364,8 @@ class _BrandDetailsPageBody extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
                                   children: [
                                     const Text(
                                       'Precision Indoor Routing',
@@ -366,22 +390,35 @@ class _BrandDetailsPageBody extends StatelessWidget {
                                     const SizedBox(height: 20.0),
                                     GestureDetector(
                                       onTap: () {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(content: Text('Starting Live Navigation directions...')),
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              'Starting Live Navigation directions...',
+                                            ),
+                                          ),
                                         );
                                       },
                                       child: Container(
                                         height: 52.0,
                                         decoration: BoxDecoration(
                                           gradient: const LinearGradient(
-                                            colors: [Color(0xFF6100D6), Color(0xFF2170E4)],
+                                            colors: [
+                                              Color(0xFF6100D6),
+                                              Color(0xFF2170E4),
+                                            ],
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
                                           ),
-                                          borderRadius: BorderRadius.circular(16.0),
+                                          borderRadius: BorderRadius.circular(
+                                            16.0,
+                                          ),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: const Color(0xFF6100D6).withOpacity(0.25),
+                                              color: const Color(
+                                                0xFF6100D6,
+                                              ).withOpacity(0.25),
                                               blurRadius: 15.0,
                                               offset: const Offset(0, 4),
                                             ),
@@ -470,7 +507,10 @@ class _BrandDetailsPageBody extends StatelessWidget {
                               child: const Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.storefront_rounded, color: Color(0xFF4A4456)),
+                                  Icon(
+                                    Icons.storefront_rounded,
+                                    color: Color(0xFF4A4456),
+                                  ),
                                   SizedBox(height: 4.0),
                                   Text(
                                     'STORES',
@@ -490,7 +530,10 @@ class _BrandDetailsPageBody extends StatelessWidget {
                               child: const Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.share_rounded, color: Color(0xFF4A4456)),
+                                  Icon(
+                                    Icons.share_rounded,
+                                    color: Color(0xFF4A4456),
+                                  ),
                                   SizedBox(height: 4.0),
                                   Text(
                                     'SHARE',
@@ -518,21 +561,30 @@ class _BrandDetailsPageBody extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Starting map routing directions...')),
+                                const SnackBar(
+                                  content: Text(
+                                    'Starting map routing directions...',
+                                  ),
+                                ),
                               );
                             },
                             child: Container(
                               height: 52.0,
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
-                                  colors: [Color(0xFF6100D6), Color(0xFF2170E4)],
+                                  colors: [
+                                    Color(0xFF6100D6),
+                                    Color(0xFF2170E4),
+                                  ],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                 ),
                                 borderRadius: BorderRadius.circular(16.0),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0xFF6100D6).withOpacity(0.2),
+                                    color: const Color(
+                                      0xFF6100D6,
+                                    ).withOpacity(0.2),
                                     blurRadius: 10.0,
                                     offset: const Offset(0, 4),
                                   ),
@@ -542,7 +594,11 @@ class _BrandDetailsPageBody extends StatelessWidget {
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.directions_run_rounded, color: Colors.white, size: 20.0),
+                                  Icon(
+                                    Icons.directions_run_rounded,
+                                    color: Colors.white,
+                                    size: 20.0,
+                                  ),
                                   SizedBox(width: 8.0),
                                   Text(
                                     'Navigate to Store',

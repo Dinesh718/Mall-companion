@@ -25,9 +25,7 @@ class LanguageSelectorTile extends StatelessWidget {
               offset: const Offset(0, 4),
             ),
           ],
-          border: Border.all(
-            color: const Color(0xFFE8DFEF).withOpacity(0.3),
-          ),
+          border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.3)),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
         child: Row(
@@ -72,10 +70,7 @@ class LanguageSelectorTile extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(
-              Icons.chevron_right_rounded,
-              color: Color(0xFF7B7488),
-            ),
+            const Icon(Icons.chevron_right_rounded, color: Color(0xFF7B7488)),
           ],
         ),
       ),
@@ -117,7 +112,9 @@ class LanguageSelectorTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16.0),
-              ...['English', 'Spanish', 'French', 'Hindi', 'Arabic'].map((lang) {
+              ...['English', 'Spanish', 'French', 'Hindi', 'Arabic'].map((
+                lang,
+              ) {
                 final isSelected = selectedLanguage == lang;
                 return ListTile(
                   contentPadding: EdgeInsets.zero,
@@ -126,12 +123,19 @@ class LanguageSelectorTile extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Plus Jakarta Sans',
                       fontSize: 14.0,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                      color: isSelected ? const Color(0xFF6100D6) : const Color(0xFF1D1A25),
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: isSelected
+                          ? const Color(0xFF6100D6)
+                          : const Color(0xFF1D1A25),
                     ),
                   ),
                   trailing: isSelected
-                      ? const Icon(Icons.check_circle_rounded, color: Color(0xFF6100D6))
+                      ? const Icon(
+                          Icons.check_circle_rounded,
+                          color: Color(0xFF6100D6),
+                        )
                       : null,
                   onTap: () {
                     onLanguageChanged(lang);

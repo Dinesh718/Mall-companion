@@ -28,9 +28,7 @@ class BrandStoreCard extends StatelessWidget {
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(
-          color: const Color(0xFFE8DFEF).withOpacity(0.5),
-        ),
+        border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.5)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +75,10 @@ class BrandStoreCard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 4.0,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFFE2F9EC),
                   borderRadius: BorderRadius.circular(8.0),
@@ -144,7 +145,9 @@ class BrandStoreCard extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.near_me_rounded,
-                    color: isPrimaryStyle ? Colors.white : const Color(0xFF6100D6),
+                    color: isPrimaryStyle
+                        ? Colors.white
+                        : const Color(0xFF6100D6),
                     size: 18.0,
                   ),
                   const SizedBox(width: 8.0),
@@ -154,7 +157,9 @@ class BrandStoreCard extends StatelessWidget {
                       fontFamily: 'Plus Jakarta Sans',
                       fontSize: 13.0,
                       fontWeight: FontWeight.bold,
-                      color: isPrimaryStyle ? Colors.white : const Color(0xFF6100D6),
+                      color: isPrimaryStyle
+                          ? Colors.white
+                          : const Color(0xFF6100D6),
                     ),
                   ),
                 ],

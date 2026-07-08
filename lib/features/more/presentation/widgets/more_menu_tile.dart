@@ -63,9 +63,7 @@ class MallServiceBentoCard extends StatelessWidget {
                 offset: const Offset(0, 4),
               ),
             ],
-            border: Border.all(
-              color: const Color(0xFFE8DFEF).withOpacity(0.3),
-            ),
+            border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.3)),
           ),
           padding: const EdgeInsets.all(24.0),
           child: Stack(
@@ -149,9 +147,7 @@ class MallServiceBentoCard extends StatelessWidget {
               offset: const Offset(0, 4),
             ),
           ],
-          border: Border.all(
-            color: const Color(0xFFE8DFEF).withOpacity(0.3),
-          ),
+          border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.3)),
         ),
         padding: const EdgeInsets.all(20.0),
         child: Column(

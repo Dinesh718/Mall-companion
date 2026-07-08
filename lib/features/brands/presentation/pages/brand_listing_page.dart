@@ -105,7 +105,10 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Color(0xFF7B7488)),
+            icon: const Icon(
+              Icons.notifications_outlined,
+              color: Color(0xFF7B7488),
+            ),
             onPressed: () {},
           ),
           const Padding(
@@ -128,7 +131,9 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
           }
 
           if (state is BrandsLoaded) {
-            final nike = state.allBrands.firstWhere((element) => element.id == 'nike');
+            final nike = state.allBrands.firstWhere(
+              (element) => element.id == 'nike',
+            );
 
             return RefreshIndicator(
               onRefresh: () async {
@@ -136,7 +141,10 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
               },
               color: const Color(0xFF6100D6),
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 24.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -153,16 +161,25 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
                           fontSize: 14.0,
                           color: Color(0xFF7B7488),
                         ),
-                        prefixIcon: const Icon(Icons.search, color: Color(0xFF7B7488)),
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Color(0xFF7B7488),
+                        ),
                         suffixIcon: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: const Icon(Icons.mic, color: Color(0xFF6100D6)),
+                              icon: const Icon(
+                                Icons.mic,
+                                color: Color(0xFF6100D6),
+                              ),
                               onPressed: () {},
                             ),
                             IconButton(
-                              icon: const Icon(Icons.qr_code_scanner, color: Color(0xFF6100D6)),
+                              icon: const Icon(
+                                Icons.qr_code_scanner,
+                                color: Color(0xFF6100D6),
+                              ),
                               onPressed: () {},
                             ),
                           ],
@@ -173,7 +190,10 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
                         ),
                         filled: true,
                         fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 14.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 14.0,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 24.0),
@@ -192,19 +212,29 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
                             padding: const EdgeInsets.only(right: 8.0),
                             child: GestureDetector(
                               onTap: () {
-                                context.read<BrandBloc>().add(FilterBrandsByFloor(floor: f));
+                                context.read<BrandBloc>().add(
+                                  FilterBrandsByFloor(floor: f),
+                                );
                               },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0,
+                                  vertical: 8.0,
+                                ),
                                 decoration: BoxDecoration(
                                   gradient: isSelected
                                       ? const LinearGradient(
-                                          colors: [Color(0xFF7B2FF7), Color(0xFF3B82F6)],
+                                          colors: [
+                                            Color(0xFF7B2FF7),
+                                            Color(0xFF3B82F6),
+                                          ],
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                         )
                                       : null,
-                                  color: isSelected ? null : const Color(0xFFF9F1FF),
+                                  color: isSelected
+                                      ? null
+                                      : const Color(0xFFF9F1FF),
                                   borderRadius: BorderRadius.circular(100.0),
                                 ),
                                 alignment: Alignment.center,
@@ -214,7 +244,9 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
                                     fontFamily: 'Plus Jakarta Sans',
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.bold,
-                                    color: isSelected ? Colors.white : const Color(0xFF4A4456),
+                                    color: isSelected
+                                        ? Colors.white
+                                        : const Color(0xFF4A4456),
                                   ),
                                 ),
                               ),
@@ -239,10 +271,15 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
                             padding: const EdgeInsets.only(right: 8.0),
                             child: GestureDetector(
                               onTap: () {
-                                context.read<BrandBloc>().add(FilterBrandsByCategory(category: cat));
+                                context.read<BrandBloc>().add(
+                                  FilterBrandsByCategory(category: cat),
+                                );
                               },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0,
+                                  vertical: 8.0,
+                                ),
                                 decoration: BoxDecoration(
                                   color: isSelected
                                       ? const Color(0xFF6100D6).withOpacity(0.1)
@@ -255,8 +292,12 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
                                   style: TextStyle(
                                     fontFamily: 'Plus Jakarta Sans',
                                     fontSize: 12.0,
-                                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                                    color: isSelected ? const Color(0xFF6100D6) : const Color(0xFF4A4456),
+                                    fontWeight: isSelected
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                    color: isSelected
+                                        ? const Color(0xFF6100D6)
+                                        : const Color(0xFF4A4456),
                                   ),
                                 ),
                               ),
@@ -299,7 +340,8 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => BrandDetailsPage(brandId: brand.id),
+                                    builder: (_) =>
+                                        BrandDetailsPage(brandId: brand.id),
                                   ),
                                 );
                               },
@@ -319,7 +361,9 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
                                         ),
                                       ],
                                       border: Border.all(
-                                        color: const Color(0xFFE8DFEF).withOpacity(0.5),
+                                        color: const Color(
+                                          0xFFE8DFEF,
+                                        ).withOpacity(0.5),
                                       ),
                                     ),
                                     padding: const EdgeInsets.all(12.0),
@@ -367,16 +411,21 @@ class _BrandListingPageBodyState extends State<_BrandListingPageBody> {
                             promoTag: promo,
                             onNavigateTap: () {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Starting navigation to ${b.name}...')),
+                                SnackBar(
+                                  content: Text(
+                                    'Starting navigation to ${b.name}...',
+                                  ),
+                                ),
                               );
                             },
                             onExploreTap: () {
                               Navigator.push(
                                 context,
-                                  MaterialPageRoute(
-                                    builder: (_) => BrandDetailsPage(brandId: b.id),
-                                  ),
-                                );
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      BrandDetailsPage(brandId: b.id),
+                                ),
+                              );
                             },
                           ),
                         );

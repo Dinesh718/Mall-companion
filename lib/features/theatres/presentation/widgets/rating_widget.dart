@@ -4,11 +4,7 @@ class RatingWidget extends StatelessWidget {
   final double rating;
   final bool isLarge;
 
-  const RatingWidget({
-    super.key,
-    required this.rating,
-    this.isLarge = false,
-  });
+  const RatingWidget({super.key, required this.rating, this.isLarge = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +15,9 @@ class RatingWidget extends StatelessWidget {
           color: const Color(0xFFF9F1FF), // surface-container-low
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(
-            color: const Color(0xFFCCC3D9).withOpacity(0.3), // outline-variant/30
+            color: const Color(
+              0xFFCCC3D9,
+            ).withOpacity(0.3), // outline-variant/30
             width: 1.0,
           ),
         ),
@@ -63,11 +61,7 @@ class RatingWidget extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
-              Icons.star,
-              color: Colors.amber,
-              size: 12.0,
-            ),
+            const Icon(Icons.star, color: Colors.amber, size: 12.0),
             const SizedBox(width: 4.0),
             Text(
               rating.toStringAsFixed(1),

@@ -24,7 +24,9 @@ class TheatreCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(24.0), // rounded-3xl
           border: Border.all(
-            color: const Color(0xFFCCC3D9).withOpacity(0.3), // outline-variant/30
+            color: const Color(
+              0xFFCCC3D9,
+            ).withOpacity(0.3), // outline-variant/30
             width: 1.0,
           ),
           boxShadow: [

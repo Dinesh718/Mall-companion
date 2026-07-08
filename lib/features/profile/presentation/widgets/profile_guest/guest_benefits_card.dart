@@ -67,10 +67,7 @@ class _BenefitItem extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  const _BenefitItem({
-    required this.icon,
-    required this.label,
-  });
+  const _BenefitItem({required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +92,9 @@ class _BenefitItem extends StatelessWidget {
             width: 40.0,
             height: 40.0,
             decoration: const BoxDecoration(
-              color: Color(0xFFD8E2FF), // secondary-fixed / secondary-container/10
+              color: Color(
+                0xFFD8E2FF,
+              ), // secondary-fixed / secondary-container/10
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,

@@ -4,10 +4,7 @@ import '../../domain/entities/store_entities.dart';
 class StoreProductCard extends StatelessWidget {
   final ProductEntity product;
 
-  const StoreProductCard({
-    super.key,
-    required this.product,
-  });
+  const StoreProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {

@@ -39,9 +39,7 @@ class TableSlotEntity {
     required this.status,
   });
 
-  TableSlotEntity copyWith({
-    String? status,
-  }) {
+  TableSlotEntity copyWith({String? status}) {
     return TableSlotEntity(
       timeSlot: timeSlot,
       tableSize: tableSize,

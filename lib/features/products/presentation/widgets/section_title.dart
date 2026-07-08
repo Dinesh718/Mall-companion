@@ -47,7 +47,11 @@ class SectionTitle extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 4.0),
-                  const Icon(Icons.chevron_right, size: 18.0, color: Color(0xFF6100D6)),
+                  const Icon(
+                    Icons.chevron_right,
+                    size: 18.0,
+                    color: Color(0xFF6100D6),
+                  ),
                 ],
               ),
             ),

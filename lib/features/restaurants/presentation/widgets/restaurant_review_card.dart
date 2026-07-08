@@ -36,7 +36,11 @@ class RestaurantReviewCard extends StatelessWidget {
                     width: 36.0,
                     height: 36.0,
                     color: const Color(0xFFEDE5F5),
-                    child: const Icon(Icons.person, color: Color(0xFF6100D6), size: 18.0),
+                    child: const Icon(
+                      Icons.person,
+                      color: Color(0xFF6100D6),
+                      size: 18.0,
+                    ),
                   ),
                 ),
               ),

@@ -4,10 +4,7 @@ import '../../domain/entities/store_entities.dart';
 class StoreContactCard extends StatelessWidget {
   final StoreEntity store;
 
-  const StoreContactCard({
-    super.key,
-    required this.store,
-  });
+  const StoreContactCard({super.key, required this.store});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +24,11 @@ class StoreContactCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.phone_outlined, color: Color(0xFF6100D6), size: 20.0),
+                const Icon(
+                  Icons.phone_outlined,
+                  color: Color(0xFF6100D6),
+                  size: 20.0,
+                ),
                 const SizedBox(width: 12.0),
                 Text(
                   store.phone,
@@ -43,7 +44,11 @@ class StoreContactCard extends StatelessWidget {
             const SizedBox(height: 12.0),
             Row(
               children: [
-                const Icon(Icons.language_outlined, color: Color(0xFF6100D6), size: 20.0),
+                const Icon(
+                  Icons.language_outlined,
+                  color: Color(0xFF6100D6),
+                  size: 20.0,
+                ),
                 const SizedBox(width: 12.0),
                 Text(
                   store.website,

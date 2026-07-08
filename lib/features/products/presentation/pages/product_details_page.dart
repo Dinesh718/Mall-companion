@@ -19,10 +19,7 @@ import '../widgets/store_availability_card.dart';
 class ProductDetailsPage extends StatelessWidget {
   final String productId;
 
-  const ProductDetailsPage({
-    super.key,
-    required this.productId,
-  });
+  const ProductDetailsPage({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +43,7 @@ class ProductDetailsPage extends StatelessWidget {
 class ProductDetailsPageBody extends StatelessWidget {
   final String productId;
 
-  const ProductDetailsPageBody({
-    super.key,
-    required this.productId,
-  });
+  const ProductDetailsPageBody({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
@@ -70,13 +64,19 @@ class ProductDetailsPageBody extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error_outline, size: 64.0, color: Color(0xFFBA1A1A)),
+                  const Icon(
+                    Icons.error_outline,
+                    size: 64.0,
+                    color: Color(0xFFBA1A1A),
+                  ),
                   const SizedBox(height: 16.0),
                   Text(state.errorMessage),
                   const SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: () {
-                      context.read<ProductBloc>().add(LoadProductDetails(productId: productId));
+                      context.read<ProductBloc>().add(
+                        LoadProductDetails(productId: productId),
+                      );
                     },
                     child: const Text('Retry'),
                   ),
@@ -106,7 +106,9 @@ class ProductDetailsPageBody extends StatelessWidget {
                       child: Container(
                         decoration: const BoxDecoration(
                           color: Color(0xFFFEF7FF), // surface-bright
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(32.0)),
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(32.0),
+                          ),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +117,9 @@ class ProductDetailsPageBody extends StatelessWidget {
 
                             // Brand details & tag
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
+                              ),
                               child: Row(
                                 children: [
                                   Text(
@@ -129,7 +133,14 @@ class ProductDetailsPageBody extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(width: 8.0),
-                                  Container(width: 4.0, height: 4.0, decoration: const BoxDecoration(color: Color(0xFFCCC3D9), shape: BoxShape.circle)),
+                                  Container(
+                                    width: 4.0,
+                                    height: 4.0,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFFCCC3D9),
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
                                   const SizedBox(width: 8.0),
                                   Text(
                                     product.tag.toUpperCase(),
@@ -148,20 +159,25 @@ class ProductDetailsPageBody extends StatelessWidget {
 
                             // Title & Price Info
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
+                              ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           product.name,
                                           style: const TextStyle(
                                             fontFamily: 'Plus Jakarta Sans',
-                                            fontSize: 24.0, // headline-lg-mobile
+                                            fontSize:
+                                                24.0, // headline-lg-mobile
                                             fontWeight: FontWeight.bold,
                                             color: Color(0xFF1D1A25),
                                           ),
@@ -184,7 +200,8 @@ class ProductDetailsPageBody extends StatelessWidget {
                                     children: [
                                       Row(
                                         textBaseline: TextBaseline.alphabetic,
-                                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.baseline,
                                         children: [
                                           Text(
                                             '\$${product.price.toStringAsFixed(0)}',
@@ -195,7 +212,8 @@ class ProductDetailsPageBody extends StatelessWidget {
                                               color: Color(0xFF6100D6),
                                             ),
                                           ),
-                                          if (product.originalPrice != null) ...[
+                                          if (product.originalPrice !=
+                                              null) ...[
                                             const SizedBox(width: 6.0),
                                             Text(
                                               '\$${product.originalPrice!.toStringAsFixed(0)}',
@@ -203,7 +221,8 @@ class ProductDetailsPageBody extends StatelessWidget {
                                                 fontFamily: 'Plus Jakarta Sans',
                                                 fontSize: 14.0,
                                                 color: Color(0xFF7B7488),
-                                                decoration: TextDecoration.lineThrough,
+                                                decoration:
+                                                    TextDecoration.lineThrough,
                                               ),
                                             ),
                                           ],
@@ -211,10 +230,17 @@ class ProductDetailsPageBody extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 4.0),
                                       Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 10.0,
+                                          vertical: 4.0,
+                                        ),
                                         decoration: BoxDecoration(
-                                          color: const Color(0xFFFFDAD6), // error-container
-                                          borderRadius: BorderRadius.circular(9999.0),
+                                          color: const Color(
+                                            0xFFFFDAD6,
+                                          ), // error-container
+                                          borderRadius: BorderRadius.circular(
+                                            9999.0,
+                                          ),
                                         ),
                                         child: const Text(
                                           '15% Off - Limited Stock',
@@ -235,7 +261,9 @@ class ProductDetailsPageBody extends StatelessWidget {
 
                             // Description Info
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
+                              ),
                               child: Text(
                                 product.description,
                                 style: const TextStyle(
@@ -256,7 +284,9 @@ class ProductDetailsPageBody extends StatelessWidget {
                             if (product.specifications.isNotEmpty) ...[
                               const SectionTitle(title: 'Specifications'),
                               const SizedBox(height: 12.0),
-                              SpecificationCard(specifications: product.specifications),
+                              SpecificationCard(
+                                specifications: product.specifications,
+                              ),
                               const SizedBox(height: 32.0),
                             ],
 
@@ -264,7 +294,9 @@ class ProductDetailsPageBody extends StatelessWidget {
                             if (product.storeAvailability.isNotEmpty) ...[
                               const SectionTitle(title: 'Available At'),
                               const SizedBox(height: 12.0),
-                              StoreAvailabilityCard(availability: product.storeAvailability.first),
+                              StoreAvailabilityCard(
+                                availability: product.storeAvailability.first,
+                              ),
                               const SizedBox(height: 32.0),
                             ],
 
@@ -272,7 +304,9 @@ class ProductDetailsPageBody extends StatelessWidget {
                             const SectionTitle(title: 'Store Wayfinding'),
                             const SizedBox(height: 12.0),
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
+                              ),
                               child: Container(
                                 height: 250.0,
                                 decoration: BoxDecoration(
@@ -292,7 +326,8 @@ class ProductDetailsPageBody extends StatelessWidget {
                                       child: Image.network(
                                         'https://lh3.googleusercontent.com/aida-public/AB6AXuD7XaPPPu0s9IOkwulmhgZBats-mkRgT8HVfre43OBaVfe8PW6hck2pYaCW5syI7au8KxOTBpGgCctJnKO1BUwRjkgkAAWtoeDhmeXyu3VMy2joHH1KhcM-YUx_1pGLL_vk21pF79KcKC9T_QQgs2bZEjMdheVpmbGi9eQE06fwHy8pELUxBO_p5PVbxjSiYiGwKb_3IdgUZC3576Xxc-KAMXxfKXo1NuzXtrPIsUExgZZyjRL7oCqisYMxuow-wayeqbiE2AWfMQ',
                                         fit: BoxFit.cover,
-                                        errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                                        errorBuilder: (_, __, ___) =>
+                                            Container(color: Colors.grey[200]),
                                       ),
                                     ),
                                     Positioned(
@@ -303,7 +338,9 @@ class ProductDetailsPageBody extends StatelessWidget {
                                         height: 56.0,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(16.0),
+                                          borderRadius: BorderRadius.circular(
+                                            16.0,
+                                          ),
                                           boxShadow: [
                                             BoxShadow(
                                               color: Colors.black.withAlpha(25),
@@ -313,9 +350,13 @@ class ProductDetailsPageBody extends StatelessWidget {
                                         ),
                                         alignment: Alignment.center,
                                         child: const Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            Icon(Icons.directions, color: Color(0xFF6100D6)),
+                                            Icon(
+                                              Icons.directions,
+                                              color: Color(0xFF6100D6),
+                                            ),
                                             SizedBox(width: 8.0),
                                             Text(
                                               'Start Live Navigation',
@@ -340,7 +381,9 @@ class ProductDetailsPageBody extends StatelessWidget {
                             if (product.reviews.isNotEmpty) ...[
                               const SectionTitle(title: 'Reviews'),
                               const SizedBox(height: 12.0),
-                              ...product.reviews.map((r) => ProductReviewCard(review: r)),
+                              ...product.reviews.map(
+                                (r) => ProductReviewCard(review: r),
+                              ),
                               const SizedBox(height: 32.0),
                             ],
 
@@ -356,7 +399,9 @@ class ProductDetailsPageBody extends StatelessWidget {
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 clipBehavior: Clip.none,
-                                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20.0,
+                                ),
                                 itemCount: recommended.length,
                                 itemBuilder: (context, index) {
                                   final rec = recommended[index];
@@ -367,12 +412,16 @@ class ProductDetailsPageBody extends StatelessWidget {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (_) => ProductDetailsPage(productId: rec.id),
+                                          builder: (_) => ProductDetailsPage(
+                                            productId: rec.id,
+                                          ),
                                         ),
                                       );
                                     },
                                     onFavorite: () {
-                                      context.read<ProductBloc>().add(ToggleWishlist(productId: rec.id));
+                                      context.read<ProductBloc>().add(
+                                        ToggleWishlist(productId: rec.id),
+                                      );
                                     },
                                   );
                                 },
@@ -408,7 +457,10 @@ class ProductDetailsPageBody extends StatelessWidget {
                           color: Colors.white.withOpacity(0.8),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.arrow_back, color: Color(0xFF1D1A25)),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: Color(0xFF1D1A25),
+                        ),
                       ),
                     ),
                     Row(
@@ -420,12 +472,17 @@ class ProductDetailsPageBody extends StatelessWidget {
                             color: Colors.white.withOpacity(0.8),
                             shape: BoxShape.circle,
                           ),
-                          child: const Icon(Icons.share_outlined, color: Color(0xFF1D1A25)),
+                          child: const Icon(
+                            Icons.share_outlined,
+                            color: Color(0xFF1D1A25),
+                          ),
                         ),
                         const SizedBox(width: 12.0),
                         GestureDetector(
                           onTap: () {
-                            context.read<ProductBloc>().add(ToggleWishlist(productId: product.id));
+                            context.read<ProductBloc>().add(
+                              ToggleWishlist(productId: product.id),
+                            );
                           },
                           child: Container(
                             width: 48.0,
@@ -435,8 +492,12 @@ class ProductDetailsPageBody extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
-                              product.isFavorite ? Icons.favorite : Icons.favorite_border,
-                              color: product.isFavorite ? const Color(0xFFBA1A1A) : const Color(0xFF6100D6),
+                              product.isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: product.isFavorite
+                                  ? const Color(0xFFBA1A1A)
+                                  : const Color(0xFF6100D6),
                             ),
                           ),
                         ),
@@ -454,7 +515,9 @@ class ProductDetailsPageBody extends StatelessWidget {
                 child: ActionButtons(
                   onStore: () {},
                   onSave: () {
-                    context.read<ProductBloc>().add(ToggleWishlist(productId: product.id));
+                    context.read<ProductBloc>().add(
+                      ToggleWishlist(productId: product.id),
+                    );
                   },
                   onNavigate: () {},
                 ),

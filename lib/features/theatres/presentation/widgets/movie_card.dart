@@ -26,11 +26,7 @@ class MovieCard extends StatelessWidget {
     required MovieEntity movie,
     required VoidCallback onTap,
   }) {
-    return MovieCard(
-      movie: movie,
-      type: MovieCardType.carousel,
-      onTap: onTap,
-    );
+    return MovieCard(movie: movie, type: MovieCardType.carousel, onTap: onTap);
   }
 
   factory MovieCard.list({
@@ -255,11 +251,18 @@ class MovieCard extends StatelessWidget {
                         child: Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                                vertical: 4.0,
+                              ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF2170E4).withOpacity(0.1), // secondary-container/10
+                                color: const Color(
+                                  0xFF2170E4,
+                                ).withOpacity(0.1), // secondary-container/10
                                 border: Border.all(
-                                  color: const Color(0xFF2170E4).withOpacity(0.2),
+                                  color: const Color(
+                                    0xFF2170E4,
+                                  ).withOpacity(0.2),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(4.0),
@@ -276,11 +279,18 @@ class MovieCard extends StatelessWidget {
                             ),
                             const SizedBox(width: 8.0),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                                vertical: 4.0,
+                              ),
                               decoration: BoxDecoration(
-                                color: const Color(0xFF813800).withOpacity(0.1), // tertiary-container/10
+                                color: const Color(
+                                  0xFF813800,
+                                ).withOpacity(0.1), // tertiary-container/10
                                 border: Border.all(
-                                  color: const Color(0xFF813800).withOpacity(0.2),
+                                  color: const Color(
+                                    0xFF813800,
+                                  ).withOpacity(0.2),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(4.0),
@@ -330,7 +340,10 @@ class MovieCard extends StatelessWidget {
                     },
                     child: Container(
                       margin: const EdgeInsets.only(right: 8.0),
-                      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14.0,
+                        vertical: 8.0,
+                      ),
                       decoration: BoxDecoration(
                         color: activeBg,
                         borderRadius: BorderRadius.circular(8.0),

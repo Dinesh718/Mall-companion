@@ -27,7 +27,9 @@ class ReportIssuePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localDataSource = MaintenanceLocalDataSourceImpl();
-    final repository = MaintenanceRepositoryImpl(localDataSource: localDataSource);
+    final repository = MaintenanceRepositoryImpl(
+      localDataSource: localDataSource,
+    );
 
     return BlocProvider(
       create: (_) => MaintenanceBloc(
@@ -99,7 +101,10 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.notifications_outlined, color: Color(0xFF4A4456)),
+              icon: const Icon(
+                Icons.notifications_outlined,
+                color: Color(0xFF4A4456),
+              ),
               onPressed: () {},
             ),
           ],
@@ -116,7 +121,10 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
 
             if (state is MaintenanceLoaded) {
               return SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 20.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -144,7 +152,9 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                     IssueCategoryGrid(
                       selectedCategory: state.category,
                       onCategorySelected: (catName) {
-                        context.read<MaintenanceBloc>().add(SelectCategory(category: catName));
+                        context.read<MaintenanceBloc>().add(
+                          SelectCategory(category: catName),
+                        );
                       },
                     ),
                     const SizedBox(height: 32.0),
@@ -189,7 +199,9 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                           TextField(
                             controller: _titleController,
                             onChanged: (val) {
-                              context.read<MaintenanceBloc>().add(UpdateIssueTitle(title: val));
+                              context.read<MaintenanceBloc>().add(
+                                UpdateIssueTitle(title: val),
+                              );
                             },
                             maxLength: 50,
                             decoration: InputDecoration(
@@ -202,7 +214,10 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                                 borderSide: BorderSide.none,
                               ),
                               focusedBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color(0xFF6100D6), width: 2.0),
+                                borderSide: BorderSide(
+                                  color: Color(0xFF6100D6),
+                                  width: 2.0,
+                                ),
                               ),
                             ),
                           ),
@@ -212,7 +227,10 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                               padding: const EdgeInsets.only(top: 4.0),
                               child: Text(
                                 '${state.title.length} / 50',
-                                style: const TextStyle(fontSize: 10.0, color: Color(0xFF7B7488)),
+                                style: const TextStyle(
+                                  fontSize: 10.0,
+                                  color: Color(0xFF7B7488),
+                                ),
                               ),
                             ),
                           ),
@@ -231,12 +249,15 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                           TextField(
                             controller: _descController,
                             onChanged: (val) {
-                              context.read<MaintenanceBloc>().add(UpdateDescription(description: val));
+                              context.read<MaintenanceBloc>().add(
+                                UpdateDescription(description: val),
+                              );
                             },
                             maxLength: 250,
                             maxLines: 4,
                             decoration: InputDecoration(
-                              hintText: 'Please provide more details about the issue...',
+                              hintText:
+                                  'Please provide more details about the issue...',
                               fillColor: const Color(0xFFEFF4FF),
                               filled: true,
                               counterText: '',
@@ -245,7 +266,10 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                                 borderSide: BorderSide.none,
                               ),
                               focusedBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color(0xFF6100D6), width: 2.0),
+                                borderSide: BorderSide(
+                                  color: Color(0xFF6100D6),
+                                  width: 2.0,
+                                ),
                               ),
                             ),
                           ),
@@ -255,7 +279,10 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                               padding: const EdgeInsets.only(top: 4.0),
                               child: Text(
                                 '${state.description.length} / 250',
-                                style: const TextStyle(fontSize: 10.0, color: Color(0xFF7B7488)),
+                                style: const TextStyle(
+                                  fontSize: 10.0,
+                                  color: Color(0xFF7B7488),
+                                ),
                               ),
                             ),
                           ),
@@ -278,16 +305,26 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                       photoPath: state.photoPath,
                       onCameraTap: () {
                         // Simulate Camera Selection
-                        context.read<MaintenanceBloc>().add(const AttachPhoto(
-                            photoPath: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600'));
+                        context.read<MaintenanceBloc>().add(
+                          const AttachPhoto(
+                            photoPath:
+                                'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600',
+                          ),
+                        );
                       },
                       onGalleryTap: () {
                         // Simulate Gallery Selection
-                        context.read<MaintenanceBloc>().add(const AttachPhoto(
-                            photoPath: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600'));
+                        context.read<MaintenanceBloc>().add(
+                          const AttachPhoto(
+                            photoPath:
+                                'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=600',
+                          ),
+                        );
                       },
                       onRemoveTap: () {
-                        context.read<MaintenanceBloc>().add(const RemovePhoto());
+                        context.read<MaintenanceBloc>().add(
+                          const RemovePhoto(),
+                        );
                       },
                     ),
                     const SizedBox(height: 32.0),
@@ -307,7 +344,9 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                       nearestLandmark: state.nearestLandmark,
                       status: state.locationStatus,
                       onRefresh: () {
-                        context.read<MaintenanceBloc>().add(const FetchCurrentLocation());
+                        context.read<MaintenanceBloc>().add(
+                          const FetchCurrentLocation(),
+                        );
                       },
                     ),
                     const SizedBox(height: 32.0),
@@ -325,7 +364,9 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
                     PrioritySelector(
                       selectedPriority: state.priority,
                       onPrioritySelected: (pri) {
-                        context.read<MaintenanceBloc>().add(UpdatePriority(priority: pri));
+                        context.read<MaintenanceBloc>().add(
+                          UpdatePriority(priority: pri),
+                        );
                       },
                     ),
                     const SizedBox(height: 40.0),
@@ -364,7 +405,12 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
     );
   }
 
-  Widget _buildTimelineStepNode(int index, String label, bool isActive, {double opacity = 1.0}) {
+  Widget _buildTimelineStepNode(
+    int index,
+    String label,
+    bool isActive, {
+    double opacity = 1.0,
+  }) {
     return Opacity(
       opacity: isActive ? 1.0 : opacity,
       child: Row(
@@ -377,7 +423,9 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
               color: isActive ? const Color(0xFF6100D6) : Colors.white,
               shape: BoxShape.circle,
               border: Border.all(
-                color: isActive ? const Color(0xFF6100D6) : const Color(0xFFCCC3D9),
+                color: isActive
+                    ? const Color(0xFF6100D6)
+                    : const Color(0xFFCCC3D9),
                 width: 1.0,
               ),
             ),
@@ -399,7 +447,9 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
               fontFamily: 'Inter',
               fontSize: 10.0,
               fontWeight: FontWeight.bold,
-              color: isActive ? const Color(0xFF6100D6) : const Color(0xFF0B1C30),
+              color: isActive
+                  ? const Color(0xFF6100D6)
+                  : const Color(0xFF0B1C30),
             ),
           ),
         ],
@@ -434,7 +484,11 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
               ),
               Text(
                 state.category.isEmpty ? 'Not Selected' : state.category,
-                style: const TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Color(0xFF0B1C30)),
+                style: const TextStyle(
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF0B1C30),
+                ),
               ),
             ],
           ),
@@ -448,7 +502,11 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
               ),
               Text(
                 state.priority,
-                style: const TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold, color: Color(0xFF6100D6)),
+                style: const TextStyle(
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF6100D6),
+                ),
               ),
             ],
           ),
@@ -493,10 +551,7 @@ class _ReportIssueViewState extends State<_ReportIssueView> {
           const Text(
             'By submitting, you agree to our Terms of Service. Your data will be used to improve mall operations.',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 10.0,
-              color: Color(0xFF7B7488),
-            ),
+            style: TextStyle(fontSize: 10.0, color: Color(0xFF7B7488)),
           ),
         ],
       ),

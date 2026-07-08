@@ -18,7 +18,7 @@ abstract class ProfileLocalDataSource {
 class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
   // Stateful simulation of login state and user preferences in memory
   static bool _isLoggedIn = true;
-  
+
   static PreferenceEntity _preferences = const PreferenceModel(
     language: 'English',
     theme: 'Light Theme',
@@ -74,7 +74,8 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
     return UserProfileModel(
       name: 'Alex Thompson',
       email: 'alex.thompson@prime-mail.com',
-      avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB8MNXy2RGJBdgt-wOnapTYeNzSgRDMm2FhLlh6Xtj47GKARFt2EL1ZANOsfw5Bzq-zJIMqbih-_OYeBrpj9E-8yxEB8kxHDCi_gZasbAaaVTs4iGRPvueOKOxIVAJA61xGeWXUxPh-z3oRCwxOwqAw29x26BkkTuHs5vtovWydvgHXBODyEtoui7Q5t0gRsqxm55sAOC836OKO98v9X53E7OL9k8ugd2EKVtwKsWLGfWYfh0BIL1UEyhwDQh_KHqvzDpBTeGfCPwE',
+      avatarUrl:
+          'https://lh3.googleusercontent.com/aida-public/AB6AXuB8MNXy2RGJBdgt-wOnapTYeNzSgRDMm2FhLlh6Xtj47GKARFt2EL1ZANOsfw5Bzq-zJIMqbih-_OYeBrpj9E-8yxEB8kxHDCi_gZasbAaaVTs4iGRPvueOKOxIVAJA61xGeWXUxPh-z3oRCwxOwqAw29x26BkkTuHs5vtovWydvgHXBODyEtoui7Q5t0gRsqxm55sAOC836OKO98v9X53E7OL9k8ugd2EKVtwKsWLGfWYfh0BIL1UEyhwDQh_KHqvzDpBTeGfCPwE',
       isVerified: true,
       membership: const MembershipModel(
         id: '8829 • 4910 • 2024',
@@ -82,19 +83,13 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
         points: 12450,
         memberSince: '2022',
       ),
-      parking: const ParkingSummaryModel(
-        level: 'Level 3',
-        spot: 'Zone B',
-      ),
+      parking: const ParkingSummaryModel(level: 'Level 3', spot: 'Zone B'),
       reservation: const ReservationSummaryModel(
         title: 'Reservations',
         subtitle: 'Today, 7:00 PM',
         timeText: '7:00 PM',
       ),
-      favorites: const FavoriteSummaryModel(
-        count: 12,
-        label: 'Saved Brands',
-      ),
+      favorites: const FavoriteSummaryModel(count: 12, label: 'Saved Brands'),
       preferences: _preferences,
     );
   }

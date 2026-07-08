@@ -4,10 +4,7 @@ import '../../../domain/entities/profile_entities.dart';
 class MembershipCard extends StatelessWidget {
   final UserProfileEntity userProfile;
 
-  const MembershipCard({
-    super.key,
-    required this.userProfile,
-  });
+  const MembershipCard({super.key, required this.userProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +149,9 @@ class MembershipCard extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 2.0),
                                   Text(
-                                    _formatPoints(userProfile.membership.points),
+                                    _formatPoints(
+                                      userProfile.membership.points,
+                                    ),
                                     style: const TextStyle(
                                       fontFamily: 'Plus Jakarta Sans',
                                       fontSize: 20.0, // headline-md (20-24px)

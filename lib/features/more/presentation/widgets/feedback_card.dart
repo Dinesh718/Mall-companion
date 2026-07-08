@@ -78,9 +78,7 @@ class _FeedbackBentoCardState extends State<FeedbackBentoCard> {
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(
-          color: const Color(0xFFE8DFEF).withOpacity(0.3),
-        ),
+        border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.3)),
       ),
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -117,7 +115,9 @@ class _FeedbackBentoCardState extends State<FeedbackBentoCard> {
                 },
                 icon: Icon(
                   isFilled ? Icons.star_rounded : Icons.star_outline_rounded,
-                  color: isFilled ? const Color(0xFFFFD700) : const Color(0xFF7B7488),
+                  color: isFilled
+                      ? const Color(0xFFFFD700)
+                      : const Color(0xFF7B7488),
                   size: 32.0,
                 ),
               );
@@ -149,7 +149,10 @@ class _FeedbackBentoCardState extends State<FeedbackBentoCard> {
               ),
               filled: true,
               fillColor: const Color(0xFFF9F1FF).withOpacity(0.3),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 12.0,
+              ),
             ),
             style: const TextStyle(
               fontFamily: 'Plus Jakarta Sans',

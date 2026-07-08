@@ -5,11 +5,7 @@ class BrandCollectionCard extends StatelessWidget {
   final BrandCollectionEntity collection;
   final VoidCallback? onTap;
 
-  const BrandCollectionCard({
-    super.key,
-    required this.collection,
-    this.onTap,
-  });
+  const BrandCollectionCard({super.key, required this.collection, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +29,7 @@ class BrandCollectionCard extends StatelessWidget {
             children: [
               // Background Image
               Positioned.fill(
-                child: Image.network(
-                  collection.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.network(collection.imageUrl, fit: BoxFit.cover),
               ),
               // Gradient Overlay
               Positioned.fill(

@@ -4,10 +4,7 @@ import '../../domain/entities/product_entities.dart';
 class ProductInformationCard extends StatefulWidget {
   final ProductEntity product;
 
-  const ProductInformationCard({
-    super.key,
-    required this.product,
-  });
+  const ProductInformationCard({super.key, required this.product});
 
   @override
   State<ProductInformationCard> createState() => _ProductInformationCardState();
@@ -61,9 +58,14 @@ class _ProductInformationCardState extends State<ProductInformationCard> {
                     });
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 8.0,
+                    ),
                     decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFF6100D6) : const Color(0xFFF3EBFA),
+                      color: isSelected
+                          ? const Color(0xFF6100D6)
+                          : const Color(0xFFF3EBFA),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: Text(
@@ -72,7 +74,9 @@ class _ProductInformationCardState extends State<ProductInformationCard> {
                         fontFamily: 'Plus Jakarta Sans',
                         fontSize: 12.0,
                         fontWeight: FontWeight.bold,
-                        color: isSelected ? Colors.white : const Color(0xFF4A4456),
+                        color: isSelected
+                            ? Colors.white
+                            : const Color(0xFF4A4456),
                       ),
                     ),
                   ),
@@ -106,9 +110,14 @@ class _ProductInformationCardState extends State<ProductInformationCard> {
                     });
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: 10.0,
+                    ),
                     decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFF6100D6) : const Color(0xFFF3EBFA),
+                      color: isSelected
+                          ? const Color(0xFF6100D6)
+                          : const Color(0xFFF3EBFA),
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: Text(
@@ -117,7 +126,9 @@ class _ProductInformationCardState extends State<ProductInformationCard> {
                         fontFamily: 'Plus Jakarta Sans',
                         fontSize: 12.0,
                         fontWeight: FontWeight.bold,
-                        color: isSelected ? Colors.white : const Color(0xFF4A4456),
+                        color: isSelected
+                            ? Colors.white
+                            : const Color(0xFF4A4456),
                       ),
                     ),
                   ),

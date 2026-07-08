@@ -8,10 +8,7 @@ import 'my_reports_page.dart';
 class TicketCreatedPage extends StatefulWidget {
   final MaintenanceReportEntity ticket;
 
-  const TicketCreatedPage({
-    super.key,
-    required this.ticket,
-  });
+  const TicketCreatedPage({super.key, required this.ticket});
 
   @override
   State<TicketCreatedPage> createState() => _TicketCreatedPageState();
@@ -41,8 +38,22 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
   @override
   Widget build(BuildContext context) {
     // Format creation time
-    final months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    final dateStr = 'Today, ${widget.ticket.createdTime.hour}:${widget.ticket.createdTime.minute.toString().padLeft(2, '0')} ${widget.ticket.createdTime.hour >= 12 ? 'PM' : 'AM'}';
+    final months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    final dateStr =
+        'Today, ${widget.ticket.createdTime.hour}:${widget.ticket.createdTime.minute.toString().padLeft(2, '0')} ${widget.ticket.createdTime.hour >= 12 ? 'PM' : 'AM'}';
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FF),
@@ -65,7 +76,10 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Color(0xFF4A4456)),
+            icon: const Icon(
+              Icons.notifications_outlined,
+              color: Color(0xFF4A4456),
+            ),
             onPressed: () {},
           ),
         ],
@@ -76,14 +90,15 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
           Positioned.fill(
             child: Opacity(
               opacity: 0.05,
-              child: CustomPaint(
-                painter: _BlueprintGridPainter(),
-              ),
+              child: CustomPaint(painter: _BlueprintGridPainter()),
             ),
           ),
           // Scrollable content
           SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 24.0,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -119,14 +134,14 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
                 // Service Roadmap Vertical Timeline
                 TicketTimeline(
                   status: widget.ticket.status,
-                  assignedTech: widget.ticket.assignedTeam == 'Janitorial Team B'
+                  assignedTech:
+                      widget.ticket.assignedTeam == 'Janitorial Team B'
                       ? 'Marcus Aurelius'
                       : 'Julius Caesar',
                 ),
                 const SizedBox(height: 32.0),
                 // Guest Benefits login banner
-                if (!_isLoadingAuth && !_isLoggedIn)
-                  _buildGuestBanner(context),
+                if (!_isLoadingAuth && !_isLoggedIn) _buildGuestBanner(context),
                 const SizedBox(height: 32.0),
                 // Grid actions buttons
                 _buildActionButtons(context),
@@ -146,7 +161,10 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(28.0),
         gradient: const LinearGradient(
-          colors: [Color(0xFF6100D6), Color(0xFF0058BE)], // primary to secondary
+          colors: [
+            Color(0xFF6100D6),
+            Color(0xFF0058BE),
+          ], // primary to secondary
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -192,7 +210,9 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
               fontFamily: 'Inter',
               fontSize: 16.0, // title-md
               fontWeight: FontWeight.w500,
-              color: Color(0xFFD2BBFF), // primary-fixed-dim / text-primary-fixed
+              color: Color(
+                0xFFD2BBFF,
+              ), // primary-fixed-dim / text-primary-fixed
             ),
           ),
           const SizedBox(height: 24.0),
@@ -210,8 +230,15 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildSuccessStatCol('Status', widget.ticket.status, isBadge: true),
-              _buildSuccessStatCol('Estimated Fix', widget.ticket.estimatedFixTime),
+              _buildSuccessStatCol(
+                'Status',
+                widget.ticket.status,
+                isBadge: true,
+              ),
+              _buildSuccessStatCol(
+                'Estimated Fix',
+                widget.ticket.estimatedFixTime,
+              ),
             ],
           ),
         ],
@@ -219,7 +246,11 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
     );
   }
 
-  Widget _buildSuccessStatCol(String label, String val, {bool isBadge = false}) {
+  Widget _buildSuccessStatCol(
+    String label,
+    String val, {
+    bool isBadge = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -234,7 +265,10 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
         const SizedBox(height: 4.0),
         if (isBadge)
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 4.0,
+            ),
             decoration: BoxDecoration(
               color: Colors.white24,
               borderRadius: BorderRadius.circular(9999.0),
@@ -366,7 +400,10 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 4.0,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFFFFDAD6), // error-container
                   borderRadius: BorderRadius.circular(9999.0),
@@ -417,10 +454,16 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
                     const SizedBox(height: 4.0),
                     Row(
                       children: [
-                        const Icon(Icons.image, color: Color(0xFF6100D6), size: 16.0),
+                        const Icon(
+                          Icons.image,
+                          color: Color(0xFF6100D6),
+                          size: 16.0,
+                        ),
                         const SizedBox(width: 6.0),
                         Text(
-                          widget.ticket.photoUrl != null ? '1 Photo Attached' : '0 Photos Attached',
+                          widget.ticket.photoUrl != null
+                              ? '1 Photo Attached'
+                              : '0 Photos Attached',
                           style: const TextStyle(
                             fontFamily: 'Inter',
                             fontSize: 13.0,
@@ -434,7 +477,10 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
                 ),
               ),
               Expanded(
-                child: _buildDetailsCol('Department', widget.ticket.assignedTeam),
+                child: _buildDetailsCol(
+                  'Department',
+                  widget.ticket.assignedTeam,
+                ),
               ),
             ],
           ),
@@ -474,7 +520,9 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
     return Container(
       padding: const EdgeInsets.all(28.0),
       decoration: BoxDecoration(
-        color: const Color(0xFFE5EEFF), // secondary-container / surface-container
+        color: const Color(
+          0xFFE5EEFF,
+        ), // secondary-container / surface-container
         borderRadius: BorderRadius.circular(28.0),
       ),
       child: Column(
@@ -503,11 +551,18 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
           GestureDetector(
             onTap: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Please navigate to the Profile tab to sign in.')),
+                const SnackBar(
+                  content: Text(
+                    'Please navigate to the Profile tab to sign in.',
+                  ),
+                ),
               );
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 12.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 28.0,
+                vertical: 12.0,
+              ),
               decoration: BoxDecoration(
                 color: const Color(0xFF0B1C30), // on-secondary-container
                 borderRadius: BorderRadius.circular(9999.0),
@@ -542,9 +597,7 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
                 () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => const MyReportsPage(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const MyReportsPage()),
                   );
                 },
               ),
@@ -558,7 +611,9 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
                 const Color(0xFFEFF4FF),
                 () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Share functionality simulated.')),
+                    const SnackBar(
+                      content: Text('Share functionality simulated.'),
+                    ),
                   );
                 },
               ),
@@ -577,9 +632,7 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
                 () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => const ReportIssuePage(),
-                    ),
+                    MaterialPageRoute(builder: (_) => const ReportIssuePage()),
                   );
                 },
               ),
@@ -617,7 +670,9 @@ class _TicketCreatedPageState extends State<TicketCreatedPage> {
           color: bgColor,
           borderRadius: BorderRadius.circular(28.0),
           border: Border.all(
-            color: bgColor == Colors.white ? const Color(0xFF0058BE) : Colors.transparent,
+            color: bgColor == Colors.white
+                ? const Color(0xFF0058BE)
+                : Colors.transparent,
             width: 1.0,
           ),
           boxShadow: [

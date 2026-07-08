@@ -4,10 +4,7 @@ import '../../domain/entities/product_entities.dart';
 class SpecificationCard extends StatelessWidget {
   final List<SpecificationEntity> specifications;
 
-  const SpecificationCard({
-    super.key,
-    required this.specifications,
-  });
+  const SpecificationCard({super.key, required this.specifications});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +26,9 @@ class SpecificationCard extends StatelessWidget {
           children: List.generate(specifications.length, (index) {
             final spec = specifications[index];
             return Padding(
-              padding: EdgeInsets.only(bottom: index == specifications.length - 1 ? 0 : 12.0),
+              padding: EdgeInsets.only(
+                bottom: index == specifications.length - 1 ? 0 : 12.0,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

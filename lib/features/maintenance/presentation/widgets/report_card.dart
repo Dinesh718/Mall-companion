@@ -57,7 +57,9 @@ class ReportCard extends StatelessWidget {
     if (report.status == 'Resolved') {
       statusBg = const Color(0xFFDCFCE7); // green-50
       statusFg = const Color(0xFF16A34A); // green-600
-    } else if (report.status == 'Assigned' || report.status == 'In Progress' || report.status == 'Repairing') {
+    } else if (report.status == 'Assigned' ||
+        report.status == 'In Progress' ||
+        report.status == 'Repairing') {
       statusBg = const Color(0xFFEADDFF); // primary-fixed
       statusFg = const Color(0xFF6100D6); // primary
     } else {
@@ -83,8 +85,22 @@ class ReportCard extends StatelessWidget {
     }
 
     // Format DateTime nicely
-    final months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    final dateStr = '${months[report.createdTime.month - 1]} ${report.createdTime.day}, ${report.createdTime.year}';
+    final months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
+    final dateStr =
+        '${months[report.createdTime.month - 1]} ${report.createdTime.day}, ${report.createdTime.year}';
 
     return Container(
       padding: const EdgeInsets.all(20.0),
@@ -124,7 +140,11 @@ class ReportCard extends StatelessWidget {
                     const SizedBox(height: 4.0),
                     Row(
                       children: [
-                        Icon(categoryIcon, color: const Color(0xFF6100D6), size: 20.0),
+                        Icon(
+                          categoryIcon,
+                          color: const Color(0xFF6100D6),
+                          size: 20.0,
+                        ),
                         const SizedBox(width: 8.0),
                         Expanded(
                           child: Text(
@@ -144,7 +164,11 @@ class ReportCard extends StatelessWidget {
                     const SizedBox(height: 8.0),
                     Row(
                       children: [
-                        const Icon(Icons.calendar_today, color: Color(0xFF4A4456), size: 12.0),
+                        const Icon(
+                          Icons.calendar_today,
+                          color: Color(0xFF4A4456),
+                          size: 12.0,
+                        ),
                         const SizedBox(width: 4.0),
                         Text(
                           dateStr,
@@ -155,7 +179,11 @@ class ReportCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 16.0),
-                        const Icon(Icons.location_on_outlined, color: Color(0xFF4A4456), size: 12.0),
+                        const Icon(
+                          Icons.location_on_outlined,
+                          color: Color(0xFF4A4456),
+                          size: 12.0,
+                        ),
                         const SizedBox(width: 4.0),
                         Expanded(
                           child: Text(
@@ -179,7 +207,10 @@ class ReportCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 4.0,
+                    ),
                     decoration: BoxDecoration(
                       color: priorityBg,
                       borderRadius: BorderRadius.circular(9999.0),
@@ -197,7 +228,10 @@ class ReportCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6.0),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 4.0,
+                    ),
                     decoration: BoxDecoration(
                       color: statusBg,
                       borderRadius: BorderRadius.circular(9999.0),
@@ -296,10 +330,7 @@ class ReportCard extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: FractionallySizedBox(
               widthFactor: progressPercent,
-              child: Container(
-                height: 2.0,
-                color: const Color(0xFF6100D6),
-              ),
+              child: Container(height: 2.0, color: const Color(0xFF6100D6)),
             ),
           ),
           // Step circles
@@ -329,10 +360,7 @@ class ReportCard extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(color: Colors.white, width: 2.0),
             boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 4.0,
-              ),
+              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 4.0),
             ],
           ),
         ),

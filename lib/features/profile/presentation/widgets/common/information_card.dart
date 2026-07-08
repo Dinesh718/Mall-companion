@@ -65,7 +65,9 @@ class InformationCard extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Plus Jakarta Sans',
                 fontSize: 11.0, // label-md
-                color: const Color(0xFF4A4456).withOpacity(0.6), // on-surface-variant opacity-60
+                color: const Color(
+                  0xFF4A4456,
+                ).withOpacity(0.6), // on-surface-variant opacity-60
               ),
             ),
             if (subtitle != null) ...[

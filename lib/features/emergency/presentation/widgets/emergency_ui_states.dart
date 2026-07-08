@@ -24,7 +24,11 @@ class EmergencyLoadingSkeleton extends StatelessWidget {
             crossAxisSpacing: 16.0,
             mainAxisSpacing: 16.0,
             childAspectRatio: 1.2,
-            children: List.generate(4, (index) => _buildPulseContainer(width: double.infinity, height: 100.0)),
+            children: List.generate(
+              4,
+              (index) =>
+                  _buildPulseContainer(width: double.infinity, height: 100.0),
+            ),
           ),
         ],
       ),
@@ -105,11 +109,7 @@ class EmergencyErrorState extends StatelessWidget {
   final String message;
   final VoidCallback? onRetry;
 
-  const EmergencyErrorState({
-    super.key,
-    required this.message,
-    this.onRetry,
-  });
+  const EmergencyErrorState({super.key, required this.message, this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -124,11 +124,17 @@ class EmergencyErrorState extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color(0xFFFFDAD6), // error-container
                 borderRadius: BorderRadius.circular(16.0),
-                border: Border.all(color: const Color(0xFFBA1A1A).withOpacity(0.2)),
+                border: Border.all(
+                  color: const Color(0xFFBA1A1A).withOpacity(0.2),
+                ),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.error_outline, color: Color(0xFFBA1A1A), size: 24.0),
+                  const Icon(
+                    Icons.error_outline,
+                    color: Color(0xFFBA1A1A),
+                    size: 24.0,
+                  ),
                   const SizedBox(width: 12.0),
                   Expanded(
                     child: Text(

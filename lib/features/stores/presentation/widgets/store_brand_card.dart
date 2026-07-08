@@ -4,10 +4,7 @@ import '../../domain/entities/store_entities.dart';
 class StoreBrandCard extends StatelessWidget {
   final BrandEntity brand;
 
-  const StoreBrandCard({
-    super.key,
-    required this.brand,
-  });
+  const StoreBrandCard({super.key, required this.brand});
 
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,9 @@ class MaintenanceRepositoryImpl implements MaintenanceRepository {
   }
 
   @override
-  Future<MaintenanceReportEntity> submitIssue(MaintenanceReportEntity issue) async {
+  Future<MaintenanceReportEntity> submitIssue(
+    MaintenanceReportEntity issue,
+  ) async {
     return await localDataSource.submitIssue(issue);
   }
 

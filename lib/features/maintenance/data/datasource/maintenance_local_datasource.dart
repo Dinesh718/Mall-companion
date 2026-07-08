@@ -13,7 +13,8 @@ class MaintenanceLocalDataSourceImpl implements MaintenanceLocalDataSource {
       ticketId: 'MT-2026-000245',
       category: 'Lighting',
       title: 'Water leak near North Entrance',
-      description: 'Flickering overhead panel lights in the corridor are causing visibility issues for shoppers. Requesting immediate ballast check.',
+      description:
+          'Flickering overhead panel lights in the corridor are causing visibility issues for shoppers. Requesting immediate ballast check.',
       location: 'West Wing, Level 3',
       floor: '3rd Floor',
       nearestLandmark: 'Prada Flagship Store',
@@ -27,7 +28,8 @@ class MaintenanceLocalDataSourceImpl implements MaintenanceLocalDataSource {
       ticketId: 'MT-2026-000212',
       category: 'Air Conditioning',
       title: 'HVAC Maintenance',
-      description: 'Air conditioning vent is blowing warm air instead of cool air in the central dining area. Need zone thermostat repair.',
+      description:
+          'Air conditioning vent is blowing warm air instead of cool air in the central dining area. Need zone thermostat repair.',
       location: 'Food Court Area',
       floor: '2nd Floor',
       nearestLandmark: 'Main Entrance Corridor',
@@ -41,7 +43,8 @@ class MaintenanceLocalDataSourceImpl implements MaintenanceLocalDataSource {
       ticketId: 'MT-2026-000198',
       category: 'Cleaning',
       title: 'Soda spill on walkway',
-      description: 'Large sticky spill on the marble walkway needs immediate mopping before it becomes a slipping hazard.',
+      description:
+          'Large sticky spill on the marble walkway needs immediate mopping before it becomes a slipping hazard.',
       location: 'South Wing, Level 1',
       floor: '1st Floor',
       nearestLandmark: 'Zara Store Entrance',
@@ -60,7 +63,9 @@ class MaintenanceLocalDataSourceImpl implements MaintenanceLocalDataSource {
   }
 
   @override
-  Future<MaintenanceReportEntity> submitIssue(MaintenanceReportEntity issue) async {
+  Future<MaintenanceReportEntity> submitIssue(
+    MaintenanceReportEntity issue,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
     final newReport = MaintenanceReportModel(
       ticketId: issue.ticketId,

@@ -42,7 +42,9 @@ class EmergencyTimeline extends StatelessWidget {
           bottom: 16.0,
           child: Container(
             width: 1.0,
-            color: const Color(0xFFCCC3D9).withOpacity(0.5), // dashed line simulation
+            color: const Color(
+              0xFFCCC3D9,
+            ).withOpacity(0.5), // dashed line simulation
           ),
         ),
         // Step list
@@ -53,8 +55,12 @@ class EmergencyTimeline extends StatelessWidget {
           separatorBuilder: (context, index) => const SizedBox(height: 24.0),
           itemBuilder: (context, index) {
             final step = steps[index];
-            final circleBg = step.isActive ? const Color(0xFF6100D6) : const Color(0xFFEFF4FF);
-            final iconColor = step.isActive ? Colors.white : const Color(0xFF6100D6);
+            final circleBg = step.isActive
+                ? const Color(0xFF6100D6)
+                : const Color(0xFFEFF4FF);
+            final iconColor = step.isActive
+                ? Colors.white
+                : const Color(0xFF6100D6);
 
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,11 +75,7 @@ class EmergencyTimeline extends StatelessWidget {
                     border: Border.all(color: Colors.white, width: 2.0),
                   ),
                   alignment: Alignment.center,
-                  child: Icon(
-                    step.icon,
-                    color: iconColor,
-                    size: 16.0,
-                  ),
+                  child: Icon(step.icon, color: iconColor, size: 16.0),
                 ),
                 const SizedBox(width: 16.0),
                 // Text details
@@ -117,9 +119,15 @@ class EmergencyTimeline extends StatelessWidget {
       child: Row(
         children: steps.map((step) {
           final isLast = steps.last == step;
-          final circleBorder = step.isActive ? const Color(0xFFBA1A1A) : const Color(0xFFCCC3D9);
-          final circleBg = step.isActive ? const Color(0xFFFFDAD6) : const Color(0xFFEFF4FF);
-          final iconColor = step.isActive ? const Color(0xFFBA1A1A) : const Color(0xFF7B7488);
+          final circleBorder = step.isActive
+              ? const Color(0xFFBA1A1A)
+              : const Color(0xFFCCC3D9);
+          final circleBg = step.isActive
+              ? const Color(0xFFFFDAD6)
+              : const Color(0xFFEFF4FF);
+          final iconColor = step.isActive
+              ? const Color(0xFFBA1A1A)
+              : const Color(0xFF7B7488);
 
           return Row(
             children: [
@@ -135,11 +143,7 @@ class EmergencyTimeline extends StatelessWidget {
                       border: Border.all(color: circleBorder, width: 2.0),
                     ),
                     alignment: Alignment.center,
-                    child: Icon(
-                      step.icon,
-                      color: iconColor,
-                      size: 16.0,
-                    ),
+                    child: Icon(step.icon, color: iconColor, size: 16.0),
                   ),
                   const SizedBox(width: 8.0),
                   Text(

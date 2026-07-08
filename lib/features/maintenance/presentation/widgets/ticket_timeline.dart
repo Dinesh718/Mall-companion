@@ -38,25 +38,35 @@ class TicketTimeline extends StatelessWidget {
       _TimelineStep(
         title: 'Technician Assigned',
         subtitle: 'Assigned to: $assignedTech',
-        state: activeStepIndex == 2 ? StepState.active : (activeStepIndex > 2 ? StepState.completed : StepState.pending),
+        state: activeStepIndex == 2
+            ? StepState.active
+            : (activeStepIndex > 2 ? StepState.completed : StepState.pending),
       ),
       _TimelineStep(
         title: 'Technician On the Way',
         subtitle: 'Estimated arrival: 15 mins',
-        state: activeStepIndex == 3 ? StepState.active : (activeStepIndex > 3 ? StepState.completed : StepState.pending),
+        state: activeStepIndex == 3
+            ? StepState.active
+            : (activeStepIndex > 3 ? StepState.completed : StepState.pending),
       ),
       _TimelineStep(
         title: 'Issue Under Repair',
-        state: activeStepIndex == 4 ? StepState.active : (activeStepIndex > 4 ? StepState.completed : StepState.pending),
+        state: activeStepIndex == 4
+            ? StepState.active
+            : (activeStepIndex > 4 ? StepState.completed : StepState.pending),
       ),
       _TimelineStep(
         title: 'Quality Verification',
-        state: activeStepIndex == 5 ? StepState.active : (activeStepIndex > 5 ? StepState.completed : StepState.pending),
+        state: activeStepIndex == 5
+            ? StepState.active
+            : (activeStepIndex > 5 ? StepState.completed : StepState.pending),
       ),
       _TimelineStep(
         title: 'Resolved',
         isLast: true,
-        state: activeStepIndex == 6 ? StepState.active : (activeStepIndex > 6 ? StepState.completed : StepState.pending),
+        state: activeStepIndex == 6
+            ? StepState.active
+            : (activeStepIndex > 6 ? StepState.completed : StepState.pending),
       ),
     ];
 
@@ -99,9 +109,7 @@ class TicketTimeline extends StatelessWidget {
                 ),
               ),
               // Main timeline columns
-              Column(
-                children: steps,
-              ),
+              Column(children: steps),
             ],
           ),
         ],
@@ -171,7 +179,11 @@ class _TimelineStep extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: isLast
-            ? const Icon(Icons.flag_outlined, color: Color(0xFFCCC3D9), size: 16.0)
+            ? const Icon(
+                Icons.flag_outlined,
+                color: Color(0xFFCCC3D9),
+                size: 16.0,
+              )
             : const SizedBox.shrink(),
       );
     }
@@ -195,8 +207,12 @@ class _TimelineStep extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 15.0,
-                    fontWeight: state == StepState.active ? FontWeight.bold : FontWeight.w600,
-                    color: state == StepState.active ? const Color(0xFF6100D6) : const Color(0xFF0B1C30),
+                    fontWeight: state == StepState.active
+                        ? FontWeight.bold
+                        : FontWeight.w600,
+                    color: state == StepState.active
+                        ? const Color(0xFF6100D6)
+                        : const Color(0xFF0B1C30),
                   ),
                 ),
                 if (subtitle != null) ...[
@@ -244,7 +260,11 @@ class _DashedLinePainter extends CustomPainter {
     double startY = 8.0;
 
     while (startY < maxExtent) {
-      canvas.drawLine(Offset(size.width / 2, startY), Offset(size.width / 2, startY + dashHeight), paint);
+      canvas.drawLine(
+        Offset(size.width / 2, startY),
+        Offset(size.width / 2, startY + dashHeight),
+        paint,
+      );
       startY += dashHeight + dashGap;
     }
   }

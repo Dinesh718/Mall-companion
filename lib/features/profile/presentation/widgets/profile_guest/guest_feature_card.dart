@@ -93,10 +93,7 @@ class _FeatureItem extends StatelessWidget {
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(
-          color: Colors.transparent,
-          width: 1.0,
-        ),
+        border: Border.all(color: Colors.transparent, width: 1.0),
       ),
       child: Row(
         children: [
@@ -113,11 +110,7 @@ class _FeatureItem extends StatelessWidget {
               ),
             ),
             alignment: Alignment.center,
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 24.0,
-            ),
+            child: Icon(icon, color: Colors.white, size: 24.0),
           ),
           const SizedBox(width: 16.0),
           Expanded(

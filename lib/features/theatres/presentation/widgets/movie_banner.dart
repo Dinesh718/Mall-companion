@@ -79,7 +79,10 @@ class MovieBanner extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0,
+                        vertical: 2.0,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.amber,
                         borderRadius: BorderRadius.circular(4.0),
@@ -139,10 +142,7 @@ class MovieBanner extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 8.0),
-                    const Text(
-                      '•',
-                      style: TextStyle(color: Colors.white70),
-                    ),
+                    const Text('•', style: TextStyle(color: Colors.white70)),
                     const SizedBox(width: 8.0),
                     const Text(
                       'Next: ',

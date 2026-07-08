@@ -27,7 +27,10 @@ class EmergencyHeroCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24.0),
         gradient: const LinearGradient(
-          colors: [Color(0xFF7B2FF7), Color(0xFF3B82F6)], // primary to secondary
+          colors: [
+            Color(0xFF7B2FF7),
+            Color(0xFF3B82F6),
+          ], // primary to secondary
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -77,7 +80,10 @@ class EmergencyHeroCard extends StatelessWidget {
               children: [
                 // Online Badge
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 4.0,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(9999.0),
@@ -143,7 +149,10 @@ class EmergencyHeroCard extends StatelessWidget {
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF7B2FF7),
                         elevation: 4.0,
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 14.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 14.0,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(9999.0),
                         ),
@@ -161,8 +170,14 @@ class EmergencyHeroCard extends StatelessWidget {
                       onPressed: onSecondaryTap,
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        side: BorderSide(color: Colors.white.withOpacity(0.4), width: 1.0),
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 14.0),
+                        side: BorderSide(
+                          color: Colors.white.withOpacity(0.4),
+                          width: 1.0,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 14.0,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(9999.0),
                         ),

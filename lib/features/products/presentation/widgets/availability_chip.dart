@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class AvailabilityChip extends StatelessWidget {
   final bool inStock;
 
-  const AvailabilityChip({
-    super.key,
-    required this.inStock,
-  });
+  const AvailabilityChip({super.key, required this.inStock});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +21,9 @@ class AvailabilityChip extends StatelessWidget {
           fontFamily: 'Plus Jakarta Sans',
           fontSize: 11.0,
           fontWeight: FontWeight.bold,
-          color: inStock ? const Color(0xFF6100D6) : const Color(0xFFBA1A1A), // primary : error
+          color: inStock
+              ? const Color(0xFF6100D6)
+              : const Color(0xFFBA1A1A), // primary : error
           letterSpacing: 0.5,
         ),
       ),

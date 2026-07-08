@@ -39,10 +39,7 @@ class MoreHeader extends StatelessWidget implements PreferredSizeWidget {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(
-                      Icons.menu,
-                      color: Color(0xFF6100D6),
-                    ),
+                    icon: const Icon(Icons.menu, color: Color(0xFF6100D6)),
                     onPressed: onMenuTap,
                   ),
                   const SizedBox(width: 8.0),

@@ -20,10 +20,7 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
     on<FavoriteStore>(_onFavoriteStore);
   }
 
-  Future<void> _onLoadStores(
-    LoadStores event,
-    Emitter<StoreState> emit,
-  ) async {
+  Future<void> _onLoadStores(LoadStores event, Emitter<StoreState> emit) async {
     emit(const StoreLoading());
     try {
       final stores = await getStoresData.getStores();
@@ -58,20 +55,23 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
     try {
       final stores = await getStoresData.getStores();
       final store = stores.firstWhere((s) => s.id == event.storeId);
-      final recommended = stores.where((s) => s.id != event.storeId && s.category == store.category).toList();
-      emit(StoreDetailsLoaded(
-        store: store,
-        recommendedStores: recommended.isNotEmpty ? recommended : stores.where((s) => s.id != event.storeId).toList(),
-      ));
+      final recommended = stores
+          .where((s) => s.id != event.storeId && s.category == store.category)
+          .toList();
+      emit(
+        StoreDetailsLoaded(
+          store: store,
+          recommendedStores: recommended.isNotEmpty
+              ? recommended
+              : stores.where((s) => s.id != event.storeId).toList(),
+        ),
+      );
     } catch (e) {
       emit(StoreError(errorMessage: e.toString()));
     }
   }
 
-  void _onSearchStores(
-    SearchStores event,
-    Emitter<StoreState> emit,
-  ) {
+  void _onSearchStores(SearchStores event, Emitter<StoreState> emit) {
     if (state is StoreLoaded) {
       final current = state as StoreLoaded;
       emit(current.copyWith(searchQuery: event.query));
@@ -88,10 +88,7 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
     }
   }
 
-  void _onFilterStoresFloor(
-    FilterStoresFloor event,
-    Emitter<StoreState> emit,
-  ) {
+  void _onFilterStoresFloor(FilterStoresFloor event, Emitter<StoreState> emit) {
     if (state is StoreLoaded) {
       final current = state as StoreLoaded;
       emit(current.copyWith(selectedFloor: event.floor));
@@ -112,7 +109,12 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
       } else if (state is StoreDetailsLoaded) {
         final current = state as StoreDetailsLoaded;
         final updatedStore = stores.firstWhere((s) => s.id == current.store.id);
-        emit(current.copyWith(store: updatedStore, recommendedStores: current.recommendedStores));
+        emit(
+          current.copyWith(
+            store: updatedStore,
+            recommendedStores: current.recommendedStores,
+          ),
+        );
       }
     } catch (e) {
       emit(StoreError(errorMessage: e.toString()));

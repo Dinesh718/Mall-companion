@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class MaintenanceHeroCard extends StatelessWidget {
   final VoidCallback onStartTap;
 
-  const MaintenanceHeroCard({
-    super.key,
-    required this.onStartTap,
-  });
+  const MaintenanceHeroCard({super.key, required this.onStartTap});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +12,10 @@ class MaintenanceHeroCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(28.0),
         gradient: const LinearGradient(
-          colors: [Color(0xFF7B2FF7), Color(0xFF3B82F6)], // primary-container to secondary-container
+          colors: [
+            Color(0xFF7B2FF7),
+            Color(0xFF3B82F6),
+          ], // primary-container to secondary-container
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -66,7 +66,10 @@ class MaintenanceHeroCard extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0,
+                        vertical: 4.0,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(9999.0),
@@ -84,7 +87,10 @@ class MaintenanceHeroCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 8.0),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0,
+                        vertical: 4.0,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(9999.0),
@@ -135,7 +141,10 @@ class MaintenanceHeroCard extends StatelessWidget {
                 GestureDetector(
                   onTap: onStartTap,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 12.0,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(9999.0),

@@ -27,13 +27,19 @@ class SOSSecurityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localDataSource = EmergencyLocalDataSourceImpl();
-    final repository = EmergencyRepositoryImpl(localDataSource: localDataSource);
+    final repository = EmergencyRepositoryImpl(
+      localDataSource: localDataSource,
+    );
 
     return BlocProvider(
       create: (_) => EmergencyBloc(
-        loadEmergencyFacilitiesUseCase: LoadEmergencyFacilitiesUseCase(repository),
+        loadEmergencyFacilitiesUseCase: LoadEmergencyFacilitiesUseCase(
+          repository,
+        ),
         loadEmergencyContactsUseCase: LoadEmergencyContactsUseCase(repository),
-        startEmergencyNavigationUseCase: StartEmergencyNavigationUseCase(repository),
+        startEmergencyNavigationUseCase: StartEmergencyNavigationUseCase(
+          repository,
+        ),
         sendSOSUseCase: SendSOSUseCase(repository),
         notifySecurityUseCase: NotifySecurityUseCase(repository),
         loadInstructionsUseCase: LoadInstructionsUseCase(repository),
@@ -218,7 +224,10 @@ class _SOSSecurityView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 4.0,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(9999.0),
@@ -279,12 +288,19 @@ class _SOSSecurityView extends StatelessWidget {
                       onPressed: () {
                         context.read<EmergencyBloc>().add(const OpenSOS());
                       },
-                      icon: const Icon(Icons.emergency, color: Color(0xFF6100D6), size: 18.0),
+                      icon: const Icon(
+                        Icons.emergency,
+                        color: Color(0xFF6100D6),
+                        size: 18.0,
+                      ),
                       label: const Text('Send SOS Alert'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF6100D6),
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 14.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 14.0,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.0),
                         ),
@@ -294,12 +310,19 @@ class _SOSSecurityView extends StatelessWidget {
                       onPressed: () {
                         context.read<EmergencyBloc>().add(const CallSecurity());
                       },
-                      icon: const Icon(Icons.call, color: Colors.white, size: 18.0),
+                      icon: const Icon(
+                        Icons.call,
+                        color: Colors.white,
+                        size: 18.0,
+                      ),
                       label: const Text('Call Security'),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.white,
                         side: BorderSide(color: Colors.white.withOpacity(0.4)),
-                        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 14.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24.0,
+                          vertical: 14.0,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.0),
                         ),
@@ -344,7 +367,9 @@ class _SOSSecurityView extends StatelessWidget {
               subtitle: 'Chat with support',
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Starting Live Chat support connection...')),
+                  const SnackBar(
+                    content: Text('Starting Live Chat support connection...'),
+                  ),
                 );
               },
             ),
@@ -366,7 +391,11 @@ class _SOSSecurityView extends StatelessWidget {
               subtitle: 'To your vehicle',
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Escort dispatch requested. Security team member is on their way.')),
+                  const SnackBar(
+                    content: Text(
+                      'Escort dispatch requested. Security team member is on their way.',
+                    ),
+                  ),
                 );
               },
             ),
@@ -380,7 +409,9 @@ class _SOSSecurityView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const EmergencyNavigationPage(destination: 'First Aid Room'),
+                    builder: (_) => const EmergencyNavigationPage(
+                      destination: 'First Aid Room',
+                    ),
                   ),
                 );
               },
@@ -395,7 +426,9 @@ class _SOSSecurityView extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const EmergencyNavigationPage(destination: 'Fire Exit North'),
+                    builder: (_) => const EmergencyNavigationPage(
+                      destination: 'Fire Exit North',
+                    ),
                   ),
                 );
               },
@@ -429,7 +462,10 @@ class _SOSSecurityView extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: ListTile(
         onTap: onTap,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+          vertical: 8.0,
+        ),
         leading: Container(
           width: 44.0,
           height: 44.0,

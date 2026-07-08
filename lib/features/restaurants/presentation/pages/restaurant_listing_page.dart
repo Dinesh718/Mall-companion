@@ -17,7 +17,9 @@ class RestaurantListingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localDataSource = RestaurantLocalDataSourceImpl();
-    final repository = RestaurantRepositoryImpl(localDataSource: localDataSource);
+    final repository = RestaurantRepositoryImpl(
+      localDataSource: localDataSource,
+    );
 
     return BlocProvider(
       create: (_) => RestaurantBloc(
@@ -87,12 +89,18 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.error_outline, size: 64.0, color: Color(0xFFBA1A1A)),
+                      const Icon(
+                        Icons.error_outline,
+                        size: 64.0,
+                        color: Color(0xFFBA1A1A),
+                      ),
                       const SizedBox(height: 16.0),
                       Text(state.errorMessage),
                       const SizedBox(height: 24.0),
                       ElevatedButton(
-                        onPressed: () => context.read<RestaurantBloc>().add(const LoadRestaurants()),
+                        onPressed: () => context.read<RestaurantBloc>().add(
+                          const LoadRestaurants(),
+                        ),
                         child: const Text('Retry'),
                       ),
                     ],
@@ -107,20 +115,31 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
 
               // Apply client-side filters
               final filteredRestaurants = allRestaurants.where((r) {
-                final matchesQuery = r.name.toLowerCase().contains(query) ||
+                final matchesQuery =
+                    r.name.toLowerCase().contains(query) ||
                     r.cuisine.toLowerCase().contains(query);
 
-                final matchesCuisine = state.selectedCuisine == 'All' ||
-                    r.cuisine.toLowerCase().contains(state.selectedCuisine.toLowerCase());
+                final matchesCuisine =
+                    state.selectedCuisine == 'All' ||
+                    r.cuisine.toLowerCase().contains(
+                      state.selectedCuisine.toLowerCase(),
+                    );
 
-                final matchesFloor = state.selectedFloor == 'All' ||
-                    r.floorText.toLowerCase().contains(state.selectedFloor.toLowerCase());
+                final matchesFloor =
+                    state.selectedFloor == 'All' ||
+                    r.floorText.toLowerCase().contains(
+                      state.selectedFloor.toLowerCase(),
+                    );
 
                 final matchesOpen = !state.openOnly || r.isOpen;
 
                 bool matchesWait = true;
                 if (state.maxWaitTime != 'All') {
-                  final waitMin = int.tryParse(r.waitTimeText.replaceAll(RegExp(r'[^0-9]'), '')) ?? 0;
+                  final waitMin =
+                      int.tryParse(
+                        r.waitTimeText.replaceAll(RegExp(r'[^0-9]'), ''),
+                      ) ??
+                      0;
                   if (state.maxWaitTime == '10 min') {
                     matchesWait = waitMin <= 10;
                   } else if (state.maxWaitTime == '20 min') {
@@ -128,15 +147,23 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                   }
                 }
 
-                return matchesQuery && matchesCuisine && matchesFloor && matchesOpen && matchesWait;
+                return matchesQuery &&
+                    matchesCuisine &&
+                    matchesFloor &&
+                    matchesOpen &&
+                    matchesWait;
               }).toList();
 
               // Separate featured
-              final featuredList = filteredRestaurants.where((r) => r.rating >= 4.7).toList();
+              final featuredList = filteredRestaurants
+                  .where((r) => r.rating >= 4.7)
+                  .toList();
 
               return RefreshIndicator(
                 onRefresh: () async {
-                  context.read<RestaurantBloc>().add(const RefreshRestaurants());
+                  context.read<RestaurantBloc>().add(
+                    const RefreshRestaurants(),
+                  );
                 },
                 color: const Color(0xFF6100D6),
                 child: SingleChildScrollView(
@@ -146,7 +173,10 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                     children: [
                       // Header
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 8.0,
+                        ),
                         child: Row(
                           children: [
                             if (canPop) ...[
@@ -157,7 +187,9 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                   color: Color(0xFF1D1A25),
                                 ),
                                 style: IconButton.styleFrom(
-                                  backgroundColor: const Color(0xFFEDE5F5), // surface-container-high
+                                  backgroundColor: const Color(
+                                    0xFFEDE5F5,
+                                  ), // surface-container-high
                                   minimumSize: const Size(40.0, 40.0),
                                   shape: const CircleBorder(),
                                 ),
@@ -183,7 +215,9 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                     style: TextStyle(
                                       fontFamily: 'Plus Jakarta Sans',
                                       fontSize: 12.0,
-                                      color: Color(0xFF4A4456), // on-surface-variant
+                                      color: Color(
+                                        0xFF4A4456,
+                                      ), // on-surface-variant
                                     ),
                                   ),
                                 ],
@@ -207,7 +241,10 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                               height: 40.0,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: Border.all(color: const Color(0xFF6100D6), width: 1.5),
+                                border: Border.all(
+                                  color: const Color(0xFF6100D6),
+                                  width: 1.5,
+                                ),
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100.0),
@@ -241,14 +278,19 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Row(
                             children: [
-                              const Icon(Icons.search_outlined, color: Color(0xFF7B7488), size: 20.0),
+                              const Icon(
+                                Icons.search_outlined,
+                                color: Color(0xFF7B7488),
+                                size: 20.0,
+                              ),
                               const SizedBox(width: 10.0),
                               Expanded(
                                 child: TextField(
                                   controller: _searchController,
                                   onChanged: (val) => _applyFilters(context),
                                   decoration: const InputDecoration(
-                                    hintText: 'Search restaurants, cuisines or cafés...',
+                                    hintText:
+                                        'Search restaurants, cuisines or cafés...',
                                     hintStyle: TextStyle(
                                       fontSize: 14.0,
                                       color: Color(0xFF7B7488),
@@ -259,9 +301,17 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                   ),
                                 ),
                               ),
-                              const Icon(Icons.mic_outlined, color: Color(0xFF6100D6), size: 20.0),
+                              const Icon(
+                                Icons.mic_outlined,
+                                color: Color(0xFF6100D6),
+                                size: 20.0,
+                              ),
                               const SizedBox(width: 12.0),
-                              const Icon(Icons.qr_code_scanner_outlined, color: Color(0xFF6100D6), size: 20.0),
+                              const Icon(
+                                Icons.qr_code_scanner_outlined,
+                                color: Color(0xFF6100D6),
+                                size: 20.0,
+                              ),
                             ],
                           ),
                         ),
@@ -281,28 +331,40 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                 color: const Color(0xFFEDE5F5),
                                 borderRadius: BorderRadius.circular(100.0),
                                 border: Border.all(
-                                  color: const Color(0xFFCCC3D9).withOpacity(0.3),
+                                  color: const Color(
+                                    0xFFCCC3D9,
+                                  ).withOpacity(0.3),
                                 ),
                               ),
-                              padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14.0,
+                                vertical: 8.0,
+                              ),
                               child: PopupMenuButton<String>(
                                 initialValue: _selectedFloor,
                                 onSelected: (val) {
                                   setState(() => _selectedFloor = val);
                                   _applyFilters(context);
                                 },
-                                itemBuilder: (_) => ['All', 'Ground', 'Level 1', 'Level 3']
-                                    .map(
-                                      (f) => PopupMenuItem(
-                                        value: f == 'All' ? 'All' : f,
-                                        child: Text(f == 'All' ? 'All Floors' : '$f Floor'),
-                                      ),
-                                    )
-                                    .toList(),
+                                itemBuilder: (_) =>
+                                    ['All', 'Ground', 'Level 1', 'Level 3']
+                                        .map(
+                                          (f) => PopupMenuItem(
+                                            value: f == 'All' ? 'All' : f,
+                                            child: Text(
+                                              f == 'All'
+                                                  ? 'All Floors'
+                                                  : '$f Floor',
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
                                 child: Row(
                                   children: [
                                     Text(
-                                      _selectedFloor == 'All' ? 'All Floors' : 'Floor: $_selectedFloor',
+                                      _selectedFloor == 'All'
+                                          ? 'All Floors'
+                                          : 'Floor: $_selectedFloor',
                                       style: const TextStyle(
                                         fontFamily: 'Plus Jakarta Sans',
                                         fontSize: 13.0,
@@ -311,7 +373,10 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                       ),
                                     ),
                                     const SizedBox(width: 4.0),
-                                    const Icon(Icons.keyboard_arrow_down_rounded, size: 18.0),
+                                    const Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                      size: 18.0,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -319,15 +384,28 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                             const SizedBox(width: 12.0),
 
                             // Cuisine Chips
-                            ...['All', 'French', 'Japanese', 'Burgers', 'Cafe'].map((cuisineOpt) {
-                              final isSelected = state.selectedCuisine == cuisineOpt;
+                            ...[
+                              'All',
+                              'French',
+                              'Japanese',
+                              'Burgers',
+                              'Cafe',
+                            ].map((cuisineOpt) {
+                              final isSelected =
+                                  state.selectedCuisine == cuisineOpt;
                               return Padding(
                                 padding: const EdgeInsets.only(right: 8.0),
                                 child: ChoiceChip(
-                                  label: Text(cuisineOpt == 'All' ? 'All Cuisines' : cuisineOpt),
+                                  label: Text(
+                                    cuisineOpt == 'All'
+                                        ? 'All Cuisines'
+                                        : cuisineOpt,
+                                  ),
                                   selected: isSelected,
                                   onSelected: (val) {
-                                    setState(() => _selectedCuisine = cuisineOpt);
+                                    setState(
+                                      () => _selectedCuisine = cuisineOpt,
+                                    );
                                     _applyFilters(context);
                                   },
                                   selectedColor: const Color(0xFF6100D6),
@@ -336,12 +414,16 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                     fontFamily: 'Plus Jakarta Sans',
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.bold,
-                                    color: isSelected ? Colors.white : const Color(0xFF4A4456),
+                                    color: isSelected
+                                        ? Colors.white
+                                        : const Color(0xFF4A4456),
                                   ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(100.0),
                                     side: BorderSide(
-                                      color: isSelected ? const Color(0xFF6100D6) : const Color(0xFFEDE5F5),
+                                      color: isSelected
+                                          ? const Color(0xFF6100D6)
+                                          : const Color(0xFFEDE5F5),
                                     ),
                                   ),
                                 ),
@@ -365,7 +447,9 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                 setState(() => _openOnly = val);
                                 _applyFilters(context);
                               },
-                              selectedColor: const Color(0xFF6100D6).withOpacity(0.1),
+                              selectedColor: const Color(
+                                0xFF6100D6,
+                              ).withOpacity(0.1),
                               checkmarkColor: const Color(0xFF6100D6),
                               labelStyle: const TextStyle(
                                 fontFamily: 'Plus Jakarta Sans',
@@ -381,9 +465,14 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(100.0),
-                                border: Border.all(color: const Color(0xFFEDE5F5)),
+                                border: Border.all(
+                                  color: const Color(0xFFEDE5F5),
+                                ),
                               ),
-                              padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 14.0,
+                                vertical: 8.0,
+                              ),
                               child: PopupMenuButton<String>(
                                 initialValue: _selectedWaitTime,
                                 onSelected: (val) {
@@ -394,14 +483,20 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                     .map(
                                       (w) => PopupMenuItem(
                                         value: w,
-                                        child: Text(w == 'All' ? 'Any Wait Time' : 'Under $w'),
+                                        child: Text(
+                                          w == 'All'
+                                              ? 'Any Wait Time'
+                                              : 'Under $w',
+                                        ),
                                       ),
                                     )
                                     .toList(),
                                 child: Row(
                                   children: [
                                     Text(
-                                      _selectedWaitTime == 'All' ? 'Waiting Time' : 'Wait: ≤ $_selectedWaitTime',
+                                      _selectedWaitTime == 'All'
+                                          ? 'Waiting Time'
+                                          : 'Wait: ≤ $_selectedWaitTime',
                                       style: const TextStyle(
                                         fontFamily: 'Plus Jakarta Sans',
                                         fontSize: 12.0,
@@ -410,7 +505,10 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                       ),
                                     ),
                                     const SizedBox(width: 4.0),
-                                    const Icon(Icons.arrow_drop_down, size: 16.0),
+                                    const Icon(
+                                      Icons.arrow_drop_down,
+                                      size: 16.0,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -424,21 +522,26 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                       if (featuredList.isNotEmpty) ...[
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: RestaurantSectionTitle(title: 'Trending This Week'),
+                          child: RestaurantSectionTitle(
+                            title: 'Trending This Week',
+                          ),
                         ),
                         const SizedBox(height: 12.0),
                         SizedBox(
                           height: 280.0,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0,
+                            ),
                             clipBehavior: Clip.none,
                             itemCount: featuredList.length,
                             itemBuilder: (context, index) {
                               final item = featuredList[index];
                               return FeaturedRestaurantCard(
                                 restaurant: item,
-                                onTap: () => _navigateToDetails(context, item.id),
+                                onTap: () =>
+                                    _navigateToDetails(context, item.id),
                               );
                             },
                           ),
@@ -473,12 +576,16 @@ class _RestaurantListingBodyState extends State<_RestaurantListingBody> {
                                 children: filteredRestaurants.map((item) {
                                   return RestaurantCard(
                                     restaurant: item,
-                                    onTap: () => _navigateToDetails(context, item.id),
+                                    onTap: () =>
+                                        _navigateToDetails(context, item.id),
                                     onNavigate: () {},
-                                    onReserve: () => _navigateToDetails(context, item.id),
+                                    onReserve: () =>
+                                        _navigateToDetails(context, item.id),
                                     onFavorite: () {
                                       context.read<RestaurantBloc>().add(
-                                        ToggleFavoriteRestaurant(restaurantId: item.id),
+                                        ToggleFavoriteRestaurant(
+                                          restaurantId: item.id,
+                                        ),
                                       );
                                     },
                                   );

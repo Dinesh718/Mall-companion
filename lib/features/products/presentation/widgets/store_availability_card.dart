@@ -40,7 +40,8 @@ class StoreAvailabilityCard extends StatelessWidget {
                 child: Image.network(
                   availability.logoUrl,
                   fit: BoxFit.contain,
-                  errorBuilder: (_, __, ___) => const Icon(Icons.store, color: Color(0xFF6100D6)),
+                  errorBuilder: (_, __, ___) =>
+                      const Icon(Icons.store, color: Color(0xFF6100D6)),
                 ),
               ),
               const SizedBox(width: 16.0),
@@ -76,7 +77,11 @@ class StoreAvailabilityCard extends StatelessWidget {
                     const SizedBox(height: 6.0),
                     Row(
                       children: [
-                        const Icon(Icons.schedule, size: 16.0, color: Color(0xFF4A4456)),
+                        const Icon(
+                          Icons.schedule,
+                          size: 16.0,
+                          color: Color(0xFF4A4456),
+                        ),
                         const SizedBox(width: 4.0),
                         Text(
                           availability.openingHours,
@@ -87,7 +92,11 @@ class StoreAvailabilityCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 12.0),
-                        const Icon(Icons.near_me, size: 16.0, color: Color(0xFF4A4456)),
+                        const Icon(
+                          Icons.near_me,
+                          size: 16.0,
+                          color: Color(0xFF4A4456),
+                        ),
                         const SizedBox(width: 4.0),
                         Text(
                           availability.distanceText,

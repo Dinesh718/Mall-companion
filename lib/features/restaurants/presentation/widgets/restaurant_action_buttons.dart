@@ -63,7 +63,11 @@ class RestaurantActionButtons extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Icon(Icons.event_seat, color: Colors.white, size: 18.0),
+                          Icon(
+                            Icons.event_seat,
+                            color: Colors.white,
+                            size: 18.0,
+                          ),
                           SizedBox(width: 8.0),
                           Text(
                             'Book Table',

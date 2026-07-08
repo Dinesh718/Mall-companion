@@ -33,9 +33,15 @@ class PrioritySelector extends StatelessWidget {
           fontWeight = isSelected ? FontWeight.bold : FontWeight.w500;
           borderWidth = isSelected ? 2.0 : 1.0;
         } else {
-          borderColor = isSelected ? const Color(0xFF6100D6) : const Color(0xFFCCC3D9); // primary : outline-variant
-          backgroundColor = isSelected ? const Color(0xFFEADDFF) : Colors.white; // primary-fixed : white
-          textColor = isSelected ? const Color(0xFF6100D6) : const Color(0xFF4A4456); // primary : on-surface-variant
+          borderColor = isSelected
+              ? const Color(0xFF6100D6)
+              : const Color(0xFFCCC3D9); // primary : outline-variant
+          backgroundColor = isSelected
+              ? const Color(0xFFEADDFF)
+              : Colors.white; // primary-fixed : white
+          textColor = isSelected
+              ? const Color(0xFF6100D6)
+              : const Color(0xFF4A4456); // primary : on-surface-variant
           fontWeight = isSelected ? FontWeight.bold : FontWeight.w500;
           borderWidth = isSelected ? 2.0 : 1.0;
         }
@@ -43,14 +49,14 @@ class PrioritySelector extends StatelessWidget {
         return GestureDetector(
           onTap: () => onPrioritySelected(priority),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 10.0,
+            ),
             decoration: BoxDecoration(
               color: backgroundColor,
               borderRadius: BorderRadius.circular(9999.0), // rounded-full
-              border: Border.all(
-                color: borderColor,
-                width: borderWidth,
-              ),
+              border: Border.all(color: borderColor, width: borderWidth),
             ),
             child: Text(
               priority,

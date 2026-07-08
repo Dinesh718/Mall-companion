@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class LogoutCard extends StatelessWidget {
   final VoidCallback onTap;
 
-  const LogoutCard({
-    super.key,
-    required this.onTap,
-  });
+  const LogoutCard({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

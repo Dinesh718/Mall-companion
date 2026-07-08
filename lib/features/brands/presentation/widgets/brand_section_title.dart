@@ -4,11 +4,7 @@ class BrandSectionTitle extends StatelessWidget {
   final String title;
   final VoidCallback? onViewAllTap;
 
-  const BrandSectionTitle({
-    super.key,
-    required this.title,
-    this.onViewAllTap,
-  });
+  const BrandSectionTitle({super.key, required this.title, this.onViewAllTap});
 
   @override
   Widget build(BuildContext context) {

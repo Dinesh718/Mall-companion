@@ -30,7 +30,12 @@ class EmergencyContactCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.only(left: 20.0, top: 20.0, right: 20.0, bottom: 8.0),
+            padding: EdgeInsets.only(
+              left: 20.0,
+              top: 20.0,
+              right: 20.0,
+              bottom: 8.0,
+            ),
             child: Text(
               'Quick Dial Contacts',
               style: TextStyle(
@@ -45,7 +50,8 @@ class EmergencyContactCard extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: contacts.length,
-            separatorBuilder: (context, index) => const Divider(height: 1.0, color: Color(0xFFEFF4FF)),
+            separatorBuilder: (context, index) =>
+                const Divider(height: 1.0, color: Color(0xFFEFF4FF)),
             itemBuilder: (context, index) {
               final contact = contacts[index];
 
@@ -77,7 +83,10 @@ class EmergencyContactCard extends StatelessWidget {
               }
 
               return ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 4.0),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 4.0,
+                ),
                 leading: Container(
                   width: 40.0,
                   height: 40.0,
@@ -86,11 +95,7 @@ class EmergencyContactCard extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   alignment: Alignment.center,
-                  child: Icon(
-                    icon,
-                    color: iconColor,
-                    size: 20.0,
-                  ),
+                  child: Icon(icon, color: iconColor, size: 20.0),
                 ),
                 title: Text(
                   contact.name,

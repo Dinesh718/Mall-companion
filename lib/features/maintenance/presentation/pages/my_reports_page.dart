@@ -25,7 +25,9 @@ class MyReportsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localDataSource = MaintenanceLocalDataSourceImpl();
-    final repository = MaintenanceRepositoryImpl(localDataSource: localDataSource);
+    final repository = MaintenanceRepositoryImpl(
+      localDataSource: localDataSource,
+    );
 
     return BlocProvider(
       create: (_) => MaintenanceBloc(
@@ -79,7 +81,10 @@ class _MyReportsViewState extends State<_MyReportsView> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Color(0xFF6100D6)),
+            icon: const Icon(
+              Icons.notifications_outlined,
+              color: Color(0xFF6100D6),
+            ),
             onPressed: () {},
           ),
           const SizedBox(width: 8.0),
@@ -119,7 +124,11 @@ class _MyReportsViewState extends State<_MyReportsView> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.error_outline, size: 64.0, color: Color(0xFFBA1A1A)),
+                    const Icon(
+                      Icons.error_outline,
+                      size: 64.0,
+                      color: Color(0xFFBA1A1A),
+                    ),
                     const SizedBox(height: 16.0),
                     const Text(
                       'Failed to load reports',
@@ -133,13 +142,18 @@ class _MyReportsViewState extends State<_MyReportsView> {
                     const SizedBox(height: 8.0),
                     Text(
                       state.errorMessage,
-                      style: const TextStyle(fontSize: 14.0, color: Color(0xFF4A4456)),
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        color: Color(0xFF4A4456),
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 24.0),
                     ElevatedButton(
                       onPressed: () {
-                        context.read<MaintenanceBloc>().add(const LoadReports());
+                        context.read<MaintenanceBloc>().add(
+                          const LoadReports(),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF6100D6),
@@ -155,7 +169,10 @@ class _MyReportsViewState extends State<_MyReportsView> {
 
           if (state is GuestMaintenanceState) {
             return SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 20.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -172,7 +189,11 @@ class _MyReportsViewState extends State<_MyReportsView> {
                   LoginPromptCard(
                     onLoginTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Please navigate to the Profile tab to sign in.')),
+                        const SnackBar(
+                          content: Text(
+                            'Please navigate to the Profile tab to sign in.',
+                          ),
+                        ),
                       );
                     },
                     onContinueAsGuestTap: () {
@@ -187,14 +208,30 @@ class _MyReportsViewState extends State<_MyReportsView> {
           if (state is LoggedInMaintenanceState) {
             // Calculate stats dynamically
             final total = state.reports.length;
-            final resolved = state.reports.where((r) => r.status == 'Resolved').length;
-            final inProgress = state.reports.where((r) => r.status == 'Assigned' || r.status == 'Repairing' || r.status == 'In Progress').length;
-            final pending = state.reports.where((r) => r.status == 'Submitted').length;
+            final resolved = state.reports
+                .where((r) => r.status == 'Resolved')
+                .length;
+            final inProgress = state.reports
+                .where(
+                  (r) =>
+                      r.status == 'Assigned' ||
+                      r.status == 'Repairing' ||
+                      r.status == 'In Progress',
+                )
+                .length;
+            final pending = state.reports
+                .where((r) => r.status == 'Submitted')
+                .length;
 
             // Apply search & pill filters
             var filteredReports = state.reports.where((r) {
-              final matchesQuery = r.ticketId.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-                  r.category.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+              final matchesQuery =
+                  r.ticketId.toLowerCase().contains(
+                    _searchQuery.toLowerCase(),
+                  ) ||
+                  r.category.toLowerCase().contains(
+                    _searchQuery.toLowerCase(),
+                  ) ||
                   r.title.toLowerCase().contains(_searchQuery.toLowerCase());
 
               if (!matchesQuery) return false;
@@ -203,13 +240,17 @@ class _MyReportsViewState extends State<_MyReportsView> {
               if (_selectedFilter == 'Open') return r.status != 'Resolved';
               if (_selectedFilter == 'Resolved') return r.status == 'Resolved';
               if (_selectedFilter == 'Pending') return r.status == 'Submitted';
-              if (_selectedFilter == 'High Priority') return r.priority == 'High' || r.priority == 'Urgent';
+              if (_selectedFilter == 'High Priority')
+                return r.priority == 'High' || r.priority == 'Urgent';
 
               return true;
             }).toList();
 
             return SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 20.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -245,7 +286,8 @@ class _MyReportsViewState extends State<_MyReportsView> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: filteredReports.length,
-                      separatorBuilder: (context, index) => const SizedBox(height: 16.0),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 16.0),
                       itemBuilder: (context, index) {
                         final report = filteredReports[index];
                         return ReportCard(
@@ -262,7 +304,8 @@ class _MyReportsViewState extends State<_MyReportsView> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => TicketCreatedPage(ticket: report),
+                                builder: (_) =>
+                                    TicketCreatedPage(ticket: report),
                               ),
                             );
                           },
@@ -301,12 +344,19 @@ class _MyReportsViewState extends State<_MyReportsView> {
               });
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 8.0,
+              ),
               decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFF6100D6) : Colors.white, // primary : white
+                color: isSelected
+                    ? const Color(0xFF6100D6)
+                    : Colors.white, // primary : white
                 borderRadius: BorderRadius.circular(9999.0),
                 border: Border.all(
-                  color: isSelected ? const Color(0xFF6100D6) : const Color(0xFFCCC3D9), // primary : outline-variant
+                  color: isSelected
+                      ? const Color(0xFF6100D6)
+                      : const Color(0xFFCCC3D9), // primary : outline-variant
                   width: 1.0,
                 ),
               ),

@@ -43,7 +43,8 @@ class FeaturedProductCard extends StatelessWidget {
                 child: Image.network(
                   product.imageUrl,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                  errorBuilder: (_, __, ___) =>
+                      Container(color: Colors.grey[200]),
                 ),
               ),
               // Tag overlay top left
@@ -51,9 +52,14 @@ class FeaturedProductCard extends StatelessWidget {
                 top: 16.0,
                 left: 16.0,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 4.0,
+                  ),
                   decoration: BoxDecoration(
-                    color: product.tag == 'Limited Edition' ? const Color(0xFFBA1A1A) : const Color(0xFF0058BE),
+                    color: product.tag == 'Limited Edition'
+                        ? const Color(0xFFBA1A1A)
+                        : const Color(0xFF0058BE),
                     borderRadius: BorderRadius.circular(9999.0),
                   ),
                   child: Text(
@@ -81,8 +87,12 @@ class FeaturedProductCard extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      product.isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: product.isFavorite ? const Color(0xFFBA1A1A) : const Color(0xFF6100D6),
+                      product.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: product.isFavorite
+                          ? const Color(0xFFBA1A1A)
+                          : const Color(0xFF6100D6),
                       size: 20.0,
                     ),
                   ),
@@ -151,7 +161,10 @@ class FeaturedProductCard extends StatelessWidget {
                           height: 48.0,
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
-                              colors: [Color(0xFF7B2FF7), Color(0xFF2170E4)], // primary-gradient
+                              colors: [
+                                Color(0xFF7B2FF7),
+                                Color(0xFF2170E4),
+                              ], // primary-gradient
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
@@ -161,7 +174,11 @@ class FeaturedProductCard extends StatelessWidget {
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.near_me, color: Colors.white, size: 16.0),
+                              Icon(
+                                Icons.near_me,
+                                color: Colors.white,
+                                size: 16.0,
+                              ),
                               SizedBox(width: 6.0),
                               Text(
                                 'Navigate',
@@ -185,7 +202,9 @@ class FeaturedProductCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12.0),
-                          border: Border.all(color: const Color(0xFFCCC3D9)), // outline-variant
+                          border: Border.all(
+                            color: const Color(0xFFCCC3D9),
+                          ), // outline-variant
                         ),
                         alignment: Alignment.center,
                         child: const Text(

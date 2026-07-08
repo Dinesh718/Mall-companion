@@ -45,11 +45,13 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
       final facilities = await loadEmergencyFacilitiesUseCase();
       final contacts = await loadEmergencyContactsUseCase();
       final instructions = await loadInstructionsUseCase();
-      emit(EmergencyLoaded(
-        facilities: facilities,
-        contacts: contacts,
-        instructions: instructions,
-      ));
+      emit(
+        EmergencyLoaded(
+          facilities: facilities,
+          contacts: contacts,
+          instructions: instructions,
+        ),
+      );
     } catch (e) {
       emit(EmergencyError(errorMessage: e.toString()));
     }
@@ -74,7 +76,9 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
   ) async {
     emit(const EmergencyLoading());
     try {
-      final route = await startEmergencyNavigationUseCase('Emergency Exit North');
+      final route = await startEmergencyNavigationUseCase(
+        'Emergency Exit North',
+      );
       emit(EmergencyNavigationLoaded(route: route));
     } catch (e) {
       emit(EmergencyError(errorMessage: e.toString()));
@@ -94,14 +98,16 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
     }
   }
 
-  Future<void> _onOpenSOS(
-    OpenSOS event,
-    Emitter<EmergencyState> emit,
-  ) async {
+  Future<void> _onOpenSOS(OpenSOS event, Emitter<EmergencyState> emit) async {
     emit(const SOSSending());
     try {
       await sendSOSUseCase();
-      emit(const SOSSent(alertMessage: 'SOS Alert dispatched! Security is tracking your location.'));
+      emit(
+        const SOSSent(
+          alertMessage:
+              'SOS Alert dispatched! Security is tracking your location.',
+        ),
+      );
     } catch (e) {
       emit(EmergencyError(errorMessage: e.toString()));
     }
@@ -114,7 +120,12 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
     emit(const SOSSending());
     try {
       await notifySecurityUseCase();
-      emit(const SOSSent(alertMessage: 'Silent alert sent. Security dispatch has been notified.'));
+      emit(
+        const SOSSent(
+          alertMessage:
+              'Silent alert sent. Security dispatch has been notified.',
+        ),
+      );
     } catch (e) {
       emit(EmergencyError(errorMessage: e.toString()));
     }
@@ -143,7 +154,10 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
     }
   }
 
-  Future<void> _onOpenFirstAid(OpenFirstAid event, Emitter<EmergencyState> emit) async {
+  Future<void> _onOpenFirstAid(
+    OpenFirstAid event,
+    Emitter<EmergencyState> emit,
+  ) async {
     emit(const EmergencyLoading());
     try {
       final route = await startEmergencyNavigationUseCase('First Aid Room');
@@ -153,7 +167,10 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
     }
   }
 
-  Future<void> _onOpenFireExit(OpenFireExit event, Emitter<EmergencyState> emit) async {
+  Future<void> _onOpenFireExit(
+    OpenFireExit event,
+    Emitter<EmergencyState> emit,
+  ) async {
     emit(const EmergencyLoading());
     try {
       final route = await startEmergencyNavigationUseCase('Fire Exit North');
@@ -163,7 +180,10 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
     }
   }
 
-  Future<void> _onOpenHelpDesk(OpenHelpDesk event, Emitter<EmergencyState> emit) async {
+  Future<void> _onOpenHelpDesk(
+    OpenHelpDesk event,
+    Emitter<EmergencyState> emit,
+  ) async {
     emit(const EmergencyLoading());
     try {
       final route = await startEmergencyNavigationUseCase('Help Desk South');
@@ -173,7 +193,10 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
     }
   }
 
-  Future<void> _onOpenLostChildAssistance(OpenLostChildAssistance event, Emitter<EmergencyState> emit) async {
+  Future<void> _onOpenLostChildAssistance(
+    OpenLostChildAssistance event,
+    Emitter<EmergencyState> emit,
+  ) async {
     emit(const EmergencyLoading());
     try {
       final route = await startEmergencyNavigationUseCase('Lost Child Center');
@@ -183,7 +206,10 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
     }
   }
 
-  Future<void> _onOpenEmergencyExit(OpenEmergencyExit event, Emitter<EmergencyState> emit) async {
+  Future<void> _onOpenEmergencyExit(
+    OpenEmergencyExit event,
+    Emitter<EmergencyState> emit,
+  ) async {
     emit(const EmergencyLoading());
     try {
       final route = await startEmergencyNavigationUseCase('Emergency Exit B');
@@ -193,11 +219,20 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
     }
   }
 
-  Future<void> _onOpenEmergencyInstructions(OpenEmergencyInstructions event, Emitter<EmergencyState> emit) async {
+  Future<void> _onOpenEmergencyInstructions(
+    OpenEmergencyInstructions event,
+    Emitter<EmergencyState> emit,
+  ) async {
     emit(const EmergencyLoading());
     try {
       final instructions = await loadInstructionsUseCase();
-      emit(EmergencyLoaded(facilities: const [], contacts: const [], instructions: instructions));
+      emit(
+        EmergencyLoaded(
+          facilities: const [],
+          contacts: const [],
+          instructions: instructions,
+        ),
+      );
     } catch (e) {
       emit(EmergencyError(errorMessage: e.toString()));
     }
@@ -210,10 +245,12 @@ class EmergencyBloc extends Bloc<EmergencyEvent, EmergencyState> {
     final facilities = await loadEmergencyFacilitiesUseCase();
     final contacts = await loadEmergencyContactsUseCase();
     final instructions = await loadInstructionsUseCase();
-    emit(EmergencyLoaded(
-      facilities: facilities,
-      contacts: contacts,
-      instructions: instructions,
-    ));
+    emit(
+      EmergencyLoaded(
+        facilities: facilities,
+        contacts: contacts,
+        instructions: instructions,
+      ),
+    );
   }
 }

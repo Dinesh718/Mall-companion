@@ -153,11 +153,7 @@ class StatisticsCard extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
-            child: Icon(
-              icon,
-              color: iconColor,
-              size: 20.0,
-            ),
+            child: Icon(icon, color: iconColor, size: 20.0),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

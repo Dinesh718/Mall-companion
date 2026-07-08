@@ -64,12 +64,16 @@ class TheatreBloc extends Bloc<TheatreEvent, TheatreState> {
       final movies = await getTheatresData.getMovies();
       final theatres = await getTheatresData.getTheatres();
       final movie = movies.firstWhere((m) => m.id == event.movieId);
-      final recommendations = movies.where((m) => m.id != event.movieId).toList();
-      emit(TheatreDetailsLoaded(
-        movie: movie,
-        theatres: theatres,
-        recommendations: recommendations,
-      ));
+      final recommendations = movies
+          .where((m) => m.id != event.movieId)
+          .toList();
+      emit(
+        TheatreDetailsLoaded(
+          movie: movie,
+          theatres: theatres,
+          recommendations: recommendations,
+        ),
+      );
     } catch (e) {
       emit(TheatreError(errorMessage: e.toString()));
     }

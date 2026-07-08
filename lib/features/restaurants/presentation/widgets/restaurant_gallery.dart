@@ -21,10 +21,7 @@ class RestaurantGallery extends StatelessWidget {
             margin: const EdgeInsets.only(right: 12.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
-              border: Border.all(
-                color: const Color(0xFFEDE5F5),
-                width: 1.0,
-              ),
+              border: Border.all(color: const Color(0xFFEDE5F5), width: 1.0),
             ),
             clipBehavior: Clip.antiAlias,
             child: Image.network(

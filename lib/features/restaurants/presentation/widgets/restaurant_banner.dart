@@ -45,10 +45,15 @@ class RestaurantBanner extends StatelessWidget {
             left: 12.0,
             child: Container(
               decoration: BoxDecoration(
-                color: isOpen ? const Color(0xFF16A34A) : const Color(0xFFBA1A1A),
+                color: isOpen
+                    ? const Color(0xFF16A34A)
+                    : const Color(0xFFBA1A1A),
                 borderRadius: BorderRadius.circular(100.0),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 3.0,
+              ),
               child: Text(
                 isOpen ? 'OPEN' : 'CLOSED',
                 style: const TextStyle(
@@ -70,7 +75,10 @@ class RestaurantBanner extends StatelessWidget {
                 color: Colors.white.withOpacity(0.9),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 3.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 6.0,
+                vertical: 3.0,
+              ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

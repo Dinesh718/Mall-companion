@@ -253,9 +253,7 @@ class _DiscoverPageBody extends StatelessWidget {
                       } else if (catId == 'more') {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (_) => const MorePage(),
-                          ),
+                          MaterialPageRoute(builder: (_) => const MorePage()),
                         );
                       } else {
                         context.read<DiscoverBloc>().add(

@@ -15,7 +15,8 @@ class ProductLoading extends ProductState {
 class ProductLoaded extends ProductState {
   final List<ProductEntity> products;
   final String searchQuery;
-  final String selectedCategory; // e.g. "All Products", "Fashion", "Electronics", etc.
+  final String
+  selectedCategory; // e.g. "All Products", "Fashion", "Electronics", etc.
   final String selectedFloor; // e.g. "All Floors", "Ground", "L1", "L2"
 
   const ProductLoaded({

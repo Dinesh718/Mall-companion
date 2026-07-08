@@ -4,10 +4,7 @@ import '../../../domain/entities/profile_entities.dart';
 class QuickActionCard extends StatelessWidget {
   final UserProfileEntity userProfile;
 
-  const QuickActionCard({
-    super.key,
-    required this.userProfile,
-  });
+  const QuickActionCard({super.key, required this.userProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +12,8 @@ class QuickActionCard extends StatelessWidget {
       _QuickAccessItem(
         icon: Icons.favorite,
         title: 'Favorites',
-        subtitle: '${userProfile.favorites.count} ${userProfile.favorites.label}',
+        subtitle:
+            '${userProfile.favorites.count} ${userProfile.favorites.label}',
         color: const Color(0xFF6100D6), // primary
       ),
       _QuickAccessItem(
@@ -117,11 +115,7 @@ class _QuickAccessItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.0), // rounded-2xl
             ),
             alignment: Alignment.center,
-            child: Icon(
-              icon,
-              color: color,
-              size: 22.0,
-            ),
+            child: Icon(icon, color: color, size: 22.0),
           ),
           const Spacer(),
           Column(

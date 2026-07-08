@@ -2,10 +2,7 @@ class SubCategoryEntity {
   final String id;
   final String name;
 
-  const SubCategoryEntity({
-    required this.id,
-    required this.name,
-  });
+  const SubCategoryEntity({required this.id, required this.name});
 }
 
 class CategoryBannerEntity {
@@ -57,9 +54,7 @@ class CategoryProductEntity {
     this.isFavorite = false,
   });
 
-  CategoryProductEntity copyWith({
-    bool? isFavorite,
-  }) {
+  CategoryProductEntity copyWith({bool? isFavorite}) {
     return CategoryProductEntity(
       id: id,
       name: name,

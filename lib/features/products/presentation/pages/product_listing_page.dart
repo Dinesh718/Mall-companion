@@ -96,7 +96,11 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error_outline, size: 64.0, color: Color(0xFFBA1A1A)),
+                  const Icon(
+                    Icons.error_outline,
+                    size: 64.0,
+                    color: Color(0xFFBA1A1A),
+                  ),
                   const SizedBox(height: 16.0),
                   Text(state.errorMessage),
                   const SizedBox(height: 16.0),
@@ -119,24 +123,37 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
 
           // Filter listing products
           final filteredProducts = state.products.where((p) {
-            final matchesQuery = p.name.toLowerCase().contains(query) ||
+            final matchesQuery =
+                p.name.toLowerCase().contains(query) ||
                 p.brandName.toLowerCase().contains(query) ||
                 p.category.toLowerCase().contains(query);
 
-            final matchesCategory = categoryFilter == 'All Products' ||
+            final matchesCategory =
+                categoryFilter == 'All Products' ||
                 p.category.toLowerCase() == categoryFilter.toLowerCase();
 
-            final matchesFloor = floorFilter == 'All Floors' ||
+            final matchesFloor =
+                floorFilter == 'All Floors' ||
                 p.floorText.toLowerCase().contains(floorFilter.toLowerCase());
 
             return matchesQuery && matchesCategory && matchesFloor;
           }).toList();
 
           // Featured Products list
-          final featuredProducts = state.products.where((p) => p.id == 'master_watch' || p.id == 'orbit_runner').toList();
+          final featuredProducts = state.products
+              .where((p) => p.id == 'master_watch' || p.id == 'orbit_runner')
+              .toList();
 
           // Trending Products list
-          final trendingProducts = state.products.where((p) => p.id == 'flora_perfume' || p.id == 'airposts_max' || p.id == 'airpods_max' || p.id == 'galleria_bag').toList();
+          final trendingProducts = state.products
+              .where(
+                (p) =>
+                    p.id == 'flora_perfume' ||
+                    p.id == 'airposts_max' ||
+                    p.id == 'airpods_max' ||
+                    p.id == 'galleria_bag',
+              )
+              .toList();
 
           return Stack(
             children: [
@@ -171,13 +188,19 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
                           child: TextField(
                             controller: _searchController,
                             onChanged: (val) {
-                              context.read<ProductBloc>().add(SearchProducts(query: val));
+                              context.read<ProductBloc>().add(
+                                SearchProducts(query: val),
+                              );
                             },
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
-                              prefixIcon: const Icon(Icons.search, color: Color(0xFF7B7488)),
-                              hintText: 'Search products, brands or categories...',
+                              prefixIcon: const Icon(
+                                Icons.search,
+                                color: Color(0xFF7B7488),
+                              ),
+                              hintText:
+                                  'Search products, brands or categories...',
                               hintStyle: const TextStyle(
                                 fontFamily: 'Plus Jakarta Sans',
                                 color: Color(0xFF7B7488),
@@ -187,28 +210,49 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                    icon: const Icon(Icons.mic, color: Color(0xFF7B7488)),
+                                    icon: const Icon(
+                                      Icons.mic,
+                                      color: Color(0xFF7B7488),
+                                    ),
                                     onPressed: () {},
                                   ),
-                                  Container(width: 1.0, height: 24.0, color: const Color(0xFFCCC3D9).withAlpha(76)),
+                                  Container(
+                                    width: 1.0,
+                                    height: 24.0,
+                                    color: const Color(
+                                      0xFFCCC3D9,
+                                    ).withAlpha(76),
+                                  ),
                                   IconButton(
-                                    icon: const Icon(Icons.qr_code_scanner, color: Color(0xFF7B7488)),
+                                    icon: const Icon(
+                                      Icons.qr_code_scanner,
+                                      color: Color(0xFF7B7488),
+                                    ),
                                     onPressed: () {},
                                   ),
                                 ],
                               ),
-                              contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 16.0,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9999.0),
-                                borderSide: const BorderSide(color: Color(0xFFCCC3D9)),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFCCC3D9),
+                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9999.0),
-                                borderSide: const BorderSide(color: Color(0xFFCCC3D9)),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFCCC3D9),
+                                ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9999.0),
-                                borderSide: const BorderSide(color: Color(0xFF6100D6), width: 2.0),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF6100D6),
+                                  width: 2.0,
+                                ),
                               ),
                             ),
                           ),
@@ -227,35 +271,55 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
                               text: 'All Products',
                               isSelected: categoryFilter == 'All Products',
                               onTap: () {
-                                context.read<ProductBloc>().add(const FilterProductsCategory(category: 'All Products'));
+                                context.read<ProductBloc>().add(
+                                  const FilterProductsCategory(
+                                    category: 'All Products',
+                                  ),
+                                );
                               },
                             ),
                             BrandChip(
                               text: 'Fashion',
                               isSelected: categoryFilter == 'Fashion',
                               onTap: () {
-                                context.read<ProductBloc>().add(const FilterProductsCategory(category: 'Fashion'));
+                                context.read<ProductBloc>().add(
+                                  const FilterProductsCategory(
+                                    category: 'Fashion',
+                                  ),
+                                );
                               },
                             ),
                             BrandChip(
                               text: 'Electronics',
                               isSelected: categoryFilter == 'Electronics',
                               onTap: () {
-                                context.read<ProductBloc>().add(const FilterProductsCategory(category: 'Electronics'));
+                                context.read<ProductBloc>().add(
+                                  const FilterProductsCategory(
+                                    category: 'Electronics',
+                                  ),
+                                );
                               },
                             ),
                             BrandChip(
                               text: 'Shoes',
                               isSelected: categoryFilter == 'Shoes',
                               onTap: () {
-                                context.read<ProductBloc>().add(const FilterProductsCategory(category: 'Shoes'));
+                                context.read<ProductBloc>().add(
+                                  const FilterProductsCategory(
+                                    category: 'Shoes',
+                                  ),
+                                );
                               },
                             ),
                             BrandChip(
                               text: 'Accessories',
                               isSelected: categoryFilter == 'Accessories',
                               onTap: () {
-                                context.read<ProductBloc>().add(const FilterProductsCategory(category: 'Accessories'));
+                                context.read<ProductBloc>().add(
+                                  const FilterProductsCategory(
+                                    category: 'Accessories',
+                                  ),
+                                );
                               },
                             ),
                           ],
@@ -281,15 +345,33 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
                               child: Container(
                                 padding: const EdgeInsets.all(4.0),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFF9F1FF), // surface-container-low
+                                  color: const Color(
+                                    0xFFF9F1FF,
+                                  ), // surface-container-low
                                   borderRadius: BorderRadius.circular(16.0),
                                 ),
                                 child: Row(
                                   children: [
-                                    _buildFloorButton(context, 'All Floors', floorFilter),
-                                    _buildFloorButton(context, 'Ground', floorFilter),
-                                    _buildFloorButton(context, 'L1', floorFilter),
-                                    _buildFloorButton(context, 'L2', floorFilter),
+                                    _buildFloorButton(
+                                      context,
+                                      'All Floors',
+                                      floorFilter,
+                                    ),
+                                    _buildFloorButton(
+                                      context,
+                                      'Ground',
+                                      floorFilter,
+                                    ),
+                                    _buildFloorButton(
+                                      context,
+                                      'L1',
+                                      floorFilter,
+                                    ),
+                                    _buildFloorButton(
+                                      context,
+                                      'L2',
+                                      floorFilter,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -320,13 +402,17 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => ProductDetailsPage(productId: product.id),
+                                    builder: (_) => ProductDetailsPage(
+                                      productId: product.id,
+                                    ),
                                   ),
                                 );
                               },
                               onNavigate: () {},
                               onFavorite: () {
-                                context.read<ProductBloc>().add(ToggleWishlist(productId: product.id));
+                                context.read<ProductBloc>().add(
+                                  ToggleWishlist(productId: product.id),
+                                );
                               },
                             );
                           },
@@ -353,12 +439,16 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => ProductDetailsPage(productId: product.id),
+                                    builder: (_) => ProductDetailsPage(
+                                      productId: product.id,
+                                    ),
                                   ),
                                 );
                               },
                               onFavorite: () {
-                                context.read<ProductBloc>().add(ToggleWishlist(productId: product.id));
+                                context.read<ProductBloc>().add(
+                                  ToggleWishlist(productId: product.id),
+                                );
                               },
                             );
                           },
@@ -379,15 +469,18 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
                             product: product,
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => ProductDetailsPage(productId: product.id),
-                                  ),
-                                );
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      ProductDetailsPage(productId: product.id),
+                                ),
+                              );
                             },
                             onNavigate: () {},
                             onFavorite: () {
-                              context.read<ProductBloc>().add(ToggleWishlist(productId: product.id));
+                              context.read<ProductBloc>().add(
+                                ToggleWishlist(productId: product.id),
+                              );
                             },
                           );
                         },
@@ -413,7 +506,9 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
                     right: 20.0,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFEF7FF).withOpacity(0.85), // glass appbar
+                    color: const Color(
+                      0xFFFEF7FF,
+                    ).withOpacity(0.85), // glass appbar
                     boxShadow: _isHeaderCollapsed
                         ? [
                             BoxShadow(
@@ -453,7 +548,9 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
                                 style: TextStyle(
                                   fontFamily: 'Plus Jakarta Sans',
                                   fontSize: 11.0, // label-sm
-                                  color: Color(0xFF4A4456), // on-surface-variant
+                                  color: Color(
+                                    0xFF4A4456,
+                                  ), // on-surface-variant
                                 ),
                               ),
                           ],
@@ -477,7 +574,11 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
     );
   }
 
-  Widget _buildFloorButton(BuildContext context, String label, String activeFloor) {
+  Widget _buildFloorButton(
+    BuildContext context,
+    String label,
+    String activeFloor,
+  ) {
     final isSelected = activeFloor == label;
     return Expanded(
       child: GestureDetector(
@@ -506,7 +607,9 @@ class _ProductListingPageBodyState extends State<ProductListingPageBody> {
               fontFamily: 'Plus Jakarta Sans',
               fontSize: 12.0,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-              color: isSelected ? const Color(0xFF6100D6) : const Color(0xFF4A4456),
+              color: isSelected
+                  ? const Color(0xFF6100D6)
+                  : const Color(0xFF4A4456),
             ),
           ),
         ),

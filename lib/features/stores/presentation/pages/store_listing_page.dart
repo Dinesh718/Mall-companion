@@ -95,7 +95,11 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error_outline, size: 64.0, color: Color(0xFFBA1A1A)),
+                  const Icon(
+                    Icons.error_outline,
+                    size: 64.0,
+                    color: Color(0xFFBA1A1A),
+                  ),
                   const SizedBox(height: 16.0),
                   Text(state.errorMessage),
                   const SizedBox(height: 16.0),
@@ -118,23 +122,37 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
 
           // Filter stores based on search query, category, and floor
           final filteredStores = state.stores.where((store) {
-            final matchesSearch = store.name.toLowerCase().contains(query) ||
+            final matchesSearch =
+                store.name.toLowerCase().contains(query) ||
                 store.category.toLowerCase().contains(query);
 
-            final matchesCategory = categoryFilter == 'All Stores' ||
+            final matchesCategory =
+                categoryFilter == 'All Stores' ||
                 store.category.toLowerCase() == categoryFilter.toLowerCase();
 
-            final matchesFloor = floorFilter == 'All Floors' ||
-                store.floorText.toLowerCase().contains(floorFilter.toLowerCase());
+            final matchesFloor =
+                floorFilter == 'All Floors' ||
+                store.floorText.toLowerCase().contains(
+                  floorFilter.toLowerCase(),
+                );
 
             return matchesSearch && matchesCategory && matchesFloor;
           }).toList();
 
           // Featured Stores
-          final featuredStores = state.stores.where((s) => s.id == 'zara' || s.id == 'hm').toList();
+          final featuredStores = state.stores
+              .where((s) => s.id == 'zara' || s.id == 'hm')
+              .toList();
 
           // Trending Now
-          final trendingStores = state.stores.where((s) => s.id == 'apple_store' || s.id == 'sephora' || s.id == 'lush').toList();
+          final trendingStores = state.stores
+              .where(
+                (s) =>
+                    s.id == 'apple_store' ||
+                    s.id == 'sephora' ||
+                    s.id == 'lush',
+              )
+              .toList();
 
           return Stack(
             children: [
@@ -169,12 +187,17 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                           child: TextField(
                             controller: _searchController,
                             onChanged: (val) {
-                              context.read<StoreBloc>().add(SearchStores(query: val));
+                              context.read<StoreBloc>().add(
+                                SearchStores(query: val),
+                              );
                             },
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
-                              prefixIcon: const Icon(Icons.search, color: Color(0xFF7B7488)),
+                              prefixIcon: const Icon(
+                                Icons.search,
+                                color: Color(0xFF7B7488),
+                              ),
                               hintText: 'Search stores, brands, products...',
                               hintStyle: const TextStyle(
                                 fontFamily: 'Plus Jakarta Sans',
@@ -185,28 +208,49 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                    icon: const Icon(Icons.mic, color: Color(0xFF7B7488)),
+                                    icon: const Icon(
+                                      Icons.mic,
+                                      color: Color(0xFF7B7488),
+                                    ),
                                     onPressed: () {},
                                   ),
-                                  Container(width: 1.0, height: 24.0, color: const Color(0xFFCCC3D9).withOpacity(0.3)),
+                                  Container(
+                                    width: 1.0,
+                                    height: 24.0,
+                                    color: const Color(
+                                      0xFFCCC3D9,
+                                    ).withOpacity(0.3),
+                                  ),
                                   IconButton(
-                                    icon: const Icon(Icons.qr_code_scanner, color: Color(0xFF7B7488)),
+                                    icon: const Icon(
+                                      Icons.qr_code_scanner,
+                                      color: Color(0xFF7B7488),
+                                    ),
                                     onPressed: () {},
                                   ),
                                 ],
                               ),
-                              contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 16.0,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9999.0),
-                                borderSide: const BorderSide(color: Color(0xFFCCC3D9)),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFCCC3D9),
+                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9999.0),
-                                borderSide: const BorderSide(color: Color(0xFFCCC3D9)),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFCCC3D9),
+                                ),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(9999.0),
-                                borderSide: const BorderSide(color: Color(0xFF6100D6), width: 2.0),
+                                borderSide: const BorderSide(
+                                  color: Color(0xFF6100D6),
+                                  width: 2.0,
+                                ),
                               ),
                             ),
                           ),
@@ -225,35 +269,55 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                               text: 'All Stores',
                               isSelected: categoryFilter == 'All Stores',
                               onTap: () {
-                                context.read<StoreBloc>().add(const FilterStoresCategory(category: 'All Stores'));
+                                context.read<StoreBloc>().add(
+                                  const FilterStoresCategory(
+                                    category: 'All Stores',
+                                  ),
+                                );
                               },
                             ),
                             StoreCategoryChip(
                               text: 'Fashion',
                               isSelected: categoryFilter == 'Fashion',
                               onTap: () {
-                                context.read<StoreBloc>().add(const FilterStoresCategory(category: 'Fashion'));
+                                context.read<StoreBloc>().add(
+                                  const FilterStoresCategory(
+                                    category: 'Fashion',
+                                  ),
+                                );
                               },
                             ),
                             StoreCategoryChip(
                               text: 'Electronics',
                               isSelected: categoryFilter == 'Electronics',
                               onTap: () {
-                                context.read<StoreBloc>().add(const FilterStoresCategory(category: 'Electronics'));
+                                context.read<StoreBloc>().add(
+                                  const FilterStoresCategory(
+                                    category: 'Electronics',
+                                  ),
+                                );
                               },
                             ),
                             StoreCategoryChip(
                               text: 'Footwear',
                               isSelected: categoryFilter == 'Footwear',
                               onTap: () {
-                                context.read<StoreBloc>().add(const FilterStoresCategory(category: 'Footwear'));
+                                context.read<StoreBloc>().add(
+                                  const FilterStoresCategory(
+                                    category: 'Footwear',
+                                  ),
+                                );
                               },
                             ),
                             StoreCategoryChip(
                               text: 'Beauty',
                               isSelected: categoryFilter == 'Beauty',
                               onTap: () {
-                                context.read<StoreBloc>().add(const FilterStoresCategory(category: 'Beauty'));
+                                context.read<StoreBloc>().add(
+                                  const FilterStoresCategory(
+                                    category: 'Beauty',
+                                  ),
+                                );
                               },
                             ),
                           ],
@@ -278,13 +342,23 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                             Container(
                               padding: const EdgeInsets.all(4.0),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFF9F1FF), // surface-container-low
+                                color: const Color(
+                                  0xFFF9F1FF,
+                                ), // surface-container-low
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: Row(
                                 children: [
-                                  _buildFloorButton(context, 'All Floors', floorFilter),
-                                  _buildFloorButton(context, 'Ground', floorFilter),
+                                  _buildFloorButton(
+                                    context,
+                                    'All Floors',
+                                    floorFilter,
+                                  ),
+                                  _buildFloorButton(
+                                    context,
+                                    'Ground',
+                                    floorFilter,
+                                  ),
                                   _buildFloorButton(context, 'L1', floorFilter),
                                   _buildFloorButton(context, 'L2', floorFilter),
                                 ],
@@ -316,7 +390,8 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => StoreDetailsPage(storeId: store.id),
+                                    builder: (_) =>
+                                        StoreDetailsPage(storeId: store.id),
                                   ),
                                 );
                               },
@@ -344,7 +419,8 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => StoreDetailsPage(storeId: store.id),
+                                    builder: (_) =>
+                                        StoreDetailsPage(storeId: store.id),
                                   ),
                                 );
                               },
@@ -354,9 +430,13 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                                 padding: const EdgeInsets.all(16.0),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20.0), // rounded-2xl
+                                  borderRadius: BorderRadius.circular(
+                                    20.0,
+                                  ), // rounded-2xl
                                   border: Border.all(
-                                    color: const Color(0xFFCCC3D9).withOpacity(0.3),
+                                    color: const Color(
+                                      0xFFCCC3D9,
+                                    ).withOpacity(0.3),
                                     width: 1.0,
                                   ),
                                   boxShadow: [
@@ -370,7 +450,11 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    StoreLogo(logoUrl: store.logoUrl, size: 56.0, padding: 4.0),
+                                    StoreLogo(
+                                      logoUrl: store.logoUrl,
+                                      size: 56.0,
+                                      padding: 4.0,
+                                    ),
                                     const SizedBox(height: 8.0),
                                     Text(
                                       store.name,
@@ -408,7 +492,11 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                         title: 'Browse All Stores',
                         customAction: Row(
                           children: [
-                            const Icon(Icons.filter_list, size: 18.0, color: Color(0xFF6100D6)),
+                            const Icon(
+                              Icons.filter_list,
+                              size: 18.0,
+                              color: Color(0xFF6100D6),
+                            ),
                             const SizedBox(width: 4.0),
                             GestureDetector(
                               onTap: () {},
@@ -438,7 +526,8 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => StoreDetailsPage(storeId: store.id),
+                                  builder: (_) =>
+                                      StoreDetailsPage(storeId: store.id),
                                 ),
                               );
                             },
@@ -467,7 +556,9 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                     right: 20.0,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFEF7FF).withOpacity(0.85), // glass appbar
+                    color: const Color(
+                      0xFFFEF7FF,
+                    ).withOpacity(0.85), // glass appbar
                     boxShadow: _isHeaderCollapsed
                         ? [
                             BoxShadow(
@@ -507,7 +598,9 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
                                 style: TextStyle(
                                   fontFamily: 'Plus Jakarta Sans',
                                   fontSize: 11.0, // label-sm
-                                  color: Color(0xFF4A4456), // on-surface-variant
+                                  color: Color(
+                                    0xFF4A4456,
+                                  ), // on-surface-variant
                                 ),
                               ),
                           ],
@@ -531,7 +624,11 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
     );
   }
 
-  Widget _buildFloorButton(BuildContext context, String label, String activeFloor) {
+  Widget _buildFloorButton(
+    BuildContext context,
+    String label,
+    String activeFloor,
+  ) {
     final isSelected = activeFloor == label;
     return GestureDetector(
       onTap: () {
@@ -558,7 +655,9 @@ class _StoreListingPageBodyState extends State<StoreListingPageBody> {
             fontFamily: 'Plus Jakarta Sans',
             fontSize: 12.0,
             fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-            color: isSelected ? const Color(0xFF6100D6) : const Color(0xFF4A4456),
+            color: isSelected
+                ? const Color(0xFF6100D6)
+                : const Color(0xFF4A4456),
           ),
         ),
       ),

@@ -55,7 +55,9 @@ class TrendingDining extends StatelessWidget {
             return GestureDetector(
               onTap: () {
                 // Map the discover restaurant entity directly to detail
-                final id = restaurant.id.isNotEmpty ? restaurant.id : 'lessence_moderne';
+                final id = restaurant.id.isNotEmpty
+                    ? restaurant.id
+                    : 'lessence_moderne';
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -77,109 +79,109 @@ class TrendingDining extends StatelessWidget {
                   ),
                 ),
                 child: Row(
-                children: [
-                  // Leading image
-                  Container(
-                    width: 80.0,
-                    height: 80.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0), // rounded-xl
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: Image.network(
-                      restaurant.imageUrl,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
-                        color: const Color(0xFFEDE5F5),
-                        child: const Icon(
-                          Icons.restaurant_outlined,
-                          size: 32.0,
-                          color: Color(0xFF6100D6),
+                  children: [
+                    // Leading image
+                    Container(
+                      width: 80.0,
+                      height: 80.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.0), // rounded-xl
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: Image.network(
+                        restaurant.imageUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => Container(
+                          color: const Color(0xFFEDE5F5),
+                          child: const Icon(
+                            Icons.restaurant_outlined,
+                            size: 32.0,
+                            color: Color(0xFF6100D6),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 16.0),
-                  // Middle Content
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              restaurant.name,
-                              style: const TextStyle(
-                                fontFamily: 'Inter',
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w600, // label-lg
-                                color: Color(0xFF1D1A25),
+                    const SizedBox(width: 16.0),
+                    // Middle Content
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                restaurant.name,
+                                style: const TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w600, // label-lg
+                                  color: Color(0xFF1D1A25),
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            if (restaurant.isOpen)
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFF0FDF4), // green-50
-                                  borderRadius: BorderRadius.circular(100.0),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0,
-                                  vertical: 2.0,
-                                ),
-                                child: const Text(
-                                  'Open',
-                                  style: TextStyle(
-                                    fontFamily: 'Inter',
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.w500, // label-sm
-                                    color: Color(0xFF16A34A), // green-600
+                              if (restaurant.isOpen)
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF0FDF4), // green-50
+                                    borderRadius: BorderRadius.circular(100.0),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0,
+                                    vertical: 2.0,
+                                  ),
+                                  child: const Text(
+                                    'Open',
+                                    style: TextStyle(
+                                      fontFamily: 'Inter',
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w500, // label-sm
+                                      color: Color(0xFF16A34A), // green-600
+                                    ),
                                   ),
                                 ),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: 4.0),
-                        Text(
-                          '${restaurant.cuisine} • ${restaurant.floorText} • ⭐ ${restaurant.rating.toStringAsFixed(1)}',
-                          style: const TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w400, // body-md
-                            color: Color(0xFF4A4456), // on-surface-variant
+                            ],
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 4.0),
-                        // Primary action / info footer
-                        Text(
-                          restaurant.waitTimeText.isNotEmpty
-                              ? restaurant.waitTimeText
-                              : restaurant.walkTimeText,
-                          style: const TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w500, // label-sm
-                            color: Color(0xFF6100D6), // primary
+                          const SizedBox(height: 4.0),
+                          Text(
+                            '${restaurant.cuisine} • ${restaurant.floorText} • ⭐ ${restaurant.rating.toStringAsFixed(1)}',
+                            style: const TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w400, // body-md
+                              color: Color(0xFF4A4456), // on-surface-variant
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 4.0),
+                          // Primary action / info footer
+                          Text(
+                            restaurant.waitTimeText.isNotEmpty
+                                ? restaurant.waitTimeText
+                                : restaurant.walkTimeText,
+                            style: const TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w500, // label-sm
+                              color: Color(0xFF6100D6), // primary
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8.0),
-                  // Trailing Icon
-                  const Icon(
-                    Icons.chevron_right,
-                    color: Color(0xFF7B7488), // outline
-                  ),
-                ],
+                    const SizedBox(width: 8.0),
+                    // Trailing Icon
+                    const Icon(
+                      Icons.chevron_right,
+                      color: Color(0xFF7B7488), // outline
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
         ],
       ),
     );

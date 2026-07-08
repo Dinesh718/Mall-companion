@@ -13,8 +13,10 @@ class RestaurantQueueTicketPage extends StatelessWidget {
     final bookingTime = now.add(const Duration(minutes: 5));
     final seatingTime = now.add(const Duration(minutes: 20));
 
-    final timeString = "${bookingTime.hour.toString().padLeft(2, '0')}:${bookingTime.minute.toString().padLeft(2, '0')} PM";
-    final seatingString = "${seatingTime.hour.toString().padLeft(2, '0')}:${seatingTime.minute.toString().padLeft(2, '0')} PM";
+    final timeString =
+        "${bookingTime.hour.toString().padLeft(2, '0')}:${bookingTime.minute.toString().padLeft(2, '0')} PM";
+    final seatingString =
+        "${seatingTime.hour.toString().padLeft(2, '0')}:${seatingTime.minute.toString().padLeft(2, '0')} PM";
 
     return Scaffold(
       backgroundColor: const Color(0xFFFEF7FF), // surface-bright
@@ -24,7 +26,11 @@ class RestaurantQueueTicketPage extends StatelessWidget {
         scrolledUnderElevation: 0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios_new, color: Color(0xFF1D1A25), size: 20.0),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Color(0xFF1D1A25),
+            size: 20.0,
+          ),
         ),
         centerTitle: true,
         title: const Text(
@@ -226,7 +232,10 @@ class RestaurantQueueTicketPage extends StatelessWidget {
 
                     // Ticket details grids
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0,
+                        vertical: 16.0,
+                      ),
                       child: GridView.count(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -235,7 +244,10 @@ class RestaurantQueueTicketPage extends StatelessWidget {
                         mainAxisSpacing: 16.0,
                         crossAxisSpacing: 16.0,
                         children: [
-                          _buildDetailTile('Reservation Time', 'Today, $timeString'),
+                          _buildDetailTile(
+                            'Reservation Time',
+                            'Today, $timeString',
+                          ),
                           _buildDetailTile(
                             'Estimated Seating',
                             '~ $seatingString',
@@ -256,7 +268,11 @@ class RestaurantQueueTicketPage extends StatelessWidget {
                               const SizedBox(height: 4.0),
                               Row(
                                 children: const [
-                                  Icon(Icons.groups, size: 18.0, color: Color(0xFF4A4456)),
+                                  Icon(
+                                    Icons.groups,
+                                    size: 18.0,
+                                    color: Color(0xFF4A4456),
+                                  ),
                                   SizedBox(width: 6.0),
                                   Text(
                                     '4 People',
@@ -354,7 +370,10 @@ class RestaurantQueueTicketPage extends StatelessWidget {
                             color: const Color(0xFF6100D6).withOpacity(0.1),
                             borderRadius: BorderRadius.circular(100.0),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0,
+                            vertical: 4.0,
+                          ),
                           child: const Text(
                             'Updating Live',
                             style: TextStyle(
@@ -592,9 +611,16 @@ class RestaurantQueueTicketPage extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailTile(String label, String value, {Color? textColor, bool isBold = false}) {
+  Widget _buildDetailTile(
+    String label,
+    String value, {
+    Color? textColor,
+    bool isBold = false,
+  }) {
     return Column(
-      crossAxisAlignment: label.startsWith('Estimated') ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment: label.startsWith('Estimated')
+          ? CrossAxisAlignment.end
+          : CrossAxisAlignment.start,
       children: [
         Text(
           label,

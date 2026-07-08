@@ -28,7 +28,9 @@ class BookingButton extends StatelessWidget {
           color: const Color(0xFFF3EBFA), // surface-container
           borderRadius: BorderRadius.circular(16.0), // rounded-2xl
           border: Border.all(
-            color: const Color(0xFFCCC3D9).withOpacity(0.3), // outline-variant/30
+            color: const Color(
+              0xFFCCC3D9,
+            ).withOpacity(0.3), // outline-variant/30
             width: 1.0,
           ),
         ),
@@ -93,11 +95,7 @@ class BookingButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (icon != null) ...[
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 20.0,
-                ),
+                Icon(icon, color: Colors.white, size: 20.0),
                 const SizedBox(width: 8.0),
               ],
               Text(

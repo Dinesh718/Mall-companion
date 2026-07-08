@@ -13,7 +13,10 @@ class RestaurantOfferCard extends StatelessWidget {
       margin: const EdgeInsets.only(right: 16.0),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFF813800), Color(0xFFFFB68E)], // tertiary / fixed-dim
+          colors: [
+            Color(0xFF813800),
+            Color(0xFFFFB68E),
+          ], // tertiary / fixed-dim
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -29,7 +32,9 @@ class RestaurantOfferCard extends StatelessWidget {
               const Icon(Icons.local_offer, color: Colors.white, size: 20.0),
               const SizedBox(width: 8.0),
               Text(
-                offer.discountPercentage > 0 ? '${offer.discountPercentage}% OFF' : 'SPECIAL DEAL',
+                offer.discountPercentage > 0
+                    ? '${offer.discountPercentage}% OFF'
+                    : 'SPECIAL DEAL',
                 style: const TextStyle(
                   fontFamily: 'Plus Jakarta Sans',
                   fontSize: 16.0,
@@ -56,7 +61,10 @@ class RestaurantOfferCard extends StatelessWidget {
               color: Colors.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(8.0),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12.0,
+              vertical: 6.0,
+            ),
             child: Text(
               'Code: ${offer.promoCode}',
               style: const TextStyle(

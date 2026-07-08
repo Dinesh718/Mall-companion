@@ -135,9 +135,7 @@ class StoreEntity {
     required this.reviews,
   });
 
-  StoreEntity copyWith({
-    bool? isBookmarked,
-  }) {
+  StoreEntity copyWith({bool? isBookmarked}) {
     return StoreEntity(
       id: id,
       name: name,

@@ -73,8 +73,14 @@ class FeaturedProductCard extends StatelessWidget {
                       ),
                       alignment: Alignment.center,
                       child: Icon(
-                        product.isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: product.isFavorite ? const Color(0xFFBA1A1A) : const Color(0xFF4A4456), // error or on-surface-variant
+                        product.isFavorite
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: product.isFavorite
+                            ? const Color(0xFFBA1A1A)
+                            : const Color(
+                                0xFF4A4456,
+                              ), // error or on-surface-variant
                         size: 16.0,
                       ),
                     ),

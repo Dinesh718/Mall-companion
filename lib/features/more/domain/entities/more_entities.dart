@@ -87,10 +87,7 @@ class ParkingFloorEntity {
     required this.status,
   });
 
-  ParkingFloorEntity copyWith({
-    int? occupiedSlots,
-    String? status,
-  }) {
+  ParkingFloorEntity copyWith({int? occupiedSlots, String? status}) {
     return ParkingFloorEntity(
       level: level,
       totalSlots: totalSlots,

@@ -4,10 +4,7 @@ import '../../domain/entities/emergency_entities.dart';
 class EmergencyRouteCard extends StatelessWidget {
   final List<RouteStepEntity> steps;
 
-  const EmergencyRouteCard({
-    super.key,
-    required this.steps,
-  });
+  const EmergencyRouteCard({super.key, required this.steps});
 
   @override
   Widget build(BuildContext context) {
@@ -96,11 +93,7 @@ class EmergencyRouteCard extends StatelessWidget {
                             border: Border.all(color: Colors.white, width: 2.0),
                           ),
                           alignment: Alignment.center,
-                          child: Icon(
-                            icon,
-                            color: iconColor,
-                            size: 14.0,
-                          ),
+                          child: Icon(icon, color: iconColor, size: 14.0),
                         ),
                         const SizedBox(width: 16.0),
                         Expanded(
@@ -112,8 +105,12 @@ class EmergencyRouteCard extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'Inter',
                                   fontSize: 14.0, // title-md
-                                  fontWeight: isLast ? FontWeight.bold : FontWeight.w600,
-                                  color: isLast ? const Color(0xFF6100D6) : const Color(0xFF0B1C30),
+                                  fontWeight: isLast
+                                      ? FontWeight.bold
+                                      : FontWeight.w600,
+                                  color: isLast
+                                      ? const Color(0xFF6100D6)
+                                      : const Color(0xFF0B1C30),
                                 ),
                               ),
                               const SizedBox(height: 2.0),
@@ -122,7 +119,9 @@ class EmergencyRouteCard extends StatelessWidget {
                                 style: const TextStyle(
                                   fontFamily: 'Inter',
                                   fontSize: 12.0, // body-md
-                                  color: Color(0xFF4A4456), // on-surface-variant
+                                  color: Color(
+                                    0xFF4A4456,
+                                  ), // on-surface-variant
                                 ),
                               ),
                             ],

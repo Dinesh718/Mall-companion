@@ -77,16 +77,38 @@ class EmergencyLocalDataSourceImpl implements EmergencyLocalDataSource {
   Future<List<EmergencyContactEntity>> loadEmergencyContacts() async {
     await Future.delayed(const Duration(milliseconds: 200));
     return const [
-      EmergencyContactModel(name: 'Mall Security', number: '044-88889999', iconName: 'security'),
-      EmergencyContactModel(name: 'Police Assistance', number: '100', iconName: 'local_police'),
-      EmergencyContactModel(name: 'Ambulance Service', number: '108', iconName: 'ambulance'),
-      EmergencyContactModel(name: 'Fire Department', number: '101', iconName: 'local_fire_department'),
-      EmergencyContactModel(name: 'Visitor Help Desk', number: '044-11112222', iconName: 'info'),
+      EmergencyContactModel(
+        name: 'Mall Security',
+        number: '044-88889999',
+        iconName: 'security',
+      ),
+      EmergencyContactModel(
+        name: 'Police Assistance',
+        number: '100',
+        iconName: 'local_police',
+      ),
+      EmergencyContactModel(
+        name: 'Ambulance Service',
+        number: '108',
+        iconName: 'ambulance',
+      ),
+      EmergencyContactModel(
+        name: 'Fire Department',
+        number: '101',
+        iconName: 'local_fire_department',
+      ),
+      EmergencyContactModel(
+        name: 'Visitor Help Desk',
+        number: '044-11112222',
+        iconName: 'info',
+      ),
     ];
   }
 
   @override
-  Future<EmergencyNavigationRouteEntity> startNavigation(String destination) async {
+  Future<EmergencyNavigationRouteEntity> startNavigation(
+    String destination,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 400));
     return EmergencyNavigationRouteModel(
       destinationName: destination,
@@ -135,17 +157,20 @@ class EmergencyLocalDataSourceImpl implements EmergencyLocalDataSource {
     return const [
       EmergencyInstructionModel(
         title: 'Fire Emergency Protocol',
-        description: 'Immediately drop everything, proceed to the nearest illuminated Fire Exit signage. Do NOT use elevators under any circumstances.',
+        description:
+            'Immediately drop everything, proceed to the nearest illuminated Fire Exit signage. Do NOT use elevators under any circumstances.',
         iconName: 'fire_extinguisher',
       ),
       EmergencyInstructionModel(
         title: 'Earthquake Protocol',
-        description: 'Take cover under sturdy mall fixtures (Drop, Cover, and Hold On). Stand clear of store glass storefronts and light fixtures.',
+        description:
+            'Take cover under sturdy mall fixtures (Drop, Cover, and Hold On). Stand clear of store glass storefronts and light fixtures.',
         iconName: 'warning',
       ),
       EmergencyInstructionModel(
         title: 'Medical Distress Help',
-        description: 'If you or someone else is in medical distress, tap SOS. Move to a visible, open corridor and wait for first responders.',
+        description:
+            'If you or someone else is in medical distress, tap SOS. Move to a visible, open corridor and wait for first responders.',
         iconName: 'medical_services',
       ),
     ];

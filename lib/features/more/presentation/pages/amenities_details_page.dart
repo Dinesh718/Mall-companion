@@ -56,7 +56,10 @@ class AmenitiesDetailsPage extends StatelessWidget {
               final amenities = state.amenities;
 
               return SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20.0,
+                  vertical: 24.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -79,7 +82,10 @@ class AmenitiesDetailsPage extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(24.0),
                               gradient: LinearGradient(
-                                colors: [Colors.black.withOpacity(0.4), Colors.transparent],
+                                colors: [
+                                  Colors.black.withOpacity(0.4),
+                                  Colors.transparent,
+                                ],
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
                               ),
@@ -128,14 +134,20 @@ class AmenitiesDetailsPage extends StatelessWidget {
                           fontSize: 14.0,
                           color: Color(0xFF7B7488),
                         ),
-                        prefixIcon: const Icon(Icons.search, color: Color(0xFF7B7488)),
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Color(0xFF7B7488),
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.0),
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
                         fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 14.0),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 14.0,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 32.0),
@@ -184,14 +196,17 @@ class AmenitiesDetailsPage extends StatelessWidget {
                                 offset: const Offset(0, 4),
                               ),
                             ],
-                            border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.3)),
+                            border: Border.all(
+                              color: const Color(0xFFE8DFEF).withOpacity(0.3),
+                            ),
                           ),
                           padding: const EdgeInsets.all(20.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     width: 44.0,
@@ -210,9 +225,14 @@ class AmenitiesDetailsPage extends StatelessWidget {
                                   Container(
                                     decoration: BoxDecoration(
                                       color: const Color(0xFFEDE5F5),
-                                      borderRadius: BorderRadius.circular(100.0),
+                                      borderRadius: BorderRadius.circular(
+                                        100.0,
+                                      ),
                                     ),
-                                    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0,
+                                      vertical: 4.0,
+                                    ),
                                     child: Text(
                                       item.status,
                                       style: TextStyle(
@@ -247,7 +267,11 @@ class AmenitiesDetailsPage extends StatelessWidget {
                               const SizedBox(height: 16.0),
                               Row(
                                 children: [
-                                  Icon(Icons.location_on_rounded, color: accentColor, size: 16.0),
+                                  Icon(
+                                    Icons.location_on_rounded,
+                                    color: accentColor,
+                                    size: 16.0,
+                                  ),
                                   const SizedBox(width: 6.0),
                                   Text(
                                     item.locationText,
@@ -267,7 +291,10 @@ class AmenitiesDetailsPage extends StatelessWidget {
                                   height: 48.0,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
-                                      colors: [accentColor, accentColor.withOpacity(0.8)],
+                                      colors: [
+                                        accentColor,
+                                        accentColor.withOpacity(0.8),
+                                      ],
                                       begin: Alignment.topLeft,
                                       end: Alignment.bottomRight,
                                     ),
@@ -277,7 +304,11 @@ class AmenitiesDetailsPage extends StatelessWidget {
                                   child: const Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(Icons.directions_rounded, color: Colors.white, size: 18.0),
+                                      Icon(
+                                        Icons.directions_rounded,
+                                        color: Colors.white,
+                                        size: 18.0,
+                                      ),
                                       SizedBox(width: 8.0),
                                       Text(
                                         'Navigate',

@@ -37,8 +37,7 @@ class LocationCard extends StatelessWidget {
           Stack(
             alignment: Alignment.center,
             children: [
-              if (!isLocating)
-                _PulseRadarRing(),
+              if (!isLocating) _PulseRadarRing(),
               Container(
                 width: 48.0,
                 height: 48.0,
@@ -53,7 +52,9 @@ class LocationCard extends StatelessWidget {
                         height: 20.0,
                         child: CircularProgressIndicator(
                           strokeWidth: 2.0,
-                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF6100D6)),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Color(0xFF6100D6),
+                          ),
                         ),
                       )
                     : const Icon(
@@ -116,7 +117,8 @@ class _PulseRadarRing extends StatefulWidget {
   State<_PulseRadarRing> createState() => _PulseRadarRingState();
 }
 
-class _PulseRadarRingState extends State<_PulseRadarRing> with SingleTickerProviderStateMixin {
+class _PulseRadarRingState extends State<_PulseRadarRing>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -143,7 +145,9 @@ class _PulseRadarRingState extends State<_PulseRadarRing> with SingleTickerProvi
           width: 48.0 + (32.0 * _controller.value),
           height: 48.0 + (32.0 * _controller.value),
           decoration: BoxDecoration(
-            color: const Color(0xFF6100D6).withOpacity(0.2 * (1.0 - _controller.value)),
+            color: const Color(
+              0xFF6100D6,
+            ).withOpacity(0.2 * (1.0 - _controller.value)),
             shape: BoxShape.circle,
           ),
         );

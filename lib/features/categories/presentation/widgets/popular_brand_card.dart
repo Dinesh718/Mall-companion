@@ -5,11 +5,7 @@ class PopularBrandCard extends StatelessWidget {
   final CategoryBrandEntity brand;
   final VoidCallback? onTap;
 
-  const PopularBrandCard({
-    super.key,
-    required this.brand,
-    this.onTap,
-  });
+  const PopularBrandCard({super.key, required this.brand, this.onTap});
 
   IconData? _getBrandIcon(String iconName) {
     switch (iconName.toLowerCase()) {

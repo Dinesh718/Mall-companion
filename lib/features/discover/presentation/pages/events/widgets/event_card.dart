@@ -470,7 +470,9 @@ class EventCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: event.isReminderSet
                               ? const Color(0xFFFDE8E8)
-                              : const Color(0xFFEDE5F5), // surface-container-high
+                              : const Color(
+                                  0xFFEDE5F5,
+                                ), // surface-container-high
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Icon(

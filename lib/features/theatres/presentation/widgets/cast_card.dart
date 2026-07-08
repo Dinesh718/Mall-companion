@@ -4,10 +4,7 @@ import '../../domain/entities/theatre_entities.dart';
 class CastCard extends StatelessWidget {
   final CastMemberEntity castMember;
 
-  const CastCard({
-    super.key,
-    required this.castMember,
-  });
+  const CastCard({super.key, required this.castMember});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +17,7 @@ class CastCard extends StatelessWidget {
             height: 80.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white,
-                width: 4.0,
-              ),
+              border: Border.all(color: Colors.white, width: 4.0),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.08),

@@ -23,10 +23,7 @@ class ProfileAvatar extends StatelessWidget {
           height: radius * 2,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(
-              color: Colors.white,
-              width: 4.0,
-            ),
+            border: Border.all(color: Colors.white, width: 4.0),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.08),
@@ -51,10 +48,7 @@ class ProfileAvatar extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color(0xFF6100D6), // primary
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2.0,
-                ),
+                border: Border.all(color: Colors.white, width: 2.0),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.15),

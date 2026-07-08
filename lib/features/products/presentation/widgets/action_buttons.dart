@@ -45,7 +45,11 @@ class ActionButtons extends StatelessWidget {
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.storefront_outlined, color: Color(0xFF4A4456), size: 20.0),
+                  Icon(
+                    Icons.storefront_outlined,
+                    color: Color(0xFF4A4456),
+                    size: 20.0,
+                  ),
                   SizedBox(height: 2.0),
                   Text(
                     'STORE',
@@ -75,7 +79,11 @@ class ActionButtons extends StatelessWidget {
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.favorite_border, color: Color(0xFF4A4456), size: 20.0),
+                  Icon(
+                    Icons.favorite_border,
+                    color: Color(0xFF4A4456),
+                    size: 20.0,
+                  ),
                   SizedBox(height: 2.0),
                   Text(
                     'SAVE',
@@ -100,7 +108,10 @@ class ActionButtons extends StatelessWidget {
                 height: 56.0,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF6100D6), Color(0xFF0058BE)], // primary-gradient
+                    colors: [
+                      Color(0xFF6100D6),
+                      Color(0xFF0058BE),
+                    ], // primary-gradient
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -117,11 +128,7 @@ class ActionButtons extends StatelessWidget {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.near_me,
-                      color: Colors.white,
-                      size: 20.0,
-                    ),
+                    Icon(Icons.near_me, color: Colors.white, size: 20.0),
                     SizedBox(width: 8.0),
                     Text(
                       'Navigate to Store',

@@ -31,13 +31,19 @@ class EmergencyHubPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localDataSource = EmergencyLocalDataSourceImpl();
-    final repository = EmergencyRepositoryImpl(localDataSource: localDataSource);
+    final repository = EmergencyRepositoryImpl(
+      localDataSource: localDataSource,
+    );
 
     return BlocProvider(
       create: (_) => EmergencyBloc(
-        loadEmergencyFacilitiesUseCase: LoadEmergencyFacilitiesUseCase(repository),
+        loadEmergencyFacilitiesUseCase: LoadEmergencyFacilitiesUseCase(
+          repository,
+        ),
         loadEmergencyContactsUseCase: LoadEmergencyContactsUseCase(repository),
-        startEmergencyNavigationUseCase: StartEmergencyNavigationUseCase(repository),
+        startEmergencyNavigationUseCase: StartEmergencyNavigationUseCase(
+          repository,
+        ),
         sendSOSUseCase: SendSOSUseCase(repository),
         notifySecurityUseCase: NotifySecurityUseCase(repository),
         loadInstructionsUseCase: LoadInstructionsUseCase(repository),
@@ -89,18 +95,14 @@ class _EmergencyHubView extends StatelessWidget {
           Positioned.fill(
             child: Opacity(
               opacity: 0.08,
-              child: CustomPaint(
-                painter: _BlueprintGridPainter(),
-              ),
+              child: CustomPaint(painter: _BlueprintGridPainter()),
             ),
           ),
           // Scrollable layout body
           BlocBuilder<EmergencyBloc, EmergencyState>(
             builder: (context, state) {
               if (state is EmergencyLoading || state is EmergencyInitial) {
-                return const Center(
-                  child: EmergencyLoadingSkeleton(),
-                );
+                return const Center(child: EmergencyLoadingSkeleton());
               }
 
               if (state is EmergencyError) {
@@ -108,7 +110,9 @@ class _EmergencyHubView extends StatelessWidget {
                   child: EmergencyErrorState(
                     message: state.errorMessage,
                     onRetry: () {
-                      context.read<EmergencyBloc>().add(const LoadEmergencyHub());
+                      context.read<EmergencyBloc>().add(
+                        const LoadEmergencyHub(),
+                      );
                     },
                   ),
                 );
@@ -116,20 +120,23 @@ class _EmergencyHubView extends StatelessWidget {
 
               if (state is EmergencyLoaded) {
                 return SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 20.0,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Welcome title header
                       const Text(
-                      'Emergency',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 28.0, // headline-lg-mobile
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1D1A25),
+                        'Emergency',
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 28.0, // headline-lg-mobile
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1D1A25),
+                        ),
                       ),
-                    ),
                       const SizedBox(height: 4.0),
                       const Text(
                         'Instant access to emergency services and assistance throughout the mall.',
@@ -143,7 +150,8 @@ class _EmergencyHubView extends StatelessWidget {
                       // Emergency Hero Banner
                       EmergencyHeroCard(
                         title: 'Emergency Assistance',
-                        description: 'Get immediate help with navigation, security, first aid and emergency services.',
+                        description:
+                            'Get immediate help with navigation, security, first aid and emergency services.',
                         badgeText: 'Mall Security Available 24/7',
                         primaryButtonText: 'Request Assistance',
                         secondaryButtonText: 'Emergency Navigation',
@@ -159,7 +167,9 @@ class _EmergencyHubView extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const EmergencyNavigationPage(destination: 'Emergency Exit North'),
+                              builder: (_) => const EmergencyNavigationPage(
+                                destination: 'Emergency Exit North',
+                              ),
                             ),
                           );
                         },
@@ -167,14 +177,14 @@ class _EmergencyHubView extends StatelessWidget {
                       const SizedBox(height: 32.0),
                       // Bento Grid
                       const Text(
-                      'Quick Actions',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 22.0, // title-lg
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1D1A25),
+                        'Quick Actions',
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 22.0, // title-lg
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1D1A25),
+                        ),
                       ),
-                    ),
                       const SizedBox(height: 16.0),
                       EmergencyActionGrid(
                         onSosTap: () {
@@ -197,7 +207,9 @@ class _EmergencyHubView extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const EmergencyNavigationPage(destination: 'Fire Exit North'),
+                              builder: (_) => const EmergencyNavigationPage(
+                                destination: 'Fire Exit North',
+                              ),
                             ),
                           );
                         },
@@ -205,7 +217,9 @@ class _EmergencyHubView extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const EmergencyNavigationPage(destination: 'First Aid Room'),
+                              builder: (_) => const EmergencyNavigationPage(
+                                destination: 'First Aid Room',
+                              ),
                             ),
                           );
                         },
@@ -232,22 +246,23 @@ class _EmergencyHubView extends StatelessWidget {
                       const SizedBox(height: 32.0),
                       // Nearby facilities list (horizontal scroll)
                       const Text(
-                      'Nearby Facilities',
-                      style: TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1D1A25),
+                        'Nearby Facilities',
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1D1A25),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16.0),
-                    SizedBox(
-                      height: 184.0,
+                      const SizedBox(height: 16.0),
+                      SizedBox(
+                        height: 184.0,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           physics: const BouncingScrollPhysics(),
                           itemCount: state.facilities.length,
-                          separatorBuilder: (context, index) => const SizedBox(width: 16.0),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 16.0),
                           itemBuilder: (context, index) {
                             final facility = state.facilities[index];
                             return EmergencyFacilityCard(
@@ -256,7 +271,9 @@ class _EmergencyHubView extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => EmergencyNavigationPage(destination: facility.title),
+                                    builder: (_) => EmergencyNavigationPage(
+                                      destination: facility.title,
+                                    ),
                                   ),
                                 );
                               },
@@ -270,11 +287,13 @@ class _EmergencyHubView extends StatelessWidget {
                         sectionTitle: 'Safety Info',
                         tips: const [
                           EmergencyTipItem(
-                            text: 'Stay calm and follow instructions from mall staff.',
+                            text:
+                                'Stay calm and follow instructions from mall staff.',
                             icon: Icons.psychology_outlined,
                           ),
                           EmergencyTipItem(
-                            text: 'Do not use elevators during a fire emergency.',
+                            text:
+                                'Do not use elevators during a fire emergency.',
                             icon: Icons.meeting_room_outlined,
                           ),
                         ],
@@ -296,9 +315,7 @@ class _EmergencyHubView extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => const SOSSecurityPage(),
-                  ),
+                  MaterialPageRoute(builder: (_) => const SOSSecurityPage()),
                 );
               },
             ),
@@ -335,7 +352,11 @@ class _EmergencyHubView extends StatelessWidget {
                   color: const Color(0xFF6100D6).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: const Icon(Icons.info, color: Color(0xFF6100D6), size: 20.0),
+                child: const Icon(
+                  Icons.info,
+                  color: Color(0xFF6100D6),
+                  size: 20.0,
+                ),
               ),
               const SizedBox(width: 12.0),
               const Text(
@@ -412,7 +433,12 @@ class _EmergencyHubView extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(Icons.home_outlined, 'Home', false, () => Navigator.maybePop(context)),
+          _buildNavItem(
+            Icons.home_outlined,
+            'Home',
+            false,
+            () => Navigator.maybePop(context),
+          ),
           _buildNavItem(Icons.explore_outlined, 'Discover', false, null),
           _buildNavItem(Icons.local_parking_outlined, 'Parking', false, null),
           _buildNavItem(Icons.emergency, 'Emergency', true, null),
@@ -422,19 +448,22 @@ class _EmergencyHubView extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool isActive, VoidCallback? onTap) {
-    final activeColor = isActive ? const Color(0xFF6100D6) : const Color(0xFF4A4456);
+  Widget _buildNavItem(
+    IconData icon,
+    String label,
+    bool isActive,
+    VoidCallback? onTap,
+  ) {
+    final activeColor = isActive
+        ? const Color(0xFF6100D6)
+        : const Color(0xFF4A4456);
 
     return GestureDetector(
       onTap: onTap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            color: activeColor,
-            size: 24.0,
-          ),
+          Icon(icon, color: activeColor, size: 24.0),
           const SizedBox(height: 4.0),
           Text(
             label,

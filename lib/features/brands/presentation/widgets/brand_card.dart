@@ -28,9 +28,7 @@ class BrandCard extends StatelessWidget {
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(
-          color: const Color(0xFFE8DFEF).withOpacity(0.3),
-        ),
+        border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.3)),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -42,17 +40,17 @@ class BrandCard extends StatelessWidget {
               SizedBox(
                 height: 192.0,
                 width: double.infinity,
-                child: Image.network(
-                  brand.bannerUrl,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.network(brand.bannerUrl, fit: BoxFit.cover),
               ),
               if (promoTag != null)
                 Positioned(
                   top: 16.0,
                   right: 16.0,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 4.0,
+                    ),
                     decoration: BoxDecoration(
                       color: promoTag == 'New Arrival'
                           ? const Color(0xFF6100D6)
@@ -166,7 +164,11 @@ class BrandCard extends StatelessWidget {
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.near_me_rounded, color: Color(0xFF6100D6), size: 18.0),
+                              Icon(
+                                Icons.near_me_rounded,
+                                color: Color(0xFF6100D6),
+                                size: 18.0,
+                              ),
                               SizedBox(width: 6.0),
                               Text(
                                 'Navigate',
@@ -207,7 +209,11 @@ class BrandCard extends StatelessWidget {
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.explore_rounded, color: Colors.white, size: 18.0),
+                              Icon(
+                                Icons.explore_rounded,
+                                color: Colors.white,
+                                size: 18.0,
+                              ),
                               SizedBox(width: 6.0),
                               Text(
                                 'Explore',

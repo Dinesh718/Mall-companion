@@ -5,10 +5,7 @@ import '../common/profile_avatar.dart';
 class UserHeader extends StatelessWidget {
   final UserProfileEntity userProfile;
 
-  const UserHeader({
-    super.key,
-    required this.userProfile,
-  });
+  const UserHeader({super.key, required this.userProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +16,9 @@ class UserHeader extends StatelessWidget {
         color: const Color(0xFFF9F1FF), // bg-surface-container-low
         borderRadius: BorderRadius.circular(32.0), // rounded-card
         border: Border.all(
-          color: const Color(0xFF7B2FF7).withOpacity(0.1), // gradient-border (linear-gradient border simulated)
+          color: const Color(0xFF7B2FF7).withOpacity(
+            0.1,
+          ), // gradient-border (linear-gradient border simulated)
           width: 2.0,
         ),
         boxShadow: [
@@ -68,19 +67,20 @@ class UserHeader extends StatelessWidget {
             alignment: WrapAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 6.0,
+                ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF7B2FF7).withOpacity(0.1), // primary-container
+                  color: const Color(
+                    0xFF7B2FF7,
+                  ).withOpacity(0.1), // primary-container
                   borderRadius: BorderRadius.circular(9999.0), // rounded-full
                 ),
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      Icons.stars,
-                      color: Color(0xFF6100D6),
-                      size: 14.0,
-                    ),
+                    Icon(Icons.stars, color: Color(0xFF6100D6), size: 14.0),
                     SizedBox(width: 6.0),
                     Text(
                       'Gold Member',
@@ -95,7 +95,10 @@ class UserHeader extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                  vertical: 6.0,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFFD8E2FF), // secondary-fixed
                   borderRadius: BorderRadius.circular(9999.0),
@@ -121,7 +124,9 @@ class UserHeader extends StatelessWidget {
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Edit Profile is not implemented in this demo.'),
+                        content: Text(
+                          'Edit Profile is not implemented in this demo.',
+                        ),
                         duration: Duration(seconds: 2),
                       ),
                     );
@@ -242,7 +247,10 @@ class UserHeader extends StatelessWidget {
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 12.0,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFEDE5F5),
                       borderRadius: BorderRadius.circular(9999.0),

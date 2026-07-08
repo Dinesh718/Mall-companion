@@ -23,7 +23,9 @@ class RestaurantWaitingTimeChip extends StatelessWidget {
           Icon(
             isDirectSeating ? Icons.check_circle : Icons.schedule,
             size: 14.0,
-            color: isDirectSeating ? const Color(0xFF16A34A) : const Color(0xFF813800),
+            color: isDirectSeating
+                ? const Color(0xFF16A34A)
+                : const Color(0xFF813800),
           ),
           const SizedBox(width: 4.0),
           Text(
@@ -32,7 +34,9 @@ class RestaurantWaitingTimeChip extends StatelessWidget {
               fontFamily: 'Plus Jakarta Sans',
               fontSize: 11.0,
               fontWeight: FontWeight.bold,
-              color: isDirectSeating ? const Color(0xFF16A34A) : const Color(0xFF813800),
+              color: isDirectSeating
+                  ? const Color(0xFF16A34A)
+                  : const Color(0xFF813800),
             ),
           ),
         ],

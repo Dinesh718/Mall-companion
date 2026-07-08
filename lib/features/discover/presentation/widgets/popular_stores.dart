@@ -93,7 +93,8 @@ class PopularStores extends StatelessWidget {
                             child: Image.network(
                               store.imageUrl,
                               fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                              errorBuilder: (_, __, ___) =>
+                                  Container(color: Colors.grey[200]),
                             ),
                           ),
                           // Rating Badge
@@ -101,10 +102,15 @@ class PopularStores extends StatelessWidget {
                             top: 12.0,
                             right: 12.0,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0,
+                                vertical: 4.0,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(9999.0), // pill
+                                borderRadius: BorderRadius.circular(
+                                  9999.0,
+                                ), // pill
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.black.withOpacity(0.1),
@@ -116,7 +122,11 @@ class PopularStores extends StatelessWidget {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.star, color: Colors.amber, size: 14.0),
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                    size: 14.0,
+                                  ),
                                   const SizedBox(width: 4.0),
                                   Text(
                                     store.rating.toStringAsFixed(1),

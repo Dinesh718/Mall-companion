@@ -15,10 +15,7 @@ import '../widgets/offer_card.dart';
 class CategoryDetailsPage extends StatelessWidget {
   final String categoryId;
 
-  const CategoryDetailsPage({
-    super.key,
-    required this.categoryId,
-  });
+  const CategoryDetailsPage({super.key, required this.categoryId});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,9 @@ class CategoryDetailsPage extends StatelessWidget {
       create: (_) => CategoryBloc(
         getCategories: GetCategories(repository),
         getCategoryDetails: GetCategoryDetails(repository),
-        toggleCategoryProductFavorite: ToggleCategoryProductFavorite(repository),
+        toggleCategoryProductFavorite: ToggleCategoryProductFavorite(
+          repository,
+        ),
         toggleFavoriteCategory: ToggleFavoriteCategory(repository),
       )..add(LoadCategoryDetails(categoryId: categoryId)),
       child: const Scaffold(
@@ -45,7 +44,8 @@ class CategoryDetailsPageBody extends StatefulWidget {
   const CategoryDetailsPageBody({super.key});
 
   @override
-  State<CategoryDetailsPageBody> createState() => _CategoryDetailsPageBodyState();
+  State<CategoryDetailsPageBody> createState() =>
+      _CategoryDetailsPageBodyState();
 }
 
 class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
@@ -174,10 +174,18 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
           }).toList();
 
           final showBanner = activeFilter == 'all' || activeFilter == 'offers';
-          final showStores = (activeFilter == 'all' || activeFilter == 'stores') && filteredStores.isNotEmpty;
-          final showBrands = (activeFilter == 'all' || activeFilter == 'brands') && filteredBrands.isNotEmpty;
-          final showProducts = (activeFilter == 'all' || activeFilter == 'products') && filteredProducts.isNotEmpty;
-          final showOffers = (activeFilter == 'all' || activeFilter == 'offers') && filteredOffers.isNotEmpty;
+          final showStores =
+              (activeFilter == 'all' || activeFilter == 'stores') &&
+              filteredStores.isNotEmpty;
+          final showBrands =
+              (activeFilter == 'all' || activeFilter == 'brands') &&
+              filteredBrands.isNotEmpty;
+          final showProducts =
+              (activeFilter == 'all' || activeFilter == 'products') &&
+              filteredProducts.isNotEmpty;
+          final showOffers =
+              (activeFilter == 'all' || activeFilter == 'offers') &&
+              filteredOffers.isNotEmpty;
 
           return Stack(
             children: [
@@ -189,7 +197,9 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Sticky Header Padding
-                    SizedBox(height: MediaQuery.of(context).padding.top + 136.0),
+                    SizedBox(
+                      height: MediaQuery.of(context).padding.top + 136.0,
+                    ),
 
                     // Quick Filters Horizontal Bar
                     SizedBox(
@@ -200,13 +210,33 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                         children: [
                           _buildFilterTab(context, 'All', 'all', activeFilter),
                           const SizedBox(width: 12.0),
-                          _buildFilterTab(context, 'Stores', 'stores', activeFilter),
+                          _buildFilterTab(
+                            context,
+                            'Stores',
+                            'stores',
+                            activeFilter,
+                          ),
                           const SizedBox(width: 12.0),
-                          _buildFilterTab(context, 'Brands', 'brands', activeFilter),
+                          _buildFilterTab(
+                            context,
+                            'Brands',
+                            'brands',
+                            activeFilter,
+                          ),
                           const SizedBox(width: 12.0),
-                          _buildFilterTab(context, 'Products', 'products', activeFilter),
+                          _buildFilterTab(
+                            context,
+                            'Products',
+                            'products',
+                            activeFilter,
+                          ),
                           const SizedBox(width: 12.0),
-                          _buildFilterTab(context, 'Offers', 'offers', activeFilter),
+                          _buildFilterTab(
+                            context,
+                            'Offers',
+                            'offers',
+                            activeFilter,
+                          ),
                         ],
                       ),
                     ),
@@ -226,7 +256,10 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                     // 2. Stores Section
                     if (showStores) ...[
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 8.0,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -257,7 +290,8 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: filteredStores.length,
-                          separatorBuilder: (context, index) => const SizedBox(height: 16.0),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 16.0),
                           itemBuilder: (context, index) {
                             final store = filteredStores[index];
                             return PopularStoreCard(
@@ -273,7 +307,10 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                     // 3. Popular Brands Section
                     if (showBrands) ...[
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 8.0,
+                        ),
                         child: Text(
                           'Popular Brands',
                           style: TextStyle(
@@ -290,12 +327,11 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                           scrollDirection: Axis.horizontal,
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           itemCount: filteredBrands.length,
-                          separatorBuilder: (context, index) => const SizedBox(width: 24.0),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 24.0),
                           itemBuilder: (context, index) {
                             final brand = filteredBrands[index];
-                            return PopularBrandCard(
-                              brand: brand,
-                            );
+                            return PopularBrandCard(brand: brand);
                           },
                         ),
                       ),
@@ -305,7 +341,10 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                     // 4. Trending Products Section
                     if (showProducts) ...[
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 8.0,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -336,7 +375,8 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                           scrollDirection: Axis.horizontal,
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           itemCount: filteredProducts.length,
-                          separatorBuilder: (context, index) => const SizedBox(width: 16.0),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 16.0),
                           itemBuilder: (context, index) {
                             final product = filteredProducts[index];
                             return Align(
@@ -345,11 +385,11 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                                 product: product,
                                 onFavoriteTap: () {
                                   context.read<CategoryBloc>().add(
-                                        FavoriteCategoryProduct(
-                                          categoryId: details.category.id,
-                                          productId: product.id,
-                                        ),
-                                      );
+                                    FavoriteCategoryProduct(
+                                      categoryId: details.category.id,
+                                      productId: product.id,
+                                    ),
+                                  );
                                 },
                                 onNavigateTap: () {},
                               ),
@@ -363,7 +403,10 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                     // 5. Current Offers Section
                     if (showOffers) ...[
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 8.0,
+                        ),
                         child: Text(
                           'Current Offers',
                           style: TextStyle(
@@ -379,19 +422,17 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                         child: GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 16.0,
-                            mainAxisSpacing: 16.0,
-                            childAspectRatio: 1.1,
-                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 16.0,
+                                mainAxisSpacing: 16.0,
+                                childAspectRatio: 1.1,
+                              ),
                           itemCount: filteredOffers.length,
                           itemBuilder: (context, index) {
                             final offer = filteredOffers[index];
-                            return OfferCard(
-                              offer: offer,
-                              index: index,
-                            );
+                            return OfferCard(offer: offer, index: index);
                           },
                         ),
                       ),
@@ -464,7 +505,9 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                color: const Color(0xFF7B2FF7), // primary-container
+                                color: const Color(
+                                  0xFF7B2FF7,
+                                ), // primary-container
                                 width: 2.0,
                               ),
                               image: const DecorationImage(
@@ -481,8 +524,12 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                       // Search field
                       Container(
                         decoration: BoxDecoration(
-                          color: const Color(0xFFFFFFFF), // bg-surface-container-lowest
-                          borderRadius: BorderRadius.circular(28.0), // rounded-full
+                          color: const Color(
+                            0xFFFFFFFF,
+                          ), // bg-surface-container-lowest
+                          borderRadius: BorderRadius.circular(
+                            28.0,
+                          ), // rounded-full
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.04),
@@ -495,8 +542,8 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                           controller: _searchController,
                           onChanged: (value) {
                             context.read<CategoryBloc>().add(
-                                  SearchCategoriesQuery(query: value),
-                                );
+                              SearchCategoriesQuery(query: value),
+                            );
                           },
                           decoration: const InputDecoration(
                             hintText: 'Search stores, brands, or products',
@@ -509,7 +556,9 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                               color: Color(0xFF7B7488), // outline
                             ),
                             border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(vertical: 16.0),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 16.0,
+                            ),
                           ),
                         ),
                       ),
@@ -536,7 +585,9 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
 
     return GestureDetector(
       onTap: () {
-        context.read<CategoryBloc>().add(FilterCategoryDetails(filter: filterValue));
+        context.read<CategoryBloc>().add(
+          FilterCategoryDetails(filter: filterValue),
+        );
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
@@ -550,7 +601,9 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
                   end: Alignment.bottomRight,
                 )
               : null,
-          color: isSelected ? null : const Color(0xFFEDE5F5), // bg-surface-container-high
+          color: isSelected
+              ? null
+              : const Color(0xFFEDE5F5), // bg-surface-container-high
           boxShadow: isSelected
               ? [
                   BoxShadow(
@@ -568,7 +621,9 @@ class _CategoryDetailsPageBodyState extends State<CategoryDetailsPageBody> {
               fontFamily: 'Plus Jakarta Sans',
               fontSize: 14.0,
               fontWeight: FontWeight.w600,
-              color: isSelected ? Colors.white : const Color(0xFF4A4456), // on-surface-variant
+              color: isSelected
+                  ? Colors.white
+                  : const Color(0xFF4A4456), // on-surface-variant
             ),
           ),
         ),

@@ -24,8 +24,8 @@ class RestaurantTableCard extends StatelessWidget {
           color: isReserved
               ? const Color(0xFFEDE5F5) // disabled style
               : isSelected
-                  ? const Color(0xFF6100D6) // primary selection
-                  : Colors.white,
+              ? const Color(0xFF6100D6) // primary selection
+              : Colors.white,
           borderRadius: BorderRadius.circular(16.0),
           border: Border.all(
             color: isSelected
@@ -56,23 +56,21 @@ class RestaurantTableCard extends StatelessWidget {
                 color: isReserved
                     ? const Color(0xFF7B7488)
                     : isSelected
-                        ? Colors.white
-                        : const Color(0xFF1D1A25),
+                    ? Colors.white
+                    : const Color(0xFF1D1A25),
               ),
             ),
             const SizedBox(height: 4.0),
             Text(
-              isReserved
-                  ? 'Reserved'
-                  : '${slot.tableSize} Guests',
+              isReserved ? 'Reserved' : '${slot.tableSize} Guests',
               style: TextStyle(
                 fontFamily: 'Plus Jakarta Sans',
                 fontSize: 11.0,
                 color: isReserved
                     ? const Color(0xFF7B7488)
                     : isSelected
-                        ? Colors.white70
-                        : const Color(0xFF4A4456),
+                    ? Colors.white70
+                    : const Color(0xFF4A4456),
               ),
             ),
           ],

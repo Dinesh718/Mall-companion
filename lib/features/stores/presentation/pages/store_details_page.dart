@@ -21,10 +21,7 @@ import '../widgets/store_section_title.dart';
 class StoreDetailsPage extends StatelessWidget {
   final String storeId;
 
-  const StoreDetailsPage({
-    super.key,
-    required this.storeId,
-  });
+  const StoreDetailsPage({super.key, required this.storeId});
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +99,11 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.error_outline, size: 48.0, color: Color(0xFFBA1A1A)),
+                const Icon(
+                  Icons.error_outline,
+                  size: 48.0,
+                  color: Color(0xFFBA1A1A),
+                ),
                 const SizedBox(height: 16.0),
                 Text(state.errorMessage),
               ],
@@ -147,14 +148,20 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
                                 const SizedBox(height: 4.0),
                                 Row(
                                   children: [
-                                    const Icon(Icons.shopping_bag_outlined, size: 18.0, color: Color(0xFF4A4456)),
+                                    const Icon(
+                                      Icons.shopping_bag_outlined,
+                                      size: 18.0,
+                                      color: Color(0xFF4A4456),
+                                    ),
                                     const SizedBox(width: 6.0),
                                     Text(
                                       '${store.category} & Accessories',
                                       style: const TextStyle(
                                         fontFamily: 'Plus Jakarta Sans',
                                         fontSize: 14.0,
-                                        color: Color(0xFF4A4456), // on-surface-variant
+                                        color: Color(
+                                          0xFF4A4456,
+                                        ), // on-surface-variant
                                       ),
                                     ),
                                   ],
@@ -170,9 +177,14 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(9999.0),
-                                side: const BorderSide(color: Color(0xFFCCC3D9)),
+                                side: const BorderSide(
+                                  color: Color(0xFFCCC3D9),
+                                ),
                               ),
-                              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
+                                vertical: 12.0,
+                              ),
                             ),
                             child: const Text(
                               'Contact',
@@ -245,29 +257,39 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
                         child: GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 12.0,
-                            mainAxisSpacing: 12.0,
-                            childAspectRatio: 2.8,
-                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 12.0,
+                                mainAxisSpacing: 12.0,
+                                childAspectRatio: 2.8,
+                              ),
                           itemCount: store.services.length,
                           itemBuilder: (context, index) {
                             final service = store.services[index];
                             IconData icon = Icons.checkroom;
-                            if (service.iconName == 'local_shipping') icon = Icons.local_shipping;
-                            if (service.iconName == 'featured_search') icon = Icons.card_giftcard;
-                            if (service.iconName == 'shopping_bag') icon = Icons.shopping_bag;
+                            if (service.iconName == 'local_shipping')
+                              icon = Icons.local_shipping;
+                            if (service.iconName == 'featured_search')
+                              icon = Icons.card_giftcard;
+                            if (service.iconName == 'shopping_bag')
+                              icon = Icons.shopping_bag;
 
                             return Container(
                               padding: const EdgeInsets.all(12.0),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFF3EBFA), // surface-container
+                                color: const Color(
+                                  0xFFF3EBFA,
+                                ), // surface-container
                                 borderRadius: BorderRadius.circular(16.0),
                               ),
                               child: Row(
                                 children: [
-                                  Icon(icon, color: const Color(0xFF0058BE), size: 20.0),
+                                  Icon(
+                                    icon,
+                                    color: const Color(0xFF0058BE),
+                                    size: 20.0,
+                                  ),
                                   const SizedBox(width: 8.0),
                                   Expanded(
                                     child: Text(
@@ -311,7 +333,9 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           itemCount: store.products.length,
                           itemBuilder: (context, index) {
-                            return StoreProductCard(product: store.products[index]);
+                            return StoreProductCard(
+                              product: store.products[index],
+                            );
                           },
                         ),
                       ),
@@ -321,10 +345,7 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
                     // 10. Wayfinding Map locations
                     const StoreSectionTitle(title: 'Location'),
                     const SizedBox(height: 16.0),
-                    StoreLocationCard(
-                      store: store,
-                      onStartNavigation: () {},
-                    ),
+                    StoreLocationCard(store: store, onStartNavigation: () {}),
                     const SizedBox(height: 32.0),
 
                     // 11. Customer feedback reviews
@@ -395,7 +416,10 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
                             ],
                           ),
                           alignment: Alignment.center,
-                          child: const Icon(Icons.arrow_back, color: Color(0xFF1D1A25)),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Color(0xFF1D1A25),
+                          ),
                         ),
                       ),
                       // Actions (Share & Fav)
@@ -403,7 +427,9 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              context.read<StoreBloc>().add(FavoriteStore(storeId: store.id));
+                              context.read<StoreBloc>().add(
+                                FavoriteStore(storeId: store.id),
+                              );
                             },
                             child: Container(
                               width: 48.0,
@@ -421,8 +447,12 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
                               ),
                               alignment: Alignment.center,
                               child: Icon(
-                                store.isBookmarked ? Icons.favorite : Icons.favorite_border,
-                                color: store.isBookmarked ? const Color(0xFFBA1A1A) : const Color(0xFF1D1A25),
+                                store.isBookmarked
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: store.isBookmarked
+                                    ? const Color(0xFFBA1A1A)
+                                    : const Color(0xFF1D1A25),
                               ),
                             ),
                           ),
@@ -444,7 +474,10 @@ class _StoreDetailsPageBodyState extends State<StoreDetailsPageBody> {
                                 ],
                               ),
                               alignment: Alignment.center,
-                              child: const Icon(Icons.share, color: Color(0xFF1D1A25)),
+                              child: const Icon(
+                                Icons.share,
+                                color: Color(0xFF1D1A25),
+                              ),
                             ),
                           ),
                         ],

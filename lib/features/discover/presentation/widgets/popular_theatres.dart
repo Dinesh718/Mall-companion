@@ -38,9 +38,12 @@ class PopularTheatres extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   String movieId = 'kingdom_planet_apes';
-                  if (theatre.id.toLowerCase().contains('spiderman') || theatre.title.toLowerCase().contains('spiderman') || theatre.title.toLowerCase().contains('spider')) {
+                  if (theatre.id.toLowerCase().contains('spiderman') ||
+                      theatre.title.toLowerCase().contains('spiderman') ||
+                      theatre.title.toLowerCase().contains('spider')) {
                     movieId = 'the_fall_guy';
-                  } else if (theatre.id.toLowerCase().contains('avatar') || theatre.title.toLowerCase().contains('avatar')) {
+                  } else if (theatre.id.toLowerCase().contains('avatar') ||
+                      theatre.title.toLowerCase().contains('avatar')) {
                     movieId = 'furiosa';
                   }
                   Navigator.push(
@@ -60,7 +63,9 @@ class PopularTheatres extends StatelessWidget {
                       Container(
                         height: 180.0,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0), // rounded-xl
+                          borderRadius: BorderRadius.circular(
+                            16.0,
+                          ), // rounded-xl
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.08),

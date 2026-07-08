@@ -64,7 +64,10 @@ class FeaturedRestaurantCard extends StatelessWidget {
                       color: Colors.white.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 4.0,
+                    ),
                     child: Row(
                       children: [
                         const Icon(
@@ -133,7 +136,10 @@ class FeaturedRestaurantCard extends StatelessWidget {
                           color: const Color(0xFF7B2FF7).withOpacity(0.1),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 4.0,
+                        ),
                         child: const Text(
                           'PREMIUM',
                           style: TextStyle(

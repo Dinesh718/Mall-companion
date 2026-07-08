@@ -1,10 +1,7 @@
 import '../../domain/entities/category_entities.dart';
 
 class SubCategoryModel extends SubCategoryEntity {
-  const SubCategoryModel({
-    required super.id,
-    required super.name,
-  });
+  const SubCategoryModel({required super.id, required super.name});
 }
 
 class CategoryBannerModel extends CategoryBannerEntity {

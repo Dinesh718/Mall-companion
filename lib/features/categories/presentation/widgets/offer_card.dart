@@ -18,9 +18,17 @@ class OfferCard extends StatelessWidget {
     // Alternate styles based on the index to match the Stitch design
     final isEven = index % 2 == 0;
 
-    final bgColor = isEven ? const Color(0xFFFFDBCA) : const Color(0xFFD8E2FF); // bg-tertiary-fixed or bg-secondary-fixed
-    final textColor = isEven ? const Color(0xFF331200) : const Color(0xFF001A42); // on-tertiary-fixed or on-secondary-fixed
-    final subtextColor = isEven ? const Color(0xFF763300) : const Color(0xFF004395); // on-tertiary-fixed-variant or on-secondary-fixed-variant
+    final bgColor = isEven
+        ? const Color(0xFFFFDBCA)
+        : const Color(0xFFD8E2FF); // bg-tertiary-fixed or bg-secondary-fixed
+    final textColor = isEven
+        ? const Color(0xFF331200)
+        : const Color(0xFF001A42); // on-tertiary-fixed or on-secondary-fixed
+    final subtextColor = isEven
+        ? const Color(0xFF763300)
+        : const Color(
+            0xFF004395,
+          ); // on-tertiary-fixed-variant or on-secondary-fixed-variant
     final watermarkIcon = isEven ? Icons.percent : Icons.shopping_bag;
 
     return GestureDetector(

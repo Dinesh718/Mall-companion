@@ -15,7 +15,8 @@ class MoreLocalDataSourceImpl implements MoreLocalDataSource {
   static UserProfileEntity _profile = const UserProfileModel(
     name: 'Charlotte Bennett',
     phone: '+1 (555) 019-2834',
-    avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCMP8Fhio9bpJhWr4in9tUOg-qV7MzIpjA4XnIywVe_nRYQLIuxPy0Q51m6xzIFoa5sxtZzcOoVL_ehBfJwM76PQa7H160NoQxDqCRTNvI8XzoV0jZJDSJmfSYS-OwZfHTKIfTlO-YrsFo5NmJ0mvquyQQGPcLnSh7G53HwHcx8ZU3lmYR72D2sjNJxpAQ34iRWXMELtc7NsDLjs5VVNeJxP7vmpkOziZVEW2l35R7diiDMO-njG-WYK3td1nYiEGSg_SIzjlwzag',
+    avatarUrl:
+        'https://lh3.googleusercontent.com/aida-public/AB6AXuCMP8Fhio9bpJhWr4in9tUOg-qV7MzIpjA4XnIywVe_nRYQLIuxPy0Q51m6xzIFoa5sxtZzcOoVL_ehBfJwM76PQa7H160NoQxDqCRTNvI8XzoV0jZJDSJmfSYS-OwZfHTKIfTlO-YrsFo5NmJ0mvquyQQGPcLnSh7G53HwHcx8ZU3lmYR72D2sjNJxpAQ34iRWXMELtc7NsDLjs5VVNeJxP7vmpkOziZVEW2l35R7diiDMO-njG-WYK3td1nYiEGSg_SIzjlwzag',
     membershipStatus: 'Premium Member',
     points: 2450,
   );
@@ -129,7 +130,8 @@ class MoreLocalDataSourceImpl implements MoreLocalDataSource {
     const AmenityItemModel(
       id: 'washrooms_l1',
       title: 'Washrooms',
-      description: 'Clean and accessible facilities located throughout the mall.',
+      description:
+          'Clean and accessible facilities located throughout the mall.',
       locationText: 'Level 1, Near Entrance A',
       status: 'Open',
       iconName: 'wc',
@@ -145,7 +147,8 @@ class MoreLocalDataSourceImpl implements MoreLocalDataSource {
     const AmenityItemModel(
       id: 'lounge_l2',
       title: 'Rest Lounges',
-      description: 'Sophisticated quiet spaces to rest during shopping sessions.',
+      description:
+          'Sophisticated quiet spaces to rest during shopping sessions.',
       locationText: 'Level 2, North Wing',
       status: 'Open',
       iconName: 'chair',
@@ -153,7 +156,8 @@ class MoreLocalDataSourceImpl implements MoreLocalDataSource {
     const AmenityItemModel(
       id: 'info_desk',
       title: 'Information Desk',
-      description: 'Get directions, mall guides, stroller hires, or physical assistance.',
+      description:
+          'Get directions, mall guides, stroller hires, or physical assistance.',
       locationText: 'Ground Floor, Main Atrium',
       status: 'Open',
       iconName: 'info',

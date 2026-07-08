@@ -5,10 +5,7 @@ import 'rating_widget.dart';
 class MovieInfoCard extends StatelessWidget {
   final MovieEntity movie;
 
-  const MovieInfoCard({
-    super.key,
-    required this.movie,
-  });
+  const MovieInfoCard({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +14,7 @@ class MovieInfoCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RatingWidget(
-            rating: movie.rating,
-            isLarge: true,
-          ),
+          RatingWidget(rating: movie.rating, isLarge: true),
           const SizedBox(width: 16.0),
           Expanded(
             child: Text(

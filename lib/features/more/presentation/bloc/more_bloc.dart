@@ -31,7 +31,10 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     on<SubmitUserFeedback>(_onFeedbackSubmitted);
   }
 
-  Future<void> _onLoadMoreData(LoadMoreData event, Emitter<MoreState> emit) async {
+  Future<void> _onLoadMoreData(
+    LoadMoreData event,
+    Emitter<MoreState> emit,
+  ) async {
     emit(const MoreLoading());
     try {
       final profile = await getUserProfileUseCase();
@@ -39,22 +42,27 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
       final mallServices = await getMallServicesUseCase();
       final popularServices = await getPopularServicesUseCase();
 
-      emit(MoreDataLoaded(
-        userProfile: profile,
-        quickActions: quickActions,
-        mallServices: mallServices,
-        popularServices: popularServices,
-        notificationsEnabled: true,
-        selectedLanguage: 'English',
-        selectedTheme: 'System',
-        feedbackSubmitted: false,
-      ));
+      emit(
+        MoreDataLoaded(
+          userProfile: profile,
+          quickActions: quickActions,
+          mallServices: mallServices,
+          popularServices: popularServices,
+          notificationsEnabled: true,
+          selectedLanguage: 'English',
+          selectedTheme: 'System',
+          feedbackSubmitted: false,
+        ),
+      );
     } catch (e) {
       emit(MoreError(message: e.toString()));
     }
   }
 
-  Future<void> _onRefreshMoreData(RefreshMoreData event, Emitter<MoreState> emit) async {
+  Future<void> _onRefreshMoreData(
+    RefreshMoreData event,
+    Emitter<MoreState> emit,
+  ) async {
     final currentState = state;
     if (currentState is MoreDataLoaded) {
       try {
@@ -68,7 +76,10 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     }
   }
 
-  Future<void> _onLoadParkingData(LoadParkingData event, Emitter<MoreState> emit) async {
+  Future<void> _onLoadParkingData(
+    LoadParkingData event,
+    Emitter<MoreState> emit,
+  ) async {
     emit(const MoreLoading());
     try {
       final floors = await getParkingFloorsUseCase();
@@ -78,7 +89,10 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     }
   }
 
-  Future<void> _onLoadAmenitiesData(LoadAmenitiesData event, Emitter<MoreState> emit) async {
+  Future<void> _onLoadAmenitiesData(
+    LoadAmenitiesData event,
+    Emitter<MoreState> emit,
+  ) async {
     emit(const MoreLoading());
     try {
       final amenities = await getAmenitiesUseCase();
@@ -88,7 +102,10 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     }
   }
 
-  void _onToggleNotificationSetting(ToggleNotificationSetting event, Emitter<MoreState> emit) {
+  void _onToggleNotificationSetting(
+    ToggleNotificationSetting event,
+    Emitter<MoreState> emit,
+  ) {
     final currentState = state;
     if (currentState is MoreDataLoaded) {
       emit(currentState.copyWith(notificationsEnabled: event.isEnabled));
@@ -109,7 +126,10 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     }
   }
 
-  Future<void> _onFeedbackSubmitted(SubmitUserFeedback event, Emitter<MoreState> emit) async {
+  Future<void> _onFeedbackSubmitted(
+    SubmitUserFeedback event,
+    Emitter<MoreState> emit,
+  ) async {
     final currentState = state;
     if (currentState is MoreDataLoaded) {
       emit(const MoreLoading());
@@ -120,16 +140,18 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
         final mallServices = await getMallServicesUseCase();
         final popularServices = await getPopularServicesUseCase();
 
-        emit(MoreDataLoaded(
-          userProfile: profile,
-          quickActions: quickActions,
-          mallServices: mallServices,
-          popularServices: popularServices,
-          notificationsEnabled: currentState.notificationsEnabled,
-          selectedLanguage: currentState.selectedLanguage,
-          selectedTheme: currentState.selectedTheme,
-          feedbackSubmitted: true,
-        ));
+        emit(
+          MoreDataLoaded(
+            userProfile: profile,
+            quickActions: quickActions,
+            mallServices: mallServices,
+            popularServices: popularServices,
+            notificationsEnabled: currentState.notificationsEnabled,
+            selectedLanguage: currentState.selectedLanguage,
+            selectedTheme: currentState.selectedTheme,
+            feedbackSubmitted: true,
+          ),
+        );
       } catch (e) {
         emit(MoreError(message: e.toString()));
       }

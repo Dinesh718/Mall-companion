@@ -5,11 +5,7 @@ class CategoryCard extends StatelessWidget {
   final CategoryEntity category;
   final VoidCallback onTap;
 
-  const CategoryCard({
-    super.key,
-    required this.category,
-    required this.onTap,
-  });
+  const CategoryCard({super.key, required this.category, required this.onTap});
 
   IconData _getIconData(String iconName) {
     switch (iconName) {
@@ -73,9 +69,7 @@ class CategoryCard extends StatelessWidget {
                     ),
                   ),
                   Positioned.fill(
-                    child: Container(
-                      color: Colors.black.withOpacity(0.1),
-                    ),
+                    child: Container(color: Colors.black.withOpacity(0.1)),
                   ),
                   // Category Icon Box top-right
                   Positioned(

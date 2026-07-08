@@ -4,10 +4,7 @@ import '../../domain/entities/store_entities.dart';
 class StoreInformationCard extends StatelessWidget {
   final StoreEntity store;
 
-  const StoreInformationCard({
-    super.key,
-    required this.store,
-  });
+  const StoreInformationCard({super.key, required this.store});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,10 @@ class StoreInformationCard extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.location_on, color: Color(0xFF6100D6)), // primary
+                  const Icon(
+                    Icons.location_on,
+                    color: Color(0xFF6100D6),
+                  ), // primary
                   const SizedBox(width: 12.0),
                   Expanded(
                     child: Column(
@@ -69,7 +69,10 @@ class StoreInformationCard extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.schedule, color: Color(0xFF6100D6)), // primary
+                  const Icon(
+                    Icons.schedule,
+                    color: Color(0xFF6100D6),
+                  ), // primary
                   const SizedBox(width: 12.0),
                   Expanded(
                     child: Column(

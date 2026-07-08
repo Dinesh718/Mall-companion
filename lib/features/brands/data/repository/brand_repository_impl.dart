@@ -28,7 +28,9 @@ class BrandRepositoryImpl implements BrandRepository {
   }
 
   @override
-  Future<List<BrandCollectionEntity>> getBrandCollections(String brandId) async {
+  Future<List<BrandCollectionEntity>> getBrandCollections(
+    String brandId,
+  ) async {
     return await localDataSource.getBrandCollections(brandId);
   }
 

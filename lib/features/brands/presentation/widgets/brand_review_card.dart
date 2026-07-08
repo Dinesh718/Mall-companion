@@ -4,10 +4,7 @@ import '../../domain/entities/brand_entities.dart';
 class BrandReviewCard extends StatelessWidget {
   final BrandReviewEntity review;
 
-  const BrandReviewCard({
-    super.key,
-    required this.review,
-  });
+  const BrandReviewCard({super.key, required this.review});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +20,7 @@ class BrandReviewCard extends StatelessWidget {
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(
-          color: const Color(0xFFE8DFEF).withOpacity(0.3),
-        ),
+        border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

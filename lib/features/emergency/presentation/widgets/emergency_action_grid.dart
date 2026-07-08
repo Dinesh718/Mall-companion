@@ -104,9 +104,15 @@ class EmergencyActionGrid extends StatelessWidget {
     bool isHighlight = false,
     required VoidCallback onTap,
   }) {
-    final cardBg = isHighlight ? const Color(0xFFFFDAD6).withOpacity(0.3) : Colors.white;
-    final borderColor = isHighlight ? const Color(0xFFFFDAD6) : const Color(0xFFCCC3D9).withOpacity(0.2);
-    final labelColor = isHighlight ? const Color(0xFFBA1A1A) : const Color(0xFF0B1C30);
+    final cardBg = isHighlight
+        ? const Color(0xFFFFDAD6).withOpacity(0.3)
+        : Colors.white;
+    final borderColor = isHighlight
+        ? const Color(0xFFFFDAD6)
+        : const Color(0xFFCCC3D9).withOpacity(0.2);
+    final labelColor = isHighlight
+        ? const Color(0xFFBA1A1A)
+        : const Color(0xFF0B1C30);
 
     return GestureDetector(
       onTap: onTap,
@@ -143,15 +149,13 @@ class EmergencyActionGrid extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   alignment: Alignment.center,
-                  child: Icon(
-                    icon,
-                    color: iconColor,
-                    size: 24.0,
-                  ),
+                  child: Icon(icon, color: iconColor, size: 24.0),
                 ),
                 Icon(
                   Icons.arrow_forward,
-                  color: isHighlight ? const Color(0xFFBA1A1A) : const Color(0xFF7B7488),
+                  color: isHighlight
+                      ? const Color(0xFFBA1A1A)
+                      : const Color(0xFF7B7488),
                   size: 18.0,
                 ),
               ],

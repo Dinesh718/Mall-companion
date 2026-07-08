@@ -78,7 +78,10 @@ class StoreActionButtons extends StatelessWidget {
                 height: 56.0,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF6100D6), Color(0xFF0058BE)], // primary-gradient
+                    colors: [
+                      Color(0xFF6100D6),
+                      Color(0xFF0058BE),
+                    ], // primary-gradient
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -95,11 +98,7 @@ class StoreActionButtons extends StatelessWidget {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.near_me,
-                      color: Colors.white,
-                      size: 20.0,
-                    ),
+                    Icon(Icons.near_me, color: Colors.white, size: 20.0),
                     SizedBox(width: 8.0),
                     Text(
                       'Navigate to Store',

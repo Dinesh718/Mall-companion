@@ -71,13 +71,15 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
   ) {
     final currentState = state;
     if (currentState is RestaurantsLoaded) {
-      emit(currentState.copyWith(
-        selectedCuisine: event.cuisine,
-        selectedFloor: event.floor,
-        openOnly: event.openOnly,
-        maxWaitTime: event.maxWaitTime,
-        searchQuery: event.searchQuery,
-      ));
+      emit(
+        currentState.copyWith(
+          selectedCuisine: event.cuisine,
+          selectedFloor: event.floor,
+          openOnly: event.openOnly,
+          maxWaitTime: event.maxWaitTime,
+          searchQuery: event.searchQuery,
+        ),
+      );
     }
   }
 
@@ -93,7 +95,9 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       if (currentState is RestaurantsLoaded) {
         emit(currentState.copyWith(restaurants: updatedList));
       } else if (currentState is RestaurantDetailsLoaded) {
-        final target = updatedList.firstWhere((r) => r.id == event.restaurantId);
+        final target = updatedList.firstWhere(
+          (r) => r.id == event.restaurantId,
+        );
         emit(RestaurantDetailsLoaded(restaurant: target));
       }
     } catch (e) {
@@ -111,7 +115,9 @@ class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
       final updatedList = await getRestaurants();
 
       if (currentState is RestaurantDetailsLoaded) {
-        final target = updatedList.firstWhere((r) => r.id == event.restaurantId);
+        final target = updatedList.firstWhere(
+          (r) => r.id == event.restaurantId,
+        );
         emit(RestaurantDetailsLoaded(restaurant: target));
       } else if (currentState is RestaurantsLoaded) {
         emit(currentState.copyWith(restaurants: updatedList));

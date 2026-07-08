@@ -71,11 +71,7 @@ class RewardCard extends StatelessWidget {
               ],
             ),
           ),
-          const Divider(
-            height: 1.0,
-            thickness: 1.0,
-            color: Color(0xFFEDE5F5),
-          ),
+          const Divider(height: 1.0, thickness: 1.0, color: Color(0xFFEDE5F5)),
           // Benefit list items
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -132,11 +128,7 @@ class RewardCard extends StatelessWidget {
               ],
             ),
             alignment: Alignment.center,
-            child: Icon(
-              icon,
-              color: iconColor,
-              size: 20.0,
-            ),
+            child: Icon(icon, color: iconColor, size: 20.0),
           ),
           const SizedBox(width: 16.0),
           Expanded(

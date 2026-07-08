@@ -25,7 +25,9 @@ class RestaurantDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localDataSource = RestaurantLocalDataSourceImpl();
-    final repository = RestaurantRepositoryImpl(localDataSource: localDataSource);
+    final repository = RestaurantRepositoryImpl(
+      localDataSource: localDataSource,
+    );
 
     return BlocProvider(
       create: (_) => RestaurantBloc(
@@ -70,7 +72,11 @@ class _RestaurantDetailsBodyState extends State<_RestaurantDetailsBody> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.error_outline, size: 64.0, color: Color(0xFFBA1A1A)),
+                    const Icon(
+                      Icons.error_outline,
+                      size: 64.0,
+                      color: Color(0xFFBA1A1A),
+                    ),
                     const SizedBox(height: 16.0),
                     Text(state.errorMessage),
                     const SizedBox(height: 24.0),
@@ -161,11 +167,15 @@ class _RestaurantDetailsBodyState extends State<_RestaurantDetailsBody> {
                           height: 140.0,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0,
+                            ),
                             clipBehavior: Clip.none,
                             itemCount: restaurant.offers.length,
                             itemBuilder: (context, index) {
-                              return RestaurantOfferCard(offer: restaurant.offers[index]);
+                              return RestaurantOfferCard(
+                                offer: restaurant.offers[index],
+                              );
                             },
                           ),
                         ),
@@ -176,18 +186,24 @@ class _RestaurantDetailsBodyState extends State<_RestaurantDetailsBody> {
                       if (restaurant.menu.isNotEmpty) ...[
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: RestaurantSectionTitle(title: 'Signature Dishes'),
+                          child: RestaurantSectionTitle(
+                            title: 'Signature Dishes',
+                          ),
                         ),
                         const SizedBox(height: 12.0),
                         SizedBox(
                           height: 210.0,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0,
+                            ),
                             clipBehavior: Clip.none,
                             itemCount: restaurant.menu.length,
                             itemBuilder: (context, index) {
-                              return RestaurantMenuCard(item: restaurant.menu[index]);
+                              return RestaurantMenuCard(
+                                item: restaurant.menu[index],
+                              );
                             },
                           ),
                         ),
@@ -203,7 +219,9 @@ class _RestaurantDetailsBodyState extends State<_RestaurantDetailsBody> {
                         const SizedBox(height: 12.0),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: RestaurantGallery(imageUrls: restaurant.galleryUrls),
+                          child: RestaurantGallery(
+                            imageUrls: restaurant.galleryUrls,
+                          ),
                         ),
                         const SizedBox(height: 32.0),
                       ],
@@ -218,7 +236,9 @@ class _RestaurantDetailsBodyState extends State<_RestaurantDetailsBody> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Column(
-                            children: restaurant.reviews.map((r) => RestaurantReviewCard(review: r)).toList(),
+                            children: restaurant.reviews
+                                .map((r) => RestaurantReviewCard(review: r))
+                                .toList(),
                           ),
                         ),
                       ],
@@ -268,7 +288,8 @@ class _RestaurantDetailsBodyState extends State<_RestaurantDetailsBody> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => RestaurantQueueTicketPage(restaurant: restaurant),
+                          builder: (_) =>
+                              RestaurantQueueTicketPage(restaurant: restaurant),
                         ),
                       );
                     },

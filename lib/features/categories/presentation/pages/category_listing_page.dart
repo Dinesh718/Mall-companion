@@ -24,7 +24,9 @@ class CategoryListingPage extends StatelessWidget {
       create: (_) => CategoryBloc(
         getCategories: GetCategories(repository),
         getCategoryDetails: GetCategoryDetails(repository),
-        toggleCategoryProductFavorite: ToggleCategoryProductFavorite(repository),
+        toggleCategoryProductFavorite: ToggleCategoryProductFavorite(
+          repository,
+        ),
         toggleFavoriteCategory: ToggleFavoriteCategory(repository),
       )..add(const LoadCategories()),
       child: const Scaffold(
@@ -39,7 +41,8 @@ class CategoryListingPageBody extends StatefulWidget {
   const CategoryListingPageBody({super.key});
 
   @override
-  State<CategoryListingPageBody> createState() => _CategoryListingPageBodyState();
+  State<CategoryListingPageBody> createState() =>
+      _CategoryListingPageBodyState();
 }
 
 class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
@@ -172,11 +175,16 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Space for sticky App Bar
-                      SizedBox(height: MediaQuery.of(context).padding.top + 76.0),
+                      SizedBox(
+                        height: MediaQuery.of(context).padding.top + 76.0,
+                      ),
 
                       // Title section
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 16.0,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -204,11 +212,16 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
 
                       // Search bar
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 8.0,
+                        ),
                         child: Container(
                           decoration: BoxDecoration(
                             color: const Color(0xFFFEF7FF), // surface
-                            borderRadius: BorderRadius.circular(28.0), // rounded-full
+                            borderRadius: BorderRadius.circular(
+                              28.0,
+                            ), // rounded-full
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.05),
@@ -221,8 +234,8 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                             controller: _searchController,
                             onChanged: (value) {
                               context.read<CategoryBloc>().add(
-                                    SearchCategoriesQuery(query: value),
-                                  );
+                                SearchCategoriesQuery(query: value),
+                              );
                             },
                             decoration: InputDecoration(
                               hintText: 'Search shopping categories...',
@@ -250,7 +263,9 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                                 ],
                               ),
                               border: InputBorder.none,
-                              contentPadding: const EdgeInsets.symmetric(vertical: 18.0),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 18.0,
+                              ),
                             ),
                           ),
                         ),
@@ -261,13 +276,17 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                       FeaturedCategoryCard(
                         title: 'Summer Fashion Collection',
                         tag: 'Editor\'s Pick',
-                        description: 'Shop the latest fashion trends from world-renowned designers.',
-                        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBlRZr6F0uQjaD8KKNuDplwWrAlGehe8wdcuz59Jn9cLmyO7KF62dpHumARb36e0raWRAaPmwsO_b_939hzDvhHRpfNh8dAzj4cwngF3e-IrYpoykKwgkF8Mn6npEyGhflvbTpFt3m0MaahaaBeNttnGfCUJ67uCnau7dweKEWXpAXZs4wpHtHvNwxzJ_9fNZysmWQ4TNbJzVB2XvT2Y4btjJHvyzhwyw4LEWw5h76xDaXbU2ZaUdIjzuLQrQ0wb5s5hBlole-F-A',
+                        description:
+                            'Shop the latest fashion trends from world-renowned designers.',
+                        imageUrl:
+                            'https://lh3.googleusercontent.com/aida-public/AB6AXuBlRZr6F0uQjaD8KKNuDplwWrAlGehe8wdcuz59Jn9cLmyO7KF62dpHumARb36e0raWRAaPmwsO_b_939hzDvhHRpfNh8dAzj4cwngF3e-IrYpoykKwgkF8Mn6npEyGhflvbTpFt3m0MaahaaBeNttnGfCUJ67uCnau7dweKEWXpAXZs4wpHtHvNwxzJ_9fNZysmWQ4TNbJzVB2XvT2Y4btjJHvyzhwyw4LEWw5h76xDaXbU2ZaUdIjzuLQrQ0wb5s5hBlole-F-A',
                         onExploreTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const CategoryDetailsPage(categoryId: 'fashion'),
+                              builder: (_) => const CategoryDetailsPage(
+                                categoryId: 'fashion',
+                              ),
                             ),
                           );
                         },
@@ -276,7 +295,10 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
 
                       // Popular Choices Horizontal Scroll
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 8.0,
+                        ),
                         child: Text(
                           'Popular Choices',
                           style: TextStyle(
@@ -299,8 +321,10 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                               icon: Icons.trending_up,
                               onTap: () {
                                 context.read<CategoryBloc>().add(
-                                      const FilterCategoryDetails(filter: 'Trending Now'),
-                                    );
+                                  const FilterCategoryDetails(
+                                    filter: 'Trending Now',
+                                  ),
+                                );
                               },
                             ),
                             const SizedBox(width: 12.0),
@@ -310,8 +334,10 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                               icon: Icons.checkroom,
                               onTap: () {
                                 context.read<CategoryBloc>().add(
-                                      const FilterCategoryDetails(filter: 'Fashion'),
-                                    );
+                                  const FilterCategoryDetails(
+                                    filter: 'Fashion',
+                                  ),
+                                );
                               },
                             ),
                             const SizedBox(width: 12.0),
@@ -321,8 +347,10 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                               icon: Icons.devices,
                               onTap: () {
                                 context.read<CategoryBloc>().add(
-                                      const FilterCategoryDetails(filter: 'Electronics'),
-                                    );
+                                  const FilterCategoryDetails(
+                                    filter: 'Electronics',
+                                  ),
+                                );
                               },
                             ),
                             const SizedBox(width: 12.0),
@@ -332,8 +360,8 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                               icon: Icons.face_retouching_natural,
                               onTap: () {
                                 context.read<CategoryBloc>().add(
-                                      const FilterCategoryDetails(filter: 'Beauty'),
-                                    );
+                                  const FilterCategoryDetails(filter: 'Beauty'),
+                                );
                               },
                             ),
                             const SizedBox(width: 12.0),
@@ -343,8 +371,8 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                               icon: Icons.restaurant,
                               onTap: () {
                                 context.read<CategoryBloc>().add(
-                                      const FilterCategoryDetails(filter: 'Dining'),
-                                    );
+                                  const FilterCategoryDetails(filter: 'Dining'),
+                                );
                               },
                             ),
                           ],
@@ -354,7 +382,10 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
 
                       // Browse All Categories title
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 8.0,
+                        ),
                         child: Text(
                           'Browse All Categories',
                           style: TextStyle(
@@ -372,12 +403,13 @@ class _CategoryListingPageBodyState extends State<CategoryListingPageBody> {
                         child: GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 16.0,
-                            mainAxisSpacing: 16.0,
-                            childAspectRatio: 0.95,
-                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 16.0,
+                                mainAxisSpacing: 16.0,
+                                childAspectRatio: 0.95,
+                              ),
                           itemCount: filteredCategories.length,
                           itemBuilder: (context, index) {
                             final category = filteredCategories[index];

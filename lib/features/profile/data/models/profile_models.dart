@@ -10,10 +10,7 @@ class MembershipModel extends MembershipEntity {
 }
 
 class RewardModel extends RewardEntity {
-  const RewardModel({
-    required super.points,
-    required super.description,
-  });
+  const RewardModel({required super.points, required super.description});
 }
 
 class ReservationSummaryModel extends ReservationSummaryEntity {
@@ -25,17 +22,11 @@ class ReservationSummaryModel extends ReservationSummaryEntity {
 }
 
 class FavoriteSummaryModel extends FavoriteSummaryEntity {
-  const FavoriteSummaryModel({
-    required super.count,
-    required super.label,
-  });
+  const FavoriteSummaryModel({required super.count, required super.label});
 }
 
 class ParkingSummaryModel extends ParkingSummaryEntity {
-  const ParkingSummaryModel({
-    required super.level,
-    required super.spot,
-  });
+  const ParkingSummaryModel({required super.level, required super.spot});
 }
 
 class PreferenceModel extends PreferenceEntity {
@@ -64,7 +55,5 @@ class UserProfileModel extends UserProfileEntity {
 }
 
 class GuestProfileModel extends GuestProfileEntity {
-  const GuestProfileModel({
-    required super.preferences,
-  });
+  const GuestProfileModel({required super.preferences});
 }

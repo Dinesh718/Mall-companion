@@ -7,17 +7,20 @@ class GuestActivityCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final activities = [
       const _ActivityItem(
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBhxqImT5sWJQpRvfvXeCEJcTmxJJOQenMStBDtOFkfmIQpL0w2QcMCk_JPmti2idV5mpqoFdopYrA41Ih755A2tnd0jycDJrJNk0OM11w8Rjqh24K_bCo58Z0nWtX5-J7M13wIlMGou3A2hZVwGxyKJiki3Us-GzSYcrsbINWKhBjFXPi7PQCJ-oA8KY7cv1IymE24jxBMkNApYCZlWPp8fAVTFvCNhD0CrQEOmT_qS-EB7yOtE9dki-3Aic7gvMWx5Pgf9Lezd1A',
+        imageUrl:
+            'https://lh3.googleusercontent.com/aida-public/AB6AXuBhxqImT5sWJQpRvfvXeCEJcTmxJJOQenMStBDtOFkfmIQpL0w2QcMCk_JPmti2idV5mpqoFdopYrA41Ih755A2tnd0jycDJrJNk0OM11w8Rjqh24K_bCo58Z0nWtX5-J7M13wIlMGou3A2hZVwGxyKJiki3Us-GzSYcrsbINWKhBjFXPi7PQCJ-oA8KY7cv1IymE24jxBMkNApYCZlWPp8fAVTFvCNhD0CrQEOmT_qS-EB7yOtE9dki-3Aic7gvMWx5Pgf9Lezd1A',
         category: 'Navigation',
         title: 'Food Court',
       ),
       const _ActivityItem(
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBfJQmRa8Cs7wTtt-6GmqeUmgg1u1LfdX5myf9u8WWYKQNsdCBgmL7nt8akTbyA71FKi90lr2tPmarLM0yvl1I9J28LgJnCYti6Rc1CMNK66MPk9tIOYxJRD162UMknij-Jmk7kgiyop6PQvHbLIWdaKkWS_n6IwnFN0-NU0K_PtW29HZb4IZ8HkBlZDNI-JAPyY9FmG25RQjiU-iw1FSmEnrYZbJ1MDDDribzClU9FPWo6bMMJ4Zow6HG_gX-oJN8Mt5PvedlR-WQ',
+        imageUrl:
+            'https://lh3.googleusercontent.com/aida-public/AB6AXuBfJQmRa8Cs7wTtt-6GmqeUmgg1u1LfdX5myf9u8WWYKQNsdCBgmL7nt8akTbyA71FKi90lr2tPmarLM0yvl1I9J28LgJnCYti6Rc1CMNK66MPk9tIOYxJRD162UMknij-Jmk7kgiyop6PQvHbLIWdaKkWS_n6IwnFN0-NU0K_PtW29HZb4IZ8HkBlZDNI-JAPyY9FmG25RQjiU-iw1FSmEnrYZbJ1MDDDribzClU9FPWo6bMMJ4Zow6HG_gX-oJN8Mt5PvedlR-WQ',
         category: 'Store Visit',
         title: 'Luxe Boutique',
       ),
       const _ActivityItem(
-        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCK8C8qKD6oRp5dF7iJ3hVGT-2G5LxRcQmBw25_iT2MTBMfA3XILe5D0nf0I1Af8bL7RRPL6FZlU-k1er91dnY6mPSRJa7moAH1Nb41V2zNTbCTlOgYcS0D-CXyur9SQ0D6rbgb-z1EWMjYz0xi6tg2q3EKWW9b_K13a005ct4vRtZq4awVtltEyFE5WHDMUuFITxtqvaaBFEN24roVrWgCGuJ1j2JUlB_KxDAqOgzCgPlUoadjTeATBDROGgrqMUXUirLNvUK-F6k',
+        imageUrl:
+            'https://lh3.googleusercontent.com/aida-public/AB6AXuCK8C8qKD6oRp5dF7iJ3hVGT-2G5LxRcQmBw25_iT2MTBMfA3XILe5D0nf0I1Af8bL7RRPL6FZlU-k1er91dnY6mPSRJa7moAH1Nb41V2zNTbCTlOgYcS0D-CXyur9SQ0D6rbgb-z1EWMjYz0xi6tg2q3EKWW9b_K13a005ct4vRtZq4awVtltEyFE5WHDMUuFITxtqvaaBFEN24roVrWgCGuJ1j2JUlB_KxDAqOgzCgPlUoadjTeATBDROGgrqMUXUirLNvUK-F6k',
         category: 'Search',
         title: 'Coffee Shops',
       ),

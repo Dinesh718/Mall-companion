@@ -23,9 +23,7 @@ class ThemeSelectorTile extends StatelessWidget {
             offset: const Offset(0, 4),
           ),
         ],
-        border: Border.all(
-          color: const Color(0xFFE8DFEF).withOpacity(0.3),
-        ),
+        border: Border.all(color: const Color(0xFFE8DFEF).withOpacity(0.3)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
       child: Column(
@@ -94,12 +92,16 @@ class ThemeSelectorTile extends StatelessWidget {
                       fontFamily: 'Plus Jakarta Sans',
                       fontSize: 12.0,
                       fontWeight: FontWeight.bold,
-                      color: isSelected ? Colors.white : const Color(0xFF4A4456),
+                      color: isSelected
+                          ? Colors.white
+                          : const Color(0xFF4A4456),
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100.0),
                       side: BorderSide(
-                        color: isSelected ? const Color(0xFF6100D6) : const Color(0xFFEDE5F5),
+                        color: isSelected
+                            ? const Color(0xFF6100D6)
+                            : const Color(0xFFEDE5F5),
                       ),
                     ),
                   ),

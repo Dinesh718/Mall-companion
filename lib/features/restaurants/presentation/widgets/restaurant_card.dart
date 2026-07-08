@@ -91,7 +91,9 @@ class RestaurantCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 8.0),
                   // Waiting Time Chip
-                  RestaurantWaitingTimeChip(waitTimeText: restaurant.waitTimeText),
+                  RestaurantWaitingTimeChip(
+                    waitTimeText: restaurant.waitTimeText,
+                  ),
                 ],
               ),
             ),
@@ -106,7 +108,9 @@ class RestaurantCard extends StatelessWidget {
                     icon: const Icon(Icons.near_me, size: 16.0),
                     label: const Text('Navigate'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFF3EBFA), // surface-container
+                      backgroundColor: const Color(
+                        0xFFF3EBFA,
+                      ), // surface-container
                       foregroundColor: const Color(0xFF6100D6), // primary
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -146,8 +150,12 @@ class RestaurantCard extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: Icon(
-                      restaurant.isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: restaurant.isFavorite ? const Color(0xFFBA1A1A) : const Color(0xFF6100D6),
+                      restaurant.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: restaurant.isFavorite
+                          ? const Color(0xFFBA1A1A)
+                          : const Color(0xFF6100D6),
                       size: 20.0,
                     ),
                   ),

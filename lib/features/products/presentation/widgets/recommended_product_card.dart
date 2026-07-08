@@ -50,7 +50,8 @@ class RecommendedProductCard extends StatelessWidget {
                   child: Image.network(
                     product.imageUrl,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(color: Colors.grey[200]),
+                    errorBuilder: (_, __, ___) =>
+                        Container(color: Colors.grey[200]),
                   ),
                 ),
                 Positioned(
@@ -66,8 +67,12 @@ class RecommendedProductCard extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
-                        product.isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: product.isFavorite ? const Color(0xFFBA1A1A) : const Color(0xFF4A4456),
+                        product.isFavorite
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        color: product.isFavorite
+                            ? const Color(0xFFBA1A1A)
+                            : const Color(0xFF4A4456),
                         size: 16.0,
                       ),
                     ),
@@ -101,7 +106,11 @@ class RecommendedProductCard extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            const Icon(Icons.star, color: Colors.amber, size: 12.0),
+                            const Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                              size: 12.0,
+                            ),
                             const SizedBox(width: 2.0),
                             Text(
                               product.rating.toStringAsFixed(1),

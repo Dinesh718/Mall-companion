@@ -46,7 +46,10 @@ class RestaurantInfoCard extends StatelessWidget {
                 color: const Color(0xFFF3EBFA), // surface-container
                 borderRadius: BorderRadius.circular(100.0),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 14.0,
+                vertical: 8.0,
+              ),
               child: Row(
                 children: [
                   const Icon(
@@ -77,7 +80,11 @@ class RestaurantInfoCard extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
-                  const Icon(Icons.layers, size: 18.0, color: Color(0xFF4A4456)),
+                  const Icon(
+                    Icons.layers,
+                    size: 18.0,
+                    color: Color(0xFF4A4456),
+                  ),
                   const SizedBox(width: 6.0),
                   Expanded(
                     child: Text(
