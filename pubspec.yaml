@@ -39,6 +39,7 @@ dependencies:
   go_router: ^17.3.0
   permission_handler: ^12.0.3
   flutter_svg: ^2.3.0
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +62,12 @@ flutter:
   assets:
     - assets/videos/
     - assets/images/
+    - assets/images/maps/
     - assets/icons/
+    - assets/svg/maps/
+    - assets/json/maps/
+    - assets/maps/
+    - assets/data/maps/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

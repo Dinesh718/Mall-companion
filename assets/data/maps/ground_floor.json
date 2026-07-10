@@ -1,0 +1,771 @@
+{
+  "id": "ground_floor",
+  "name": "Ground Floor",
+  "floorNumber": 0,
+  "svgPath": "assets/svg/maps/ground_floor_geometry.svg",
+  "shops": [
+    {
+      "id": "shop_001",
+      "polygonId": "S001",
+      "name": "Zara",
+      "category": "Fashion & Apparel",
+      "description": "World-renowned Spanish fashion retailer offering trendy clothing, accessories, and shoes.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.8,
+      "offer": "Flat 30% OFF",
+      "logo": "assets/images/logos/zara.png",
+      "navigationNodeId": "N001",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 80.0,
+        "y": 320.0,
+        "width": 77.0,
+        "height": 83.0
+      }
+    },
+    {
+      "id": "shop_002",
+      "polygonId": "S002",
+      "name": "H&M",
+      "category": "Fashion & Apparel",
+      "description": "Swedish multinational clothing-retail company known for its fast-fashion clothing.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.5,
+      "offer": "Buy 2 Get 1 Free",
+      "logo": "assets/images/logos/hm.png",
+      "navigationNodeId": "N002",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 173.0,
+        "y": 318.0,
+        "width": 41.0,
+        "height": 85.0
+      }
+    },
+    {
+      "id": "shop_003",
+      "polygonId": "S003",
+      "name": "Nike Store",
+      "category": "Sports & Activewear",
+      "description": "Athletic footwear, apparel, equipment, accessories, and services.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.9,
+      "offer": "Up to 50% OFF",
+      "logo": "assets/images/logos/nike.png",
+      "navigationNodeId": "N003",
+      "isAccessible": true,
+      "geometry": {
+        "type": "polygon",
+        "points": [
+          {
+            "x": 229.0,
+            "y": 317.0
+          },
+          {
+            "x": 272.0,
+            "y": 317.0
+          },
+          {
+            "x": 272.0,
+            "y": 404.0
+          },
+          {
+            "x": 229.0,
+            "y": 404.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "shop_004",
+      "polygonId": "S004",
+      "name": "Adidas",
+      "category": "Sports & Activewear",
+      "description": "Premium sports shoes, clothing, and accessories designed for athletes.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.7,
+      "offer": "No Active Offer",
+      "logo": "assets/images/logos/adidas.png",
+      "navigationNodeId": "N004",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 283.0,
+        "y": 318.0,
+        "width": 42.0,
+        "height": 85.0
+      }
+    },
+    {
+      "id": "shop_005",
+      "polygonId": "S005",
+      "name": "Apple Store",
+      "category": "Electronics",
+      "description": "Official store featuring Apple iPhones, MacBooks, iPads, and accessories.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.9,
+      "offer": "Trade-in Deals",
+      "logo": "assets/images/logos/apple.png",
+      "navigationNodeId": "N005",
+      "isAccessible": true,
+      "geometry": {
+        "type": "polygon",
+        "points": [
+          {
+            "x": 393.0,
+            "y": 321.0
+          },
+          {
+            "x": 427.0,
+            "y": 321.0
+          },
+          {
+            "x": 427.0,
+            "y": 402.5
+          },
+          {
+            "x": 393.0,
+            "y": 402.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "shop_006",
+      "polygonId": "S006",
+      "name": "Samsung Experience",
+      "category": "Electronics",
+      "description": "Official showroom for Samsung smartphones, tablets, TVs, and smart devices.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.6,
+      "offer": "10% Student Discount",
+      "logo": "assets/images/logos/samsung.png",
+      "navigationNodeId": "N006",
+      "isAccessible": true,
+      "geometry": {
+        "type": "polygon",
+        "points": [
+          {
+            "x": 446.5,
+            "y": 317.5
+          },
+          {
+            "x": 480.5,
+            "y": 317.5
+          },
+          {
+            "x": 480.5,
+            "y": 398.5
+          },
+          {
+            "x": 446.5,
+            "y": 398.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "shop_007",
+      "polygonId": "S007",
+      "name": "Sony Center",
+      "category": "Electronics",
+      "description": "Audio, cameras, PlayStation gaming systems, and high-fidelity smart TVs.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.4,
+      "offer": "Free Gift Card",
+      "logo": "assets/images/logos/sony.png",
+      "navigationNodeId": "N007",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 505.0,
+        "y": 320.0,
+        "width": 36.0,
+        "height": 78.0
+      }
+    },
+    {
+      "id": "shop_008",
+      "polygonId": "S008",
+      "name": "Sephora",
+      "category": "Beauty & Cosmetics",
+      "description": "Luxury cosmetics, skincare, body products, fragrance, and hair care products.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.8,
+      "offer": "Free Makeover Session",
+      "logo": "assets/images/logos/sephora.png",
+      "navigationNodeId": "N008",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 562.0,
+        "y": 322.0,
+        "width": 44.0,
+        "height": 76.0
+      }
+    },
+    {
+      "id": "shop_009",
+      "polygonId": "S009",
+      "name": "MAC Cosmetics",
+      "category": "Beauty & Cosmetics",
+      "description": "Professional-grade makeup and cosmetics designed for global fashion trends.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.7,
+      "offer": "Buy 3 Get 10% OFF",
+      "logo": "assets/images/logos/mac.png",
+      "navigationNodeId": "N009",
+      "isAccessible": true,
+      "geometry": {
+        "type": "polygon",
+        "points": [
+          {
+            "x": 924.0,
+            "y": 319.0
+          },
+          {
+            "x": 977.0,
+            "y": 319.0
+          },
+          {
+            "x": 977.0,
+            "y": 397.0
+          },
+          {
+            "x": 924.0,
+            "y": 397.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "shop_010",
+      "polygonId": "S010",
+      "name": "Lush Cosmetics",
+      "category": "Beauty & Cosmetics",
+      "description": "Fresh, handmade cosmetics, bath bombs, skincare, and organic soaps.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.5,
+      "offer": "Eco-return rewards",
+      "logo": "assets/images/logos/lush.png",
+      "navigationNodeId": "N010",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 999.0,
+        "y": 320.0,
+        "width": 32.0,
+        "height": 74.0
+      }
+    },
+    {
+      "id": "shop_011",
+      "polygonId": "S011",
+      "name": "Levi's Store",
+      "category": "Fashion & Apparel",
+      "description": "American clothing company known worldwide for its Levi's brand of denim jeans.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.6,
+      "offer": "Flat 20% OFF Denim",
+      "logo": "assets/images/logos/levis.png",
+      "navigationNodeId": "N011",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1051.0,
+        "y": 322.0,
+        "width": 38.0,
+        "height": 76.0
+      }
+    },
+    {
+      "id": "shop_012",
+      "polygonId": "S012",
+      "name": "Calvin Klein",
+      "category": "Fashion & Apparel",
+      "description": "Global lifestyle brand that exemplifies bold, progressive ideals and seductive aesthetics.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.7,
+      "offer": "No Active Offer",
+      "logo": "assets/images/logos/ck.png",
+      "navigationNodeId": "N012",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1108.0,
+        "y": 324.0,
+        "width": 34.0,
+        "height": 74.0
+      }
+    },
+    {
+      "id": "shop_013",
+      "polygonId": "S013",
+      "name": "Tommy Hilfiger",
+      "category": "Fashion & Apparel",
+      "description": "Premium styling, quality and value to consumers worldwide under Hilfiger brands.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.6,
+      "offer": "Up to 40% OFF",
+      "logo": "assets/images/logos/tommy.png",
+      "navigationNodeId": "N013",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1217.0,
+        "y": 324.0,
+        "width": 34.0,
+        "height": 79.0
+      }
+    },
+    {
+      "id": "shop_014",
+      "polygonId": "S014",
+      "name": "Starbucks",
+      "category": "Food & Beverage",
+      "description": "Seattle-based coffeehouse chain known for its signature roasts and light bites.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.8,
+      "offer": "1+1 Coffee Happy Hour",
+      "logo": "assets/images/logos/starbucks.png",
+      "navigationNodeId": "N014",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1270.0,
+        "y": 324.0,
+        "width": 36.0,
+        "height": 79.0
+      }
+    },
+    {
+      "id": "shop_015",
+      "polygonId": "S015",
+      "name": "Chipotle",
+      "category": "Food & Beverage",
+      "description": "Mexican grill serving custom-made burritos, tacos, bowls, and fresh guacamole.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.5,
+      "offer": "Free Soft Drink",
+      "logo": "assets/images/logos/chipotle.png",
+      "navigationNodeId": "N015",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1325.0,
+        "y": 325.0,
+        "width": 33.0,
+        "height": 73.0
+      }
+    },
+    {
+      "id": "shop_016",
+      "polygonId": "S016",
+      "name": "Subway",
+      "category": "Food & Beverage",
+      "description": "Casual counter-serve franchise for custom-build salads and submarine sandwiches.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.3,
+      "offer": "Sub of the Day",
+      "logo": "assets/images/logos/subway.png",
+      "navigationNodeId": "N016",
+      "isAccessible": true,
+      "geometry": {
+        "type": "polygon",
+        "points": [
+          {
+            "x": 1384.0,
+            "y": 318.5
+          },
+          {
+            "x": 1452.0,
+            "y": 318.5
+          },
+          {
+            "x": 1452.0,
+            "y": 404.0
+          },
+          {
+            "x": 1384.0,
+            "y": 404.0
+          }
+        ]
+      }
+    },
+    {
+      "id": "shop_017",
+      "polygonId": "S017",
+      "name": "Pizza Hut",
+      "category": "Food & Beverage",
+      "description": "Family-friendly chain known for its deep-dish pan pizzas and pasta dishes.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.2,
+      "offer": "Pizza Buffet Deal",
+      "logo": "assets/images/logos/pizzahut.png",
+      "navigationNodeId": "N017",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 80.0,
+        "y": 482.0,
+        "width": 77.0,
+        "height": 156.0
+      }
+    },
+    {
+      "id": "shop_018",
+      "polygonId": "S018",
+      "name": "McDonald's",
+      "category": "Food & Beverage",
+      "description": "Classic, long-running fast-food chain famous for its burgers and fries.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.4,
+      "offer": "Free Fry Friday",
+      "logo": "assets/images/logos/mcdonalds.png",
+      "navigationNodeId": "N018",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 173.0,
+        "y": 491.0,
+        "width": 34.0,
+        "height": 147.0
+      }
+    },
+    {
+      "id": "shop_019",
+      "polygonId": "S019",
+      "name": "Swarovski",
+      "category": "Jewelry & Watches",
+      "description": "Premium crystal decorations, jewelry, figurines, and elegant luxury accessories.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.8,
+      "offer": "10% Off First Purchase",
+      "logo": "assets/images/logos/swarovski.png",
+      "navigationNodeId": "N019",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 230.0,
+        "y": 493.0,
+        "width": 38.0,
+        "height": 145.0
+      }
+    },
+    {
+      "id": "shop_020",
+      "polygonId": "S020",
+      "name": "Rolex Boutique",
+      "category": "Jewelry & Watches",
+      "description": "Official retailer displaying Rolex luxury Swiss watches and professional models.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.9,
+      "offer": "No Active Offer",
+      "logo": "assets/images/logos/rolex.png",
+      "navigationNodeId": "N020",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 285.0,
+        "y": 497.0,
+        "width": 40.0,
+        "height": 141.0
+      }
+    },
+    {
+      "id": "shop_021",
+      "polygonId": "S021",
+      "name": "Pandora",
+      "category": "Jewelry & Watches",
+      "description": "Playful charms, rings, bracelets, and custom jewelry crafted in sterling silver.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.6,
+      "offer": "Free custom engraving",
+      "logo": "assets/images/logos/pandora.png",
+      "navigationNodeId": "N021",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 394.0,
+        "y": 501.0,
+        "width": 32.0,
+        "height": 137.0
+      }
+    },
+    {
+      "id": "shop_022",
+      "polygonId": "S022",
+      "name": "Barnes & Noble",
+      "category": "Books & Stationery",
+      "description": "Nationwide bookstore seller for novels, magazines, journals, and board games.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.7,
+      "offer": "Buy 1 Get 1 50% Off Books",
+      "logo": "assets/images/logos/barnesnoble.png",
+      "navigationNodeId": "N022",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 451.0,
+        "y": 501.0,
+        "width": 29.0,
+        "height": 137.0
+      }
+    },
+    {
+      "id": "shop_023",
+      "polygonId": "S023",
+      "name": "Miniso Store",
+      "category": "Books & Stationery",
+      "description": "Japanese-inspired lifestyle product retailer offering toys, cosmetics, and household items.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.5,
+      "offer": "No Active Offer",
+      "logo": "assets/images/logos/miniso.png",
+      "navigationNodeId": "N023",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 503.0,
+        "y": 497.0,
+        "width": 38.0,
+        "height": 141.0
+      }
+    },
+    {
+      "id": "shop_024",
+      "polygonId": "S024",
+      "name": "LEGO Store",
+      "category": "Toys & Hobbies",
+      "description": "Official brick store for LEGO collections, architectural sets, and play blocks.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.9,
+      "offer": "Free Build Session",
+      "logo": "assets/images/logos/lego.png",
+      "navigationNodeId": "N024",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 556.0,
+        "y": 497.0,
+        "width": 65.0,
+        "height": 141.0
+      }
+    },
+    {
+      "id": "shop_025",
+      "polygonId": "S025",
+      "name": "Disney Store",
+      "category": "Toys & Hobbies",
+      "description": "Magical destination for Disney, Pixar, Marvel, and Star Wars toys and plush.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.8,
+      "offer": "No Active Offer",
+      "logo": "assets/images/logos/disney.png",
+      "navigationNodeId": "N025",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 651.0,
+        "y": 576.0,
+        "width": 55.0,
+        "height": 63.0
+      }
+    },
+    {
+      "id": "shop_026",
+      "polygonId": "S026",
+      "name": "Grand Hypermarket",
+      "category": "Supermarket & Groceries",
+      "description": "One-stop shop for fresh vegetables, local groceries, home appliances, and daily essentials.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.7,
+      "offer": "5% Cash Back on Groceries",
+      "logo": "assets/images/logos/hypermarket.png",
+      "navigationNodeId": "N026",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 829.0,
+        "y": 587.0,
+        "width": 56.0,
+        "height": 63.0
+      }
+    },
+    {
+      "id": "shop_027",
+      "polygonId": "S027",
+      "name": "Starbucks Coffee",
+      "category": "Food & Beverage",
+      "description": "Seattle-based coffeehouse chain known for its signature roasts, light bites, and specialty drinks.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.8,
+      "offer": "1+1 Coffee Happy Hour",
+      "logo": "assets/images/logos/starbucks.png",
+      "navigationNodeId": "N027",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 915.0,
+        "y": 501.0,
+        "width": 61.0,
+        "height": 137.0
+      }
+    },
+    {
+      "id": "shop_028",
+      "polygonId": "S028",
+      "name": "Chipotle Mexican Grill",
+      "category": "Food & Beverage",
+      "description": "Mexican grill serving custom-made burritos, tacos, bowls, and fresh guacamole.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.5,
+      "offer": "Free Soft Drink with Meal",
+      "logo": "assets/images/logos/chipotle.png",
+      "navigationNodeId": "N028",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1003.0,
+        "y": 495.0,
+        "width": 28.0,
+        "height": 143.0
+      }
+    },
+    {
+      "id": "shop_029",
+      "polygonId": "S029",
+      "name": "Subway Sandwiches",
+      "category": "Food & Beverage",
+      "description": "Casual counter-serve franchise for custom-built salads and fresh submarine sandwiches.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.3,
+      "offer": "Sub of the Day Offer",
+      "logo": "assets/images/logos/subway.png",
+      "navigationNodeId": "N029",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1056.0,
+        "y": 501.0,
+        "width": 33.0,
+        "height": 137.0
+      }
+    },
+    {
+      "id": "shop_030",
+      "polygonId": "S030",
+      "name": "Baskin Robbins",
+      "category": "Food & Beverage",
+      "description": "Premium ice creams, sundaes, milkshakes, and frozen desserts with iconic 31 flavors.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.6,
+      "offer": "15% OFF on Waffle Cones",
+      "logo": "assets/images/logos/baskinrobbins.png",
+      "navigationNodeId": "N030",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1106.0,
+        "y": 541.0,
+        "width": 36.0,
+        "height": 44.0
+      }
+    },
+    {
+      "id": "shop_031",
+      "polygonId": "S031",
+      "name": "Burger King",
+      "category": "Food & Beverage",
+      "description": "Well-known fast-food chain famous for its flame-broiled Whopper burgers and golden fries.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.4,
+      "offer": "Free King Meal Upgrade",
+      "logo": "assets/images/logos/burgerking.png",
+      "navigationNodeId": "N031",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1215.0,
+        "y": 497.0,
+        "width": 36.0,
+        "height": 141.0
+      }
+    },
+    {
+      "id": "shop_032",
+      "polygonId": "S032",
+      "name": "Pizza Hut Express",
+      "category": "Food & Beverage",
+      "description": "Fast service counter for deep-dish pizzas, pasta, garlic bread, and chicken wings.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.2,
+      "offer": "Flat 20% OFF Personal Pan",
+      "logo": "assets/images/logos/pizzahut.png",
+      "navigationNodeId": "N032",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1268.0,
+        "y": 499.0,
+        "width": 38.0,
+        "height": 139.0
+      }
+    },
+    {
+      "id": "shop_033",
+      "polygonId": "S033",
+      "name": "McDonald's Family Dining",
+      "category": "Food & Beverage",
+      "description": "Classic, long-running fast-food chain famous for its burgers, chicken nuggets, and Happy Meals.",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 4.4,
+      "offer": "Free Fries on Orders above $15",
+      "logo": "assets/images/logos/mcdonalds.png",
+      "navigationNodeId": "N033",
+      "isAccessible": true,
+      "geometry": {
+        "type": "rectangle",
+        "x": 1325.0,
+        "y": 493.0,
+        "width": 139.0,
+        "height": 145.0
+      }
+    }
+  ]
+}

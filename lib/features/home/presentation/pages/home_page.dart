@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visitor_mall/features/map/presentation/pages/map_page.dart';
 
 // Usecases & Data Layer
 import '../../data/datasource/home_local_datasource.dart';
@@ -62,12 +63,7 @@ class _HomePageState extends State<HomePage> {
               // Tab 0: Home Dashboard
               const _HomeDashboardBody(),
               // Tab 1: Map
-              const _PlaceholderTab(
-                title: 'Interactive Map',
-                icon: Icons.map_outlined,
-                message:
-                    'Explore the full layout and get step-by-step navigation directions.',
-              ),
+              const MapPage(),
               // Tab 2: Discover
               const DiscoverPage(),
               // Tab 3: Event
