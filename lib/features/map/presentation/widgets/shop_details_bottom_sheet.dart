@@ -4,11 +4,13 @@ import '../../domain/entities/map_entities.dart';
 class ShopDetailsBottomSheet extends StatelessWidget {
   final ShopEntity shop;
   final String floorName;
+  final VoidCallback? onNavigate;
 
   const ShopDetailsBottomSheet({
     super.key,
     required this.shop,
     required this.floorName,
+    this.onNavigate,
   });
 
   @override
@@ -222,7 +224,7 @@ class ShopDetailsBottomSheet extends StatelessWidget {
             ),
           const SizedBox(height: 24.0),
 
-          // Action button row (visually active but functionally disabled)
+          // Action button row
           SizedBox(
             width: double.infinity,
             child: FilledButton.icon(
@@ -241,7 +243,10 @@ class ShopDetailsBottomSheet extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16.0),
                 ),
               ),
-              onPressed: null, // Disabled navigation action
+              onPressed: () {
+                onNavigate?.call();
+                Navigator.pop(context);
+              },
             ),
           ),
         ],

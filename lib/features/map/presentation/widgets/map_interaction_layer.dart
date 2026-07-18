@@ -30,6 +30,10 @@ class MapInteractionLayer extends StatelessWidget {
         // Check top-most shop first in case of overlapping regions
         for (int i = shops.length - 1; i >= 0; i--) {
           final shop = shops[i];
+          // Corridors and escalators are map geometry only, not interactive shops
+          if (shop.category == 'Corridor' || shop.category == 'Escalator') {
+            continue;
+          }
           final containsPoint = shop.geometry.contains(point);
           if (containsPoint) {
             debugPrint('>>> MATCH FOUND: ${shop.name} (${shop.id})');
@@ -39,7 +43,9 @@ class MapInteractionLayer extends StatelessWidget {
         }
 
         debugPrint('>>> NO MATCH: Tapped outside all shops');
-        context.read<MapBloc>().add(const ClearSelection());
+        final mapBloc = context.read<MapBloc>();
+        mapBloc.add(const ClearSelection());
+        mapBloc.add(const ClearRoute());
       },
       child: Container(
         width: width,

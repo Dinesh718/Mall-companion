@@ -18,9 +18,15 @@ class LocalMapDataSourceImpl implements LocalMapDataSource {
     );
     final Map<String, dynamic> decodedJson =
         json.decode(jsonString) as Map<String, dynamic>;
-
-    // The JSON root represents the ground floor. Let's parse it and wrap it in a MapModel.
     final floor = FloorModel.fromJson(decodedJson);
-    return MapModel(id: 'mall_phoenix', floors: [floor]);
+
+    final firstFloorJsonString = await assetBundle.loadString(
+      'assets/data/maps/first_floor.json',
+    );
+    final Map<String, dynamic> firstFloorDecodedJson =
+        json.decode(firstFloorJsonString) as Map<String, dynamic>;
+    final firstFloor = FloorModel.fromJson(firstFloorDecodedJson);
+
+    return MapModel(id: 'mall_phoenix', floors: [floor, firstFloor]);
   }
 }

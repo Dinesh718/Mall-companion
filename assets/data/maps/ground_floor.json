@@ -15,7 +15,6 @@
       "rating": 4.8,
       "offer": "Flat 30% OFF",
       "logo": "assets/images/logos/zara.png",
-      "navigationNodeId": "N001",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -23,7 +22,10 @@
         "y": 320.0,
         "width": 77.0,
         "height": 83.0
-      }
+      },
+      "entranceNodeIds": [
+        "E001"
+      ]
     },
     {
       "id": "shop_002",
@@ -36,7 +38,6 @@
       "rating": 4.5,
       "offer": "Buy 2 Get 1 Free",
       "logo": "assets/images/logos/hm.png",
-      "navigationNodeId": "N002",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -44,7 +45,10 @@
         "y": 318.0,
         "width": 41.0,
         "height": 85.0
-      }
+      },
+      "entranceNodeIds": [
+        "E002"
+      ]
     },
     {
       "id": "shop_003",
@@ -57,7 +61,6 @@
       "rating": 4.9,
       "offer": "Up to 50% OFF",
       "logo": "assets/images/logos/nike.png",
-      "navigationNodeId": "N003",
       "isAccessible": true,
       "geometry": {
         "type": "polygon",
@@ -79,7 +82,10 @@
             "y": 404.0
           }
         ]
-      }
+      },
+      "entranceNodeIds": [
+        "E003"
+      ]
     },
     {
       "id": "shop_004",
@@ -92,7 +98,6 @@
       "rating": 4.7,
       "offer": "No Active Offer",
       "logo": "assets/images/logos/adidas.png",
-      "navigationNodeId": "N004",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -100,7 +105,10 @@
         "y": 318.0,
         "width": 42.0,
         "height": 85.0
-      }
+      },
+      "entranceNodeIds": [
+        "E004"
+      ]
     },
     {
       "id": "shop_005",
@@ -113,7 +121,6 @@
       "rating": 4.9,
       "offer": "Trade-in Deals",
       "logo": "assets/images/logos/apple.png",
-      "navigationNodeId": "N005",
       "isAccessible": true,
       "geometry": {
         "type": "polygon",
@@ -135,7 +142,10 @@
             "y": 402.5
           }
         ]
-      }
+      },
+      "entranceNodeIds": [
+        "E005"
+      ]
     },
     {
       "id": "shop_006",
@@ -148,7 +158,6 @@
       "rating": 4.6,
       "offer": "10% Student Discount",
       "logo": "assets/images/logos/samsung.png",
-      "navigationNodeId": "N006",
       "isAccessible": true,
       "geometry": {
         "type": "polygon",
@@ -170,7 +179,10 @@
             "y": 398.5
           }
         ]
-      }
+      },
+      "entranceNodeIds": [
+        "E006"
+      ]
     },
     {
       "id": "shop_007",
@@ -183,7 +195,6 @@
       "rating": 4.4,
       "offer": "Free Gift Card",
       "logo": "assets/images/logos/sony.png",
-      "navigationNodeId": "N007",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -191,7 +202,10 @@
         "y": 320.0,
         "width": 36.0,
         "height": 78.0
-      }
+      },
+      "entranceNodeIds": [
+        "E007"
+      ]
     },
     {
       "id": "shop_008",
@@ -204,7 +218,6 @@
       "rating": 4.8,
       "offer": "Free Makeover Session",
       "logo": "assets/images/logos/sephora.png",
-      "navigationNodeId": "N008",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -212,7 +225,10 @@
         "y": 322.0,
         "width": 44.0,
         "height": 76.0
-      }
+      },
+      "entranceNodeIds": [
+        "E008"
+      ]
     },
     {
       "id": "shop_009",
@@ -225,7 +241,6 @@
       "rating": 4.7,
       "offer": "Buy 3 Get 10% OFF",
       "logo": "assets/images/logos/mac.png",
-      "navigationNodeId": "N009",
       "isAccessible": true,
       "geometry": {
         "type": "polygon",
@@ -247,7 +262,10 @@
             "y": 397.0
           }
         ]
-      }
+      },
+      "entranceNodeIds": [
+        "E009"
+      ]
     },
     {
       "id": "shop_010",
@@ -260,7 +278,6 @@
       "rating": 4.5,
       "offer": "Eco-return rewards",
       "logo": "assets/images/logos/lush.png",
-      "navigationNodeId": "N010",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -268,7 +285,10 @@
         "y": 320.0,
         "width": 32.0,
         "height": 74.0
-      }
+      },
+      "entranceNodeIds": [
+        "E010"
+      ]
     },
     {
       "id": "shop_011",
@@ -281,7 +301,6 @@
       "rating": 4.6,
       "offer": "Flat 20% OFF Denim",
       "logo": "assets/images/logos/levis.png",
-      "navigationNodeId": "N011",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -289,7 +308,10 @@
         "y": 322.0,
         "width": 38.0,
         "height": 76.0
-      }
+      },
+      "entranceNodeIds": [
+        "E011"
+      ]
     },
     {
       "id": "shop_012",
@@ -302,7 +324,6 @@
       "rating": 4.7,
       "offer": "No Active Offer",
       "logo": "assets/images/logos/ck.png",
-      "navigationNodeId": "N012",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -310,7 +331,10 @@
         "y": 324.0,
         "width": 34.0,
         "height": 74.0
-      }
+      },
+      "entranceNodeIds": [
+        "E012"
+      ]
     },
     {
       "id": "shop_013",
@@ -323,7 +347,6 @@
       "rating": 4.6,
       "offer": "Up to 40% OFF",
       "logo": "assets/images/logos/tommy.png",
-      "navigationNodeId": "N013",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -331,7 +354,10 @@
         "y": 324.0,
         "width": 34.0,
         "height": 79.0
-      }
+      },
+      "entranceNodeIds": [
+        "E013"
+      ]
     },
     {
       "id": "shop_014",
@@ -344,7 +370,6 @@
       "rating": 4.8,
       "offer": "1+1 Coffee Happy Hour",
       "logo": "assets/images/logos/starbucks.png",
-      "navigationNodeId": "N014",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -352,7 +377,10 @@
         "y": 324.0,
         "width": 36.0,
         "height": 79.0
-      }
+      },
+      "entranceNodeIds": [
+        "E014"
+      ]
     },
     {
       "id": "shop_015",
@@ -365,7 +393,6 @@
       "rating": 4.5,
       "offer": "Free Soft Drink",
       "logo": "assets/images/logos/chipotle.png",
-      "navigationNodeId": "N015",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -373,7 +400,10 @@
         "y": 325.0,
         "width": 33.0,
         "height": 73.0
-      }
+      },
+      "entranceNodeIds": [
+        "E015"
+      ]
     },
     {
       "id": "shop_016",
@@ -386,7 +416,6 @@
       "rating": 4.3,
       "offer": "Sub of the Day",
       "logo": "assets/images/logos/subway.png",
-      "navigationNodeId": "N016",
       "isAccessible": true,
       "geometry": {
         "type": "polygon",
@@ -408,7 +437,10 @@
             "y": 404.0
           }
         ]
-      }
+      },
+      "entranceNodeIds": [
+        "E016"
+      ]
     },
     {
       "id": "shop_017",
@@ -421,7 +453,6 @@
       "rating": 4.2,
       "offer": "Pizza Buffet Deal",
       "logo": "assets/images/logos/pizzahut.png",
-      "navigationNodeId": "N017",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -429,7 +460,10 @@
         "y": 482.0,
         "width": 77.0,
         "height": 156.0
-      }
+      },
+      "entranceNodeIds": [
+        "E017"
+      ]
     },
     {
       "id": "shop_018",
@@ -442,7 +476,6 @@
       "rating": 4.4,
       "offer": "Free Fry Friday",
       "logo": "assets/images/logos/mcdonalds.png",
-      "navigationNodeId": "N018",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -450,7 +483,10 @@
         "y": 491.0,
         "width": 34.0,
         "height": 147.0
-      }
+      },
+      "entranceNodeIds": [
+        "E018"
+      ]
     },
     {
       "id": "shop_019",
@@ -463,7 +499,6 @@
       "rating": 4.8,
       "offer": "10% Off First Purchase",
       "logo": "assets/images/logos/swarovski.png",
-      "navigationNodeId": "N019",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -471,7 +506,10 @@
         "y": 493.0,
         "width": 38.0,
         "height": 145.0
-      }
+      },
+      "entranceNodeIds": [
+        "E019"
+      ]
     },
     {
       "id": "shop_020",
@@ -484,7 +522,6 @@
       "rating": 4.9,
       "offer": "No Active Offer",
       "logo": "assets/images/logos/rolex.png",
-      "navigationNodeId": "N020",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -492,7 +529,10 @@
         "y": 497.0,
         "width": 40.0,
         "height": 141.0
-      }
+      },
+      "entranceNodeIds": [
+        "E020"
+      ]
     },
     {
       "id": "shop_021",
@@ -505,7 +545,6 @@
       "rating": 4.6,
       "offer": "Free custom engraving",
       "logo": "assets/images/logos/pandora.png",
-      "navigationNodeId": "N021",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -513,7 +552,10 @@
         "y": 501.0,
         "width": 32.0,
         "height": 137.0
-      }
+      },
+      "entranceNodeIds": [
+        "E021"
+      ]
     },
     {
       "id": "shop_022",
@@ -526,7 +568,6 @@
       "rating": 4.7,
       "offer": "Buy 1 Get 1 50% Off Books",
       "logo": "assets/images/logos/barnesnoble.png",
-      "navigationNodeId": "N022",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -534,7 +575,10 @@
         "y": 501.0,
         "width": 29.0,
         "height": 137.0
-      }
+      },
+      "entranceNodeIds": [
+        "E022"
+      ]
     },
     {
       "id": "shop_023",
@@ -547,7 +591,6 @@
       "rating": 4.5,
       "offer": "No Active Offer",
       "logo": "assets/images/logos/miniso.png",
-      "navigationNodeId": "N023",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -555,7 +598,10 @@
         "y": 497.0,
         "width": 38.0,
         "height": 141.0
-      }
+      },
+      "entranceNodeIds": [
+        "E023"
+      ]
     },
     {
       "id": "shop_024",
@@ -568,7 +614,6 @@
       "rating": 4.9,
       "offer": "Free Build Session",
       "logo": "assets/images/logos/lego.png",
-      "navigationNodeId": "N024",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -576,7 +621,10 @@
         "y": 497.0,
         "width": 65.0,
         "height": 141.0
-      }
+      },
+      "entranceNodeIds": [
+        "E024"
+      ]
     },
     {
       "id": "shop_025",
@@ -589,7 +637,6 @@
       "rating": 4.8,
       "offer": "No Active Offer",
       "logo": "assets/images/logos/disney.png",
-      "navigationNodeId": "N025",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -597,7 +644,10 @@
         "y": 576.0,
         "width": 55.0,
         "height": 63.0
-      }
+      },
+      "entranceNodeIds": [
+        "E025"
+      ]
     },
     {
       "id": "shop_026",
@@ -610,7 +660,6 @@
       "rating": 4.7,
       "offer": "5% Cash Back on Groceries",
       "logo": "assets/images/logos/hypermarket.png",
-      "navigationNodeId": "N026",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -618,7 +667,10 @@
         "y": 587.0,
         "width": 56.0,
         "height": 63.0
-      }
+      },
+      "entranceNodeIds": [
+        "E026"
+      ]
     },
     {
       "id": "shop_027",
@@ -631,7 +683,6 @@
       "rating": 4.8,
       "offer": "1+1 Coffee Happy Hour",
       "logo": "assets/images/logos/starbucks.png",
-      "navigationNodeId": "N027",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -639,7 +690,10 @@
         "y": 501.0,
         "width": 61.0,
         "height": 137.0
-      }
+      },
+      "entranceNodeIds": [
+        "E027"
+      ]
     },
     {
       "id": "shop_028",
@@ -652,7 +706,6 @@
       "rating": 4.5,
       "offer": "Free Soft Drink with Meal",
       "logo": "assets/images/logos/chipotle.png",
-      "navigationNodeId": "N028",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -660,7 +713,10 @@
         "y": 495.0,
         "width": 28.0,
         "height": 143.0
-      }
+      },
+      "entranceNodeIds": [
+        "E028"
+      ]
     },
     {
       "id": "shop_029",
@@ -673,7 +729,6 @@
       "rating": 4.3,
       "offer": "Sub of the Day Offer",
       "logo": "assets/images/logos/subway.png",
-      "navigationNodeId": "N029",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -681,7 +736,10 @@
         "y": 501.0,
         "width": 33.0,
         "height": 137.0
-      }
+      },
+      "entranceNodeIds": [
+        "E029"
+      ]
     },
     {
       "id": "shop_030",
@@ -694,7 +752,6 @@
       "rating": 4.6,
       "offer": "15% OFF on Waffle Cones",
       "logo": "assets/images/logos/baskinrobbins.png",
-      "navigationNodeId": "N030",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -702,7 +759,10 @@
         "y": 541.0,
         "width": 36.0,
         "height": 44.0
-      }
+      },
+      "entranceNodeIds": [
+        "E030"
+      ]
     },
     {
       "id": "shop_031",
@@ -715,7 +775,6 @@
       "rating": 4.4,
       "offer": "Free King Meal Upgrade",
       "logo": "assets/images/logos/burgerking.png",
-      "navigationNodeId": "N031",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -723,7 +782,10 @@
         "y": 497.0,
         "width": 36.0,
         "height": 141.0
-      }
+      },
+      "entranceNodeIds": [
+        "E031"
+      ]
     },
     {
       "id": "shop_032",
@@ -736,7 +798,6 @@
       "rating": 4.2,
       "offer": "Flat 20% OFF Personal Pan",
       "logo": "assets/images/logos/pizzahut.png",
-      "navigationNodeId": "N032",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -744,7 +805,10 @@
         "y": 499.0,
         "width": 38.0,
         "height": 139.0
-      }
+      },
+      "entranceNodeIds": [
+        "E032"
+      ]
     },
     {
       "id": "shop_033",
@@ -757,7 +821,6 @@
       "rating": 4.4,
       "offer": "Free Fries on Orders above $15",
       "logo": "assets/images/logos/mcdonalds.png",
-      "navigationNodeId": "N033",
       "isAccessible": true,
       "geometry": {
         "type": "rectangle",
@@ -765,6 +828,590 @@
         "y": 493.0,
         "width": 139.0,
         "height": 145.0
+      },
+      "entranceNodeIds": [
+        "E033"
+      ]
+    },
+    {
+      "id": "lift_2",
+      "polygonId": "lift_2",
+      "name": "Lift 2",
+      "category": "Lift",
+      "description": "Ground Floor Elevator to First Floor",
+      "floorId": "ground_floor",
+      "status": "open",
+      "rating": 5.0,
+      "offer": "",
+      "logo": "",
+      "isAccessible": true,
+      "geometry": {
+        "type": "polygon",
+        "points": [
+          {"x": 873.5, "y": 241.0},
+          {"x": 827.5, "y": 241.0},
+          {"x": 827.5, "y": 282.5},
+          {"x": 866.0, "y": 304.0},
+          {"x": 873.5, "y": 292.5}
+        ]
+      },
+      "entranceNodeIds": [
+        "L002"
+      ]
+    }
+  ],
+  "navigation": {
+    "nodes": [
+      {
+        "id": "L002",
+        "x": 850.5,
+        "y": 272.5,
+        "floorId": "ground_floor",
+        "type": "lift"
+      },
+      {
+        "id": "H001",
+        "x": 100.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H002",
+        "x": 250.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H003",
+        "x": 400.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H004",
+        "x": 550.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H005",
+        "x": 700.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H006",
+        "x": 850.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H007",
+        "x": 1000.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H008",
+        "x": 1150.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H009",
+        "x": 1300.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H010",
+        "x": 1450.0,
+        "y": 440.0,
+        "floorId": "ground_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "E001",
+        "x": 118.5,
+        "y": 403.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E002",
+        "x": 193.5,
+        "y": 403.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E003",
+        "x": 250.5,
+        "y": 404.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E004",
+        "x": 304.0,
+        "y": 403.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E005",
+        "x": 410.0,
+        "y": 402.5,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E006",
+        "x": 463.5,
+        "y": 398.5,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E007",
+        "x": 523.0,
+        "y": 398.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E008",
+        "x": 584.0,
+        "y": 398.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E009",
+        "x": 950.5,
+        "y": 397.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E010",
+        "x": 1015.0,
+        "y": 394.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E011",
+        "x": 1070.0,
+        "y": 398.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E012",
+        "x": 1125.0,
+        "y": 398.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E013",
+        "x": 1234.0,
+        "y": 403.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E014",
+        "x": 1288.0,
+        "y": 403.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E015",
+        "x": 1341.5,
+        "y": 398.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E016",
+        "x": 1418.0,
+        "y": 404.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E017",
+        "x": 118.5,
+        "y": 482.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E018",
+        "x": 190.0,
+        "y": 491.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E019",
+        "x": 249.0,
+        "y": 493.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E020",
+        "x": 305.0,
+        "y": 497.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E021",
+        "x": 410.0,
+        "y": 501.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E022",
+        "x": 465.5,
+        "y": 501.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E023",
+        "x": 522.0,
+        "y": 497.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E024",
+        "x": 588.5,
+        "y": 497.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E025",
+        "x": 678.5,
+        "y": 576.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E026",
+        "x": 857.0,
+        "y": 587.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E027",
+        "x": 945.5,
+        "y": 501.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E028",
+        "x": 1017.0,
+        "y": 495.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E029",
+        "x": 1072.5,
+        "y": 501.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E030",
+        "x": 1124.0,
+        "y": 541.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E031",
+        "x": 1233.0,
+        "y": 497.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E032",
+        "x": 1287.0,
+        "y": 499.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E033",
+        "x": 1394.5,
+        "y": 493.0,
+        "floorId": "ground_floor",
+        "type": "entrance"
+      }
+    ],
+    "edges": [
+      {
+        "fromNodeId": "H001",
+        "toNodeId": "H002",
+        "distance": 150.0
+      },
+      {
+        "fromNodeId": "H002",
+        "toNodeId": "H003",
+        "distance": 150.0
+      },
+      {
+        "fromNodeId": "H003",
+        "toNodeId": "H004",
+        "distance": 150.0
+      },
+      {
+        "fromNodeId": "H004",
+        "toNodeId": "H005",
+        "distance": 150.0
+      },
+      {
+        "fromNodeId": "H005",
+        "toNodeId": "H006",
+        "distance": 150.0
+      },
+      {
+        "fromNodeId": "H006",
+        "toNodeId": "H007",
+        "distance": 150.0
+      },
+      {
+        "fromNodeId": "H007",
+        "toNodeId": "H008",
+        "distance": 150.0
+      },
+      {
+        "fromNodeId": "H008",
+        "toNodeId": "H009",
+        "distance": 150.0
+      },
+      {
+        "fromNodeId": "H009",
+        "toNodeId": "H010",
+        "distance": 150.0
+      },
+      {
+        "fromNodeId": "E001",
+        "toNodeId": "H001",
+        "distance": 41.4
+      },
+      {
+        "fromNodeId": "E002",
+        "toNodeId": "H002",
+        "distance": 67.5
+      },
+      {
+        "fromNodeId": "E003",
+        "toNodeId": "H002",
+        "distance": 36.0
+      },
+      {
+        "fromNodeId": "E004",
+        "toNodeId": "H002",
+        "distance": 65.5
+      },
+      {
+        "fromNodeId": "E005",
+        "toNodeId": "H003",
+        "distance": 38.8
+      },
+      {
+        "fromNodeId": "E006",
+        "toNodeId": "H003",
+        "distance": 75.9
+      },
+      {
+        "fromNodeId": "E007",
+        "toNodeId": "H004",
+        "distance": 49.9
+      },
+      {
+        "fromNodeId": "E008",
+        "toNodeId": "H004",
+        "distance": 54.0
+      },
+      {
+        "fromNodeId": "E009",
+        "toNodeId": "H007",
+        "distance": 65.6
+      },
+      {
+        "fromNodeId": "E010",
+        "toNodeId": "H007",
+        "distance": 48.4
+      },
+      {
+        "fromNodeId": "E011",
+        "toNodeId": "H007",
+        "distance": 81.6
+      },
+      {
+        "fromNodeId": "E012",
+        "toNodeId": "H008",
+        "distance": 48.9
+      },
+      {
+        "fromNodeId": "E013",
+        "toNodeId": "H009",
+        "distance": 75.7
+      },
+      {
+        "fromNodeId": "E014",
+        "toNodeId": "H009",
+        "distance": 38.9
+      },
+      {
+        "fromNodeId": "E015",
+        "toNodeId": "H009",
+        "distance": 59.0
+      },
+      {
+        "fromNodeId": "E016",
+        "toNodeId": "H010",
+        "distance": 48.2
+      },
+      {
+        "fromNodeId": "E017",
+        "toNodeId": "H001",
+        "distance": 45.9
+      },
+      {
+        "fromNodeId": "E018",
+        "toNodeId": "H002",
+        "distance": 78.7
+      },
+      {
+        "fromNodeId": "E019",
+        "toNodeId": "H002",
+        "distance": 53.0
+      },
+      {
+        "fromNodeId": "E020",
+        "toNodeId": "H002",
+        "distance": 79.2
+      },
+      {
+        "fromNodeId": "E021",
+        "toNodeId": "H003",
+        "distance": 61.8
+      },
+      {
+        "fromNodeId": "E022",
+        "toNodeId": "H003",
+        "distance": 89.5
+      },
+      {
+        "fromNodeId": "E023",
+        "toNodeId": "H004",
+        "distance": 63.5
+      },
+      {
+        "fromNodeId": "E024",
+        "toNodeId": "H004",
+        "distance": 68.8
+      },
+      {
+        "fromNodeId": "E025",
+        "toNodeId": "H005",
+        "distance": 137.7
+      },
+      {
+        "fromNodeId": "E026",
+        "toNodeId": "H006",
+        "distance": 147.2
+      },
+      {
+        "fromNodeId": "E027",
+        "toNodeId": "H007",
+        "distance": 81.8
+      },
+      {
+        "fromNodeId": "E028",
+        "toNodeId": "H007",
+        "distance": 57.6
+      },
+      {
+        "fromNodeId": "E029",
+        "toNodeId": "H007",
+        "distance": 94.7
+      },
+      {
+        "fromNodeId": "E030",
+        "toNodeId": "H008",
+        "distance": 104.3
+      },
+      {
+        "fromNodeId": "E031",
+        "toNodeId": "H009",
+        "distance": 88.0
+      },
+      {
+        "fromNodeId": "E032",
+        "toNodeId": "H009",
+        "distance": 60.4
+      },
+      {
+        "fromNodeId": "E033",
+        "toNodeId": "H010",
+        "distance": 76.7
+      },
+      {
+        "fromNodeId": "L002",
+        "toNodeId": "H006",
+        "distance": 167.5
+      }
+    ]
+  },
+  "connectors": [
+    {
+      "id": "escalator_1_g",
+      "floorId": "ground_floor",
+      "navigationNodeId": "H009",
+      "connectedConnectorId": "escalator_1_f",
+      "connectorType": "escalator",
+      "accessible": true,
+      "metadata": {
+        "destinationFloorId": "first_floor",
+        "destinationConnectorId": "escalator_1_f"
+      }
+    },
+    {
+      "id": "lift_2_g",
+      "floorId": "ground_floor",
+      "navigationNodeId": "L002",
+      "connectedConnectorId": "lift_2_f",
+      "connectorType": "lift",
+      "accessible": true,
+      "metadata": {
+        "destinationFloorId": "first_floor",
+        "destinationConnectorId": "lift_2_f"
       }
     }
   ]

@@ -1,0 +1,594 @@
+{
+  "id": "first_floor",
+  "name": "First Floor",
+  "svgPath": "assets/svg/maps/first_floor.svg",
+  "shops": [
+    {
+      "id": "F108",
+      "name": "Shop F108",
+      "category": "Retail",
+      "description": "First Floor Store F108",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 939.0,
+        "y": 278.0,
+        "width": 77.0,
+        "height": 74.0
+      },
+      "entranceNodeIds": ["E108"]
+    },
+    {
+      "id": "F109",
+      "name": "Shop F109",
+      "category": "Retail",
+      "description": "First Floor Store F109",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1032.0,
+        "y": 279.0,
+        "width": 60.0,
+        "height": 73.0
+      },
+      "entranceNodeIds": ["E109"]
+    },
+    {
+      "id": "F110",
+      "name": "Shop F110",
+      "category": "Retail",
+      "description": "First Floor Store F110",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1110.0,
+        "y": 276.0,
+        "width": 51.0,
+        "height": 76.0
+      },
+      "entranceNodeIds": ["E110"]
+    },
+    {
+      "id": "F111",
+      "name": "Shop F111",
+      "category": "Retail",
+      "description": "First Floor Store F111",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1175.0,
+        "y": 276.0,
+        "width": 61.0,
+        "height": 76.0
+      },
+      "entranceNodeIds": ["E111"]
+    },
+    {
+      "id": "F118",
+      "name": "Shop F118",
+      "category": "Retail",
+      "description": "First Floor Store F118",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1253.0,
+        "y": 273.0,
+        "width": 51.0,
+        "height": 79.0
+      },
+      "entranceNodeIds": ["E118"]
+    },
+    {
+      "id": "F119",
+      "name": "Shop F119",
+      "category": "Retail",
+      "description": "First Floor Store F119",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1329.0,
+        "y": 278.0,
+        "width": 50.0,
+        "height": 74.0
+      },
+      "entranceNodeIds": ["E119"]
+    },
+    {
+      "id": "F120",
+      "name": "Shop F120",
+      "category": "Retail",
+      "description": "First Floor Store F120",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1398.0,
+        "y": 276.0,
+        "width": 65.0,
+        "height": 76.0
+      },
+      "entranceNodeIds": ["E120"]
+    },
+    {
+      "id": "F112",
+      "name": "Shop F112",
+      "category": "Retail",
+      "description": "First Floor Store F112",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1387.0,
+        "y": 457.0,
+        "width": 76.0,
+        "height": 159.0
+      },
+      "entranceNodeIds": ["E112"]
+    },
+    {
+      "id": "F113",
+      "name": "Shop F113",
+      "category": "Retail",
+      "description": "First Floor Store F113",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1315.0,
+        "y": 458.0,
+        "width": 48.0,
+        "height": 158.0
+      },
+      "entranceNodeIds": ["E113"]
+    },
+    {
+      "id": "F114",
+      "name": "Shop F114",
+      "category": "Retail",
+      "description": "First Floor Store F114",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1244.0,
+        "y": 457.0,
+        "width": 51.0,
+        "height": 159.0
+      },
+      "entranceNodeIds": ["E114"]
+    },
+    {
+      "id": "F115",
+      "name": "Shop F115",
+      "category": "Retail",
+      "description": "First Floor Store F115",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1074.0,
+        "y": 457.0,
+        "width": 43.0,
+        "height": 159.0
+      },
+      "entranceNodeIds": ["E115"]
+    },
+    {
+      "id": "F116",
+      "name": "Shop F116",
+      "category": "Retail",
+      "description": "First Floor Store F116",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1010.0,
+        "y": 460.0,
+        "width": 45.0,
+        "height": 156.0
+      },
+      "entranceNodeIds": ["E116"]
+    },
+    {
+      "id": "F117",
+      "name": "Shop F117",
+      "category": "Retail",
+      "description": "First Floor Store F117",
+      "status": "open",
+      "rating": 4.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 925.0,
+        "y": 460.0,
+        "width": 65.0,
+        "height": 156.0
+      },
+      "entranceNodeIds": ["E117"]
+    },
+    {
+      "id": "F_corridor_1",
+      "name": "Corridor",
+      "category": "Corridor",
+      "description": "First Floor Corridor Segment 1",
+      "status": "open",
+      "rating": 0.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 911.0,
+        "y": 378.0,
+        "width": 340.0,
+        "height": 40.0
+      },
+      "entranceNodeIds": []
+    },
+    {
+      "id": "F_corridor_2",
+      "name": "Corridor",
+      "category": "Corridor",
+      "description": "First Floor Corridor Segment 2",
+      "status": "open",
+      "rating": 0.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1396.0,
+        "y": 375.0,
+        "width": 67.0,
+        "height": 43.0
+      },
+      "entranceNodeIds": []
+    },
+    {
+      "id": "F_escalator",
+      "name": "Escalator",
+      "category": "Escalator",
+      "description": "First Floor Escalator Connector",
+      "status": "open",
+      "rating": 0.0,
+      "offer": "",
+      "geometry": {
+        "type": "rectangle",
+        "x": 1265.0,
+        "y": 385.0,
+        "width": 121.0,
+        "height": 44.0
+      },
+      "entranceNodeIds": []
+    },
+    {
+      "id": "lift_2",
+      "polygonId": "F_lift_2",
+      "name": "Lift 2",
+      "category": "Lift",
+      "description": "First Floor Elevator to Ground Floor",
+      "floorId": "first_floor",
+      "status": "open",
+      "rating": 5.0,
+      "offer": "",
+      "logo": "",
+      "isAccessible": true,
+      "geometry": {
+        "type": "polygon",
+        "points": [
+          {"x": 825.0, "y": 203.5},
+          {"x": 825.0, "y": 251.0},
+          {"x": 889.0, "y": 285.5},
+          {"x": 920.0, "y": 245.5},
+          {"x": 916.0, "y": 203.5}
+        ]
+      },
+      "entranceNodeIds": ["L102"]
+    }
+  ],
+  "navigation": {
+    "nodes": [
+      {
+        "id": "L102",
+        "x": 872.5,
+        "y": 244.5,
+        "floorId": "first_floor",
+        "type": "lift"
+      },
+      {
+        "id": "H101",
+        "x": 957.5,
+        "y": 398.0,
+        "floorId": "first_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H102",
+        "x": 1032.5,
+        "y": 398.0,
+        "floorId": "first_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H103",
+        "x": 1095.5,
+        "y": 398.0,
+        "floorId": "first_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H104",
+        "x": 1205.5,
+        "y": 398.0,
+        "floorId": "first_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H105",
+        "x": 1270.0,
+        "y": 398.0,
+        "floorId": "first_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H106",
+        "x": 1354.0,
+        "y": 398.0,
+        "floorId": "first_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H107",
+        "x": 1430.5,
+        "y": 398.0,
+        "floorId": "first_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "H109",
+        "x": 1325.5,
+        "y": 407.0,
+        "floorId": "first_floor",
+        "type": "hallway"
+      },
+      {
+        "id": "E108",
+        "x": 977.5,
+        "y": 352.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E109",
+        "x": 1062.0,
+        "y": 352.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E110",
+        "x": 1135.5,
+        "y": 352.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E111",
+        "x": 1205.5,
+        "y": 352.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E118",
+        "x": 1278.5,
+        "y": 352.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E119",
+        "x": 1354.0,
+        "y": 352.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E120",
+        "x": 1430.5,
+        "y": 352.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E112",
+        "x": 1425.0,
+        "y": 457.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E113",
+        "x": 1339.0,
+        "y": 457.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E114",
+        "x": 1269.5,
+        "y": 457.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E115",
+        "x": 1095.5,
+        "y": 457.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E116",
+        "x": 1032.5,
+        "y": 460.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      },
+      {
+        "id": "E117",
+        "x": 957.5,
+        "y": 460.0,
+        "floorId": "first_floor",
+        "type": "entrance"
+      }
+    ],
+    "edges": [
+      {
+        "fromNodeId": "H101",
+        "toNodeId": "H102",
+        "distance": 75.0
+      },
+      {
+        "fromNodeId": "H102",
+        "toNodeId": "H103",
+        "distance": 63.0
+      },
+      {
+        "fromNodeId": "H103",
+        "toNodeId": "H104",
+        "distance": 110.0
+      },
+      {
+        "fromNodeId": "H104",
+        "toNodeId": "H105",
+        "distance": 64.5
+      },
+      {
+        "fromNodeId": "H105",
+        "toNodeId": "H109",
+        "distance": 56.2
+      },
+      {
+        "fromNodeId": "H109",
+        "toNodeId": "H106",
+        "distance": 29.9
+      },
+      {
+        "fromNodeId": "H106",
+        "toNodeId": "H107",
+        "distance": 76.5
+      },
+      {
+        "fromNodeId": "E112",
+        "toNodeId": "H107",
+        "distance": 59.0
+      },
+      {
+        "fromNodeId": "E113",
+        "toNodeId": "H106",
+        "distance": 59.0
+      },
+      {
+        "fromNodeId": "E114",
+        "toNodeId": "H105",
+        "distance": 59.0
+      },
+      {
+        "fromNodeId": "E115",
+        "toNodeId": "H103",
+        "distance": 59.0
+      },
+      {
+        "fromNodeId": "E116",
+        "toNodeId": "H102",
+        "distance": 62.0
+      },
+      {
+        "fromNodeId": "E117",
+        "toNodeId": "H101",
+        "distance": 62.0
+      },
+      {
+        "fromNodeId": "E108",
+        "toNodeId": "H101",
+        "distance": 50.1
+      },
+      {
+        "fromNodeId": "E109",
+        "toNodeId": "H102",
+        "distance": 54.6
+      },
+      {
+        "fromNodeId": "E110",
+        "toNodeId": "H103",
+        "distance": 60.9
+      },
+      {
+        "fromNodeId": "E111",
+        "toNodeId": "H104",
+        "distance": 46.0
+      },
+      {
+        "fromNodeId": "E118",
+        "toNodeId": "H105",
+        "distance": 46.8
+      },
+      {
+        "fromNodeId": "E119",
+        "toNodeId": "H106",
+        "distance": 46.0
+      },
+      {
+        "fromNodeId": "E120",
+        "toNodeId": "H107",
+        "distance": 46.0
+      },
+      {
+        "fromNodeId": "L102",
+        "toNodeId": "H101",
+        "distance": 175.5
+      }
+    ]
+  },
+  "connectors": [
+    {
+      "id": "escalator_1_f",
+      "floorId": "first_floor",
+      "navigationNodeId": "H109",
+      "connectedConnectorId": "escalator_1_g",
+      "connectorType": "escalator",
+      "accessible": true,
+      "metadata": {
+        "destinationFloorId": "ground_floor",
+        "destinationConnectorId": "escalator_1_g"
+      }
+    },
+    {
+      "id": "lift_2_f",
+      "floorId": "first_floor",
+      "navigationNodeId": "L102",
+      "connectedConnectorId": "lift_2_g",
+      "connectorType": "lift",
+      "accessible": true,
+      "metadata": {
+        "destinationFloorId": "ground_floor",
+        "destinationConnectorId": "lift_2_g"
+      }
+    }
+  ]
+}
