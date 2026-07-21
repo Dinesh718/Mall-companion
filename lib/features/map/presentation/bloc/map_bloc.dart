@@ -9,23 +9,29 @@ import '../../domain/services/navigation_progress_service.dart';
 import '../../domain/services/navigation_simulation_service.dart';
 import '../../domain/entities/map_entities.dart';
 import '../../domain/entities/position_entities.dart';
+import '../../domain/services/navigation_instruction_service.dart';
+import '../../domain/services/route_preview_service.dart';
+import '../../domain/services/text_to_speech_service.dart';
 import 'map_event.dart';
 import 'map_state.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
   final MapRepository mapRepository;
   final PositionRepository? positionRepository;
+  final TextToSpeechService _ttsService = TextToSpeechService();
   StreamSubscription<IndoorPositionEntity>? _positionSubscription;
   bool _isRecalculating = false;
 
   MapBloc({required this.mapRepository, this.positionRepository})
     : super(const MapInitial()) {
+    print('MAP BLOC CREATED ${identityHashCode(this)}');
     on<LoadMap>(_onLoadMap);
     on<SelectShop>(_onSelectShop);
     on<ClearSelection>(_onClearSelection);
     on<SearchShops>(_onSearchShops);
     on<ClearSearch>(_onClearSearch);
     on<CalculateRoute>(_onCalculateRoute);
+    on<StartNavigation>(_onStartNavigation);
     on<ClearRoute>(_onClearRoute);
     on<AdvanceToNextSegment>(_onAdvanceToNextSegment);
     on<CompleteFloorTransition>(_onCompleteFloorTransition);
@@ -34,6 +40,13 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<StopPositioning>(_onStopPositioning);
     on<UpdateUserPosition>(_onUpdateUserPosition);
     on<SelectFloor>(_onSelectFloor);
+    on<ToggleVoiceGuidance>(_onToggleVoiceGuidance);
+  }
+
+  @override
+  void onEvent(MapEvent event) {
+    super.onEvent(event);
+    print('EVENT RECEIVED ${event.runtimeType} at ${DateTime.now()}');
   }
 
   Future<void> _onLoadMap(LoadMap event, Emitter<MapState> emit) async {
@@ -99,6 +112,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           activeRoute: currentState.activeRoute,
           navigationSession: currentState.navigationSession,
           latestPosition: currentState.latestPosition,
+          instructions: currentState.instructions,
         ),
       );
     }
@@ -138,6 +152,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           activeRoute: currentState.activeRoute,
           navigationSession: currentState.navigationSession,
           latestPosition: currentState.latestPosition,
+          instructions: currentState.instructions,
         ),
       );
     }
@@ -218,7 +233,6 @@ debugPrint("destination=${event.endNodeId}");
       );
 
       NavigationRouteEntity? routeEntity;
-      NavigationSessionEntity? sessionEntity;
 
       if (nodes.isNotEmpty) {
         final List<RouteSegmentEntity> segments = [];
@@ -307,36 +321,107 @@ debugPrint("destination=${event.endNodeId}");
           if (destinationShopId.isNotEmpty) break;
         }
 
-        String? nextConnectorId;
-        if (segments.length > 1) {
-          final firstSeg = segments[0];
-          final lastNodeId = firstSeg.nodes.last.id;
-          final currentFloor = currentState.mapEntity.floors.firstWhere(
-            (f) => f.id == firstSeg.floorId,
-          );
-          for (final conn in currentFloor.connectors) {
-            if (conn.navigationNodeId == lastNodeId) {
-              nextConnectorId = conn.id;
-              break;
-            }
-          }
-        }
-
-        sessionEntity = NavigationSessionEntity(
-          destinationShopId: destinationShopId,
-          destinationEntranceId: event.endNodeId,
+        final previewEntity = RoutePreviewService.generatePreview(
           route: routeEntity,
-          segments: segments,
-          currentSegmentIndex: 0,
-          currentFloorId: segments.isNotEmpty
-              ? segments.first.floorId
-              : currentState.currentFloor.id,
-          nextConnectorId: nextConnectorId,
-          remainingDistance: totalDistance,
-          estimatedWalkingDistance: totalDistance,
-          navigationStatus: NavigationStatus.navigating,
+          floors: currentState.mapEntity.floors,
+          destinationShopId: destinationShopId,
+        );
+
+        emit(
+          MapLoaded(
+            mapEntity: currentState.mapEntity,
+            currentFloor: currentState.currentFloor,
+            shops: currentState.shops,
+            selectedShopId: currentState.selectedShopId,
+            searchResults: currentState.searchResults,
+            searchQuery: currentState.searchQuery,
+            activeRoute: routeEntity,
+            navigationSession: null,
+            latestPosition: currentState.latestPosition,
+            instructions: null,
+            preview: previewEntity,
+            isPreviewMode: true,
+          ),
         );
       }
+    }
+  }
+
+  void _onStartNavigation(StartNavigation event, Emitter<MapState> emit) {
+    print('START NAVIGATION CALLED on MapBloc ${identityHashCode(this)}');
+    debugPrint('START NAVIGATION EVENT RECEIVED');
+    final currentState = state;
+    if (currentState is MapLoaded && currentState.activeRoute != null) {
+      final routeEntity = currentState.activeRoute!;
+      final endNodeId = routeEntity.completeRoute.isNotEmpty
+          ? routeEntity.completeRoute.last.id
+          : '';
+
+      String destinationShopId = '';
+      for (final floor in currentState.mapEntity.floors) {
+        for (final shop in floor.shops) {
+          if (shop.entranceNodeIds.contains(endNodeId)) {
+            destinationShopId = shop.id;
+            break;
+          }
+        }
+        if (destinationShopId.isNotEmpty) break;
+      }
+
+      String? nextConnectorId;
+      if (routeEntity.segments.length > 1) {
+        final firstSeg = routeEntity.segments[0];
+        final lastNodeId = firstSeg.nodes.last.id;
+        final matchingFloors = currentState.mapEntity.floors.where((f) => f.id == firstSeg.floorId);
+        final currentFloor = matchingFloors.isNotEmpty
+            ? matchingFloors.first
+            : currentState.currentFloor;
+        for (final conn in currentFloor.connectors) {
+          if (conn.navigationNodeId == lastNodeId) {
+            nextConnectorId = conn.id;
+            break;
+          }
+        }
+      }
+
+      final sessionEntity = NavigationSessionEntity(
+        destinationShopId: destinationShopId,
+        destinationEntranceId: endNodeId,
+        route: routeEntity,
+        segments: routeEntity.segments,
+        currentSegmentIndex: 0,
+        currentFloorId: routeEntity.segments.isNotEmpty
+            ? routeEntity.segments.first.floorId
+            : currentState.currentFloor.id,
+        nextConnectorId: nextConnectorId,
+        remainingDistance: routeEntity.totalDistance,
+        estimatedWalkingDistance: routeEntity.totalDistance,
+        navigationStatus: NavigationStatus.navigating,
+      );
+
+      final instructions = NavigationInstructionService.generateInstructions(
+        route: routeEntity,
+        floors: currentState.mapEntity.floors,
+        destinationShopId: destinationShopId,
+      );
+
+      _isRecalculating = false;
+
+      final startNode = routeEntity.completeRoute.isNotEmpty
+          ? routeEntity.completeRoute.first
+          : null;
+
+      final initialPosition = startNode != null
+          ? IndoorPositionEntity(
+              id: 'start_pos_${startNode.id}',
+              floorId: startNode.floorId,
+              x: startNode.x,
+              y: startNode.y,
+              accuracy: 1.0,
+              timestamp: DateTime.now(),
+              source: PositionSource.simulation,
+            )
+          : currentState.latestPosition;
 
       emit(
         MapLoaded(
@@ -348,11 +433,14 @@ debugPrint("destination=${event.endNodeId}");
           searchQuery: currentState.searchQuery,
           activeRoute: routeEntity,
           navigationSession: sessionEntity,
-          latestPosition: currentState.latestPosition,
+          latestPosition: initialPosition,
+          instructions: instructions,
+          preview: currentState.preview,
+          isPreviewMode: false,
         ),
       );
 
-      if (routeEntity != null && positionRepository != null) {
+      if (positionRepository != null) {
         final simPath = NavigationSimulationService.generateSimulationPath(
           routeEntity,
         );
@@ -363,6 +451,7 @@ debugPrint("destination=${event.endNodeId}");
   }
 
   void _onClearRoute(ClearRoute event, Emitter<MapState> emit) {
+    print('CLEAR ROUTE DISPATCHED');
     final currentState = state;
     if (currentState is MapLoaded) {
       emit(
@@ -376,6 +465,9 @@ debugPrint("destination=${event.endNodeId}");
           activeRoute: null,
           navigationSession: null,
           latestPosition: currentState.latestPosition,
+          instructions: null,
+          preview: null,
+          isPreviewMode: false,
         ),
       );
     }
@@ -412,6 +504,8 @@ debugPrint("destination=${event.endNodeId}");
           searchQuery: currentState.searchQuery,
           activeRoute: currentState.activeRoute,
           navigationSession: updatedSession,
+          latestPosition: currentState.latestPosition,
+          instructions: currentState.instructions,
         ),
       );
     }
@@ -450,6 +544,8 @@ debugPrint("destination=${event.endNodeId}");
               searchQuery: currentState.searchQuery,
               activeRoute: currentState.activeRoute,
               navigationSession: updatedSession,
+              latestPosition: currentState.latestPosition,
+              instructions: currentState.instructions,
             ),
           );
           return;
@@ -504,6 +600,7 @@ debugPrint("destination=${event.endNodeId}");
           route: session.route,
           segments: session.segments,
           currentSegmentIndex: nextIndex,
+          currentRouteNodeIndex: session.currentRouteNodeIndex,
           currentFloorId: nextFloorId,
           nextConnectorId: nextConnectorId,
           remainingDistance: remainingDistance,
@@ -521,6 +618,8 @@ debugPrint("destination=${event.endNodeId}");
             searchQuery: currentState.searchQuery,
             activeRoute: currentState.activeRoute,
             navigationSession: updatedSession,
+            latestPosition: currentState.latestPosition,
+            instructions: currentState.instructions,
           ),
         );
       } else {
@@ -547,6 +646,8 @@ debugPrint("destination=${event.endNodeId}");
             searchQuery: currentState.searchQuery,
             activeRoute: currentState.activeRoute,
             navigationSession: updatedSession,
+            latestPosition: currentState.latestPosition,
+            instructions: currentState.instructions,
           ),
         );
       }
@@ -554,6 +655,7 @@ debugPrint("destination=${event.endNodeId}");
   }
 
   void _onCancelNavigation(CancelNavigation event, Emitter<MapState> emit) {
+    print('CANCEL NAVIGATION DISPATCHED');
     final currentState = state;
     if (currentState is MapLoaded) {
       emit(
@@ -567,6 +669,7 @@ debugPrint("destination=${event.endNodeId}");
           activeRoute: null,
           navigationSession: null,
           latestPosition: currentState.latestPosition,
+          instructions: null,
         ),
       );
     }
@@ -588,11 +691,6 @@ debugPrint("destination=${event.endNodeId}");
   }
 
   void _onUpdateUserPosition(UpdateUserPosition event, Emitter<MapState> emit) {
-    debugPrint(
-  "POSITION UPDATE -> "
-  "${event.position.floorId} "
-  "(${event.position.x}, ${event.position.y})",
-);
     final currentState = state;
     if (currentState is MapLoaded) {
       if (event.position.x.isNaN || event.position.y.isNaN) {
@@ -613,6 +711,11 @@ debugPrint("destination=${event.endNodeId}");
             session.navigationStatus == NavigationStatus.navigating && 
             !_isRecalculating) {
           _isRecalculating = true;
+          _ttsService.speak(
+            speechKey: 'off_route',
+            text: 'Recalculating route',
+            force: true,
+          );
           positionRepository?.loadPositionPath([]);
           final endNodeId = session.route.completeRoute.last.id;
           add(CalculateRoute(endNodeId: endNodeId));
@@ -674,17 +777,15 @@ debugPrint("destination=${event.endNodeId}");
         NavigationSessionEntity? updatedSession = activeSession;
 
         if (result.hasReachedDestination) {
-          updatedSession = NavigationSessionEntity(
-            destinationShopId: activeSession.destinationShopId,
-            destinationEntranceId: activeSession.destinationEntranceId,
-            route: activeSession.route,
-            segments: activeSession.segments,
-            currentSegmentIndex: activeSession.currentSegmentIndex,
-            currentFloorId: activeSession.currentFloorId,
-            nextConnectorId: activeSession.nextConnectorId,
+          updatedSession = activeSession.copyWith(
+            currentRouteNodeIndex: result.currentRouteNodeIndex,
             remainingDistance: 0.0,
-            estimatedWalkingDistance: activeSession.estimatedWalkingDistance,
             navigationStatus: NavigationStatus.arrived,
+          );
+          _ttsService.speak(
+            speechKey: 'arrived',
+            text: 'You have arrived at your destination',
+            force: true,
           );
         } else if (result.shouldAdvanceSegment &&
             activeSession.navigationStatus == NavigationStatus.navigating) {
@@ -692,61 +793,78 @@ debugPrint("destination=${event.endNodeId}");
           if (nextSegIdx < activeSession.segments.length) {
             final nextSeg = activeSession.segments[nextSegIdx];
             if (nextSeg.floorId == 'transition') {
-              updatedSession = NavigationSessionEntity(
-                destinationShopId: activeSession.destinationShopId,
-                destinationEntranceId: activeSession.destinationEntranceId,
-                route: activeSession.route,
-                segments: activeSession.segments,
+              updatedSession = activeSession.copyWith(
                 currentSegmentIndex: nextSegIdx,
+                currentRouteNodeIndex: result.currentRouteNodeIndex,
                 currentFloorId: 'transition',
-                nextConnectorId: activeSession.nextConnectorId,
                 remainingDistance: result.remainingDistance,
-                estimatedWalkingDistance: activeSession.estimatedWalkingDistance,
                 navigationStatus: NavigationStatus.transitioningFloor,
               );
             } else {
-              updatedSession = NavigationSessionEntity(
-                destinationShopId: activeSession.destinationShopId,
-                destinationEntranceId: activeSession.destinationEntranceId,
-                route: activeSession.route,
-                segments: activeSession.segments,
-                currentSegmentIndex: activeSession.currentSegmentIndex,
-                currentFloorId: activeSession.currentFloorId,
-                nextConnectorId: activeSession.nextConnectorId,
+              updatedSession = activeSession.copyWith(
+                currentRouteNodeIndex: result.currentRouteNodeIndex,
                 remainingDistance: result.remainingDistance,
-                estimatedWalkingDistance: activeSession.estimatedWalkingDistance,
                 navigationStatus: NavigationStatus.waitingForConnector,
               );
             }
           } else {
-            updatedSession = NavigationSessionEntity(
-              destinationShopId: activeSession.destinationShopId,
-              destinationEntranceId: activeSession.destinationEntranceId,
-              route: activeSession.route,
-              segments: activeSession.segments,
-              currentSegmentIndex: activeSession.currentSegmentIndex,
-              currentFloorId: activeSession.currentFloorId,
-              nextConnectorId: activeSession.nextConnectorId,
+            updatedSession = activeSession.copyWith(
+              currentRouteNodeIndex: result.currentRouteNodeIndex,
               remainingDistance: result.remainingDistance,
-              estimatedWalkingDistance: activeSession.estimatedWalkingDistance,
               navigationStatus: NavigationStatus.waitingForConnector,
             );
           }
         } else {
-          updatedSession = NavigationSessionEntity(
-            destinationShopId: activeSession.destinationShopId,
-            destinationEntranceId: activeSession.destinationEntranceId,
-            route: activeSession.route,
-            segments: activeSession.segments,
-            currentSegmentIndex: activeSession.currentSegmentIndex,
-            currentFloorId: activeSession.currentFloorId,
-            nextConnectorId: activeSession.nextConnectorId,
+          updatedSession = activeSession.copyWith(
+            currentRouteNodeIndex: result.currentRouteNodeIndex,
             remainingDistance: result.remainingDistance,
-            estimatedWalkingDistance: activeSession.estimatedWalkingDistance,
-            navigationStatus: activeSession.navigationStatus,
           );
         }
 
+        final updatedInstructions = NavigationInstructionService.updateInstructionProgress(
+          instructions: currentState.instructions ?? [],
+          nearestRouteIndex: result.nearestRouteIndex,
+          currentRouteNodeIndex: result.currentRouteNodeIndex,
+          position: event.position,
+          route: updatedSession.route,
+        );
+
+        if (updatedInstructions.isNotEmpty) {
+          final activeInstIndex = updatedInstructions.indexWhere((inst) => !inst.isCompleted);
+          final activeInst = activeInstIndex != -1
+              ? updatedInstructions[activeInstIndex]
+              : updatedInstructions.last;
+          
+          if (updatedSession.navigationStatus != NavigationStatus.arrived) {
+            _ttsService.speak(
+              speechKey: 'inst_${activeInst.instructionId}_${activeInst.type}',
+              text: activeInst.text,
+            );
+          }
+
+          double distToTrigger = 0.0;
+          if (activeInst.endNodeIndex < updatedSession.route.completeRoute.length) {
+            final triggerNode = updatedSession.route.completeRoute[activeInst.endNodeIndex];
+            final dx = event.position.x - triggerNode.x;
+            final dy = event.position.y - triggerNode.y;
+            distToTrigger = sqrt(dx * dx + dy * dy);
+          }
+
+          debugPrint('--------------------------------------------------');
+          debugPrint('Blue Dot Position: (${event.position.x.toStringAsFixed(1)}, ${event.position.y.toStringAsFixed(1)}) on ${event.position.floorId}');
+          debugPrint('Current Route Node: ${result.currentRouteNodeIndex}');
+          debugPrint('Current Active Instruction Index: ${activeInstIndex != -1 ? activeInstIndex : updatedInstructions.length - 1}');
+          debugPrint('Instruction: ${activeInst.text}');
+          debugPrint('Instruction Type: ${activeInst.type}');
+          debugPrint('Distance To Trigger Node: ${distToTrigger.toStringAsFixed(1)}');
+          debugPrint('Instruction Completed: ${activeInst.isCompleted}');
+          debugPrint('--------------------------------------------------');
+        }
+
+        debugPrint(
+          'STATE latestPosition: ${event.position.floorId} ${event.position.x} ${event.position.y}',
+        );
+        print('EMITTING NEW MAPLOADED');
         emit(
           MapLoaded(
             mapEntity: currentState.mapEntity,
@@ -758,12 +876,18 @@ debugPrint("destination=${event.endNodeId}");
             activeRoute: currentState.activeRoute,
             navigationSession: updatedSession,
             latestPosition: event.position,
+            instructions: updatedInstructions,
           ),
         );
+        print('MAPLOADED EMITTED');
+        print('EXIT UPDATE USER POSITION');
         return;
       }
 
+      print('EMITTING NEW MAPLOADED (no session)');
       emit(currentState.copyWith(latestPosition: event.position));
+      print('MAPLOADED EMITTED (no session)');
+      print('EXIT UPDATE USER POSITION');
     }
   }
 
@@ -786,6 +910,7 @@ debugPrint("destination=${event.endNodeId}");
             activeRoute: currentState.activeRoute,
             navigationSession: currentState.navigationSession,
             latestPosition: currentState.latestPosition,
+            instructions: currentState.instructions,
           ),
         );
       } catch (_) {
@@ -794,9 +919,18 @@ debugPrint("destination=${event.endNodeId}");
     }
   }
 
+  void _onToggleVoiceGuidance(ToggleVoiceGuidance event, Emitter<MapState> emit) {
+    final currentState = state;
+    if (currentState is MapLoaded) {
+      _ttsService.toggleMute();
+      emit(currentState.copyWith(isVoiceMuted: _ttsService.isMuted));
+    }
+  }
+
   @override
   Future<void> close() {
     _positionSubscription?.cancel();
+    _ttsService.stop();
     return super.close();
   }
 }

@@ -245,7 +245,6 @@ class ShopDetailsBottomSheet extends StatelessWidget {
               ),
               onPressed: () {
                 onNavigate?.call();
-                Navigator.pop(context);
               },
             ),
           ),

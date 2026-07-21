@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:visitor_mall/features/map/data/datasources/local_map_datasource.dart';
 import 'package:visitor_mall/features/map/data/repositories/dummy_map_repository.dart';
-import 'package:visitor_mall/features/map/domain/entities/map_entities.dart';
 
 class TestAssetBundle extends CachingAssetBundle {
   @override

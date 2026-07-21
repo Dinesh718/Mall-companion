@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -348,6 +347,18 @@ void main() {
         ),
       );
 
+      mapBloc.add(const StartNavigation());
+      await expectLater(
+        mapBloc.stream,
+        emitsThrough(
+          isA<MapLoaded>().having(
+            (s) => s.navigationSession,
+            'navigationSession',
+            isNotNull,
+          ),
+        ),
+      );
+
       var state = mapBloc.state as MapLoaded;
       expect(state.currentFloor.id, 'ground_floor');
       expect(state.navigationSession?.currentSegmentIndex, 0);
@@ -477,6 +488,18 @@ void main() {
         ),
       );
 
+      mapBloc.add(const StartNavigation());
+      await expectLater(
+        mapBloc.stream,
+        emitsThrough(
+          isA<MapLoaded>().having(
+            (s) => s.navigationSession,
+            'navigationSession',
+            isNotNull,
+          ),
+        ),
+      );
+
       var state = mapBloc.state as MapLoaded;
       expect(state.currentFloor.id, 'ground_floor');
       expect(state.activeRoute, isNotNull);
@@ -562,6 +585,18 @@ void main() {
         ),
       );
 
+      mapBloc.add(const StartNavigation());
+      await expectLater(
+        mapBloc.stream,
+        emitsThrough(
+          isA<MapLoaded>().having(
+            (s) => s.navigationSession,
+            'navigationSession',
+            isNotNull,
+          ),
+        ),
+      );
+
       // Advance user position to the escalator connector H009
       mapBloc.add(UpdateUserPosition(IndoorPositionEntity(
         id: 'pos_connector',
@@ -622,11 +657,35 @@ void main() {
         ),
       );
 
+      mapBloc.add(const StartNavigation());
+      await expectLater(
+        mapBloc.stream,
+        emitsThrough(
+          isA<MapLoaded>().having(
+            (s) => s.navigationSession,
+            'navigationSession',
+            isNotNull,
+          ),
+        ),
+      );
+
       var state = mapBloc.state as MapLoaded;
       expect(state.navigationSession?.destinationShopId, 'F112');
 
       // Change destination to S027 (entrance E027) while session is active
       mapBloc.add(const CalculateRoute(startNodeId: 'E026', endNodeId: 'E027'));
+      await expectLater(
+        mapBloc.stream,
+        emitsThrough(
+          isA<MapLoaded>().having(
+            (s) => s.activeRoute,
+            'activeRoute',
+            isNotNull,
+          ),
+        ),
+      );
+
+      mapBloc.add(const StartNavigation());
       await expectLater(
         mapBloc.stream,
         emitsThrough(

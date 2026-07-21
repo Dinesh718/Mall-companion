@@ -52,6 +52,10 @@ class ClearRoute extends MapEvent {
   const ClearRoute();
 }
 
+class StartNavigation extends MapEvent {
+  const StartNavigation();
+}
+
 class AdvanceToNextSegment extends MapEvent {
   const AdvanceToNextSegment();
 }
@@ -88,4 +92,8 @@ class SelectFloor extends MapEvent {
 
   @override
   List<Object?> get props => [floorId];
+}
+
+class ToggleVoiceGuidance extends MapEvent {
+  const ToggleVoiceGuidance();
 }

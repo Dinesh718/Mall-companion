@@ -37,6 +37,7 @@ class NavigationProgressService {
         nearestRouteIndex: route.completeRoute.indexWhere(
           (n) => n.id == activeSegment.nodes.first.id,
         ),
+        currentRouteNodeIndex: session.currentRouteNodeIndex,
         remainingDistance: session.remainingDistance,
         hasReachedNextNode: false,
         hasReachedConnector: false,
@@ -48,28 +49,54 @@ class NavigationProgressService {
       );
     }
 
-    // 1. Find nearest node on the active segment (using <= to select the later node on exact ties)
-    double minDistance = double.infinity;
-    NavigationNodeEntity nearestNode = activeSegment.nodes.first;
-    int localNearestIndex = 0;
-
-    for (int i = 0; i < activeSegment.nodes.length; i++) {
-      final node = activeSegment.nodes[i];
-      final dx = position.x - node.x;
-      final dy = position.y - node.y;
-      final dist = sqrt(dx * dx + dy * dy);
-      if (dist <= minDistance) {
-        minDistance = dist;
-        nearestNode = node;
-        localNearestIndex = i;
+    // 1. Determine local starting node index on active segment corresponding to currentRouteNodeIndex
+    int startLocalIndex = 0;
+    if (session.currentRouteNodeIndex > 0) {
+      final currentNodeId = route.completeRoute[
+        min(session.currentRouteNodeIndex, route.completeRoute.length - 1)
+      ].id;
+      final foundIndex = activeSegment.nodes.indexWhere((n) => n.id == currentNodeId);
+      if (foundIndex != -1) {
+        startLocalIndex = foundIndex;
       }
     }
 
+    // 2. Physical Blue Dot node progress: advance localNearestIndex ONLY when Blue Dot physically reaches next node
+    int localNearestIndex = startLocalIndex;
+    if (startLocalIndex < activeSegment.nodes.length - 1) {
+      final nextNode = activeSegment.nodes[startLocalIndex + 1];
+      final dxNext = position.x - nextNode.x;
+      final dyNext = position.y - nextNode.y;
+      final distToNext = sqrt(dxNext * dxNext + dyNext * dyNext);
+
+      final currentNode = activeSegment.nodes[startLocalIndex];
+      final abx = nextNode.x - currentNode.x;
+      final aby = nextNode.y - currentNode.y;
+      final lenSq = abx * abx + aby * aby;
+      double t = 0.0;
+      if (lenSq > 0.0) {
+        final apx = position.x - currentNode.x;
+        final apy = position.y - currentNode.y;
+        t = ((apx * abx + apy * aby) / lenSq).clamp(0.0, 1.0);
+      }
+
+      // Advance node progress only if Blue Dot is within threshold to next node or has completed edge traversal (t >= 0.95)
+      if (distToNext <= threshold || t >= 0.95) {
+        localNearestIndex = startLocalIndex + 1;
+      }
+    }
+
+    NavigationNodeEntity nearestNode = activeSegment.nodes[localNearestIndex];
     final nearestRouteIndex = route.completeRoute.indexWhere(
       (n) => n.id == nearestNode.id,
     );
 
-    // 2. Next node calculation
+    final updatedRouteNodeIndex = max(
+      session.currentRouteNodeIndex,
+      nearestRouteIndex != -1 ? nearestRouteIndex : session.currentRouteNodeIndex,
+    );
+
+    // 3. Next node calculation
     final dxNearest = position.x - nearestNode.x;
     final dyNearest = position.y - nearestNode.y;
     final distanceToNearest = sqrt(
@@ -101,7 +128,7 @@ class NavigationProgressService {
       hasReachedNextNode = false;
     }
 
-    // 3. Connector reached check
+    // 4. Connector reached check
     bool hasReachedConnector = false;
     bool shouldBeginFloorTransition = false;
     bool shouldAdvanceSegment = false;
@@ -118,28 +145,15 @@ class NavigationProgressService {
       }
     }
 
-    // 4. Destination reached check
-    final finalSegment = segments.last;
-    final destNode = finalSegment.nodes.last;
-    final destDx = position.x - destNode.x;
-    final destDy = position.y - destNode.y;
-    final distanceToDestination = sqrt(destDx * destDx + destDy * destDy);
-    final hasReachedDestination =
-        (currentSegmentIndex == segments.length - 1) &&
-        (distanceToDestination <= threshold);
-
     // 5. Remaining distance calculation
-    double remainingDistance = 0.0;
-    remainingDistance += minDistance;
-
-    // Remaining path on the active segment
-    for (int i = localNearestIndex; i < activeSegment.nodes.length - 1; i++) {
-      final n1 = activeSegment.nodes[i];
-      final n2 = activeSegment.nodes[i + 1];
-      final dx = n1.x - n2.x;
-      final dy = n1.y - n2.y;
-      remainingDistance += sqrt(dx * dx + dy * dy);
-    }
+    final activeSegDist = calculatePathRemainingDistance(
+      path: activeSegment.nodes,
+      px: position.x,
+      py: position.y,
+      startIndex: startLocalIndex,
+      endIndex: activeSegment.nodes.length - 1,
+    );
+    double remainingDistance = activeSegDist;
 
     // Subsequent segments
     for (int s = currentSegmentIndex + 1; s < segments.length; s++) {
@@ -153,9 +167,28 @@ class NavigationProgressService {
       }
     }
 
+    // 6. Destination reached check (Strict physical Blue Dot arrival)
+    final finalSegment = segments.last;
+    final destNode = finalSegment.nodes.last;
+    final destDx = position.x - destNode.x;
+    final destDy = position.y - destNode.y;
+    final distanceToDestination = sqrt(destDx * destDx + destDy * destDy);
+
+    final isFinalSegment = currentSegmentIndex == segments.length - 1;
+
+    bool hasReachedDestination = false;
+    if (isFinalSegment && position.floorId == finalSegment.floorId) {
+      // Arrived ONLY when Blue Dot is physically within threshold of destination entrance
+      if (distanceToDestination <= threshold) {
+        hasReachedDestination = true;
+        remainingDistance = 0.0;
+      }
+    }
+
     return NavigationProgressResult(
       nearestNodeId: nearestNode.id,
       nearestRouteIndex: nearestRouteIndex,
+      currentRouteNodeIndex: updatedRouteNodeIndex,
       remainingDistance: remainingDistance,
       hasReachedNextNode: hasReachedNextNode,
       hasReachedConnector: hasReachedConnector,
@@ -165,6 +198,71 @@ class NavigationProgressService {
       distanceToNextNode: distanceToNextNode,
       distanceToDestination: distanceToDestination,
     );
+  }
+
+  static double calculatePathRemainingDistance({
+    required List<NavigationNodeEntity> path,
+    required double px,
+    required double py,
+    required int startIndex,
+    required int endIndex,
+  }) {
+    if (path.isEmpty || startIndex < 0 || endIndex < startIndex) return 0.0;
+    if (startIndex == endIndex) {
+      final node = path[startIndex];
+      final dx = px - node.x;
+      final dy = py - node.y;
+      return sqrt(dx * dx + dy * dy);
+    }
+
+    double minEdgeDist = double.infinity;
+    int closestEdgeIndex = startIndex;
+    double closestT = 0.0;
+
+    for (int i = startIndex; i < endIndex; i++) {
+      final a = path[i];
+      final b = path[i + 1];
+      final abx = b.x - a.x;
+      final aby = b.y - a.y;
+      final lenSq = abx * abx + aby * aby;
+
+      double t = 0.0;
+      if (lenSq > 0.0) {
+        final apx = px - a.x;
+        final apy = py - a.y;
+        t = (apx * abx + apy * aby) / lenSq;
+        t = t.clamp(0.0, 1.0);
+      }
+
+      final projX = a.x + t * abx;
+      final projY = a.y + t * aby;
+      final dx = px - projX;
+      final dy = py - projY;
+      final dist = sqrt(dx * dx + dy * dy);
+
+      if (dist < minEdgeDist) {
+        minEdgeDist = dist;
+        closestEdgeIndex = i;
+        closestT = t;
+      }
+    }
+
+    final edgeA = path[closestEdgeIndex];
+    final edgeB = path[closestEdgeIndex + 1];
+    final eDx = edgeB.x - edgeA.x;
+    final eDy = edgeB.y - edgeA.y;
+    final edgeLen = sqrt(eDx * eDx + eDy * eDy);
+    double dist = (1.0 - closestT) * edgeLen;
+
+    for (int i = closestEdgeIndex + 1; i < endIndex; i++) {
+      final n1 = path[i];
+      final n2 = path[i + 1];
+      final dx = n2.x - n1.x;
+      final dy = n2.y - n1.y;
+      dist += sqrt(dx * dx + dy * dy);
+    }
+
+    return dist;
   }
 
   static double _distanceToSegment({

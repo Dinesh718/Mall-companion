@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class NavigationProgressResult extends Equatable {
   final String nearestNodeId;
   final int nearestRouteIndex;
+  final int currentRouteNodeIndex;
   final double remainingDistance;
   final bool hasReachedNextNode;
   final bool hasReachedConnector;
@@ -15,6 +16,7 @@ class NavigationProgressResult extends Equatable {
   const NavigationProgressResult({
     required this.nearestNodeId,
     required this.nearestRouteIndex,
+    this.currentRouteNodeIndex = 0,
     required this.remainingDistance,
     required this.hasReachedNextNode,
     required this.hasReachedConnector,
@@ -29,6 +31,7 @@ class NavigationProgressResult extends Equatable {
   List<Object?> get props => [
     nearestNodeId,
     nearestRouteIndex,
+    currentRouteNodeIndex,
     remainingDistance,
     hasReachedNextNode,
     hasReachedConnector,

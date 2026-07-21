@@ -4,7 +4,7 @@ import '../../domain/entities/map_entities.dart';
 class NavigationSimulationService {
   static List<IndoorPositionEntity> generateSimulationPath(
     NavigationRouteEntity route, {
-    int positionsPerEdge = 10,
+    int positionsPerEdge = 20,
   }) {
     final List<IndoorPositionEntity> path = [];
     final nodes = route.completeRoute;

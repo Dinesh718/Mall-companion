@@ -26,6 +26,12 @@ class IndoorMapView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("=================================");
+debugPrint("INDOOR MAP BUILD");
+debugPrint("svgPath = $svgPath");
+debugPrint("shops = ${shops.length}");
+debugPrint("graph nodes = ${navigationGraph.nodes.length}");
+debugPrint("=================================");
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
@@ -132,7 +138,11 @@ class IndoorMapView extends StatelessWidget {
                     ),
 
                     // 3.5. User Position Overlay Layer
-                    UserPositionLayer(width: 1536.0, height: 838.0),
+                    UserPositionLayer(
+                      width: 1536.0,
+                      height: 838.0,
+                      transformationController: transformationController,
+                    ),
 
                     // 4. Invisible touch hit testing layer (aligned 1-to-1 to canvas coordinates)
                     MapInteractionLayer(

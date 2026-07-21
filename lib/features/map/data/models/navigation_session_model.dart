@@ -8,6 +8,7 @@ class NavigationSessionModel extends NavigationSessionEntity {
     required super.route,
     required super.segments,
     required super.currentSegmentIndex,
+    super.currentRouteNodeIndex = 0,
     required super.currentFloorId,
     super.nextConnectorId,
     required super.remainingDistance,
@@ -58,6 +59,7 @@ class NavigationSessionModel extends NavigationSessionEntity {
       route: routeEntity,
       segments: segments,
       currentSegmentIndex: json['currentSegmentIndex'] as int? ?? 0,
+      currentRouteNodeIndex: json['currentRouteNodeIndex'] as int? ?? 0,
       currentFloorId: json['currentFloorId'] as String? ?? '',
       nextConnectorId: json['nextConnectorId'] as String?,
       remainingDistance: (json['remainingDistance'] as num? ?? 0.0).toDouble(),
@@ -104,6 +106,7 @@ class NavigationSessionModel extends NavigationSessionEntity {
         };
       }).toList(),
       'currentSegmentIndex': currentSegmentIndex,
+      'currentRouteNodeIndex': currentRouteNodeIndex,
       'currentFloorId': currentFloorId,
       if (nextConnectorId != null) 'nextConnectorId': nextConnectorId,
       'remainingDistance': remainingDistance,
@@ -112,12 +115,14 @@ class NavigationSessionModel extends NavigationSessionEntity {
     };
   }
 
+  @override
   NavigationSessionModel copyWith({
     String? destinationShopId,
     String? destinationEntranceId,
     NavigationRouteEntity? route,
     List<RouteSegmentEntity>? segments,
     int? currentSegmentIndex,
+    int? currentRouteNodeIndex,
     String? currentFloorId,
     String? nextConnectorId,
     double? remainingDistance,
@@ -131,6 +136,8 @@ class NavigationSessionModel extends NavigationSessionEntity {
       route: route ?? this.route,
       segments: segments ?? this.segments,
       currentSegmentIndex: currentSegmentIndex ?? this.currentSegmentIndex,
+      currentRouteNodeIndex:
+          currentRouteNodeIndex ?? this.currentRouteNodeIndex,
       currentFloorId: currentFloorId ?? this.currentFloorId,
       nextConnectorId: nextConnectorId ?? this.nextConnectorId,
       remainingDistance: remainingDistance ?? this.remainingDistance,

@@ -277,6 +277,18 @@ void main() {
           mapBloc.stream,
           emitsThrough(
             isA<MapLoaded>().having(
+              (s) => s.activeRoute,
+              'activeRoute',
+              isNotNull,
+            ),
+          ),
+        );
+
+        mapBloc.add(const StartNavigation());
+        await expectLater(
+          mapBloc.stream,
+          emitsThrough(
+            isA<MapLoaded>().having(
               (s) => s.navigationSession,
               'navigationSession',
               isNotNull,

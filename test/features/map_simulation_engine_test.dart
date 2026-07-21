@@ -10,6 +10,7 @@ import 'package:visitor_mall/features/map/presentation/bloc/map_state.dart';
 import 'map_crossfloor_test.dart'; // Reuse MockMapRepository
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   group('NavigationSimulationService Tests', () {
     const nodeA = NavigationNodeEntity(
       id: 'A',
@@ -245,8 +246,11 @@ void main() {
         mapBloc.add(const LoadMap());
         await expectLater(mapBloc.stream, emitsThrough(isA<MapLoaded>()));
 
-        // 2. Select Shop and Calculate Route. Should auto-start simulation positioning!
+        // 2. Select Shop and Calculate Route, then Start Navigation
         mapBloc.add(const CalculateRoute(startNodeId: 'N01', endNodeId: 'N02'));
+        await expectLater(mapBloc.stream, emitsThrough(isA<MapLoaded>()));
+
+        mapBloc.add(const StartNavigation());
 
         // 3. Verify latestPosition updates are received and stored inside state
         await expectLater(

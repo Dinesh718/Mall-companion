@@ -8,11 +8,19 @@ class UserPositionPainter extends CustomPainter {
   final double x;
   final double y;
   final Color color;
+  final TransformationController? transformationController;
 
-  UserPositionPainter({required this.x, required this.y, required this.color});
+  UserPositionPainter({
+    required this.x,
+    required this.y,
+    required this.color,
+    this.transformationController,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
+    debugPrint('PAINT BLUE DOT $x $y');
+
     // 1. Glowing outer translucent ring
     final glowPaint = Paint()
       ..color = color.withOpacity(0.2)
@@ -43,11 +51,13 @@ class UserPositionPainter extends CustomPainter {
 class UserPositionLayer extends StatelessWidget {
   final double width;
   final double height;
+  final TransformationController? transformationController;
 
   const UserPositionLayer({
     super.key,
     required this.width,
     required this.height,
+    this.transformationController,
   });
 
   @override
@@ -74,6 +84,7 @@ class UserPositionLayer extends StatelessWidget {
                 x: position.x,
                 y: position.y,
                 color: const Color(0xFF2196F3),
+                transformationController: transformationController,
               ),
             ),
           ),

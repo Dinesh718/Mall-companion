@@ -9,12 +9,14 @@ import '../../data/datasources/simulation_position_provider.dart';
 import '../../data/repositories/position_repository_impl.dart';
 import '../../domain/entities/map_entities.dart';
 import '../../domain/entities/position_entities.dart';
+import '../../domain/entities/navigation_instruction_entity.dart';
 import '../widgets/indoor_map_view.dart';
 import '../widgets/map_controls.dart';
 import '../widgets/shop_details_bottom_sheet.dart';
 import '../widgets/shop_search_bar.dart';
 import '../widgets/shop_search_results.dart';
 import '../widgets/elevator_transition_overlay.dart';
+import '../widgets/route_preview_card.dart';
 import '../helpers/map_camera_controller.dart';
 
 class MapPage extends StatelessWidget {
@@ -156,40 +158,39 @@ class _MapPageBodyState extends State<MapPageBody>
                     floorName: state.currentFloor.name,
                     onNavigate: selectedShop.entranceNodeIds.isNotEmpty
                         ? () {
+                            if (_isBottomSheetOpen) {
+                              _isBottomSheetOpen = false;
+                              Navigator.of(sheetContext).pop();
+                            }
                             mapBloc.add(
                               CalculateRoute(
                                 endNodeId: selectedShop!.entranceNodeIds.first,
                               ),
                             );
+                            mapBloc.add(const StartNavigation());
                           }
                         : null,
                   ),
                 ).then((_) {
                   _isBottomSheetOpen = false;
-                  // Clear selection in Bloc if user dismissed the bottom sheet manually
-                  if (mounted) {
-                    final currentBlocState = mapBloc.state;
-                    if (currentBlocState is MapLoaded &&
-                        currentBlocState.selectedShopId != null) {
-                      mapBloc.add(const ClearSelection());
-                    }
-                  }
                 });
               }
             }
-          } else if (selectedShopId == null && _isBottomSheetOpen) {
-            // Dismiss programmatically if selection is cleared outside
-            _isBottomSheetOpen = false;
-            Navigator.pop(context);
           }
         }
       },
       buildWhen: (previous, current) {
-        // Do not rebuild parent MapPageBody when only selectedShopId changes
+        // Rebuild parent MapPageBody when floor, shops, activeRoute, navigationSession, instructions, or preview mode changes
         if (previous.runtimeType != current.runtimeType) return true;
         if (previous is MapLoaded && current is MapLoaded) {
           return previous.currentFloor != current.currentFloor ||
-              previous.shops != current.shops;
+              previous.shops != current.shops ||
+              previous.activeRoute != current.activeRoute ||
+              previous.navigationSession != current.navigationSession ||
+              previous.instructions != current.instructions ||
+              previous.preview != current.preview ||
+              previous.isPreviewMode != current.isPreviewMode ||
+              previous.latestPosition != current.latestPosition;
         }
         return false;
       },
@@ -216,6 +217,13 @@ class _MapPageBodyState extends State<MapPageBody>
         }
 
         final loadedState = state as MapLoaded;
+
+        debugPrint("==================================");
+debugPrint("isPreviewMode : ${loadedState.isPreviewMode}");
+debugPrint("navigationSession : ${loadedState.navigationSession != null}");
+debugPrint("preview : ${loadedState.preview != null}");
+debugPrint("currentFloor : ${loadedState.currentFloor.id}");
+debugPrint("==================================");
 
         return SafeArea(
           child: Stack(
@@ -247,18 +255,50 @@ class _MapPageBodyState extends State<MapPageBody>
                 ),
               ),
 
-              // 4. Floating navigation panel overlay
-              if (loadedState.navigationSession != null)
+              // 4. Route Preview Card overlay
+              if (loadedState.isPreviewMode && loadedState.preview != null)
+                Positioned(
+                  bottom: 16.0,
+                  left: 16.0,
+                  right: 16.0,
+                  child: RoutePreviewCard(
+                    preview: loadedState.preview!,
+                    onStartNavigation: () {
+                      context.read<MapBloc>().add(const StartNavigation());
+                    },
+                    onClose: () {
+                      context.read<MapBloc>().add(const ClearRoute());
+                    },
+                  ),
+                ),
+
+              // 5. Floating navigation panel and instruction banner overlay
+              if (!loadedState.isPreviewMode && loadedState.navigationSession != null)
                 Positioned(
                   bottom: 24.0,
                   left: 24.0,
                   right: 88.0,
-                  child: NavigationPanel(
-                    session: loadedState.navigationSession!,
-                    shops: loadedState.mapEntity.floors.expand((f) => f.shops).toList(),
-                    onCancel: () {
-                      context.read<MapBloc>().add(const ClearRoute());
-                    },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (loadedState.instructions != null && loadedState.instructions!.isNotEmpty) ...[
+                        NavigationInstructionBanner(
+                          instruction: loadedState.instructions!.firstWhere(
+                            (inst) => !inst.isCompleted,
+                            orElse: () => loadedState.instructions!.last,
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
+                      ],
+                      NavigationPanel(
+                        session: loadedState.navigationSession!,
+                        shops: loadedState.mapEntity.floors.expand((f) => f.shops).toList(),
+                        onCancel: () {
+                          context.read<MapBloc>().add(const ClearRoute());
+                        },
+                      ),
+                    ],
                   ),
                 ),
 
@@ -450,9 +490,154 @@ class NavigationPanel extends StatelessWidget {
               ],
             ),
           ),
+          BlocBuilder<MapBloc, MapState>(
+            buildWhen: (previous, current) {
+              if (previous is! MapLoaded || current is! MapLoaded) return true;
+              return previous.isVoiceMuted != current.isVoiceMuted;
+            },
+            builder: (context, state) {
+              final isMuted = state is MapLoaded && state.isVoiceMuted;
+              return IconButton(
+                icon: Icon(
+                  isMuted ? Icons.volume_off_outlined : Icons.volume_up_outlined,
+                  color: const Color(0xFF6100D6),
+                ),
+                tooltip: isMuted ? 'Unmute Voice Guidance' : 'Mute Voice Guidance',
+                onPressed: () {
+                  context.read<MapBloc>().add(const ToggleVoiceGuidance());
+                },
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.close, color: Color(0xFF4A4456)),
             onPressed: onCancel,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class NavigationInstructionBanner extends StatelessWidget {
+  final NavigationInstructionEntity instruction;
+
+  const NavigationInstructionBanner({super.key, required this.instruction});
+
+  IconData _getIconForType(String type) {
+    switch (type) {
+      case 'straight':
+        return Icons.arrow_upward;
+      case 'slightLeft':
+        return Icons.turn_slight_left;
+      case 'left':
+        return Icons.turn_left;
+      case 'sharpLeft':
+        return Icons.turn_sharp_left;
+      case 'slightRight':
+        return Icons.turn_slight_right;
+      case 'right':
+        return Icons.turn_right;
+      case 'sharpRight':
+        return Icons.turn_sharp_right;
+      case 'lift':
+        return Icons.elevator_outlined;
+      case 'stairs':
+        return Icons.stairs_outlined;
+      case 'escalator':
+        return Icons.escalator_outlined;
+      case 'arrival':
+        return Icons.pin_drop_outlined;
+      default:
+        return Icons.navigation_outlined;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final IconData icon = _getIconForType(instruction.type);
+    const Color themeColor = Color(0xFF6100D6);
+
+    final showDistance = instruction.type == 'straight' && instruction.distanceRemaining > 0;
+    final distanceText = showDistance
+        ? '${instruction.distanceRemaining.toStringAsFixed(0)} m remaining'
+        : '';
+
+    final isConnector = instruction.type == 'lift' ||
+                        instruction.type == 'stairs' ||
+                        instruction.type == 'escalator';
+
+    final titleText = isConnector
+        ? '${instruction.type.toUpperCase()} AHEAD'
+        : 'WALK DIRECTION';
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+      decoration: BoxDecoration(
+        color: const Color(0xFFEADDFF),
+        borderRadius: BorderRadius.circular(12.0),
+        border: Border.all(
+          color: const Color(0xFF6100D6).withOpacity(0.2),
+          width: 1.0,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 8.0,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6.0),
+            decoration: BoxDecoration(
+              color: themeColor.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Icon(icon, color: themeColor, size: 20.0),
+          ),
+          const SizedBox(width: 12.0),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  titleText,
+                  style: const TextStyle(
+                    fontFamily: 'Plus Jakarta Sans',
+                    fontSize: 10.0,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.0,
+                    color: themeColor,
+                  ),
+                ),
+                const SizedBox(height: 2.0),
+                Text(
+                  instruction.text,
+                  style: const TextStyle(
+                    fontFamily: 'Plus Jakarta Sans',
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF1D1A25),
+                  ),
+                ),
+                if (showDistance) ...[
+                  const SizedBox(height: 2.0),
+                  Text(
+                    distanceText,
+                    style: const TextStyle(
+                      fontFamily: 'Plus Jakarta Sans',
+                      fontSize: 11.0,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF4A4456),
+                    ),
+                  ),
+                ],
+              ],
+            ),
           ),
         ],
       ),

@@ -268,6 +268,7 @@ class NavigationSessionEntity extends Equatable {
   final NavigationRouteEntity route;
   final List<RouteSegmentEntity> segments;
   final int currentSegmentIndex;
+  final int currentRouteNodeIndex;
   final String currentFloorId;
   final String? nextConnectorId;
   final double remainingDistance;
@@ -280,6 +281,7 @@ class NavigationSessionEntity extends Equatable {
     required this.route,
     required this.segments,
     required this.currentSegmentIndex,
+    this.currentRouteNodeIndex = 0,
     required this.currentFloorId,
     this.nextConnectorId,
     required this.remainingDistance,
@@ -294,6 +296,34 @@ class NavigationSessionEntity extends Equatable {
     return null;
   }
 
+  NavigationSessionEntity copyWith({
+    String? destinationShopId,
+    String? destinationEntranceId,
+    NavigationRouteEntity? route,
+    List<RouteSegmentEntity>? segments,
+    int? currentSegmentIndex,
+    int? currentRouteNodeIndex,
+    String? currentFloorId,
+    String? nextConnectorId,
+    double? remainingDistance,
+    double? estimatedWalkingDistance,
+    NavigationStatus? navigationStatus,
+  }) {
+    return NavigationSessionEntity(
+      destinationShopId: destinationShopId ?? this.destinationShopId,
+      destinationEntranceId: destinationEntranceId ?? this.destinationEntranceId,
+      route: route ?? this.route,
+      segments: segments ?? this.segments,
+      currentSegmentIndex: currentSegmentIndex ?? this.currentSegmentIndex,
+      currentRouteNodeIndex: currentRouteNodeIndex ?? this.currentRouteNodeIndex,
+      currentFloorId: currentFloorId ?? this.currentFloorId,
+      nextConnectorId: nextConnectorId ?? this.nextConnectorId,
+      remainingDistance: remainingDistance ?? this.remainingDistance,
+      estimatedWalkingDistance: estimatedWalkingDistance ?? this.estimatedWalkingDistance,
+      navigationStatus: navigationStatus ?? this.navigationStatus,
+    );
+  }
+
   @override
   List<Object?> get props => [
     destinationShopId,
@@ -301,6 +331,7 @@ class NavigationSessionEntity extends Equatable {
     route,
     segments,
     currentSegmentIndex,
+    currentRouteNodeIndex,
     currentFloorId,
     nextConnectorId,
     remainingDistance,

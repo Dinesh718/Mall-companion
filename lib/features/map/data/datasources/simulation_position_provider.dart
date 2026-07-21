@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import '../../domain/entities/position_entities.dart';
 import '../../domain/services/position_provider.dart';
 
@@ -10,6 +11,10 @@ class SimulationPositionProvider implements IndoorPositionProvider {
   int _currentIndex = 0;
   Timer? _timer;
   bool _isRunning = false;
+
+  SimulationPositionProvider() {
+    print('PROVIDER CREATED ${identityHashCode(this)}');
+  }
 
   IndoorPositionEntity _lastKnownPosition = IndoorPositionEntity(
     id: 'sim_initial_pos',
@@ -58,7 +63,7 @@ class SimulationPositionProvider implements IndoorPositionProvider {
     // Emit initial position immediately
     _emitPosition();
 
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       _emitPosition();
     });
   }
@@ -68,11 +73,17 @@ class SimulationPositionProvider implements IndoorPositionProvider {
       if (_currentIndex < _positionPath.length) {
         final position = _positionPath[_currentIndex];
         _lastKnownPosition = position;
+        debugPrint(
+          'EMIT POSITION ${position.floorId} (${position.x}, ${position.y})',
+        );
         _controller.add(position);
         _currentIndex++;
       } else {
         _positionPath = [];
         _currentIndex = 0;
+        debugPrint(
+          'EMIT POSITION ${_lastKnownPosition.floorId} (${_lastKnownPosition.x}, ${_lastKnownPosition.y})',
+        );
         _controller.add(_lastKnownPosition);
       }
     } else if (_path.isNotEmpty) {
