@@ -89,20 +89,25 @@ class _ElevatorTransitionDialogState extends State<_ElevatorTransitionDialog>
 
     _scaleAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 1.0, end: 1.15)
-            .chain(CurveTween(curve: Curves.easeInOut)),
+        tween: Tween<double>(
+          begin: 1.0,
+          end: 1.15,
+        ).chain(CurveTween(curve: Curves.easeInOut)),
         weight: 50.0,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 1.15, end: 1.0)
-            .chain(CurveTween(curve: Curves.easeInOut)),
+        tween: Tween<double>(
+          begin: 1.15,
+          end: 1.0,
+        ).chain(CurveTween(curve: Curves.easeInOut)),
         weight: 50.0,
       ),
     ]).animate(_controller);
 
-    _arrowAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _arrowAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override

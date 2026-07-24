@@ -2,13 +2,14 @@ import 'package:equatable/equatable.dart';
 
 class NavigationInstructionEntity extends Equatable {
   final String instructionId;
-  final String type; // straight, slightLeft, left, sharpLeft, slightRight, right, sharpRight, lift, stairs, escalator, arrival
+  final String
+  type; // straight, slightLeft, left, sharpLeft, slightRight, right, sharpRight, lift, stairs, escalator, arrival
   final String text;
   final String floorId;
   final String relatedNodeId;
   final double distanceRemaining;
   final bool isCompleted;
-  
+
   // Meta fields to map instruction progress to route nodes
   final int startNodeIndex;
   final int endNodeIndex;
@@ -51,14 +52,14 @@ class NavigationInstructionEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        instructionId,
-        type,
-        text,
-        floorId,
-        relatedNodeId,
-        distanceRemaining,
-        isCompleted,
-        startNodeIndex,
-        endNodeIndex,
-      ];
+    instructionId,
+    type,
+    text,
+    floorId,
+    relatedNodeId,
+    distanceRemaining,
+    isCompleted,
+    startNodeIndex,
+    endNodeIndex,
+  ];
 }

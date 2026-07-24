@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:visitor_mall/features/map/domain/entities/map_entities.dart';
 import 'package:visitor_mall/features/map/domain/repositories/map_repository.dart';
+import 'package:visitor_mall/features/map/domain/entities/shop_category.dart';
+import 'package:visitor_mall/features/map/domain/entities/position_entities.dart';
 import 'package:visitor_mall/features/map/domain/services/pathfinding_service.dart';
 import 'package:visitor_mall/features/map/presentation/bloc/map_bloc.dart';
 import 'package:visitor_mall/features/map/presentation/bloc/map_event.dart';
@@ -455,8 +457,71 @@ class MockMapRepository implements MapRepository {
   Future<MapEntity> getMapData() async => mapData;
 
   @override
-  Future<List<ShopEntity>> searchShops(String query) async => [];
+  Future<List<ShopEntity>> searchShops(String query) async {
+    return getShops(query: query);
+  }
 
   @override
   Future<ShopEntity?> getShopById(String id) async => null;
+
+  @override
+  Future<List<ShopCategory>> getCategories() async {
+    return const [
+      ShopCategory(id: 'fashion', name: 'Fashion', icon: '👕'),
+      ShopCategory(id: 'food', name: 'Food', icon: '🍔'),
+    ];
+  }
+
+  @override
+  Future<List<ShopEntity>> getShopsByCategory(ShopCategory category) async {
+    return getShops(category: category);
+  }
+
+  @override
+  Future<List<ShopEntity>> getShops({
+    String? query,
+    ShopCategory? category,
+  }) async {
+    var results = mapData.floors.expand((floor) => floor.shops).toList();
+
+    if (category != null) {
+      final catLower = category.name.toLowerCase().trim();
+      results = results
+          .where((s) => s.category.toLowerCase().trim() == catLower)
+          .toList();
+    }
+
+    if (query != null && query.trim().isNotEmpty) {
+      final queryLower = query.toLowerCase().trim();
+      results = results
+          .where(
+            (s) =>
+                s.name.toLowerCase().contains(queryLower) ||
+                s.category.toLowerCase().contains(queryLower),
+          )
+          .toList();
+    }
+
+    return results;
+  }
+
+  @override
+  Future<IndoorPositionEntity?> resolveNavigationNode(String nodeId) async {
+    for (final floor in mapData.floors) {
+      for (final node in floor.navigationGraph.nodes) {
+        if (node.id == nodeId) {
+          return IndoorPositionEntity(
+            id: 'node_$nodeId',
+            floorId: floor.id,
+            x: node.x,
+            y: node.y,
+            accuracy: 1.0,
+            timestamp: DateTime.now(),
+            source: PositionSource.qr,
+          );
+        }
+      }
+    }
+    return null;
+  }
 }

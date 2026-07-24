@@ -52,10 +52,15 @@ class NavigationProgressService {
     // 1. Determine local starting node index on active segment corresponding to currentRouteNodeIndex
     int startLocalIndex = 0;
     if (session.currentRouteNodeIndex > 0) {
-      final currentNodeId = route.completeRoute[
-        min(session.currentRouteNodeIndex, route.completeRoute.length - 1)
-      ].id;
-      final foundIndex = activeSegment.nodes.indexWhere((n) => n.id == currentNodeId);
+      final currentNodeId = route
+          .completeRoute[min(
+            session.currentRouteNodeIndex,
+            route.completeRoute.length - 1,
+          )]
+          .id;
+      final foundIndex = activeSegment.nodes.indexWhere(
+        (n) => n.id == currentNodeId,
+      );
       if (foundIndex != -1) {
         startLocalIndex = foundIndex;
       }
@@ -93,7 +98,9 @@ class NavigationProgressService {
 
     final updatedRouteNodeIndex = max(
       session.currentRouteNodeIndex,
-      nearestRouteIndex != -1 ? nearestRouteIndex : session.currentRouteNodeIndex,
+      nearestRouteIndex != -1
+          ? nearestRouteIndex
+          : session.currentRouteNodeIndex,
     );
 
     // 3. Next node calculation
@@ -297,9 +304,18 @@ class NavigationProgressService {
     final segments = session.segments;
     if (segments.isEmpty) return false;
 
+    // Do not check off-route during floor transition
+    if (session.navigationStatus == NavigationStatus.transitioningFloor ||
+        session.navigationStatus == NavigationStatus.waitingForConnector) {
+      return false;
+    }
+
     // If user's sensor floor is different from active segment floor, they are off-route
     if (session.currentSegmentIndex < segments.length) {
       final currentSegment = segments[session.currentSegmentIndex];
+      if (currentSegment.floorId == 'transition') {
+        return false;
+      }
       if (position.floorId != currentSegment.floorId) {
         return true;
       }

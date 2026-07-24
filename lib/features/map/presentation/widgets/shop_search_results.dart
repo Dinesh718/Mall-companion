@@ -10,17 +10,25 @@ class ShopSearchResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<MapBloc, MapState, (List<ShopEntity>?, String?)>(
-      selector: (state) {
-        if (state is MapLoaded) {
-          return (state.searchResults, state.searchQuery);
-        }
-        return (null, null);
+    return BlocBuilder<MapBloc, MapState>(
+      buildWhen: (previous, current) {
+        if (previous is! MapLoaded || current is! MapLoaded) return true;
+        return previous.searchResults != current.searchResults ||
+            previous.searchQuery != current.searchQuery ||
+            previous.selectedCategory != current.selectedCategory;
       },
-      builder: (context, searchState) {
-        final (results, query) = searchState;
+      builder: (context, state) {
+        if (state is! MapLoaded) {
+          return const SizedBox.shrink();
+        }
 
-        if (query == null || query.trim().isEmpty) {
+        final query = state.searchQuery;
+        final selectedCat = state.selectedCategory;
+        final results = state.searchResults;
+
+        final isSearchActive =
+            (query != null && query.trim().isNotEmpty) || selectedCat != null;
+        if (!isSearchActive) {
           return const SizedBox.shrink();
         }
 
@@ -37,7 +45,9 @@ class ShopSearchResults extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      "No results found for '$query'",
+                      query != null && query.trim().isNotEmpty
+                          ? "No results found for '$query'"
+                          : "No shops found in this category",
                       style: const TextStyle(
                         fontFamily: 'Plus Jakarta Sans',
                         color: Color(0xFF79747E),

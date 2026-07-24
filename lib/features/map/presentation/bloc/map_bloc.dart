@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/repositories/map_repository.dart';
 import '../../domain/repositories/position_repository.dart';
+import '../../../positioning/domain/repositories/qr_position_repository.dart';
 import '../../domain/services/pathfinding_service.dart';
 import '../../domain/services/navigation_progress_service.dart';
 import '../../domain/services/navigation_simulation_service.dart';
@@ -12,18 +13,36 @@ import '../../domain/entities/position_entities.dart';
 import '../../domain/services/navigation_instruction_service.dart';
 import '../../domain/services/route_preview_service.dart';
 import '../../domain/services/text_to_speech_service.dart';
+import '../../domain/entities/shop_category.dart';
 import 'map_event.dart';
 import 'map_state.dart';
+import 'package:visitor_mall/features/navigation/domain/entities/navigation_lifecycle_entity.dart';
+import 'package:visitor_mall/features/navigation/domain/services/navigation_state_machine.dart';
+import 'package:visitor_mall/features/navigation/domain/entities/active_position_source_entity.dart';
+import 'package:visitor_mall/features/navigation/domain/services/position_source_orchestrator.dart';
+import 'package:visitor_mall/features/navigation/domain/services/destination_switch_service.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
   final MapRepository mapRepository;
   final PositionRepository? positionRepository;
+  final QrPositionRepository? qrPositionRepository;
   final TextToSpeechService _ttsService = TextToSpeechService();
   StreamSubscription<IndoorPositionEntity>? _positionSubscription;
   bool _isRecalculating = false;
+  late final PositionSourceOrchestrator? _orchestrator;
 
-  MapBloc({required this.mapRepository, this.positionRepository})
-    : super(const MapInitial()) {
+  MapBloc({
+    required this.mapRepository,
+    this.positionRepository,
+    this.qrPositionRepository,
+  }) : super(const MapInitial()) {
+    if (positionRepository != null) {
+      _orchestrator = PositionSourceOrchestrator(
+        positionRepository: positionRepository!,
+      );
+    } else {
+      _orchestrator = null;
+    }
     print('MAP BLOC CREATED ${identityHashCode(this)}');
     on<LoadMap>(_onLoadMap);
     on<SelectShop>(_onSelectShop);
@@ -41,6 +60,13 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<UpdateUserPosition>(_onUpdateUserPosition);
     on<SelectFloor>(_onSelectFloor);
     on<ToggleVoiceGuidance>(_onToggleVoiceGuidance);
+    on<LoadCategories>(_onLoadCategories);
+    on<SelectCategory>(_onSelectCategory);
+    on<ClearCategory>(_onClearCategory);
+    on<ScanQrPositionRequested>(_onScanQrPositionRequested);
+    on<ClearQrError>(_onClearQrError);
+    on<NavigationCompleted>(_onNavigationCompleted);
+    on<DestinationSwitchRequested>(_onDestinationSwitchRequested);
   }
 
   @override
@@ -65,6 +91,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           shops: currentFloor.shops,
         ),
       );
+      add(const LoadCategories());
       add(const StartPositioning());
     } catch (e) {
       emit(MapError(e.toString()));
@@ -83,6 +110,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         }
       }
 
+      final isNavigating = currentState.navigationLifecycleState ==
+              NavigationLifecycleState.navigating ||
+          currentState.navigationLifecycleState ==
+              NavigationLifecycleState.waitingForFloorTransition;
+
       emit(
         MapLoaded(
           mapEntity: currentState.mapEntity,
@@ -91,8 +123,19 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           selectedShopId: event.shopId,
           searchResults: currentState.searchResults,
           searchQuery: currentState.searchQuery,
-          activeRoute: null,
-          navigationSession: null,
+          activeRoute: isNavigating ? currentState.activeRoute : null,
+          navigationSession: isNavigating ? currentState.navigationSession : null,
+          latestPosition: currentState.latestPosition,
+          instructions: isNavigating ? currentState.instructions : null,
+          preview: currentState.preview,
+          isPreviewMode: currentState.isPreviewMode,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          selectedCategory: currentState.selectedCategory,
+          navigationLifecycleState: isNavigating
+              ? currentState.navigationLifecycleState
+              : NavigationLifecycleState.idle,
+          activePositionSource: _orchestrator?.currentSource,
         ),
       );
     }
@@ -113,6 +156,12 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           navigationSession: currentState.navigationSession,
           latestPosition: currentState.latestPosition,
           instructions: currentState.instructions,
+          preview: currentState.preview,
+          isPreviewMode: currentState.isPreviewMode,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          selectedCategory: currentState.selectedCategory,
+          activePositionSource: _orchestrator?.currentSource,
         ),
       );
     }
@@ -122,10 +171,37 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final currentState = state;
     if (currentState is MapLoaded) {
       if (event.query.trim().isEmpty) {
-        emit(currentState.copyWith(searchResults: [], searchQuery: ''));
+        final results = currentState.selectedCategory != null
+            ? await mapRepository.getShops(
+                category: currentState.selectedCategory,
+              )
+            : null;
+        emit(
+          MapLoaded(
+            mapEntity: currentState.mapEntity,
+            currentFloor: currentState.currentFloor,
+            shops: currentState.shops,
+            selectedShopId: currentState.selectedShopId,
+            searchResults: results,
+            searchQuery: '',
+            activeRoute: currentState.activeRoute,
+            navigationSession: currentState.navigationSession,
+            latestPosition: currentState.latestPosition,
+            instructions: currentState.instructions,
+            preview: currentState.preview,
+            isPreviewMode: currentState.isPreviewMode,
+            isVoiceMuted: currentState.isVoiceMuted,
+            categories: currentState.categories,
+            selectedCategory: currentState.selectedCategory,
+            activePositionSource: _orchestrator?.currentSource,
+          ),
+        );
         return;
       }
-      final results = await mapRepository.searchShops(event.query);
+      final results = await mapRepository.getShops(
+        query: event.query,
+        category: currentState.selectedCategory,
+      );
       final filteredResults = results
           .where((s) => s.category != 'Corridor' && s.category != 'Escalator')
           .toList();
@@ -153,6 +229,12 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           navigationSession: currentState.navigationSession,
           latestPosition: currentState.latestPosition,
           instructions: currentState.instructions,
+          preview: currentState.preview,
+          isPreviewMode: currentState.isPreviewMode,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          activePositionSource: _orchestrator?.currentSource,
+          selectedCategory: null,
         ),
       );
     }
@@ -165,14 +247,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       String resolvedStartNodeId = event.startNodeId ?? '';
       final latestPos = currentState.latestPosition;
       debugPrint("========== NEW ROUTE ==========");
-debugPrint("latestPosition: ${latestPos?.floorId}");
-debugPrint("x=${latestPos?.x}");
-debugPrint("y=${latestPos?.y}");
-debugPrint("resolvedStartNodeId=$resolvedStartNodeId");
-debugPrint("destination=${event.endNodeId}");
-      
+      debugPrint("latestPosition: ${latestPos?.floorId}");
+      debugPrint("x=${latestPos?.x}");
+      debugPrint("y=${latestPos?.y}");
+      debugPrint("resolvedStartNodeId=$resolvedStartNodeId");
+      debugPrint("destination=${event.endNodeId}");
+
       if (resolvedStartNodeId.isEmpty && latestPos == null) {
-        resolvedStartNodeId = currentState.currentFloor.id == 'first_floor' ? 'H101' : 'H007';
+        resolvedStartNodeId = currentState.currentFloor.id == 'first_floor'
+            ? 'H101'
+            : 'H007';
       }
 
       if (latestPos != null) {
@@ -196,7 +280,8 @@ debugPrint("destination=${event.endNodeId}");
             }
           }
 
-          if (containingShop != null && containingShop.entranceNodeIds.isNotEmpty) {
+          if (containingShop != null &&
+              containingShop.entranceNodeIds.isNotEmpty) {
             resolvedStartNodeId = containingShop.entranceNodeIds.first;
           } else {
             double minDistanceSq = double.infinity;
@@ -219,10 +304,12 @@ debugPrint("destination=${event.endNodeId}");
 
       final floors = currentState.mapEntity.floors.map((f) => f).toList();
       final pathfindGraph = (latestPos != null)
-          ? (floors.firstWhere(
-              (f) => f.id == latestPos.floorId,
-              orElse: () => currentState.currentFloor,
-            ).navigationGraph)
+          ? (floors
+                .firstWhere(
+                  (f) => f.id == latestPos.floorId,
+                  orElse: () => currentState.currentFloor,
+                )
+                .navigationGraph)
           : currentState.currentFloor.navigationGraph;
 
       final nodes = PathfindingService.findPath(
@@ -245,10 +332,7 @@ debugPrint("destination=${event.endNodeId}");
 
         if (floorChangeIndices.isEmpty) {
           segments.add(
-            RouteSegmentEntity(
-              floorId: nodes.first.floorId,
-              nodes: nodes,
-            ),
+            RouteSegmentEntity(floorId: nodes.first.floorId, nodes: nodes),
           );
         } else {
           int startIdx = 0;
@@ -327,6 +411,15 @@ debugPrint("destination=${event.endNodeId}");
           destinationShopId: destinationShopId,
         );
 
+        final stateMachine = NavigationStateMachine(
+          initialState: currentState.navigationLifecycleState,
+        );
+        if (stateMachine.isValidTransition(
+          NavigationLifecycleState.previewing,
+        )) {
+          stateMachine.startPreview();
+        }
+
         emit(
           MapLoaded(
             mapEntity: currentState.mapEntity,
@@ -341,6 +434,11 @@ debugPrint("destination=${event.endNodeId}");
             instructions: null,
             preview: previewEntity,
             isPreviewMode: true,
+            isVoiceMuted: currentState.isVoiceMuted,
+            categories: currentState.categories,
+            selectedCategory: currentState.selectedCategory,
+            navigationLifecycleState: stateMachine.currentState,
+            activePositionSource: _orchestrator?.currentSource,
           ),
         );
       }
@@ -372,7 +470,9 @@ debugPrint("destination=${event.endNodeId}");
       if (routeEntity.segments.length > 1) {
         final firstSeg = routeEntity.segments[0];
         final lastNodeId = firstSeg.nodes.last.id;
-        final matchingFloors = currentState.mapEntity.floors.where((f) => f.id == firstSeg.floorId);
+        final matchingFloors = currentState.mapEntity.floors.where(
+          (f) => f.id == firstSeg.floorId,
+        );
         final currentFloor = matchingFloors.isNotEmpty
             ? matchingFloors.first
             : currentState.currentFloor;
@@ -423,6 +523,13 @@ debugPrint("destination=${event.endNodeId}");
             )
           : currentState.latestPosition;
 
+      final stateMachine = NavigationStateMachine(
+        initialState: currentState.navigationLifecycleState,
+      );
+      if (stateMachine.isValidTransition(NavigationLifecycleState.navigating)) {
+        stateMachine.startNavigation();
+      }
+
       emit(
         MapLoaded(
           mapEntity: currentState.mapEntity,
@@ -437,6 +544,11 @@ debugPrint("destination=${event.endNodeId}");
           instructions: instructions,
           preview: currentState.preview,
           isPreviewMode: false,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          selectedCategory: currentState.selectedCategory,
+          navigationLifecycleState: stateMachine.currentState,
+          activePositionSource: _orchestrator?.currentSource,
         ),
       );
 
@@ -454,6 +566,13 @@ debugPrint("destination=${event.endNodeId}");
     print('CLEAR ROUTE DISPATCHED');
     final currentState = state;
     if (currentState is MapLoaded) {
+      final stateMachine = NavigationStateMachine(
+        initialState: currentState.navigationLifecycleState,
+      );
+      if (stateMachine.isValidTransition(NavigationLifecycleState.idle)) {
+        stateMachine.reset();
+      }
+
       emit(
         MapLoaded(
           mapEntity: currentState.mapEntity,
@@ -468,6 +587,11 @@ debugPrint("destination=${event.endNodeId}");
           instructions: null,
           preview: null,
           isPreviewMode: false,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          selectedCategory: currentState.selectedCategory,
+          navigationLifecycleState: stateMachine.currentState,
+          activePositionSource: _orchestrator?.currentSource,
         ),
       );
     }
@@ -494,6 +618,15 @@ debugPrint("destination=${event.endNodeId}");
         navigationStatus: NavigationStatus.waitingForConnector,
       );
 
+      final stateMachine = NavigationStateMachine(
+        initialState: currentState.navigationLifecycleState,
+      );
+      if (stateMachine.isValidTransition(
+        NavigationLifecycleState.waitingForFloorTransition,
+      )) {
+        stateMachine.waitForFloorTransition();
+      }
+
       emit(
         MapLoaded(
           mapEntity: currentState.mapEntity,
@@ -506,6 +639,13 @@ debugPrint("destination=${event.endNodeId}");
           navigationSession: updatedSession,
           latestPosition: currentState.latestPosition,
           instructions: currentState.instructions,
+          preview: currentState.preview,
+          isPreviewMode: currentState.isPreviewMode,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          selectedCategory: currentState.selectedCategory,
+          navigationLifecycleState: stateMachine.currentState,
+          activePositionSource: _orchestrator?.currentSource,
         ),
       );
     }
@@ -534,6 +674,15 @@ debugPrint("destination=${event.endNodeId}");
             navigationStatus: NavigationStatus.transitioningFloor,
           );
 
+          final stateMachine = NavigationStateMachine(
+            initialState: currentState.navigationLifecycleState,
+          );
+          if (stateMachine.isValidTransition(
+            NavigationLifecycleState.waitingForFloorTransition,
+          )) {
+            stateMachine.waitForFloorTransition();
+          }
+
           emit(
             MapLoaded(
               mapEntity: currentState.mapEntity,
@@ -546,6 +695,13 @@ debugPrint("destination=${event.endNodeId}");
               navigationSession: updatedSession,
               latestPosition: currentState.latestPosition,
               instructions: currentState.instructions,
+              preview: currentState.preview,
+              isPreviewMode: currentState.isPreviewMode,
+              isVoiceMuted: currentState.isVoiceMuted,
+              categories: currentState.categories,
+              selectedCategory: currentState.selectedCategory,
+              navigationLifecycleState: stateMachine.currentState,
+              activePositionSource: _orchestrator?.currentSource,
             ),
           );
           return;
@@ -608,6 +764,15 @@ debugPrint("destination=${event.endNodeId}");
           navigationStatus: NavigationStatus.navigating,
         );
 
+        final stateMachine = NavigationStateMachine(
+          initialState: currentState.navigationLifecycleState,
+        );
+        if (stateMachine.isValidTransition(
+          NavigationLifecycleState.navigating,
+        )) {
+          stateMachine.startNavigation();
+        }
+
         emit(
           MapLoaded(
             mapEntity: currentState.mapEntity,
@@ -620,6 +785,13 @@ debugPrint("destination=${event.endNodeId}");
             navigationSession: updatedSession,
             latestPosition: currentState.latestPosition,
             instructions: currentState.instructions,
+            preview: currentState.preview,
+            isPreviewMode: currentState.isPreviewMode,
+            isVoiceMuted: currentState.isVoiceMuted,
+            categories: currentState.categories,
+            selectedCategory: currentState.selectedCategory,
+            navigationLifecycleState: stateMachine.currentState,
+            activePositionSource: _orchestrator?.currentSource,
           ),
         );
       } else {
@@ -636,6 +808,13 @@ debugPrint("destination=${event.endNodeId}");
           navigationStatus: NavigationStatus.arrived,
         );
 
+        final stateMachine = NavigationStateMachine(
+          initialState: currentState.navigationLifecycleState,
+        );
+        if (stateMachine.isValidTransition(NavigationLifecycleState.arrived)) {
+          stateMachine.arrive();
+        }
+
         emit(
           MapLoaded(
             mapEntity: currentState.mapEntity,
@@ -648,6 +827,13 @@ debugPrint("destination=${event.endNodeId}");
             navigationSession: updatedSession,
             latestPosition: currentState.latestPosition,
             instructions: currentState.instructions,
+            preview: currentState.preview,
+            isPreviewMode: currentState.isPreviewMode,
+            isVoiceMuted: currentState.isVoiceMuted,
+            categories: currentState.categories,
+            selectedCategory: currentState.selectedCategory,
+            navigationLifecycleState: stateMachine.currentState,
+            activePositionSource: _orchestrator?.currentSource,
           ),
         );
       }
@@ -658,6 +844,13 @@ debugPrint("destination=${event.endNodeId}");
     print('CANCEL NAVIGATION DISPATCHED');
     final currentState = state;
     if (currentState is MapLoaded) {
+      final stateMachine = NavigationStateMachine(
+        initialState: currentState.navigationLifecycleState,
+      );
+      if (stateMachine.isValidTransition(NavigationLifecycleState.cancelled)) {
+        stateMachine.cancel();
+      }
+
       emit(
         MapLoaded(
           mapEntity: currentState.mapEntity,
@@ -670,24 +863,45 @@ debugPrint("destination=${event.endNodeId}");
           navigationSession: null,
           latestPosition: currentState.latestPosition,
           instructions: null,
+          preview: null,
+          isPreviewMode: false,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          selectedCategory: currentState.selectedCategory,
+          navigationLifecycleState: stateMachine.currentState,
+          activePositionSource: _orchestrator?.currentSource,
         ),
       );
     }
   }
 
   void _onStartPositioning(StartPositioning event, Emitter<MapState> emit) {
-    if (positionRepository == null) return;
+    if (_orchestrator == null) return;
     _positionSubscription?.cancel();
-    _positionSubscription = positionRepository!.positionStream.listen((pos) {
+    _positionSubscription = _orchestrator.positionStream.listen((pos) {
       add(UpdateUserPosition(pos));
     });
-    positionRepository!.startPositioning();
+    _orchestrator.activateSimulation();
+
+    final currentState = state;
+    if (currentState is MapLoaded) {
+      emit(
+        currentState.copyWith(
+          activePositionSource: _orchestrator.currentSource,
+        ),
+      );
+    }
   }
 
   void _onStopPositioning(StopPositioning event, Emitter<MapState> emit) {
     _positionSubscription?.cancel();
     _positionSubscription = null;
-    positionRepository?.stopPositioning();
+    _orchestrator?.deactivateCurrentSource();
+
+    final currentState = state;
+    if (currentState is MapLoaded) {
+      emit(currentState.copyWith(clearActivePositionSource: true));
+    }
   }
 
   void _onUpdateUserPosition(UpdateUserPosition event, Emitter<MapState> emit) {
@@ -696,19 +910,43 @@ debugPrint("destination=${event.endNodeId}");
       if (event.position.x.isNaN || event.position.y.isNaN) {
         return;
       }
+      if (event.position.source == PositionSource.qr) {
+        print('QR Position Event Received');
+      }
+      print(
+        'Old latestPosition ${currentState.latestPosition?.x} ${currentState.latestPosition?.y}',
+      );
+
+      // 1. Resolve current visible floor from position update
+      FloorEntity visibleFloor = currentState.currentFloor;
+      var visibleShops = currentState.shops;
+
+      final bool floorChanged = currentState.latestPosition == null ||
+          event.position.floorId != currentState.latestPosition!.floorId;
+
+      if (event.position.floorId.isNotEmpty && floorChanged) {
+        final targetFloor = currentState.mapEntity.floors
+            .cast<FloorEntity>()
+            .firstWhere(
+              (f) => f.id == event.position.floorId,
+              orElse: () => currentState.currentFloor,
+            );
+        visibleFloor = targetFloor;
+        visibleShops = targetFloor.shops;
+      }
+
       final session = currentState.navigationSession;
       if (session != null &&
           session.navigationStatus != NavigationStatus.arrived &&
           session.navigationStatus != NavigationStatus.cancelled) {
-        
         final isOffRoute = NavigationProgressService.checkOffRoute(
           position: event.position,
           session: session,
           threshold: 30.0,
         );
 
-        if (isOffRoute && 
-            session.navigationStatus == NavigationStatus.navigating && 
+        if (isOffRoute &&
+            session.navigationStatus == NavigationStatus.navigating &&
             !_isRecalculating) {
           _isRecalculating = true;
           _ttsService.speak(
@@ -721,22 +959,26 @@ debugPrint("destination=${event.endNodeId}");
           add(CalculateRoute(endNodeId: endNodeId));
           return;
         }
-        
+
         NavigationSessionEntity activeSession = session;
-        FloorEntity visibleFloor = currentState.currentFloor;
-        var visibleShops = currentState.shops;
 
         if (event.position.floorId != session.currentFloorId) {
           final targetSegmentIdx = session.segments.indexWhere(
             (seg) => seg.floorId == event.position.floorId,
           );
 
-          if (targetSegmentIdx != -1 && targetSegmentIdx > session.currentSegmentIndex) {
-            final floors = currentState.mapEntity.floors.map((f) => f).toList();
-            final nextFloor = floors.firstWhere(
-              (f) => f.id == event.position.floorId,
-              orElse: () => currentState.currentFloor,
-            );
+          final isTransitioning = session.navigationStatus == NavigationStatus.transitioningFloor ||
+              session.navigationStatus == NavigationStatus.waitingForConnector;
+          final isBackwardSwitch = targetSegmentIdx != -1 && targetSegmentIdx < session.currentSegmentIndex;
+          final shouldAllowSwitch = !(isTransitioning && isBackwardSwitch);
+
+          if (targetSegmentIdx != -1 && shouldAllowSwitch) {
+            final nextFloor = currentState.mapEntity.floors
+                .cast<FloorEntity>()
+                .firstWhere(
+                  (f) => f.id == event.position.floorId,
+                  orElse: () => currentState.currentFloor,
+                );
 
             visibleFloor = nextFloor;
             visibleShops = nextFloor.shops;
@@ -821,20 +1063,23 @@ debugPrint("destination=${event.endNodeId}");
           );
         }
 
-        final updatedInstructions = NavigationInstructionService.updateInstructionProgress(
-          instructions: currentState.instructions ?? [],
-          nearestRouteIndex: result.nearestRouteIndex,
-          currentRouteNodeIndex: result.currentRouteNodeIndex,
-          position: event.position,
-          route: updatedSession.route,
-        );
+        final updatedInstructions =
+            NavigationInstructionService.updateInstructionProgress(
+              instructions: currentState.instructions ?? [],
+              nearestRouteIndex: result.nearestRouteIndex,
+              currentRouteNodeIndex: result.currentRouteNodeIndex,
+              position: event.position,
+              route: updatedSession.route,
+            );
 
         if (updatedInstructions.isNotEmpty) {
-          final activeInstIndex = updatedInstructions.indexWhere((inst) => !inst.isCompleted);
+          final activeInstIndex = updatedInstructions.indexWhere(
+            (inst) => !inst.isCompleted,
+          );
           final activeInst = activeInstIndex != -1
               ? updatedInstructions[activeInstIndex]
               : updatedInstructions.last;
-          
+
           if (updatedSession.navigationStatus != NavigationStatus.arrived) {
             _ttsService.speak(
               speechKey: 'inst_${activeInst.instructionId}_${activeInst.type}',
@@ -843,20 +1088,28 @@ debugPrint("destination=${event.endNodeId}");
           }
 
           double distToTrigger = 0.0;
-          if (activeInst.endNodeIndex < updatedSession.route.completeRoute.length) {
-            final triggerNode = updatedSession.route.completeRoute[activeInst.endNodeIndex];
+          if (activeInst.endNodeIndex <
+              updatedSession.route.completeRoute.length) {
+            final triggerNode =
+                updatedSession.route.completeRoute[activeInst.endNodeIndex];
             final dx = event.position.x - triggerNode.x;
             final dy = event.position.y - triggerNode.y;
             distToTrigger = sqrt(dx * dx + dy * dy);
           }
 
           debugPrint('--------------------------------------------------');
-          debugPrint('Blue Dot Position: (${event.position.x.toStringAsFixed(1)}, ${event.position.y.toStringAsFixed(1)}) on ${event.position.floorId}');
+          debugPrint(
+            'Blue Dot Position: (${event.position.x.toStringAsFixed(1)}, ${event.position.y.toStringAsFixed(1)}) on ${event.position.floorId}',
+          );
           debugPrint('Current Route Node: ${result.currentRouteNodeIndex}');
-          debugPrint('Current Active Instruction Index: ${activeInstIndex != -1 ? activeInstIndex : updatedInstructions.length - 1}');
+          debugPrint(
+            'Current Active Instruction Index: ${activeInstIndex != -1 ? activeInstIndex : updatedInstructions.length - 1}',
+          );
           debugPrint('Instruction: ${activeInst.text}');
           debugPrint('Instruction Type: ${activeInst.type}');
-          debugPrint('Distance To Trigger Node: ${distToTrigger.toStringAsFixed(1)}');
+          debugPrint(
+            'Distance To Trigger Node: ${distToTrigger.toStringAsFixed(1)}',
+          );
           debugPrint('Instruction Completed: ${activeInst.isCompleted}');
           debugPrint('--------------------------------------------------');
         }
@@ -864,6 +1117,28 @@ debugPrint("destination=${event.endNodeId}");
         debugPrint(
           'STATE latestPosition: ${event.position.floorId} ${event.position.x} ${event.position.y}',
         );
+        NavigationLifecycleState nextLifecycleState =
+            currentState.navigationLifecycleState;
+        if (updatedSession.navigationStatus == NavigationStatus.arrived) {
+          nextLifecycleState = NavigationLifecycleState.arrived;
+        } else if (updatedSession.navigationStatus ==
+                NavigationStatus.transitioningFloor ||
+            updatedSession.navigationStatus ==
+                NavigationStatus.waitingForConnector) {
+          nextLifecycleState =
+              NavigationLifecycleState.waitingForFloorTransition;
+        } else if (updatedSession.navigationStatus ==
+            NavigationStatus.navigating) {
+          nextLifecycleState = NavigationLifecycleState.navigating;
+        }
+
+        final stateMachine = NavigationStateMachine(
+          initialState: currentState.navigationLifecycleState,
+        );
+        if (stateMachine.isValidTransition(nextLifecycleState)) {
+          stateMachine.transitionTo(nextLifecycleState);
+        }
+
         print('EMITTING NEW MAPLOADED');
         emit(
           MapLoaded(
@@ -877,15 +1152,43 @@ debugPrint("destination=${event.endNodeId}");
             navigationSession: updatedSession,
             latestPosition: event.position,
             instructions: updatedInstructions,
+            preview: currentState.preview,
+            isPreviewMode: currentState.isPreviewMode,
+            isVoiceMuted: currentState.isVoiceMuted,
+            categories: currentState.categories,
+            selectedCategory: currentState.selectedCategory,
+            navigationLifecycleState: stateMachine.currentState,
+            activePositionSource: _orchestrator?.currentSource,
           ),
         );
+        print('New latestPosition ${event.position.x} ${event.position.y}');
         print('MAPLOADED EMITTED');
         print('EXIT UPDATE USER POSITION');
         return;
       }
 
       print('EMITTING NEW MAPLOADED (no session)');
-      emit(currentState.copyWith(latestPosition: event.position));
+      emit(
+        MapLoaded(
+          mapEntity: currentState.mapEntity,
+          currentFloor: visibleFloor,
+          shops: visibleShops,
+          selectedShopId: currentState.selectedShopId,
+          searchResults: currentState.searchResults,
+          searchQuery: currentState.searchQuery,
+          activeRoute: currentState.activeRoute,
+          navigationSession: currentState.navigationSession,
+          latestPosition: event.position,
+          instructions: currentState.instructions,
+          preview: currentState.preview,
+          isPreviewMode: currentState.isPreviewMode,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          selectedCategory: currentState.selectedCategory,
+          activePositionSource: _orchestrator?.currentSource,
+        ),
+      );
+      print('New latestPosition ${event.position.x} ${event.position.y}');
       print('MAPLOADED EMITTED (no session)');
       print('EXIT UPDATE USER POSITION');
     }
@@ -904,13 +1207,21 @@ debugPrint("destination=${event.endNodeId}");
             mapEntity: currentState.mapEntity,
             currentFloor: selectedFloor,
             shops: selectedFloor.shops,
-            selectedShopId: hasActiveSession ? currentState.selectedShopId : null,
+            selectedShopId: hasActiveSession
+                ? currentState.selectedShopId
+                : null,
             searchResults: hasActiveSession ? currentState.searchResults : null,
             searchQuery: hasActiveSession ? currentState.searchQuery : null,
             activeRoute: currentState.activeRoute,
             navigationSession: currentState.navigationSession,
             latestPosition: currentState.latestPosition,
             instructions: currentState.instructions,
+            preview: currentState.preview,
+            isPreviewMode: currentState.isPreviewMode,
+            isVoiceMuted: currentState.isVoiceMuted,
+            categories: currentState.categories,
+            selectedCategory: currentState.selectedCategory,
+            activePositionSource: _orchestrator?.currentSource,
           ),
         );
       } catch (_) {
@@ -919,11 +1230,302 @@ debugPrint("destination=${event.endNodeId}");
     }
   }
 
-  void _onToggleVoiceGuidance(ToggleVoiceGuidance event, Emitter<MapState> emit) {
+  void _onToggleVoiceGuidance(
+    ToggleVoiceGuidance event,
+    Emitter<MapState> emit,
+  ) {
     final currentState = state;
     if (currentState is MapLoaded) {
       _ttsService.toggleMute();
       emit(currentState.copyWith(isVoiceMuted: _ttsService.isMuted));
+    }
+  }
+
+  Future<void> _onLoadCategories(
+    LoadCategories event,
+    Emitter<MapState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is MapLoaded) {
+      try {
+        final categories = await mapRepository.getCategories();
+        emit(currentState.copyWith(categories: categories));
+      } catch (e) {
+        debugPrint('Error loading categories: $e');
+      }
+    }
+  }
+
+  Future<void> _onSelectCategory(
+    SelectCategory event,
+    Emitter<MapState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is MapLoaded) {
+      final isAlreadySelected =
+          currentState.selectedCategory?.id == event.category.id;
+
+      if (isAlreadySelected) {
+        final results =
+            currentState.searchQuery != null &&
+                currentState.searchQuery!.isNotEmpty
+            ? await mapRepository.getShops(query: currentState.searchQuery)
+            : null;
+        emit(
+          MapLoaded(
+            mapEntity: currentState.mapEntity,
+            currentFloor: currentState.currentFloor,
+            shops: currentState.shops,
+            selectedShopId: currentState.selectedShopId,
+            searchResults: results,
+            searchQuery: currentState.searchQuery,
+            activeRoute: currentState.activeRoute,
+            navigationSession: currentState.navigationSession,
+            latestPosition: currentState.latestPosition,
+            instructions: currentState.instructions,
+            preview: currentState.preview,
+            isPreviewMode: currentState.isPreviewMode,
+            isVoiceMuted: currentState.isVoiceMuted,
+            categories: currentState.categories,
+            selectedCategory: null,
+            activePositionSource: _orchestrator?.currentSource,
+          ),
+        );
+      } else {
+        final results = await mapRepository.getShops(
+          query: currentState.searchQuery,
+          category: event.category,
+        );
+        emit(
+          currentState.copyWith(
+            selectedCategory: event.category,
+            searchResults: results,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _onClearCategory(
+    ClearCategory event,
+    Emitter<MapState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is MapLoaded) {
+      final results =
+          currentState.searchQuery != null &&
+              currentState.searchQuery!.isNotEmpty
+          ? await mapRepository.getShops(query: currentState.searchQuery)
+          : null;
+      emit(
+        MapLoaded(
+          mapEntity: currentState.mapEntity,
+          currentFloor: currentState.currentFloor,
+          shops: currentState.shops,
+          selectedShopId: currentState.selectedShopId,
+          searchResults: results,
+          searchQuery: currentState.searchQuery,
+          activeRoute: currentState.activeRoute,
+          navigationSession: currentState.navigationSession,
+          latestPosition: currentState.latestPosition,
+          instructions: currentState.instructions,
+          preview: currentState.preview,
+          isPreviewMode: currentState.isPreviewMode,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          selectedCategory: null,
+          activePositionSource: _orchestrator?.currentSource,
+        ),
+      );
+    }
+  }
+
+  Future<void> _onScanQrPositionRequested(
+    ScanQrPositionRequested event,
+    Emitter<MapState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is MapLoaded) {
+      if (qrPositionRepository == null) return;
+      final position = await qrPositionRepository!.getPositionByQrId(
+        event.qrId,
+      );
+      if (position != null) {
+        print('resolvedPosition.floorId: ${position.floorId}');
+        print('currentFloor: ${currentState.currentFloor.id}');
+        print(
+          'latestPosition.floorId: ${currentState.latestPosition?.floorId}',
+        );
+
+        if (_orchestrator != null) {
+          _positionSubscription ??= _orchestrator.positionStream.listen((pos) {
+            add(UpdateUserPosition(pos));
+          });
+          _orchestrator.activateQr(position);
+        } else {
+          positionRepository?.loadPositionPath([position]);
+          add(UpdateUserPosition(position));
+        }
+        emit(
+          currentState.copyWith(
+            clearQrError: true,
+            activePositionSource: _orchestrator?.currentSource,
+          ),
+        );
+      } else {
+        emit(currentState.copyWith(qrError: event.qrId));
+      }
+    }
+  }
+
+  void _onClearQrError(ClearQrError event, Emitter<MapState> emit) {
+    final currentState = state;
+    if (currentState is MapLoaded) {
+      emit(currentState.copyWith(clearQrError: true));
+    }
+  }
+
+  void _onNavigationCompleted(
+    NavigationCompleted event,
+    Emitter<MapState> emit,
+  ) {
+    final currentState = state;
+    if (currentState is MapLoaded) {
+      final stateMachine = NavigationStateMachine(
+        initialState: currentState.navigationLifecycleState,
+      );
+      if (stateMachine.isValidTransition(NavigationLifecycleState.completed)) {
+        stateMachine.complete();
+      }
+      emit(
+        currentState.copyWith(
+          navigationLifecycleState: stateMachine.currentState,
+        ),
+      );
+    }
+  }
+
+  Future<void> _onDestinationSwitchRequested(
+    DestinationSwitchRequested event,
+    Emitter<MapState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is MapLoaded &&
+        currentState.navigationSession != null &&
+        currentState.activeRoute != null &&
+        currentState.latestPosition != null) {
+      final currentPos = currentState.latestPosition!;
+
+      final newRoute = DestinationSwitchService.switchDestination(
+        mapEntity: currentState.mapEntity,
+        currentPosition: currentPos,
+        newDestinationShopId: event.newDestinationShopId,
+      );
+
+      if (newRoute == null) return;
+
+      final endNodeId = newRoute.completeRoute.isNotEmpty
+          ? newRoute.completeRoute.last.id
+          : '';
+
+      String destinationShopId = '';
+      for (final floor in currentState.mapEntity.floors) {
+        for (final shop in floor.shops) {
+          if (shop.entranceNodeIds.contains(endNodeId)) {
+            destinationShopId = shop.id;
+            break;
+          }
+        }
+        if (destinationShopId.isNotEmpty) break;
+      }
+
+      String? nextConnectorId;
+      if (newRoute.segments.length > 1) {
+        final firstSeg = newRoute.segments[0];
+        final lastNodeId = firstSeg.nodes.last.id;
+        final matchingFloors = currentState.mapEntity.floors.where(
+          (f) => f.id == firstSeg.floorId,
+        );
+        final currentFloor = matchingFloors.isNotEmpty
+            ? matchingFloors.first
+            : currentState.currentFloor;
+        for (final conn in currentFloor.connectors) {
+          if (conn.navigationNodeId == lastNodeId) {
+            nextConnectorId = conn.id;
+            break;
+          }
+        }
+      }
+
+      final sessionEntity = NavigationSessionEntity(
+        destinationShopId: destinationShopId,
+        destinationEntranceId: endNodeId,
+        route: newRoute,
+        segments: newRoute.segments,
+        currentSegmentIndex: 0,
+        currentFloorId: newRoute.segments.isNotEmpty
+            ? newRoute.segments.first.floorId
+            : currentState.currentFloor.id,
+        nextConnectorId: nextConnectorId,
+        remainingDistance: newRoute.totalDistance,
+        estimatedWalkingDistance: newRoute.totalDistance,
+        navigationStatus: NavigationStatus.navigating,
+      );
+
+      final instructions = NavigationInstructionService.generateInstructions(
+        route: newRoute,
+        floors: currentState.mapEntity.floors,
+        destinationShopId: destinationShopId,
+      );
+
+      _ttsService.stop();
+      if (instructions.isNotEmpty) {
+        _ttsService.speak(
+          speechKey: 'dest_switch',
+          text: instructions.first.text,
+          force: true,
+        );
+      }
+
+      if (_orchestrator?.currentSource == PositionSourceType.simulation && positionRepository != null) {
+        final simPath = NavigationSimulationService.generateSimulationPath(
+          newRoute,
+        );
+        positionRepository!.loadPositionPath(simPath);
+        add(const StartPositioning());
+      }
+
+      FloorEntity visibleFloor = currentState.currentFloor;
+      if (newRoute.segments.isNotEmpty) {
+        final firstSegmentFloorId = newRoute.segments.first.floorId;
+        final matchedFloor = currentState.mapEntity.floors.map((f) => f).firstWhere(
+          (f) => f.id == firstSegmentFloorId,
+          orElse: () => currentState.currentFloor,
+        );
+        visibleFloor = matchedFloor;
+      }
+
+      emit(
+        MapLoaded(
+          mapEntity: currentState.mapEntity,
+          currentFloor: visibleFloor,
+          shops: visibleFloor.shops,
+          selectedShopId: destinationShopId,
+          searchResults: currentState.searchResults,
+          searchQuery: currentState.searchQuery,
+          activeRoute: newRoute,
+          navigationSession: sessionEntity,
+          latestPosition: currentPos,
+          instructions: instructions,
+          preview: null,
+          isPreviewMode: false,
+          isVoiceMuted: currentState.isVoiceMuted,
+          categories: currentState.categories,
+          selectedCategory: currentState.selectedCategory,
+          navigationLifecycleState: NavigationLifecycleState.navigating,
+          activePositionSource: _orchestrator?.currentSource,
+        ),
+      );
     }
   }
 

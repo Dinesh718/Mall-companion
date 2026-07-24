@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import '../../domain/entities/position_entities.dart';
+import '../../domain/entities/shop_category.dart';
 
 abstract class MapEvent extends Equatable {
   const MapEvent();
@@ -96,4 +97,47 @@ class SelectFloor extends MapEvent {
 
 class ToggleVoiceGuidance extends MapEvent {
   const ToggleVoiceGuidance();
+}
+
+class LoadCategories extends MapEvent {
+  const LoadCategories();
+}
+
+class SelectCategory extends MapEvent {
+  final ShopCategory category;
+
+  const SelectCategory(this.category);
+
+  @override
+  List<Object?> get props => [category];
+}
+
+class ClearCategory extends MapEvent {
+  const ClearCategory();
+}
+
+class ScanQrPositionRequested extends MapEvent {
+  final String qrId;
+
+  const ScanQrPositionRequested(this.qrId);
+
+  @override
+  List<Object?> get props => [qrId];
+}
+
+class ClearQrError extends MapEvent {
+  const ClearQrError();
+}
+
+class NavigationCompleted extends MapEvent {
+  const NavigationCompleted();
+}
+
+class DestinationSwitchRequested extends MapEvent {
+  final String newDestinationShopId;
+
+  const DestinationSwitchRequested(this.newDestinationShopId);
+
+  @override
+  List<Object?> get props => [newDestinationShopId];
 }

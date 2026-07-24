@@ -10,6 +10,8 @@ import '../../data/repositories/position_repository_impl.dart';
 import '../../domain/entities/map_entities.dart';
 import '../../domain/entities/position_entities.dart';
 import '../../domain/entities/navigation_instruction_entity.dart';
+import '../../domain/entities/shop_category.dart';
+import '../../../navigation/domain/entities/navigation_lifecycle_entity.dart';
 import '../widgets/indoor_map_view.dart';
 import '../widgets/map_controls.dart';
 import '../widgets/shop_details_bottom_sheet.dart';
@@ -18,21 +20,31 @@ import '../widgets/shop_search_results.dart';
 import '../widgets/elevator_transition_overlay.dart';
 import '../widgets/route_preview_card.dart';
 import '../helpers/map_camera_controller.dart';
+import '../../../positioning/presentation/pages/qr_scanner_page.dart';
+import '../../../positioning/data/repository/qr_position_repository_impl.dart';
+import '../../../positioning/data/datasource/qr_local_datasource.dart';
 
 class MapPage extends StatelessWidget {
   const MapPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final mapRepo = DummyMapRepository(
+      localDataSource: LocalMapDataSourceImpl(
+        assetBundle: DefaultAssetBundle.of(context),
+      ),
+    );
     return BlocProvider(
       create: (context) => MapBloc(
-        mapRepository: DummyMapRepository(
-          localDataSource: LocalMapDataSourceImpl(
-            assetBundle: DefaultAssetBundle.of(context),
-          ),
-        ),
+        mapRepository: mapRepo,
         positionRepository: PositionRepositoryImpl(
           SimulationPositionProvider(),
+        ),
+        qrPositionRepository: QrPositionRepositoryImpl(
+          localDataSource: QrLocalDataSourceImpl(
+            assetBundle: DefaultAssetBundle.of(context),
+          ),
+          mapRepository: mapRepo,
         ),
       )..add(const LoadMap()),
       child: const Scaffold(
@@ -56,6 +68,7 @@ class _MapPageBodyState extends State<MapPageBody>
   late final TransformationController _transformationController;
   late final MapCameraController _cameraController;
   bool _isBottomSheetOpen = false;
+  String? _lastRenderedFloorId;
 
   @override
   void initState() {
@@ -119,12 +132,42 @@ class _MapPageBodyState extends State<MapPageBody>
     return BlocConsumer<MapBloc, MapState>(
       listenWhen: (previous, current) {
         if (previous is MapLoaded && current is MapLoaded) {
-          return previous.selectedShopId != current.selectedShopId;
+          final shopChanged = previous.selectedShopId != current.selectedShopId;
+          final positionChanged =
+              previous.latestPosition != current.latestPosition;
+          final qrErrorChanged = previous.qrError != current.qrError;
+          return shopChanged ||
+              (positionChanged &&
+                  current.latestPosition?.source == PositionSource.qr) ||
+              (qrErrorChanged && current.qrError != null);
         }
         return current is MapLoaded;
       },
       listener: (context, state) {
         if (state is MapLoaded) {
+          final qrError = state.qrError;
+          if (qrError != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Scanned QR Code '$qrError' is not registered in this mall.",
+                  style: const TextStyle(fontFamily: 'Plus Jakarta Sans'),
+                ),
+                backgroundColor: Colors.red,
+              ),
+            );
+            context.read<MapBloc>().add(const ClearQrError());
+          }
+
+          final latestPos = state.latestPosition;
+          if (latestPos != null && latestPos.source == PositionSource.qr) {
+            final viewportSize = MediaQuery.of(context).size;
+            _cameraController.animateTo(
+              Point2D(latestPos.x, latestPos.y),
+              viewportSize,
+            );
+          }
+
           final selectedShopId = state.selectedShopId;
           final shops = state.shops;
 
@@ -158,16 +201,91 @@ class _MapPageBodyState extends State<MapPageBody>
                     floorName: state.currentFloor.name,
                     onNavigate: selectedShop.entranceNodeIds.isNotEmpty
                         ? () {
-                            if (_isBottomSheetOpen) {
-                              _isBottomSheetOpen = false;
-                              Navigator.of(sheetContext).pop();
+                            final isNavigating = state.navigationLifecycleState ==
+                                    NavigationLifecycleState.navigating ||
+                                state.navigationLifecycleState ==
+                                    NavigationLifecycleState.waitingForFloorTransition;
+
+                            if (isNavigating) {
+                              String currentDestinationName = 'Destination';
+                              final currentDestId =
+                                  state.navigationSession?.destinationShopId;
+                              if (currentDestId != null) {
+                                for (final floor in state.mapEntity.floors) {
+                                  for (final s in floor.shops) {
+                                    if (s.id == currentDestId) {
+                                      currentDestinationName = s.name;
+                                      break;
+                                    }
+                                  }
+                                }
+                              }
+
+                              showDialog<bool>(
+                                context: context,
+                                builder: (dialogContext) {
+                                  return AlertDialog(
+                                    title: const Text('Replace current destination?'),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Text('You are currently navigating to:'),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          currentDestinationName,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        const Text('Do you want to replace it with:'),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          selectedShop!.name,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(dialogContext).pop(false),
+                                        child: const Text('Keep Current Route'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(dialogContext).pop(true),
+                                        child: const Text('Navigate to This Shop'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ).then((confirm) {
+                                if (confirm == true) {
+                                  if (_isBottomSheetOpen) {
+                                    _isBottomSheetOpen = false;
+                                    Navigator.of(sheetContext).pop();
+                                  }
+                                  mapBloc.add(
+                                    DestinationSwitchRequested(selectedShop!.id),
+                                  );
+                                }
+                              });
+                            } else {
+                              if (_isBottomSheetOpen) {
+                                _isBottomSheetOpen = false;
+                                Navigator.of(sheetContext).pop();
+                              }
+                              mapBloc.add(
+                                CalculateRoute(
+                                  endNodeId: selectedShop!.entranceNodeIds.first,
+                                ),
+                              );
+                              mapBloc.add(const StartNavigation());
                             }
-                            mapBloc.add(
-                              CalculateRoute(
-                                endNodeId: selectedShop!.entranceNodeIds.first,
-                              ),
-                            );
-                            mapBloc.add(const StartNavigation());
                           }
                         : null,
                   ),
@@ -219,11 +337,13 @@ class _MapPageBodyState extends State<MapPageBody>
         final loadedState = state as MapLoaded;
 
         debugPrint("==================================");
-debugPrint("isPreviewMode : ${loadedState.isPreviewMode}");
-debugPrint("navigationSession : ${loadedState.navigationSession != null}");
-debugPrint("preview : ${loadedState.preview != null}");
-debugPrint("currentFloor : ${loadedState.currentFloor.id}");
-debugPrint("==================================");
+        debugPrint("isPreviewMode : ${loadedState.isPreviewMode}");
+        debugPrint(
+          "navigationSession : ${loadedState.navigationSession != null}",
+        );
+        debugPrint("preview : ${loadedState.preview != null}");
+        debugPrint("currentFloor : ${loadedState.currentFloor.id}");
+        debugPrint("==================================");
 
         return SafeArea(
           child: Stack(
@@ -231,7 +351,7 @@ debugPrint("==================================");
               // 1. Static Indoor map viewport
               IndoorMapView(
                 transformationController: _transformationController,
-                shops: loadedState.shops,
+                shops: loadedState.displayedShops,
                 svgPath: loadedState.currentFloor.svgPath,
                 navigationGraph: loadedState.currentFloor.navigationGraph,
               ),
@@ -245,13 +365,17 @@ debugPrint("==================================");
               ),
 
               // 3. Floating search layer
-              const Positioned(
+              Positioned(
                 top: 16.0,
                 left: 16.0,
                 right: 16.0,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [ShopSearchBar(), ShopSearchResults()],
+                  children: [
+                    const ShopSearchBar(),
+                    const CategorySelector(),
+                    const ShopSearchResults(),
+                  ],
                 ),
               ),
 
@@ -273,7 +397,8 @@ debugPrint("==================================");
                 ),
 
               // 5. Floating navigation panel and instruction banner overlay
-              if (!loadedState.isPreviewMode && loadedState.navigationSession != null)
+              if (!loadedState.isPreviewMode &&
+                  loadedState.navigationSession != null)
                 Positioned(
                   bottom: 24.0,
                   left: 24.0,
@@ -282,7 +407,8 @@ debugPrint("==================================");
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      if (loadedState.instructions != null && loadedState.instructions!.isNotEmpty) ...[
+                      if (loadedState.instructions != null &&
+                          loadedState.instructions!.isNotEmpty) ...[
                         NavigationInstructionBanner(
                           instruction: loadedState.instructions!.firstWhere(
                             (inst) => !inst.isCompleted,
@@ -293,7 +419,9 @@ debugPrint("==================================");
                       ],
                       NavigationPanel(
                         session: loadedState.navigationSession!,
-                        shops: loadedState.mapEntity.floors.expand((f) => f.shops).toList(),
+                        shops: loadedState.mapEntity.floors
+                            .expand((f) => f.shops)
+                            .toList(),
                         onCancel: () {
                           context.read<MapBloc>().add(const ClearRoute());
                         },
@@ -393,6 +521,31 @@ debugPrint("==================================");
                   ),
                 ),
               const ElevatorTransitionOverlay(),
+              Positioned(
+                right: 24.0,
+                bottom: 240.0,
+                child: FloatingActionButton(
+                  key: const Key('qr_scanner_fab'),
+                  heroTag: 'qr_scanner_fab',
+                  backgroundColor: const Color(0xFFFEF7FF),
+                  foregroundColor: const Color(0xFF6100D6),
+                  onPressed: () async {
+                    final qrId = await Navigator.push<String>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const QrScannerPage(),
+                      ),
+                    );
+                    if (qrId != null && context.mounted) {
+                      print('SCANNED QR: $qrId');
+                      context.read<MapBloc>().add(
+                        ScanQrPositionRequested(qrId),
+                      );
+                    }
+                  },
+                  child: const Icon(Icons.qr_code_scanner),
+                ),
+              ),
             ],
           ),
         );
@@ -499,10 +652,14 @@ class NavigationPanel extends StatelessWidget {
               final isMuted = state is MapLoaded && state.isVoiceMuted;
               return IconButton(
                 icon: Icon(
-                  isMuted ? Icons.volume_off_outlined : Icons.volume_up_outlined,
+                  isMuted
+                      ? Icons.volume_off_outlined
+                      : Icons.volume_up_outlined,
                   color: const Color(0xFF6100D6),
                 ),
-                tooltip: isMuted ? 'Unmute Voice Guidance' : 'Mute Voice Guidance',
+                tooltip: isMuted
+                    ? 'Unmute Voice Guidance'
+                    : 'Mute Voice Guidance',
                 onPressed: () {
                   context.read<MapBloc>().add(const ToggleVoiceGuidance());
                 },
@@ -558,14 +715,16 @@ class NavigationInstructionBanner extends StatelessWidget {
     final IconData icon = _getIconForType(instruction.type);
     const Color themeColor = Color(0xFF6100D6);
 
-    final showDistance = instruction.type == 'straight' && instruction.distanceRemaining > 0;
+    final showDistance =
+        instruction.type == 'straight' && instruction.distanceRemaining > 0;
     final distanceText = showDistance
         ? '${instruction.distanceRemaining.toStringAsFixed(0)} m remaining'
         : '';
 
-    final isConnector = instruction.type == 'lift' ||
-                        instruction.type == 'stairs' ||
-                        instruction.type == 'escalator';
+    final isConnector =
+        instruction.type == 'lift' ||
+        instruction.type == 'stairs' ||
+        instruction.type == 'escalator';
 
     final titleText = isConnector
         ? '${instruction.type.toUpperCase()} AHEAD'
@@ -641,6 +800,74 @@ class NavigationInstructionBanner extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class CategorySelector extends StatelessWidget {
+  const CategorySelector({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MapBloc, MapState>(
+      buildWhen: (previous, current) {
+        if (previous is! MapLoaded || current is! MapLoaded) return true;
+        return previous.selectedCategory != current.selectedCategory ||
+            previous.categories != current.categories;
+      },
+      builder: (context, state) {
+        if (state is! MapLoaded) return const SizedBox.shrink();
+
+        final categories = state.categories;
+        if (categories.isEmpty) return const SizedBox.shrink();
+
+        final selected = state.selectedCategory;
+
+        return Container(
+          height: 48.0,
+          margin: const EdgeInsets.only(top: 8.0),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: categories.length,
+            itemBuilder: (context, index) {
+              final cat = categories[index];
+              final isSelected = selected?.id == cat.id;
+
+              return Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: ChoiceChip(
+                  label: Text('${cat.icon}  ${cat.name}'),
+                  selected: isSelected,
+                  selectedColor: const Color(0xFF6100D6),
+                  backgroundColor: const Color(0xFFFEF7FF),
+                  labelStyle: TextStyle(
+                    fontFamily: 'Plus Jakarta Sans',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14.0,
+                    color: isSelected ? Colors.white : const Color(0xFF1D1B20),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    side: BorderSide(
+                      color: isSelected
+                          ? const Color(0xFF6100D6)
+                          : const Color(0xFFCAC4D0),
+                      width: 1.0,
+                    ),
+                  ),
+                  onSelected: (val) {
+                    if (val) {
+                      context.read<MapBloc>().add(SelectCategory(cat));
+                    } else {
+                      context.read<MapBloc>().add(const ClearCategory());
+                    }
+                  },
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

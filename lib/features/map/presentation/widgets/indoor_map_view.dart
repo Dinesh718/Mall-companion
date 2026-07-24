@@ -27,11 +27,11 @@ class IndoorMapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint("=================================");
-debugPrint("INDOOR MAP BUILD");
-debugPrint("svgPath = $svgPath");
-debugPrint("shops = ${shops.length}");
-debugPrint("graph nodes = ${navigationGraph.nodes.length}");
-debugPrint("=================================");
+    debugPrint("INDOOR MAP BUILD");
+    debugPrint("svgPath = $svgPath");
+    debugPrint("shops = ${shops.length}");
+    debugPrint("graph nodes = ${navigationGraph.nodes.length}");
+    debugPrint("=================================");
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
@@ -106,7 +106,9 @@ debugPrint("=================================");
                       builder: (context, activeRoute) {
                         return RouteLayer(
                           activeRoute: activeRoute,
-                          currentFloorId: svgPath.contains('ground_floor') ? 'ground_floor' : 'first_floor',
+                          currentFloorId: svgPath.contains('ground_floor')
+                              ? 'ground_floor'
+                              : 'first_floor',
                           width: 1536.0,
                           height: 838.0,
                         );

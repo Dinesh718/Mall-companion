@@ -6,7 +6,7 @@
     {
       "id": "F108",
       "name": "Shop F108",
-      "category": "Retail",
+      "category": "Fashion",
       "description": "First Floor Store F108",
       "status": "open",
       "rating": 4.0,
@@ -18,12 +18,14 @@
         "width": 77.0,
         "height": 74.0
       },
-      "entranceNodeIds": ["E108"]
+      "entranceNodeIds": [
+        "E108"
+      ]
     },
     {
       "id": "F109",
       "name": "Shop F109",
-      "category": "Retail",
+      "category": "Electronics",
       "description": "First Floor Store F109",
       "status": "open",
       "rating": 4.0,
@@ -35,12 +37,14 @@
         "width": 60.0,
         "height": 73.0
       },
-      "entranceNodeIds": ["E109"]
+      "entranceNodeIds": [
+        "E109"
+      ]
     },
     {
       "id": "F110",
       "name": "Shop F110",
-      "category": "Retail",
+      "category": "Food",
       "description": "First Floor Store F110",
       "status": "open",
       "rating": 4.0,
@@ -52,12 +56,14 @@
         "width": 51.0,
         "height": 76.0
       },
-      "entranceNodeIds": ["E110"]
+      "entranceNodeIds": [
+        "E110"
+      ]
     },
     {
       "id": "F111",
       "name": "Shop F111",
-      "category": "Retail",
+      "category": "Cafe",
       "description": "First Floor Store F111",
       "status": "open",
       "rating": 4.0,
@@ -69,12 +75,14 @@
         "width": 61.0,
         "height": 76.0
       },
-      "entranceNodeIds": ["E111"]
+      "entranceNodeIds": [
+        "E111"
+      ]
     },
     {
       "id": "F118",
       "name": "Shop F118",
-      "category": "Retail",
+      "category": "Beauty",
       "description": "First Floor Store F118",
       "status": "open",
       "rating": 4.0,
@@ -86,12 +94,14 @@
         "width": 51.0,
         "height": 79.0
       },
-      "entranceNodeIds": ["E118"]
+      "entranceNodeIds": [
+        "E118"
+      ]
     },
     {
       "id": "F119",
       "name": "Shop F119",
-      "category": "Retail",
+      "category": "Footwear",
       "description": "First Floor Store F119",
       "status": "open",
       "rating": 4.0,
@@ -103,12 +113,14 @@
         "width": 50.0,
         "height": 74.0
       },
-      "entranceNodeIds": ["E119"]
+      "entranceNodeIds": [
+        "E119"
+      ]
     },
     {
       "id": "F120",
       "name": "Shop F120",
-      "category": "Retail",
+      "category": "Banking",
       "description": "First Floor Store F120",
       "status": "open",
       "rating": 4.0,
@@ -120,12 +132,14 @@
         "width": 65.0,
         "height": 76.0
       },
-      "entranceNodeIds": ["E120"]
+      "entranceNodeIds": [
+        "E120"
+      ]
     },
     {
       "id": "F112",
       "name": "Shop F112",
-      "category": "Retail",
+      "category": "Fashion",
       "description": "First Floor Store F112",
       "status": "open",
       "rating": 4.0,
@@ -137,12 +151,14 @@
         "width": 76.0,
         "height": 159.0
       },
-      "entranceNodeIds": ["E112"]
+      "entranceNodeIds": [
+        "E112"
+      ]
     },
     {
       "id": "F113",
       "name": "Shop F113",
-      "category": "Retail",
+      "category": "Electronics",
       "description": "First Floor Store F113",
       "status": "open",
       "rating": 4.0,
@@ -154,12 +170,14 @@
         "width": 48.0,
         "height": 158.0
       },
-      "entranceNodeIds": ["E113"]
+      "entranceNodeIds": [
+        "E113"
+      ]
     },
     {
       "id": "F114",
       "name": "Shop F114",
-      "category": "Retail",
+      "category": "Food",
       "description": "First Floor Store F114",
       "status": "open",
       "rating": 4.0,
@@ -171,12 +189,14 @@
         "width": 51.0,
         "height": 159.0
       },
-      "entranceNodeIds": ["E114"]
+      "entranceNodeIds": [
+        "E114"
+      ]
     },
     {
       "id": "F115",
       "name": "Shop F115",
-      "category": "Retail",
+      "category": "Cafe",
       "description": "First Floor Store F115",
       "status": "open",
       "rating": 4.0,
@@ -188,12 +208,14 @@
         "width": 43.0,
         "height": 159.0
       },
-      "entranceNodeIds": ["E115"]
+      "entranceNodeIds": [
+        "E115"
+      ]
     },
     {
       "id": "F116",
       "name": "Shop F116",
-      "category": "Retail",
+      "category": "Beauty",
       "description": "First Floor Store F116",
       "status": "open",
       "rating": 4.0,
@@ -205,12 +227,14 @@
         "width": 45.0,
         "height": 156.0
       },
-      "entranceNodeIds": ["E116"]
+      "entranceNodeIds": [
+        "E116"
+      ]
     },
     {
       "id": "F117",
       "name": "Shop F117",
-      "category": "Retail",
+      "category": "Footwear",
       "description": "First Floor Store F117",
       "status": "open",
       "rating": 4.0,
@@ -222,7 +246,9 @@
         "width": 65.0,
         "height": 156.0
       },
-      "entranceNodeIds": ["E117"]
+      "entranceNodeIds": [
+        "E117"
+      ]
     },
     {
       "id": "F_corridor_1",
@@ -290,14 +316,31 @@
       "geometry": {
         "type": "polygon",
         "points": [
-          {"x": 825.0, "y": 203.5},
-          {"x": 825.0, "y": 251.0},
-          {"x": 889.0, "y": 285.5},
-          {"x": 920.0, "y": 245.5},
-          {"x": 916.0, "y": 203.5}
+          {
+            "x": 825.0,
+            "y": 203.5
+          },
+          {
+            "x": 825.0,
+            "y": 251.0
+          },
+          {
+            "x": 889.0,
+            "y": 285.5
+          },
+          {
+            "x": 920.0,
+            "y": 245.5
+          },
+          {
+            "x": 916.0,
+            "y": 203.5
+          }
         ]
       },
-      "entranceNodeIds": ["L102"]
+      "entranceNodeIds": [
+        "L102"
+      ]
     }
   ],
   "navigation": {

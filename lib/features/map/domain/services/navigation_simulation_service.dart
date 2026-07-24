@@ -54,7 +54,15 @@ class NavigationSimulationService {
         final ratio = step / positionsPerEdge;
         final x = n1.x + dx * ratio;
         final y = n1.y + dy * ratio;
-        final floorId = ratio < 0.5 ? n1.floorId : n2.floorId;
+
+        String floorId;
+        if (n1.floorId == 'transition' && n2.floorId != 'transition') {
+          floorId = ratio < 0.9 ? n1.floorId : n2.floorId;
+        } else if (n1.floorId != 'transition' && n2.floorId == 'transition') {
+          floorId = n2.floorId;
+        } else {
+          floorId = ratio < 0.5 ? n1.floorId : n2.floorId;
+        }
 
         path.add(
           IndoorPositionEntity(

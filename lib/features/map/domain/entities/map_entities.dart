@@ -311,15 +311,18 @@ class NavigationSessionEntity extends Equatable {
   }) {
     return NavigationSessionEntity(
       destinationShopId: destinationShopId ?? this.destinationShopId,
-      destinationEntranceId: destinationEntranceId ?? this.destinationEntranceId,
+      destinationEntranceId:
+          destinationEntranceId ?? this.destinationEntranceId,
       route: route ?? this.route,
       segments: segments ?? this.segments,
       currentSegmentIndex: currentSegmentIndex ?? this.currentSegmentIndex,
-      currentRouteNodeIndex: currentRouteNodeIndex ?? this.currentRouteNodeIndex,
+      currentRouteNodeIndex:
+          currentRouteNodeIndex ?? this.currentRouteNodeIndex,
       currentFloorId: currentFloorId ?? this.currentFloorId,
       nextConnectorId: nextConnectorId ?? this.nextConnectorId,
       remainingDistance: remainingDistance ?? this.remainingDistance,
-      estimatedWalkingDistance: estimatedWalkingDistance ?? this.estimatedWalkingDistance,
+      estimatedWalkingDistance:
+          estimatedWalkingDistance ?? this.estimatedWalkingDistance,
       navigationStatus: navigationStatus ?? this.navigationStatus,
     );
   }

@@ -148,7 +148,9 @@ class NavigationInstructionService {
             NavigationInstructionEntity(
               instructionId: nextId(),
               type: 'straight',
-              text: instructions.isEmpty ? 'Head straight' : 'Continue straight',
+              text: instructions.isEmpty
+                  ? 'Head straight'
+                  : 'Continue straight',
               floorId: segment.floorId,
               relatedNodeId: node.id,
               distanceRemaining: 0.0,
@@ -163,7 +165,11 @@ class NavigationInstructionService {
         // Detect turns at intermediate indices
         final List<int> turnIndices = [];
         for (int i = 1; i < segNodes.length - 1; i++) {
-          final angle = angleAtNode(segNodes[i - 1], segNodes[i], segNodes[i + 1]);
+          final angle = angleAtNode(
+            segNodes[i - 1],
+            segNodes[i],
+            segNodes[i + 1],
+          );
           if (angle.abs() > 20.0) {
             turnIndices.add(i);
           }
@@ -203,7 +209,9 @@ class NavigationInstructionService {
             }
           }
 
-          String text = instructions.isEmpty ? 'Head straight' : 'Continue straight';
+          String text = instructions.isEmpty
+              ? 'Head straight'
+              : 'Continue straight';
           if (endsAtConnector) {
             if (connType == 'lift') {
               text = 'Proceed to Lift';
@@ -317,11 +325,15 @@ class NavigationInstructionService {
       // Strict sequential rule & anti-tunneling safeguard:
       // Instruction idx can ONLY complete if all preceding instructions (0..idx-1) were already completed in a prior pass.
       if (previousAllCompleted && !isCompleted && !justCompletedInThisPass) {
-        if (inst.type == 'straight' || inst.type == 'lift' || inst.type == 'escalator' || inst.type == 'stairs') {
+        if (inst.type == 'straight' ||
+            inst.type == 'lift' ||
+            inst.type == 'escalator' ||
+            inst.type == 'stairs') {
           if (progressIndex >= inst.endNodeIndex) {
             isCompleted = true;
             justCompletedInThisPass = true;
-          } else if (progressIndex >= inst.startNodeIndex && inst.endNodeIndex < route.completeRoute.length) {
+          } else if (progressIndex >= inst.startNodeIndex &&
+              inst.endNodeIndex < route.completeRoute.length) {
             // Calculate total segment length to compute dynamic effective threshold for short corridors
             double segLength = 0.0;
             for (int i = inst.startNodeIndex; i < inst.endNodeIndex; i++) {
@@ -353,7 +365,8 @@ class NavigationInstructionService {
           if (progressIndex > inst.endNodeIndex) {
             isCompleted = true;
             justCompletedInThisPass = true;
-          } else if (progressIndex == inst.endNodeIndex && inst.endNodeIndex < route.completeRoute.length - 1) {
+          } else if (progressIndex == inst.endNodeIndex &&
+              inst.endNodeIndex < route.completeRoute.length - 1) {
             final turnNode = route.completeRoute[inst.endNodeIndex];
             final nextNode = route.completeRoute[inst.endNodeIndex + 1];
             final abx = nextNode.x - turnNode.x;
@@ -378,7 +391,8 @@ class NavigationInstructionService {
 
       double dist = 0.0;
       if (!isCompleted) {
-        if (progressIndex >= inst.startNodeIndex && progressIndex <= inst.endNodeIndex) {
+        if (progressIndex >= inst.startNodeIndex &&
+            progressIndex <= inst.endNodeIndex) {
           dist = NavigationProgressService.calculatePathRemainingDistance(
             path: route.completeRoute,
             px: position.x,
@@ -398,10 +412,7 @@ class NavigationInstructionService {
       }
 
       updated.add(
-        inst.copyWith(
-          isCompleted: isCompleted,
-          distanceRemaining: dist,
-        ),
+        inst.copyWith(isCompleted: isCompleted, distanceRemaining: dist),
       );
     }
 
